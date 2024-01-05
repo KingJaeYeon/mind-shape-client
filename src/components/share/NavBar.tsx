@@ -19,7 +19,7 @@ export default function NavBar({}) {
     <AnimatedDiv
       className={
         // "flex w-[250px] bg-darkGray transition-all duration-700"
-        "flex w-[250px] border-r border-line bg-darkGray transition-all duration-700"
+        "flex w-[250px] border-r border-line bg-black transition-all duration-700"
       }
       style={getNavBarStyle()}
     >
@@ -73,7 +73,7 @@ function NavBarOption({
             href={item.url}
             key={index}
             className={
-              "hover:text-orange cursor-pointer text-[18px] text-white transition-all duration-200"
+              "cursor-pointer text-[18px] text-white transition-all duration-200 hover:text-orange"
             }
           >
             {item.title}

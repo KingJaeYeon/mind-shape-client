@@ -6,15 +6,15 @@ type Props = {
   className?: string;
 };
 
-const Page = forwardRef<HTMLDivElement, Props>((props, ref) => {
+const Grid = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { children, className } = props;
   return (
-    <div ref={ref} className={cn(`relative flex justify-center`, className)}>
+    <div ref={ref} className={cn(`grid`, className)}>
       {children}
     </div>
   );
 });
 
-Page.displayName = "Page";
+Grid.displayName = "Grid";
 
-export default Page;
+export default Grid;

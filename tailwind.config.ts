@@ -21,7 +21,7 @@ const config: Config = {
         lightGray: "var(--grayscale-lightgray)",
         neutralGray: "var(--grayscale-neutral-gray)",
         deepGray: "var(--grayscale-deep-gray)",
-        darkGray: "var(--grayscale-darkgray)",
+        darkGray: "var(--grayscale-dark-gray)",
         black: "var(--grayscale-black)",
         orange: "var(--orange)",
         gold1: "var(--gold1)",
@@ -46,6 +46,10 @@ const config: Config = {
       },
       fontFamily: {
         maple: ["MaplestoryOTFBold", "sans-serif"],
+      },
+      boxShadow: {
+        card: "0px 10px 20px 0px rgba(0, 0, 0, 0.08)",
+        card2: "0px 15px 30px 0px rgba(0, 0, 0, 0.2)",
       },
     },
   },

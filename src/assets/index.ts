@@ -1,2 +1,5 @@
 import IconMenu from "@/assets/IconMenu";
-export { IconMenu };
+import IconTradingUp from "@/assets/IconTradingUp";
+import IconTradingDown from "@/assets/IconTradingDown";
+
+export { IconMenu, IconTradingUp, IconTradingDown };
