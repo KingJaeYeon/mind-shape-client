@@ -24,6 +24,8 @@ const config: Config = {
         darkGray: "var(--grayscale-darkgray)",
         black: "var(--grayscale-black)",
         orange: "var(--orange)",
+        gold1: "var(--gold1)",
+        gold2: "var(--gold2)",
       },
       textColor: {
         gray: "var(--grayscale-gray)",
@@ -36,6 +38,8 @@ const config: Config = {
         darkGray: "var(--grayscale-darkgray)",
         black: "var(--grayscale-black)",
         orange: "var(--orange)",
+        gold1: "var(--gold1)",
+        gold2: "var(--gold2)",
       },
       borderColor: {
         line: "var(--line)",
