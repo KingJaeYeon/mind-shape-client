@@ -35,6 +35,7 @@ export default async function Home() {
           ]}
         />
         <CardList
+          color={"red"}
           options={[
             { title: "환전총액", icon: "", value: 104340.06, unit: "$" },
             { title: "배당금 누적손익", icon: "", value: 2290106, unit: "원" },

@@ -3,6 +3,7 @@ import Contents from "@/components/layout/Contents";
 import { cn } from "@/lib/utils";
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
+import IconMoney from "@/assets/IconMoney";
 
 export function CardList({
   options,
@@ -35,7 +36,18 @@ export function CardItem({
   option: { title: string; value: any; unit?: any; icon: any };
 }) {
   const { title, value, unit, icon } = option;
-
+  function colorStyle() {
+    switch (color) {
+      case "green":
+        return "rgb(50 ,168 ,102)";
+      case "red":
+        return "rgb( 238,40 ,16)";
+      case "orange":
+        return "bg-orange";
+      case "gold":
+        return "bg-gold";
+    }
+  }
   function text() {
     if (!unit) {
       return value.toLocaleString();
@@ -49,17 +61,25 @@ export function CardItem({
   }
   return (
     <Card
-      className={
-        "shadow-card h-[120px] w-full max-w-full px-[60px] pb-[25px] pt-[10px]"
-      }
+      className={"shadow-card h-[120px] w-full max-w-full pb-[25px] pt-[10px]"}
     >
-      <Row className={"text-neutralGray"}>{title}</Row>
-      <Row
-        className={
-          "h-full w-full items-end justify-center text-[24px] text-white"
-        }
-      >
-        {text()}
+      <Row className={"px-[60px] text-neutralGray"}>{title}</Row>
+      <Row className={"relative h-full w-full"}>
+        <Row
+          className={
+            "h-full w-full items-end justify-center text-[24px] text-white"
+          }
+        >
+          {text()}
+        </Row>
+        <Row
+          className={cn(
+            "absolute bottom-0 right-[-10px] h-[50px] w-[50px] items-center justify-center rounded-[5px]",
+          )}
+          style={{ backgroundColor: colorStyle() }}
+        >
+          <IconMoney />
+        </Row>
       </Row>
     </Card>
   );
