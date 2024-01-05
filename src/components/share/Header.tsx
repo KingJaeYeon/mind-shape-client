@@ -12,6 +12,7 @@ export default function Header({ className }: { className?: string }) {
   return (
     <Contents
       className={cn(
+        // "flex h-[75px] items-center justify-between bg-darkGray px-[20px] font-maple",
         "flex h-[75px] items-center justify-between border-b border-line bg-darkGray px-[20px] font-maple",
         className,
       )}
