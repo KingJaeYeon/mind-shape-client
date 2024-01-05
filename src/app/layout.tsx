@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Contents className={"grid h-[100dvh] grid-rows-[auto_1fr]"}>
+        <Contents className={"grid h-[100dvh] grid-rows-[auto_1fr] font-maple"}>
           <Header />
           <Row className={"h-full"}>
             <NavBar />

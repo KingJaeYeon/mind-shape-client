@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import { useConvenienceStore } from "@/store/convenienceStore";
+import { IconMenu } from "@/assets";
 
 export default function Header({ className }: { className?: string }) {
   const { setValue, getValue } = useConvenienceStore();
@@ -11,16 +12,16 @@ export default function Header({ className }: { className?: string }) {
   return (
     <Contents
       className={cn(
-        "font-maple flex h-[75px] justify-between border-b border-line bg-darkGray",
+        "flex h-[75px] items-center justify-between border-b border-line bg-darkGray px-[20px] font-maple",
         className,
       )}
     >
-      <Row>
+      <Row className={"gap-[20px]"}>
         <button
           className={"cursor-pointer text-[40px] text-white"}
           onClick={() => setValue("hideNavBar", !getValue("hideNavBar"))}
         >
-          사이드바
+          <IconMenu className={"h-[40px] w-[40px] text-white"} />
         </button>
         <Link href={"/"} className={"cursor-pointer text-[40px] text-white"}>
           HOME

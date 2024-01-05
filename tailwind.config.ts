@@ -23,6 +23,7 @@ const config: Config = {
         deepGray: "var(--grayscale-deep-gray)",
         darkGray: "var(--grayscale-darkgray)",
         black: "var(--grayscale-black)",
+        orange: "var(--orange)",
       },
       textColor: {
         gray: "var(--grayscale-gray)",
@@ -34,6 +35,7 @@ const config: Config = {
         deepGray: "var(--grayscale-deep-gray)",
         darkGray: "var(--grayscale-darkgray)",
         black: "var(--grayscale-black)",
+        orange: "var(--orange)",
       },
       borderColor: {
         line: "var(--line)",
