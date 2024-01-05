@@ -35,7 +35,7 @@ const config: Config = {
         lightGray: "var(--grayscale-lightgray)",
         neutralGray: "var(--grayscale-neutral-gray)",
         deepGray: "var(--grayscale-deep-gray)",
-        darkGray: "var(--grayscale-darkgray)",
+        darkGray: "var(--grayscale-dark-gray)",
         black: "var(--grayscale-black)",
         orange: "var(--orange)",
         gold1: "var(--gold1)",
