@@ -2,21 +2,35 @@ import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
 import Bubble from "@/components/share/chart/Bubble";
 
-export function ChartList() {
+export function ChartList({
+  options,
+}: {
+  options: { title: string; value: {}; type: string }[];
+}) {
   return (
-    <Row>
-      <ChartItem />
+    <Row className={"w-full gap-[30px]"}>
+      {options.map((option, index) => (
+        <ChartItem key={index} option={option} />
+      ))}
     </Row>
   );
 }
 
-export function ChartItem() {
+export function ChartItem({
+  option,
+}: {
+  option: { title: string; value: {}; type: string };
+}) {
+  function chartType() {
+    switch (option.type) {
+      case "bubble":
+        return <Bubble value={option.value} />;
+    }
+  }
   return (
-    <Card>
-      <Row className={"px-[60px] text-neutralGray"}>
-        비중과 수익률 버블 차트
-      </Row>
-      <Bubble />
+    <Card className={"h-[400px]"}>
+      <Row className={"px-[60px] text-neutralGray"}>{option.title}</Row>
+      {chartType()}
     </Card>
   );
 }

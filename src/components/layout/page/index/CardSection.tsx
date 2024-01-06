@@ -13,7 +13,7 @@ export default function CardSection() {
   return (
     <Grid
       className={
-        "grid-col w-full max-w-full grid-cols-1 gap-x-[20px] gap-y-[20px] xl:grid-cols-2 2xl:grid-cols-4"
+        "grid-col h-auto w-full max-w-full grid-cols-1 gap-x-[30px] gap-y-[30px] xl:grid-cols-2 2xl:grid-cols-4"
       }
     >
       <CardList

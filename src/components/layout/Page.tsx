@@ -9,7 +9,7 @@ type Props = {
 const Page = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { children, className } = props;
   return (
-    <div ref={ref} className={cn(`relative flex justify-center`, className)}>
+    <div ref={ref} className={cn(`relative flex`, className)}>
       {children}
     </div>
   );

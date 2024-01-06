@@ -4,8 +4,6 @@ import React from "react";
 
 import Contents from "@/components/layout/Contents";
 
-const BubbleChart: React.FC = () => {
-  return <Contents className={"w-full max-w-full"}></Contents>;
-};
-
-export default BubbleChart;
+export default function BubbleChart({ value }: { value: any }) {
+  return <Contents className={"flex w-full max-w-full"}></Contents>;
+}

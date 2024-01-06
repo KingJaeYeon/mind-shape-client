@@ -7,6 +7,7 @@ import React from "react";
 import NavBar from "@/components/share/NavBar";
 import MainPage from "@/components/layout/MainPage";
 import Row from "@/components/layout/Row";
+import Footer from "@/components/share/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={"hide-scrollbar"}>
+    <html lang="en">
+      {/*<html lang="en" className={"hide-scrollbar"}>*/}
       <body className={inter.className}>
-        <Contents className={"grid h-[100dvh] grid-rows-[auto_1fr] font-maple"}>
+        <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
           <Header />
-          <Row className={"h-full"}>
+          <Row>
             <NavBar />
             <main className={"flex w-full bg-black"}>{children}</main>
           </Row>
+          <Footer />
         </Contents>
       </body>
     </html>
