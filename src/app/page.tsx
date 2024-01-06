@@ -6,7 +6,7 @@ export default async function Home() {
   return (
     <Page
       className={
-        "h-full w-full flex-col gap-[40px] overflow-hidden px-[30px] py-[10px]"
+        "mt-[75px] h-[calc(100dvh-75px)] w-full flex-col gap-[40px] overflow-auto px-[30px] py-[10px]"
       }
     >
       <CardSection />

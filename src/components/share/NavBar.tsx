@@ -18,8 +18,8 @@ export default function NavBar({}) {
   return (
     <AnimatedDiv
       className={
-        // "flex w-[250px] bg-darkGray transition-all duration-700"
-        "flex w-[250px] border-r border-line bg-black transition-all duration-700"
+        "absolute left-0 top-0 z-[1] flex h-[100dvh] w-[250px] border-r border-line bg-black pt-[75px] transition-all duration-700"
+        // "flex w-[250px] border-r border-line bg-black transition-all duration-700"
       }
       style={getNavBarStyle()}
     >

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/share/Header";
+import { Header } from "@/components/share/Header";
 import Contents from "@/components/layout/Contents";
 import React from "react";
 import NavBar from "@/components/share/NavBar";
@@ -25,11 +25,11 @@ export default function RootLayout({
     <html lang="en">
       {/*<html lang="en" className={"hide-scrollbar"}>*/}
       <body className={inter.className}>
-        <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
+        <Contents className={"grid grid-rows-[auto] bg-black font-maple"}>
           <Header />
           <Row>
             <NavBar />
-            <main className={"flex w-full bg-black"}>{children}</main>
+            <main className={"flex w-full overflow-hidden"}>{children}</main>
           </Row>
           <Footer />
         </Contents>
