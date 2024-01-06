@@ -1,6 +1,8 @@
+"use client";
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
 import Bubble from "@/components/share/chart/Bubble";
+import Grid from "@/components/layout/Grid";
 
 export function ChartList({
   options,
@@ -8,11 +10,15 @@ export function ChartList({
   options: { title: string; value: {}; type: string }[];
 }) {
   return (
-    <Row className={"w-full gap-[30px]"}>
+    <Grid
+      className={
+        "h-auto w-full max-w-full grid-cols-1 gap-x-[30px] gap-y-[30px] xl:grid-cols-2 2xl:grid-cols-3"
+      }
+    >
       {options.map((option, index) => (
         <ChartItem key={index} option={option} />
       ))}
-    </Row>
+    </Grid>
   );
 }
 
@@ -27,8 +33,9 @@ export function ChartItem({
         return <Bubble value={option.value} />;
     }
   }
+
   return (
-    <Card className={"h-[400px]"}>
+    <Card className={"h-[400px] transition-all duration-700"}>
       <Row className={"px-[60px] text-neutralGray"}>{option.title}</Row>
       {chartType()}
     </Card>
