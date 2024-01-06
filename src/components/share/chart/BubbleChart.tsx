@@ -1,6 +1,6 @@
 "use client";
 // pages/index.tsx 또는 적절한 파일
-import React, { useRef } from "react";
+import React from "react";
 import Contents from "@/components/layout/Contents";
 import { Bubble } from "react-chartjs-2";
 import {
