@@ -3,7 +3,6 @@ import Contents from "@/components/layout/Contents";
 import { cn } from "@/lib/utils";
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
-import IconMoney from "@/assets/IconMoney";
 
 export function CardList({
   options,
@@ -39,13 +38,13 @@ export function CardItem({
   function colorStyle() {
     switch (color) {
       case "green":
-        return "rgb(50 ,168 ,102)";
+        return "bg-green shadow-green";
       case "red":
-        return "rgb( 238,40 ,16)";
+        return "bg-red shadow-red";
       case "orange":
-        return "bg-orange";
+        return "bg-orange shadow-orange";
       case "gold":
-        return "bg-gold";
+        return "bg-gold1 shadow-gold";
     }
   }
   function text() {
@@ -61,7 +60,7 @@ export function CardItem({
   }
   return (
     <Card
-      className={"shadow-card h-[120px] w-full max-w-full pb-[25px] pt-[10px]"}
+      className={"h-[120px] w-full max-w-full pb-[25px] pt-[10px] shadow-card"}
     >
       <Row className={"px-[60px] text-neutralGray"}>{title}</Row>
       <Row className={"relative h-full w-full"}>
@@ -74,11 +73,11 @@ export function CardItem({
         </Row>
         <Row
           className={cn(
-            "absolute bottom-0 right-[-10px] h-[50px] w-[50px] items-center justify-center rounded-[5px]",
+            "absolute bottom-0 right-[-10px] h-[50px] w-[50px] items-center justify-center rounded-[5px] shadow-card",
+            colorStyle(),
           )}
-          style={{ backgroundColor: colorStyle() }}
         >
-          <IconMoney />
+          {icon}
         </Row>
       </Row>
     </Card>

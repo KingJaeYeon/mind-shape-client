@@ -1,5 +1,19 @@
 import IconMenu from "@/assets/IconMenu";
-import IconTradingUp from "@/assets/IconTradingUp";
-import IconTradingDown from "@/assets/IconTradingDown";
+import {
+  IconChart,
+  IconTrading,
+  IconTradingDown,
+  IconChartInsights,
+} from "@/assets/IconChart";
+import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
 
-export { IconMenu, IconTradingUp, IconTradingDown };
+export {
+  IconMenu,
+  IconChart,
+  IconTradingDown,
+  IconMoney,
+  IconTrading,
+  IconMoney2,
+  IconMoney3,
+  IconChartInsights,
+};

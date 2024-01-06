@@ -26,6 +26,8 @@ const config: Config = {
         orange: "var(--orange)",
         gold1: "var(--gold1)",
         gold2: "var(--gold2)",
+        red: "var(--red)",
+        green: "var(--green)",
       },
       textColor: {
         gray: "var(--grayscale-gray)",
@@ -40,6 +42,8 @@ const config: Config = {
         orange: "var(--orange)",
         gold1: "var(--gold1)",
         gold2: "var(--gold2)",
+        red: "var(--red)",
+        green: "var(--green)",
       },
       borderColor: {
         line: "var(--line)",
@@ -48,8 +52,10 @@ const config: Config = {
         maple: ["MaplestoryOTFBold", "sans-serif"],
       },
       boxShadow: {
-        card: "0px 10px 20px 0px rgba(0, 0, 0, 0.08)",
-        card2: "0px 15px 30px 0px rgba(0, 0, 0, 0.2)",
+        green: "0px 0px 20px var(--green)",
+        red: "0px 0px 20px var(--red)",
+        orange: "0px 0px 20px var(--orange)",
+        gold: "0px 0px 20px var(--gold1)",
       },
     },
   },
