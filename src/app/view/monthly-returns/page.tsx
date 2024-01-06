@@ -1,5 +1,10 @@
 import Row from "@/components/layout/Row";
+import PageContainer from "@/components/layout/page/index/PageContainer";
 
 export default function page() {
-  return <Row className={"text-white"}>monthly-returns</Row>;
+  return (
+    <PageContainer>
+      <Row className={"text-white"}>monthly-returns</Row>
+    </PageContainer>
+  );
 }

@@ -22,16 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/*<html lang="en" className={"hide-scrollbar"}>*/}
+    <html lang="en" className={"hide-scrollbar bg-black"}>
       <body className={inter.className}>
-        <Contents className={"grid grid-rows-[auto] bg-black font-maple"}>
+        <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
           <Header />
           <Row>
             <NavBar />
-            <main className={"flex w-full overflow-hidden"}>{children}</main>
+            <main className={"hide-scrollbar flex w-full"}>{children}</main>
           </Row>
-          <Footer />
         </Contents>
       </body>
     </html>
