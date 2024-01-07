@@ -4,6 +4,7 @@ import Row from "@/components/layout/Row";
 import BubbleChart from "@/components/share/chart/BubbleChart";
 import Grid from "@/components/layout/Grid";
 import { ChartData } from "chart.js";
+import Text from "@/components/layout/Text";
 
 const options = {
   responsive: true,
@@ -42,7 +43,9 @@ export function ChartItem({
 
   return (
     <Card className={"h-[400px] transition-all duration-700"}>
-      <Row className={"px-[60px] text-neutralGray"}>{option.title}</Row>
+      <Row className={"justify-between px-[30px] py-[10px]"}>
+        <Text className={"text-[20px] text-white"}>{option.title}</Text>
+      </Row>
       {chartType()}
     </Card>
   );

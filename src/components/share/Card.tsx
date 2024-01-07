@@ -3,6 +3,7 @@ import Contents from "@/components/layout/Contents";
 import { cn } from "@/lib/utils";
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
+import Text from "@/components/layout/Text";
 
 export function CardList({
   options,
@@ -60,20 +61,20 @@ export function CardItem({
   }
   return (
     <Card
-      className={"h-[120px] w-full max-w-full pb-[25px] pt-[10px] shadow-card"}
+      className={"shadow-card h-[120px] w-full max-w-full pb-[25px] pt-[10px]"}
     >
       <Row className={"px-[60px] text-neutralGray"}>{title}</Row>
       <Row className={"relative h-full w-full"}>
-        <Row
+        <Text
           className={
             "h-full w-full items-end justify-center text-[24px] text-white"
           }
         >
           {text()}
-        </Row>
+        </Text>
         <Row
           className={cn(
-            "absolute bottom-0 right-[-10px] h-[50px] w-[50px] items-center justify-center rounded-[5px] shadow-card",
+            "shadow-card absolute bottom-0 right-[-10px] h-[50px] w-[50px] items-center justify-center rounded-[5px]",
             colorStyle(),
           )}
         >
