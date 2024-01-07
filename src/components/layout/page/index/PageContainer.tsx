@@ -3,6 +3,7 @@ import Page from "@/components/layout/Page";
 import React from "react";
 import { useConvenienceStore } from "@/store/convenienceStore";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/share/Footer";
 
 export default function PageContainer({
   children,
@@ -24,6 +25,7 @@ export default function PageContainer({
       style={getPageStyle()}
     >
       {children}
+      <Footer />
     </Page>
   );
 }

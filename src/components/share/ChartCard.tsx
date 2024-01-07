@@ -46,8 +46,8 @@ export function ChartList({ options }: { options: ChartOption[] }) {
 
 export function ChartItem({ option }: { option: ChartOption }) {
   return (
-    <Card className={"min-h-[400px] transition-all duration-700"}>
-      <Row className={"items-center justify-between px-[30px] py-[20px]"}>
+    <Card className={"min-h-[400px] px-[30px] transition-all duration-700"}>
+      <Row className={"items-center justify-between pt-[20px]"}>
         <ChartCardTitle title={option.title} />
         <Row className={"flex min-h-[24px] gap-[10px]"}>
           <TextToggleButton options={option?.toggleList} />

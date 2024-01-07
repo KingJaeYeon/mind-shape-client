@@ -13,7 +13,7 @@ const options = {
 };
 
 export function ChartDuration() {
-  return <Contents>dd</Contents>;
+  return <Contents className={"flex"}></Contents>;
 }
 
 export function ChartBase({

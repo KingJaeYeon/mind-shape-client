@@ -31,11 +31,25 @@ export default function ChartSection() {
                 { label: "누적수익금", value: "누적수익금" },
               ],
             },
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "포트폴리오 비중 도넛 차트",
             value: bubbleData,
             chartType: "bubble",
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "포트폴리오 비중 트리맵 차트",
@@ -49,16 +63,37 @@ export default function ChartSection() {
                 { label: "업종과 종목", value: "업종과 종목" },
               ],
             },
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "업종별 비중 도넛 차트",
             value: bubbleData,
             chartType: "bubble",
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "배당 비중 도넛 차트",
             value: bubbleData,
             chartType: "bubble",
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "1년간 예상 배당금 차트",
@@ -95,12 +130,26 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "누적 배당금 차트",
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
+            duration: {
+              isFixedDuration: false,
+              options: {
+                label: "2022년",
+                value: 2022,
+              },
+            },
           },
           {
             title: "수익률,매수금액,평가금액,누적수익금 차트",

@@ -9,7 +9,6 @@ export default async function Home() {
     <PageContainer>
       <CardSection />
       <ChartSection />
-      <Footer />
     </PageContainer>
   );
 }
