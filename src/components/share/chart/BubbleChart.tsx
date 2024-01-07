@@ -15,7 +15,7 @@ export default function BubbleChart({ data, options }: BubbleChartProps) {
       <Bubble
         data={data}
         options={options}
-        style={{ width: "100%" }}
+        style={{ width: "100%", height: "100%" }}
         className={"flex w-full max-w-full"}
       />
     </Contents>

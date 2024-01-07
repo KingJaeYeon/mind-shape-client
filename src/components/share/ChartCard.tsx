@@ -13,8 +13,12 @@ import {
 } from "chart.js";
 
 import { ModalTriggerButtonTypeChart } from "@/components/share/ModalTriggerButton";
-import { ChartBase, ChartCardTitle } from "@/components/share/ChartPlugIn";
-import { TextToggleButton } from "@/components/share/TextToggleButton";
+import {
+  ChartBase,
+  ChartCardTitle,
+  ChartDuration,
+  TextToggleButton,
+} from "@/components/share/ChartPlugIn";
 import { ChartOption } from "@/constant/chart";
 
 ChartJS.register(
@@ -42,7 +46,7 @@ export function ChartList({ options }: { options: ChartOption[] }) {
 
 export function ChartItem({ option }: { option: ChartOption }) {
   return (
-    <Card className={"h-[400px] transition-all duration-700"}>
+    <Card className={"min-h-[400px] transition-all duration-700"}>
       <Row className={"items-center justify-between px-[30px] py-[20px]"}>
         <ChartCardTitle title={option.title} />
         <Row className={"flex min-h-[24px] gap-[10px]"}>
@@ -50,7 +54,7 @@ export function ChartItem({ option }: { option: ChartOption }) {
           <ModalTriggerButtonTypeChart isShow={option?.hasModal} />
         </Row>
       </Row>
-
+      <ChartDuration />
       <ChartBase value={option.value} chartType={option.chartType} />
     </Card>
   );

@@ -65,8 +65,8 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
-            dropDown: {
-              showDropdown: true,
+            duration: {
+              isFixedDuration: true,
               options: [
                 {
                   label: "2022년",
@@ -80,8 +80,8 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
-            dropDown: {
-              showDropdown: true,
+            duration: {
+              isFixedDuration: true,
               options: [
                 {
                   label: "2022년",
@@ -107,8 +107,8 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
-            dropDown: {
-              showDropdown: true,
+            duration: {
+              isFixedDuration: true,
               options: [
                 {
                   label: "전체 기간",
@@ -122,8 +122,8 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
-            dropDown: {
-              showDropdown: true,
+            duration: {
+              isFixedDuration: true,
               options: [
                 {
                   label: "올해",
@@ -137,8 +137,8 @@ export default function ChartSection() {
             value: bubbleData,
             chartType: "bubble",
             hasModal: true,
-            dropDown: {
-              showDropdown: true,
+            duration: {
+              isFixedDuration: true,
               options: [
                 {
                   label: "전체기간",

@@ -5,15 +5,18 @@ export interface ChartOption {
   value: ChartData<any>;
   chartType: string;
   hasModal?: boolean;
-  dropDown?: {
-    showDropdown: boolean;
-    options?: {
-      label: string;
-      value: number;
-    }[];
-  };
+  duration?: DurationListProps;
   toggleList?: ToggleListProps;
 }
+
+export interface DurationListProps {
+  isFixedDuration: boolean;
+  options: {
+    label: string;
+    value: number;
+  }[];
+}
+
 export interface ToggleListProps {
   showToggleList?: boolean;
   options: {
