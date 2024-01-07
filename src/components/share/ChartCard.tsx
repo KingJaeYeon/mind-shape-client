@@ -54,7 +54,7 @@ export function ChartItem({ option }: { option: ChartOption }) {
           <ModalTriggerButtonTypeChart isShow={option?.hasModal} />
         </Row>
       </Row>
-      <ChartDuration />
+      <ChartDuration options={option.duration} />
       <ChartBase value={option.value} chartType={option.chartType} />
     </Card>
   );

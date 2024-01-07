@@ -2,7 +2,7 @@
 import { ChartData } from "chart.js";
 import BubbleChart from "@/components/share/chart/BubbleChart";
 import Text from "@/components/layout/Text";
-import { ToggleListProps } from "@/constant/chart";
+import { ChartOption, ToggleListProps } from "@/constant/chart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import Contents from "@/components/layout/Contents";
 
@@ -12,8 +12,23 @@ const options = {
   // ... 기타 옵션
 };
 
-export function ChartDuration() {
-  return <Contents className={"flex"}></Contents>;
+export function ChartDuration({
+  options,
+}: {
+  options: ChartOption["duration"];
+}) {
+  if (options.isFixedDuration) {
+    return (
+      <Text className={"text-[0.8rem] text-neutralGray"}>
+        {options.options?.label}
+      </Text>
+    );
+  }
+  return (
+    <Text className={"text-[0.8rem] text-neutralGray"}>
+      {options.options[0]?.label}
+    </Text>
+  );
 }
 
 export function ChartBase({

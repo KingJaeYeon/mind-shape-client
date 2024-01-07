@@ -5,12 +5,12 @@ export interface ChartOption {
   value: ChartData<any>;
   chartType: string;
   hasModal?: boolean;
-  duration: DurationListProps | DurationProps;
+  duration: DurationProps | DurationListProps;
   toggleList?: ToggleListProps;
 }
 
 export interface DurationListProps {
-  isFixedDuration: true;
+  isFixedDuration: false;
   options: {
     label: string;
     value: number;
@@ -18,7 +18,7 @@ export interface DurationListProps {
 }
 
 export interface DurationProps {
-  isFixedDuration: false;
+  isFixedDuration: true;
   options: {
     label: string;
     value: number;
