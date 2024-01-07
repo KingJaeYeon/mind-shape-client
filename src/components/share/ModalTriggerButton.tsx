@@ -1,6 +1,7 @@
+"use client";
 import { IconModalTrigger } from "@/assets";
 
-export default function ModalTriggerButton({ isShow }: { isShow?: boolean }) {
+export function ModalTriggerButtonTypeChart({ isShow }: { isShow?: boolean }) {
   if (!isShow) {
     return null;
   }
