@@ -6,6 +6,7 @@ import {
   IconChartInsights,
 } from "@/assets/IconChart";
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
+import { IconModalTrigger } from "@/assets/IconModal";
 
 export {
   IconMenu,
@@ -16,4 +17,5 @@ export {
   IconMoney2,
   IconMoney3,
   IconChartInsights,
+  IconModalTrigger,
 };
