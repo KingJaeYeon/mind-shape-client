@@ -160,6 +160,26 @@ export default function ChartSection() {
               isFixedDuration: false,
               options: [
                 {
+                  label: "6개월",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "올해",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "1년",
+                  value: 1,
+                },
+                {
+                  label: "2년",
+                  value: 2,
+                },
+                {
+                  label: "3년",
+                  value: 3,
+                },
+                {
                   label: "전체 기간",
                   value: 0,
                 },
@@ -189,6 +209,111 @@ export default function ChartSection() {
             duration: {
               isFixedDuration: false,
               options: [
+                {
+                  label: "전체 기간",
+                  value: 0,
+                },
+              ],
+            },
+          },
+          {
+            title: "수익률과 누적수입금 차트",
+            value: bubbleData,
+            chartType: "bubble",
+            hasModal: true,
+            duration: {
+              isFixedDuration: false,
+              options: [
+                {
+                  label: "6개월",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "올해",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "1년",
+                  value: 1,
+                },
+                {
+                  label: "2년",
+                  value: 2,
+                },
+                {
+                  label: "3년",
+                  value: 3,
+                },
+                {
+                  label: "전체 기간",
+                  value: 0,
+                },
+              ],
+            },
+          },
+          {
+            title: "연도별 수입금 차트",
+            value: bubbleData,
+            chartType: "bubble",
+            hasModal: true,
+            duration: {
+              isFixedDuration: false,
+              options: [
+                {
+                  label: "6개월",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "올해",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "1년",
+                  value: 1,
+                },
+                {
+                  label: "2년",
+                  value: 2,
+                },
+                {
+                  label: "3년",
+                  value: 3,
+                },
+                {
+                  label: "전체 기간",
+                  value: 0,
+                },
+              ],
+            },
+          },
+          {
+            title: "연도별 수익률 차트",
+            value: bubbleData,
+            chartType: "bubble",
+            hasModal: true,
+            duration: {
+              isFixedDuration: false,
+              options: [
+                {
+                  label: "6개월",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "올해",
+                  value: new Date().getFullYear(),
+                },
+                {
+                  label: "1년",
+                  value: 1,
+                },
+                {
+                  label: "2년",
+                  value: 2,
+                },
+                {
+                  label: "3년",
+                  value: 3,
+                },
                 {
                   label: "전체 기간",
                   value: 0,

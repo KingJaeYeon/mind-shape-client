@@ -7,7 +7,7 @@ import {
 } from "@/assets/IconChart";
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
 import { IconModalTrigger } from "@/assets/IconModal";
-
+import { IconChevronDown } from "@/assets/IconChevron";
 export {
   IconMenu,
   IconChart,
@@ -18,4 +18,5 @@ export {
   IconMoney3,
   IconChartInsights,
   IconModalTrigger,
+  IconChevronDown,
 };

@@ -5,6 +5,7 @@ import Text from "@/components/layout/Text";
 import { ChartOption, ToggleListProps } from "@/constant/chart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import Contents from "@/components/layout/Contents";
+import SelectBase from "@/components/share/radix/SelectBase";
 
 const options = {
   responsive: true,
@@ -24,11 +25,7 @@ export function ChartDuration({
       </Text>
     );
   }
-  return (
-    <Text className={"text-[0.8rem] text-neutralGray"}>
-      {options.options[0]?.label}
-    </Text>
-  );
+  return <SelectBase options={options.options} />;
 }
 
 export function ChartBase({

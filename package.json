@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
-    "@radix-ui/react-tabs": "^1.0.4",
+    "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@react-spring/web": "^9.7.3",
     "axios": "^1.6.5",

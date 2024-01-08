@@ -7,7 +7,7 @@ export function ToggleGroupBaseSingle({
   options,
   className,
 }: {
-  options: any[];
+  options: { value: any; label: string }[];
   className?: string;
 }) {
   const [value, setValue] = useState(options[0]?.value);
@@ -38,7 +38,7 @@ export function ToggleGroupBase({
   options,
   className,
 }: {
-  options: any[];
+  options: { value: any; label: string }[];
   className?: string;
 }) {
   const [value, setValue] = useState(options[0]?.value);

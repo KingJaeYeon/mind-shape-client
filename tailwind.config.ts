@@ -56,6 +56,7 @@ const config: Config = {
         red: "0px 0px 20px var(--red)",
         orange: "0px 0px 20px var(--orange)",
         gold: "0px 0px 20px var(--gold1)",
+        dark: "0px 0px 30px #000",
       },
     },
   },
