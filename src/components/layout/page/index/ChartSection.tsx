@@ -1,6 +1,8 @@
 "use client";
 import Contents from "@/components/layout/Contents";
 import { ChartList } from "@/components/share/ChartCard";
+import { getDurationDate, getYearAndUint } from "@/lib/utils";
+import { subYears } from "date-fns";
 
 const bubbleData = {
   datasets: [
@@ -35,7 +37,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "현재",
-                value: 2022,
+                value: getDurationDate("current"),
               },
             },
           },
@@ -47,7 +49,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "현재",
-                value: 2022,
+                value: getDurationDate("current"),
               },
             },
           },
@@ -67,7 +69,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "현재",
-                value: 2022,
+                value: getDurationDate("current"),
               },
             },
           },
@@ -79,7 +81,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "현재",
-                value: 2022,
+                value: getDurationDate("current"),
               },
             },
           },
@@ -91,7 +93,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "현재",
-                value: 2022,
+                value: getDurationDate("current"),
               },
             },
           },
@@ -101,17 +103,11 @@ export default function ChartSection() {
             chartType: "bubble",
             hasModal: true,
             duration: {
-              isFixedDuration: false,
-              defaultValue: {
-                label: `${new Date().getFullYear() + "년"}`,
-                value: new Date().getFullYear(),
+              isFixedDuration: true,
+              options: {
+                label: getYearAndUint(new Date(), true),
+                value: getDurationDate("current"),
               },
-              options: [
-                {
-                  label: `${new Date().getFullYear() + "년"}`,
-                  value: new Date().getFullYear(),
-                },
-              ],
             },
           },
           {
@@ -122,13 +118,25 @@ export default function ChartSection() {
             duration: {
               isFixedDuration: false,
               defaultValue: {
-                label: `${new Date().getFullYear() + "년"}`,
-                value: new Date().getFullYear(),
+                label: getYearAndUint(new Date(), true),
+                value: getDurationDate("this-year"),
               },
               options: [
                 {
-                  label: `${new Date().getFullYear() + "년"}`,
-                  value: new Date().getFullYear(),
+                  label: getYearAndUint(new Date(), true),
+                  value: getDurationDate("this-year"),
+                },
+                {
+                  label: getYearAndUint(subYears(new Date(), 1), true),
+                  value: getDurationDate("1year-start"),
+                },
+                {
+                  label: getYearAndUint(subYears(new Date(), 2), true),
+                  value: getDurationDate("2year-start"),
+                },
+                {
+                  label: getYearAndUint(subYears(new Date(), 3), true),
+                  value: getDurationDate("3year-start"),
                 },
               ],
             },
@@ -142,7 +150,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
             },
           },
@@ -155,7 +163,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
             },
           },
@@ -168,32 +176,32 @@ export default function ChartSection() {
               isFixedDuration: false,
               defaultValue: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
               options: [
                 {
                   label: "6개월",
-                  value: new Date().getFullYear(),
+                  value: getDurationDate("half-month"),
                 },
                 {
                   label: "올해",
-                  value: new Date().getFullYear(),
+                  value: getDurationDate("this-year"),
                 },
                 {
                   label: "1년",
-                  value: 1,
+                  value: getDurationDate("1year-ago"),
                 },
                 {
                   label: "2년",
-                  value: 2,
+                  value: getDurationDate("2year-ago"),
                 },
                 {
                   label: "3년",
-                  value: 3,
+                  value: getDurationDate("3year-ago"),
                 },
                 {
                   label: "전체 기간",
-                  value: 0,
+                  value: getDurationDate("all-duration"),
                 },
               ],
             },
@@ -207,12 +215,32 @@ export default function ChartSection() {
               isFixedDuration: false,
               defaultValue: {
                 label: "올해",
-                value: new Date().getFullYear(),
+                value: getDurationDate("this-year"),
               },
               options: [
                 {
+                  label: "6개월",
+                  value: getDurationDate("half-month"),
+                },
+                {
                   label: "올해",
-                  value: new Date().getFullYear(),
+                  value: getDurationDate("this-year"),
+                },
+                {
+                  label: "1년",
+                  value: getDurationDate("1year-ago"),
+                },
+                {
+                  label: "2년",
+                  value: getDurationDate("2year-ago"),
+                },
+                {
+                  label: "3년",
+                  value: getDurationDate("3year-ago"),
+                },
+                {
+                  label: "전체 기간",
+                  value: getDurationDate("all-duration"),
                 },
               ],
             },
@@ -226,12 +254,32 @@ export default function ChartSection() {
               isFixedDuration: false,
               defaultValue: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
               options: [
                 {
+                  label: "6개월",
+                  value: getDurationDate("half-month"),
+                },
+                {
+                  label: "올해",
+                  value: getDurationDate("this-year"),
+                },
+                {
+                  label: "1년",
+                  value: getDurationDate("1year-ago"),
+                },
+                {
+                  label: "2년",
+                  value: getDurationDate("2year-ago"),
+                },
+                {
+                  label: "3년",
+                  value: getDurationDate("3year-ago"),
+                },
+                {
                   label: "전체 기간",
-                  value: 0,
+                  value: getDurationDate("all-duration"),
                 },
               ],
             },
@@ -245,32 +293,32 @@ export default function ChartSection() {
               isFixedDuration: false,
               defaultValue: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
               options: [
                 {
                   label: "6개월",
-                  value: new Date().getFullYear(),
+                  value: getDurationDate("half-month"),
                 },
                 {
                   label: "올해",
-                  value: new Date().getFullYear(),
+                  value: getDurationDate("this-year"),
                 },
                 {
                   label: "1년",
-                  value: 1,
+                  value: getDurationDate("1year-ago"),
                 },
                 {
                   label: "2년",
-                  value: 2,
+                  value: getDurationDate("2year-ago"),
                 },
                 {
                   label: "3년",
-                  value: 3,
+                  value: getDurationDate("3year-ago"),
                 },
                 {
                   label: "전체 기간",
-                  value: 0,
+                  value: getDurationDate("all-duration"),
                 },
               ],
             },
@@ -284,7 +332,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
             },
           },
@@ -297,7 +345,7 @@ export default function ChartSection() {
               isFixedDuration: true,
               options: {
                 label: "전체 기간",
-                value: 0,
+                value: getDurationDate("all-duration"),
               },
             },
           },

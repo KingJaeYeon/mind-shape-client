@@ -13,11 +13,11 @@ export interface DurationListProps {
   isFixedDuration: false;
   defaultValue: {
     label: string;
-    value: number;
+    value: string;
   };
   options: {
     label: string;
-    value: number;
+    value: string;
   }[];
 }
 
@@ -25,7 +25,7 @@ export interface DurationProps {
   isFixedDuration: true;
   options: {
     label: string;
-    value: number;
+    value: string;
   };
 }
 
