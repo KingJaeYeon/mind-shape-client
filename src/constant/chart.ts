@@ -11,6 +11,10 @@ export interface ChartOption {
 
 export interface DurationListProps {
   isFixedDuration: false;
+  defaultValue: {
+    label: string;
+    value: number;
+  };
   options: {
     label: string;
     value: number;

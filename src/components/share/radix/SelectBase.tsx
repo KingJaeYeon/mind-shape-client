@@ -16,14 +16,16 @@ export default function SelectBase({
   contentClassName,
   selectClassName,
   options,
+  defaultValue,
 }: {
   selectIcon?: any;
   triggerClassName?: string;
   contentClassName?: string;
   selectClassName?: string;
   options: { value: any; label: string }[];
+  defaultValue: { value: any; label: string };
 }) {
-  const [value, setValue] = React.useState(options[options.length - 1]?.value);
+  const [value, setValue] = React.useState(defaultValue?.value);
   return (
     <Select.Root value={value} onValueChange={setValue}>
       <Select.Trigger

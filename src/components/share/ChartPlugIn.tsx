@@ -25,7 +25,9 @@ export function ChartDuration({
       </Text>
     );
   }
-  return <SelectBase options={options.options} />;
+  return (
+    <SelectBase options={options.options} defaultValue={options.defaultValue} />
+  );
 }
 
 export function ChartBase({

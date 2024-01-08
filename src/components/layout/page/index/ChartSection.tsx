@@ -102,6 +102,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: `${new Date().getFullYear() + "년"}`,
+                value: new Date().getFullYear(),
+              },
               options: [
                 {
                   label: `${new Date().getFullYear() + "년"}`,
@@ -117,6 +121,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: `${new Date().getFullYear() + "년"}`,
+                value: new Date().getFullYear(),
+              },
               options: [
                 {
                   label: `${new Date().getFullYear() + "년"}`,
@@ -158,6 +166,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: "전체 기간",
+                value: 0,
+              },
               options: [
                 {
                   label: "6개월",
@@ -193,6 +205,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: "올해",
+                value: new Date().getFullYear(),
+              },
               options: [
                 {
                   label: "올해",
@@ -208,6 +224,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: "전체 기간",
+                value: 0,
+              },
               options: [
                 {
                   label: "전체 기간",
@@ -223,6 +243,10 @@ export default function ChartSection() {
             hasModal: true,
             duration: {
               isFixedDuration: false,
+              defaultValue: {
+                label: "전체 기간",
+                value: 0,
+              },
               options: [
                 {
                   label: "6개월",
@@ -257,33 +281,11 @@ export default function ChartSection() {
             chartType: "bubble",
             hasModal: true,
             duration: {
-              isFixedDuration: false,
-              options: [
-                {
-                  label: "6개월",
-                  value: new Date().getFullYear(),
-                },
-                {
-                  label: "올해",
-                  value: new Date().getFullYear(),
-                },
-                {
-                  label: "1년",
-                  value: 1,
-                },
-                {
-                  label: "2년",
-                  value: 2,
-                },
-                {
-                  label: "3년",
-                  value: 3,
-                },
-                {
-                  label: "전체 기간",
-                  value: 0,
-                },
-              ],
+              isFixedDuration: true,
+              options: {
+                label: "전체 기간",
+                value: 0,
+              },
             },
           },
           {
@@ -292,33 +294,11 @@ export default function ChartSection() {
             chartType: "bubble",
             hasModal: true,
             duration: {
-              isFixedDuration: false,
-              options: [
-                {
-                  label: "6개월",
-                  value: new Date().getFullYear(),
-                },
-                {
-                  label: "올해",
-                  value: new Date().getFullYear(),
-                },
-                {
-                  label: "1년",
-                  value: 1,
-                },
-                {
-                  label: "2년",
-                  value: 2,
-                },
-                {
-                  label: "3년",
-                  value: 3,
-                },
-                {
-                  label: "전체 기간",
-                  value: 0,
-                },
-              ],
+              isFixedDuration: true,
+              options: {
+                label: "전체 기간",
+                value: 0,
+              },
             },
           },
         ]}
