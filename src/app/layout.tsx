@@ -1,4 +1,4 @@
-import type { Metadata, NextPage } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/share/Header";
@@ -6,8 +6,6 @@ import Contents from "@/components/layout/Contents";
 import React from "react";
 import NavBar from "@/components/share/NavBar";
 import Row from "@/components/layout/Row";
-import "../lib/i18n";
-import { appWithTranslation } from "next-i18next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +16,12 @@ export const metadata: Metadata = {
     icon: "./favicon.ico",
   },
 };
-type AppProps = {
-  Component: NextPage;
-  pageProps: any;
-};
-function RootLayout({ Component, pageProps }: AppProps) {
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={"hide-scrollbar bg-black"}>
       <body className={inter.className}>
@@ -30,14 +29,10 @@ function RootLayout({ Component, pageProps }: AppProps) {
           <Header />
           <Row>
             <NavBar />
-            <main className={"hide-scrollbar flex w-full"}>
-              <Component {...pageProps} />
-            </main>
+            <main className={"hide-scrollbar flex w-full"}>{children}</main>
           </Row>
         </Contents>
       </body>
     </html>
   );
 }
-
-export default appWithTranslation(RootLayout);
