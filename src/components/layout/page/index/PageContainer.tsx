@@ -19,7 +19,7 @@ export default function PageContainer({
   return (
     <Page
       className={cn(
-        "hide-scrollbar left-[250px] mt-[75px] h-[calc(100dvh-75px)] w-full flex-col gap-[40px] " +
+        "hide-scrollbar left-[250px] mt-[75px] min-h-[calc(100dvh-75px)] w-full flex-col gap-[40px] " +
           "overflow-auto px-[30px] py-[10px] transition-all duration-700",
       )}
       style={getPageStyle()}

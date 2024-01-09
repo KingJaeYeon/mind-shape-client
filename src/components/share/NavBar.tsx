@@ -19,7 +19,6 @@ export default function NavBar({}) {
     <AnimatedDiv
       className={
         "absolute left-0 top-0 z-[1] flex h-[100dvh] w-[250px] border-r border-line bg-black pt-[75px] transition-all duration-700"
-        // "flex w-[250px] border-r border-line bg-black transition-all duration-700"
       }
       style={getNavBarStyle()}
     >
@@ -37,10 +36,10 @@ export default function NavBar({}) {
       <NavBarOption
         title={"주식내역 등록"}
         option={[
-          { title: "포트폴리오내역", url: "/view/investment-status" },
-          { title: "외화내역", url: "/view/portfolio" },
-          { title: "배당금내역", url: "/view/accumulated-dividends" },
-          { title: "실현손익내역", url: "/view/monthly-returns" },
+          { title: "포트폴리오내역", url: "/add/portfolio" },
+          { title: "외화내역", url: "/add/forex" },
+          { title: "배당금내역", url: "/add/dividends" },
+          { title: "실현손익내역", url: "/add/realized" },
         ]}
       />
       <NavBarOption
