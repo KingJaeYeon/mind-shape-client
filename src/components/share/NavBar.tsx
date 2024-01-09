@@ -28,7 +28,7 @@ export default function NavBar({}) {
         title={"주식조회"}
         option={[
           { title: "투자현황", url: "/view/investment-status" },
-          { title: "포토폴리오 상세", url: "/view/portfolio" },
+          { title: "포트폴리오 상세", url: "/view/portfolio" },
           { title: "누적배당금 내역", url: "/view/accumulated-dividends" },
           { title: "월별수익률", url: "/view/monthly-returns" },
           { title: "월간이력", url: "/view/monthly-history" },
@@ -37,7 +37,7 @@ export default function NavBar({}) {
       <NavBarOption
         title={"주식내역 등록"}
         option={[
-          { title: "포토폴리오내역", url: "/view/investment-status" },
+          { title: "포트폴리오내역", url: "/view/investment-status" },
           { title: "외화내역", url: "/view/portfolio" },
           { title: "배당금내역", url: "/view/accumulated-dividends" },
           { title: "실현손익내역", url: "/view/monthly-returns" },
@@ -50,6 +50,10 @@ export default function NavBar({}) {
           { title: "피드", url: "/view/portfolio" },
           { title: "게시글", url: "/view/accumulated-dividends" },
         ]}
+      />
+      <NavBarOption
+        title={"설정"}
+        option={[{ title: "설정", url: "/view/investment-status" }]}
       />
     </AnimatedDiv>
   );

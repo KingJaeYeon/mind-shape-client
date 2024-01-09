@@ -18,6 +18,7 @@
     "chartjs-chart-treemap": "^2.3.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.1.0",
+    "fs-extra": "^11.2.0",
     "next": "14.0.4",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
