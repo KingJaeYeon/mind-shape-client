@@ -13,7 +13,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      backgroundColor: {
+      colors: {
         gray: "var(--grayscale-gray)",
         white: "var(--grayscale-white)",
         paleGray: "var(--grayscale-pale-gray)",
@@ -28,24 +28,7 @@ const config: Config = {
         gold2: "var(--gold2)",
         red: "var(--red)",
         green: "var(--green)",
-      },
-      textColor: {
-        gray: "var(--grayscale-gray)",
-        white: "var(--grayscale-white)",
-        paleGray: "var(--grayscale-pale-gray)",
-        weakGray: "var(--grayscale-weak-gray)",
-        lightGray: "var(--grayscale-lightgray)",
-        neutralGray: "var(--grayscale-neutral-gray)",
-        deepGray: "var(--grayscale-deep-gray)",
-        darkGray: "var(--grayscale-dark-gray)",
-        black: "var(--grayscale-black)",
-        orange: "var(--orange)",
-        gold1: "var(--gold1)",
-        gold2: "var(--gold2)",
-        red: "var(--red)",
-        green: "var(--green)",
-      },
-      borderColor: {
+        switchBg: "var(--switch-bg)",
         line: "var(--line)",
       },
       fontFamily: {
@@ -57,6 +40,8 @@ const config: Config = {
         orange: "0px 0px 20px var(--orange)",
         gold: "0px 0px 20px var(--gold1)",
         dark: "0px 0px 30px #000",
+        switch: "0 2px 10px var(--grayscale-black)",
+        switchThumb: "0 2px 2px var(--grayscale-black)",
       },
     },
   },

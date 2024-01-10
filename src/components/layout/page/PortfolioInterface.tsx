@@ -8,6 +8,7 @@ import {
   ShowOrHideTrigger,
 } from "@/components/share/ShowOrHideAmount";
 import { cn } from "@/lib/utils";
+import SwitchBase from "@/components/share/radix/SwitchBase";
 
 export default function PortfolioInterface({ data }: { data: any }) {
   const { initData } = usePortfolioStore();
@@ -20,18 +21,25 @@ export default function PortfolioInterface({ data }: { data: any }) {
     <Contents className={"flex justify-between"}>
       <PriceView />
       <Row>
-        <ShowChartButton />
+        <ShowChartSwitch />
       </Row>
     </Contents>
   );
 }
-function ShowChartButton() {
+
+function ShowChartSwitch() {
   return (
-    <Row className={"text-white"}>
-      <Row>Show charts</Row>
-    </Row>
+    <form>
+      <Row className={"items-center text-white"}>
+        <label htmlFor="portfolio-chart" className={"pr-[15px]"}>
+          Show charts
+        </label>
+        <SwitchBase id={"portfolio-chart"} switchKey={"portfolioIsShowChart"} />
+      </Row>
+    </form>
   );
 }
+
 function PriceView() {
   const { totalAmountCurrent, totalAmountYesterday } = usePortfolioStore();
   const isPlus = totalAmountCurrent - totalAmountYesterday > 0;

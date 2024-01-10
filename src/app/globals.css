@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer {
-    :root{
-        --grayscale-white:hsla(0, 0%, 100%, 1);
+    :root {
+        --grayscale-white: hsla(0, 0%, 100%, 1);
         --grayscale-pale-gray: hsla(241, 43%, 99%, 1);
         --grayscale-weak-gray: hsla(241, 33%, 97%, 1);
         --grayscale-lightgray: hsla(240, 12%, 89%, 1);
@@ -20,9 +20,10 @@
         --gold1: #DAA520;
         --gold2: #FFD700;
 
-        --green: rgb(50 ,168 ,102);
+        --green: rgb(50, 168, 102);
+        --red: rgb(238, 40, 16);
 
-        --red: rgb( 238,40 ,16)
+        --switch-bg: rgb(224, 224, 231);
     }
 }
 
@@ -35,10 +36,10 @@
 
 
 .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera*/
+    display: none; /* Chrome, Safari, Opera*/
 }
