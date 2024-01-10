@@ -9,7 +9,7 @@ type Props = {
 const Text = forwardRef<HTMLParagraphElement, Props>(
   ({ children, className, ...props }, ref) => {
     return (
-      <p ref={ref} className={cn(`flex`, className)} {...props}>
+      <p ref={ref} className={cn(`flex break-all`, className)} {...props}>
         {children}
       </p>
     );

@@ -8,6 +8,8 @@ import {
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
 import { IconModalTrigger } from "@/assets/IconModal";
 import { IconChevronDown } from "@/assets/IconChevron";
+import { IconEyeOff, IconEye } from "@/assets/IconEye";
+
 export {
   IconMenu,
   IconChart,
@@ -19,4 +21,6 @@ export {
   IconChartInsights,
   IconModalTrigger,
   IconChevronDown,
+  IconEyeOff,
+  IconEye,
 };

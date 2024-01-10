@@ -1,10 +1,11 @@
 import Text from "@/components/layout/Text";
 import PageContainer from "@/components/layout/page/index/PageContainer";
+import PageTitle from "@/components/layout/page/PageTitle";
 
 export default function page() {
   return (
     <PageContainer>
-      <Text className={"text-white"}>실현손익 내역</Text>
+      <PageTitle title={"My Realized"} emoji={"🚀"} />
     </PageContainer>
   );
 }

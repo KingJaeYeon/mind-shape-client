@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 interface ConvenienceStore {
   hideNavBar: boolean;
+  isShowAmount: boolean;
   config: any;
   getValue: (key: string) => any;
   setValue: (key: string, value: any) => void;
@@ -10,6 +11,7 @@ interface ConvenienceStore {
 export const useConvenienceStore = create<ConvenienceStore>(
   (set: any, get: any) => ({
     hideNavBar: true,
+    isShowAmount: true,
     config: {},
     getValue: (key: string) => {
       let config = get().config;

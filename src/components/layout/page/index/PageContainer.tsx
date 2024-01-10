@@ -7,8 +7,10 @@ import Footer from "@/components/share/Footer";
 
 export default function PageContainer({
   children,
+  className,
 }: {
   children: React.ReactNode | React.ReactNode[];
+  className?: string;
 }) {
   const { getValue } = useConvenienceStore();
   const getPageStyle = () => {
@@ -21,6 +23,7 @@ export default function PageContainer({
       className={cn(
         "hide-scrollbar left-[250px] mt-[75px] min-h-[calc(100dvh-75px)] w-full flex-col gap-[40px] " +
           "overflow-auto px-[30px] py-[10px] transition-all duration-700",
+        className,
       )}
       style={getPageStyle()}
     >
