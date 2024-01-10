@@ -24,6 +24,7 @@
         --red: rgb(238, 40, 16);
 
         --switch-bg: rgb(224, 224, 231);
+        --dialog-overlay: rgba(0, 0, 0, 0.4);
     }
 }
 

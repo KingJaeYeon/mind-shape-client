@@ -9,7 +9,8 @@ import {
 } from "@/components/share/ShowOrHideAmount";
 import { cn } from "@/lib/utils";
 import SwitchBase from "@/components/share/radix/SwitchBase";
-import AddPortfolioButton from "@/components/ui/AddPortfolioButton";
+import DialogBase from "@/components/share/radix/DialogBase";
+import Button from "@/components/layout/Button";
 
 export default function PortfolioInterface({ data }: { data: any }) {
   const { initData } = usePortfolioStore();
@@ -27,7 +28,16 @@ export default function PortfolioInterface({ data }: { data: any }) {
       <PriceView />
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
-        <AddPortfolioButton />
+        <DialogBase
+          contents={
+            <>
+              <div className={"text-white"}>dd</div>
+            </>
+          }
+          submitButton={<button type="submit">dd</button>}
+        >
+          <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
+        </DialogBase>
       </Row>
     </Contents>
   );
