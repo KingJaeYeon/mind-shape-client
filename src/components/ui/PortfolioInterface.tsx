@@ -29,7 +29,13 @@ export default function PortfolioInterface({ data }: { data: any }) {
       <PriceView />
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
-        <DialogBase contents={<TypeAddPortfolio />} title={"거래추가"}>
+        <DialogBase
+          contents={<TypeAddPortfolio />}
+          title={"거래추가"}
+          className={
+            "max-w-[496px] rounded-[16px] px-[32px] pb-[32px] pt-[16px]"
+          }
+        >
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
         </DialogBase>
       </Row>
@@ -41,7 +47,7 @@ function ShowChartSwitch() {
   return (
     <form>
       <Row className={"items-center text-white"}>
-        <label htmlFor="portfolio-chart" className={"pr-[15px]"}>
+        <label htmlFor="portfolio-chart" className={"break-all pr-[15px]"}>
           Show charts
         </label>
         <SwitchBase id={"portfolio-chart"} switchKey={"portfolioIsShowChart"} />

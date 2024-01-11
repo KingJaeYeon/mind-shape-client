@@ -24,7 +24,6 @@ const config: Config = {
         darkGray: "var(--grayscale-dark-gray)",
         black: "var(--grayscale-black)",
         switchBg: "var(--switch-bg)",
-        line: "var(--line)",
         dialogOverlay: "var(--dialog-overlay)",
 
         bg: "var(--bg)",
@@ -33,6 +32,9 @@ const config: Config = {
         gold2: "var(--gold2)",
         red: "var(--red)",
         green: "var(--green)",
+      },
+      borderColor: {
+        line: "var(--line)",
       },
       fontFamily: {
         maple: ["MaplestoryOTFBold", "sans-serif"],

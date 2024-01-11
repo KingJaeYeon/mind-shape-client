@@ -63,18 +63,18 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
           className,
         )}
       >
-        <Row>
-          <Row>{title}</Row>
-          <Button onClick={() => setOpen(false)}>
-            <ModalCloseTriggerButton />
-          </Button>
-        </Row>
         <form
           onSubmit={(event) => {
             wait().then(() => setOpen(false));
             event.preventDefault();
           }}
         >
+          <Row className={"justify-between text-deepGray"}>
+            <Row className={"text-[24px] font-bold "}>{title}</Row>
+            <Button onClick={() => setOpen(false)}>
+              <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
+            </Button>
+          </Row>
           {children}
         </form>
       </Dialog.Content>

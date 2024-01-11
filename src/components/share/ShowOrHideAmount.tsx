@@ -20,10 +20,12 @@ export function ShowOrHideAmount({
   }, []);
 
   if (getValue("isShowAmount")) {
-    return <Contents className={"flex items-center"}>{text}</Contents>;
+    return (
+      <Contents className={"flex items-center break-all"}>{text}</Contents>
+    );
   }
   return (
-    <Contents className={"flex items-center"}>
+    <Contents className={"flex items-center break-all"}>
       {Array.from(Array(length), () => "*")}
     </Contents>
   );
