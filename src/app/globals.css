@@ -25,6 +25,9 @@
 
         --switch-bg: rgb(224, 224, 231);
         --dialog-overlay: rgba(0, 0, 0, 0.4);
+
+
+        --bg: var(--grayscale-black);
     }
 }
 
@@ -34,13 +37,11 @@
     font-weight: normal;
     font-style: normal;
 }
-
-
 .hide-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+    display: none;  /* Chrome, Safari, Opera*/
 }

@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import SwitchBase from "@/components/share/radix/SwitchBase";
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/layout/Button";
+import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
 
 export default function PortfolioInterface({ data }: { data: any }) {
   const { initData } = usePortfolioStore();
@@ -28,14 +29,7 @@ export default function PortfolioInterface({ data }: { data: any }) {
       <PriceView />
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
-        <DialogBase
-          contents={
-            <>
-              <div className={"text-white"}>dd</div>
-            </>
-          }
-          submitButton={<button type="submit">dd</button>}
-        >
+        <DialogBase contents={<TypeAddPortfolio />} title={"거래추가"}>
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
         </DialogBase>
       </Row>

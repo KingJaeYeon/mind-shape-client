@@ -6,7 +6,7 @@ import {
   IconChartInsights,
 } from "@/assets/IconChart";
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
-import { IconModalTrigger } from "@/assets/IconModal";
+import { IconModalTrigger, IconModalClose } from "@/assets/IconModal";
 import { IconChevronDown } from "@/assets/IconChevron";
 import { IconEyeOff, IconEye } from "@/assets/IconEye";
 
@@ -20,6 +20,7 @@ export {
   IconMoney3,
   IconChartInsights,
   IconModalTrigger,
+  IconModalClose,
   IconChevronDown,
   IconEyeOff,
   IconEye,
