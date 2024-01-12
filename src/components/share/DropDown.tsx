@@ -7,7 +7,10 @@ import { useState } from "react";
 import { useSpring } from "@react-spring/web";
 import AnimatedDiv from "@/components/layout/AnimatedDiv";
 import Col from "@/components/layout/Col";
-
+/*
+우선 기억해야 할 것은 마우스 이벤트의 처리 순서이다
+mousedown -> blur -> mouseup -> click
+ */
 export default function DropDown({
   className,
   search,
@@ -50,10 +53,7 @@ export default function DropDown({
       >
         <input
           onFocus={() => setIsFocus(true)}
-          onBlur={(e) => {
-            e.preventDefault();
-            setIsFocus(false);
-          }}
+          onBlur={() => setIsFocus(false)}
           value={isFocus ? search : chosen.name}
           placeholder={placeholder}
           className={cn("w-full outline-none")}
@@ -128,8 +128,7 @@ function DropDownItem({ item, onClick }: { item: any; onClick: any }) {
   console.log(item.name);
   return (
     <Contents
-      onClick={(e) => {
-        e.preventDefault();
+      onMouseDown={(e) => {
         onClick({
           index: item?.index,
           name: item?.name,
@@ -140,7 +139,7 @@ function DropDownItem({ item, onClick }: { item: any; onClick: any }) {
         "z-[1001] flex h-[45px] w-full cursor-pointer items-center text-black"
       }
     >
-      {item?.name}
+      {item?.name} {item?.symbol}
     </Contents>
   );
 }
