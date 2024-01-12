@@ -47,6 +47,8 @@ const config: Config = {
         dark: "0px 0px 30px #000",
         switch: "0 2px 10px var(--grayscale-black)",
         switchThumb: "0 2px 2px var(--grayscale-black)",
+        dropdown:
+          "rgba(128, 138, 157, 0.12) 0px 1px 2px, rgba(128, 138, 157, 0.24) 0px 8px 32px",
       },
       keyframes: {
         overlayShow: {

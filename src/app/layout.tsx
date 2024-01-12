@@ -6,6 +6,7 @@ import Contents from "@/components/layout/Contents";
 import React from "react";
 import NavBar from "@/components/share/NavBar";
 import Row from "@/components/layout/Row";
+import QueryProvider from "@/components/provider/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={"hide-scrollbar bg-bg"}>
       <body className={inter.className}>
-        <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
-          <Header />
-          <Row>
-            <NavBar />
-            <main className={"hide-scrollbar flex w-full"}>{children}</main>
-          </Row>
-        </Contents>
+        <QueryProvider>
+          <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
+            <Header />
+            <Row>
+              <NavBar />
+              <main className={"hide-scrollbar flex w-full"}>{children}</main>
+            </Row>
+          </Contents>
+        </QueryProvider>
       </body>
     </html>
   );
