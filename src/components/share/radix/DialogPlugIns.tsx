@@ -2,7 +2,7 @@
 import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import Contents from "@/components/layout/Contents";
-import DropDown from "@/components/share/DropDown";
+import DropDown, { DropDownView } from "@/components/share/DropDown";
 
 import { useSearchAsset } from "@/hooks/useSearchAsset";
 
@@ -27,7 +27,7 @@ export function TypeAddPortfolio() {
         search={search}
         isLoad={isLoad}
         list={searchResult}
-        chosen={chosen}
+        viewElement={<DropDownView item={chosen} />}
         setChosen={setChosen}
         placeholder={"Ticker..."}
       />

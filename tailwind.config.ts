@@ -38,6 +38,7 @@ const config: Config = {
       },
       fontFamily: {
         maple: ["MaplestoryOTFBold", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
       boxShadow: {
         green: "0px 0px 20px var(--green)",

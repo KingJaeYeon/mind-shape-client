@@ -3,7 +3,7 @@ import Row from "@/components/layout/Row";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@/assets";
 import Contents from "@/components/layout/Contents";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSpring } from "@react-spring/web";
 import AnimatedDiv from "@/components/layout/AnimatedDiv";
 import Col from "@/components/layout/Col";
@@ -16,92 +16,205 @@ export default function DropDown({
   search,
   setSearch,
   isLoad,
-  chosen,
   setChosen,
   list,
   placeholder,
+  viewElement,
 }: {
   className?: string;
   search: string;
   setSearch: any;
-  isLoad: boolean;
-  chosen: {
-    index: number;
-    name: string;
-    symbol: string;
-  };
+  isLoad?: boolean;
   setChosen: any;
   placeholder?: string;
   list: any[];
+  viewElement: any;
 }) {
-  console.log(chosen);
-  const [isFocus, setIsFocus] = useState(false);
-  const sp = useSpring({
-    transform: isFocus ? "rotate(180deg)" : "rotate(0deg)",
-    config: {
-      tension: 100,
-    },
-    delay: 0,
-  });
+  const [focus, hasFocus] = useState(false);
+
   return (
-    <Col className={"relative"}>
-      <Row
-        className={cn(
-          "h-[45px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
-          className,
-        )}
+    <DropdownContainer>
+      <DropdownInputSection
+        className={className}
+        focus={focus}
+        hasFocus={hasFocus}
       >
-        <input
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
-          value={isFocus ? search : chosen.name}
+        <DropdownInputOrView
+          focus={focus}
           placeholder={placeholder}
-          className={cn("w-full outline-none")}
-          onChange={(e) => setSearch(e.target.value)}
+          search={search}
+          setSearch={setSearch}
+          viewElement={viewElement}
         />
-        <Contents
-          className={"absolute right-[20px] flex cursor-pointer flex-col"}
-        >
-          <AnimatedDiv style={{ ...sp }}>
-            <IconChevronDown />
-          </AnimatedDiv>
-        </Contents>
-      </Row>
+      </DropdownInputSection>
       <DropDownList
         list={list}
         search={search}
         setChosen={setChosen}
-        isFocus={isFocus}
+        focus={focus}
         isLoad={isLoad}
       />
-    </Col>
+    </DropdownContainer>
   );
 }
-
+function DropdownInputOrView({
+  focus,
+  search,
+  setSearch,
+  placeholder,
+  viewElement,
+}: {
+  focus: boolean;
+  search: string;
+  setSearch: any;
+  placeholder?: string;
+  viewElement: any;
+}) {
+  if (focus || !search) {
+    return (
+      <input
+        value={search}
+        autoFocus={true}
+        placeholder={placeholder}
+        className={cn("w-full outline-none")}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    );
+  }
+  return viewElement;
+}
 function DropDownList({
   list,
-  isFocus,
+  focus,
   setChosen,
   search,
   isLoad,
 }: {
   list: any[];
-  isFocus: boolean;
+  focus: boolean;
   setChosen: any;
   search?: string;
-  isLoad: boolean;
+  isLoad?: boolean;
+}) {
+  if (!focus || !search) {
+    return null;
+  }
+
+  return (
+    <DropdownListSection focus={focus}>
+      <DropDownListView list={list} setChosen={setChosen} isLoad={isLoad} />
+    </DropdownListSection>
+  );
+}
+function DropDownListView({
+  isLoad,
+  list,
+  setChosen,
+}: {
+  isLoad?: boolean;
+  list: any[];
+  setChosen: any;
+}) {
+  if (isLoad) {
+    return (
+      <DropDownError
+        text={"로딩중..."}
+        className={
+          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
+        }
+      />
+    );
+  }
+  if (list?.length === 0) {
+    return (
+      <DropDownError
+        text={"검색 결과가 없습니다."}
+        className={
+          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
+        }
+      />
+    );
+  }
+
+  return list?.map((item, index) => {
+    return (
+      <DropDownView
+        item={item}
+        key={index}
+        onClickHandler={setChosen}
+        className={
+          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
+        }
+      />
+    );
+  });
+}
+export function DropDownView({
+  item,
+  className,
+  onClickHandler,
+}: {
+  item: {
+    index: number;
+    name: string;
+    symbol: string;
+  };
+  className?: string;
+  onClickHandler?: any;
+}) {
+  return (
+    <Contents
+      className={cn(
+        "font-Inter flex items-center gap-[5px] text-[14px]",
+        className,
+      )}
+      onMouseDown={() => {
+        if (!!onClickHandler) {
+          onClickHandler(item);
+        }
+      }}
+    >
+      <Row className={"break-all font-bold"}>{item.name}</Row>
+      <Row className={"text-neutralGray"}>{item.symbol}</Row>
+    </Contents>
+  );
+}
+function DropDownError({
+  className,
+  text,
+}: {
+  className?: string;
+  text: string;
+}) {
+  return (
+    <Contents
+      className={cn(
+        "font-Inter flex items-center gap-[5px] text-[14px]",
+        className,
+      )}
+    >
+      <Row className={"break-all"}>{text}</Row>
+    </Contents>
+  );
+}
+
+function DropdownContainer({ children }: { children: React.ReactNode }) {
+  return <Col className={"relative"}>{children}</Col>;
+}
+function DropdownListSection({
+  children,
+  focus,
+}: {
+  children: React.ReactNode;
+  focus: boolean;
 }) {
   const sp = useSpring({
-    opacity: isFocus ? 1 : 0,
-    visibility: isFocus ? "visible" : "hidden",
+    opacity: focus ? 1 : 0,
+    visibility: focus ? "visible" : "hidden",
     config: {
       tension: 100,
     },
   });
-  if (!isFocus || !search) {
-    return null;
-  }
-
   return (
     <AnimatedDiv
       style={{
@@ -109,59 +222,49 @@ function DropDownList({
         visibility: sp.visibility.to((v) => (v ? "visible" : "hidden")),
       }}
       className={
-        "shadow-dropdown visible absolute top-[45px] flex max-h-[200px] w-full rounded-[10px] border border-lightGray bg-white"
+        "visible absolute top-[48px] flex max-h-[200px] w-full overflow-hidden rounded-[10px] border border-lightGray bg-white shadow-dropdown"
       }
     >
-      {isLoad ? (
-        <DropDownLoading />
-      ) : list.length > 0 ? (
-        list?.map((item, index) => {
-          return <DropDownItem item={item} key={index} onClick={setChosen} />;
-        })
-      ) : (
-        <DropDownNotFound />
-      )}
+      {children}
     </AnimatedDiv>
   );
 }
-function DropDownItem({ item, onClick }: { item: any; onClick: any }) {
-  console.log(item.name);
+function DropdownInputSection({
+  children,
+  className,
+  focus,
+  hasFocus,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  focus: boolean;
+  hasFocus: any;
+}) {
+  const sp = useSpring({
+    transform: focus ? "rotate(180deg)" : "rotate(0deg)",
+    config: {
+      tension: 100,
+    },
+    delay: 0,
+  });
   return (
-    <Contents
-      onMouseDown={(e) => {
-        onClick({
-          index: item?.index,
-          name: item?.name,
-          symbol: item?.symbol,
-        });
-      }}
-      className={
-        "z-[1001] flex h-[45px] w-full cursor-pointer items-center text-black"
-      }
+    <Row
+      className={cn(
+        "h-[48px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
+        className,
+      )}
+      onFocus={() => hasFocus(true)}
+      onBlur={() => hasFocus(false)}
+      tabIndex={1}
     >
-      {item?.name} {item?.symbol}
-    </Contents>
-  );
-}
-function DropDownNotFound() {
-  return (
-    <Contents
-      className={
-        "z-[1001] flex h-[45px] w-full cursor-pointer items-center text-black"
-      }
-    >
-      검색 결과가 없습니다.
-    </Contents>
-  );
-}
-function DropDownLoading() {
-  return (
-    <Contents
-      className={
-        "z-[1001] flex h-[45px] w-full cursor-pointer items-center text-black"
-      }
-    >
-      로딩중...
-    </Contents>
+      {children}
+      <Contents
+        className={"absolute right-[20px] flex cursor-pointer flex-col"}
+      >
+        <AnimatedDiv style={{ ...sp }}>
+          <IconChevronDown />
+        </AnimatedDiv>
+      </Contents>
+    </Row>
   );
 }

@@ -7,18 +7,16 @@ export function useSearchAsset(search: string) {
   const [isLoad, setIsLoad] = useState(false);
   useEffect(() => {
     if (!search) {
+      setIsLoad(true);
+      setSearchResult([]);
       return;
     }
     setIsLoad(true);
     searchAsset(search)
       .then((res) => {
         setSearchResult([...res]);
-        console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setTimeout(() => setIsLoad(false), 500));
+      .finally(() => setIsLoad(false));
   }, [search]);
 
   return { searchResult, isLoad };

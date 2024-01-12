@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={"hide-scrollbar bg-bg"}>
+    <html lang="en" className={"hide-scrollbar font-Inter bg-bg"}>
       <body className={inter.className}>
         <QueryProvider>
           <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
