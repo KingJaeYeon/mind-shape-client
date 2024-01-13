@@ -55,6 +55,23 @@ export function TypeAddPortfolio() {
     }
   }
 
+  const isSubmitDisable = !(
+    typeof amount === "number" &&
+    amount > 0 &&
+    typeof price === "number" &&
+    price > 0 &&
+    !!chosen?.name
+  );
+  function submitHandler(e: any) {
+    console.log("수량::", amount);
+    console.log("가격::", price);
+    console.log("분류::", chosen.category.name);
+    console.log("티커::", chosen.symbol);
+    console.log("주식::", chosen.name);
+    console.log("국가::", chosen.exChange);
+    console.log("index::", chosen.index);
+    e.preventDefault();
+  }
   return (
     <Contents className={"mt-[10px] flex h-auto flex-col"}>
       <DropDown
@@ -115,8 +132,10 @@ export function TypeAddPortfolio() {
         </Row>
       </Col>
       <Button
+        disabled={isSubmitDisable}
+        onClick={(e) => submitHandler(e)}
         className={
-          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] bg-orange font-Inter"
+          "bg-primary hover:bg-primary-light mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] font-Inter text-white disabled:opacity-50"
         }
       >
         거래 추가

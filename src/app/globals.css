@@ -14,6 +14,12 @@
         --grayscale-dark-gray: hsla(240, 3%, 16%, 1);
         --grayscale-black: hsla(0, 0%, 0%, 1);
 
+
+        --primary: #338a3e;
+        --primary-light: #6fbf73;
+        --primary-dark: #285e29;
+        --primary-shadow-input: rgb(223, 247, 236);
+
         --line: rgba(255, 255, 255, 0.2);
         --orange: #F7941D;
 
@@ -21,8 +27,7 @@
         --gold1: #DAA520;
         --gold2: #FFD700;
 
-        --green: rgb(50, 168, 102);
-        --green-shadow: rgb(223, 247, 236);
+
         --red: rgb(238, 40, 16);
 
         --switch-bg: rgb(224, 224, 231);
@@ -38,24 +43,36 @@
         --input-label-text: var(--grayscale-black);
         --input-readOnly: var(--grayscale-pale-gray);
         --icon-color: var(--grayscale-white);
-        --focus-input-border: var(--green);
-        --focus-input-border-shadow: var(--green-shadow);
+        --focus-input-shadow: var(--primary-shadow-input);
+
     }
 }
+
 {
-    --bg: var(--grayscale-white);
-    --modal-bg: var(--grayscale-white);
-    --modal-title: var(--grayscale-deep-gray);
-    --input-value-text: var(--grayscale-deep-gray);
-    --input-label-text: var(--grayscale-black);
-    --input-readOnly: var(--grayscale-pale-gray);
-    --icon-color: var(--grayscale-white);
+    --bg: var(--grayscale-white)
+;
+    --modal-bg: var(--grayscale-white)
+;
+    --modal-title: var(--grayscale-deep-gray)
+;
+    --input-value-text: var(--grayscale-deep-gray)
+;
+    --input-label-text: var(--grayscale-black)
+;
+    --input-readOnly: var(--grayscale-pale-gray)
+;
+    --icon-color: var(--grayscale-white)
+;
 }
 {
-    --bg: var(--grayscale-black);
-    --modal-bg: var(--grayscale-dark-gray);
-    --modal-title: var(--grayscale-white);
-    --icon-color: var(--grayscale-white);
+    --bg: var(--grayscale-black)
+;
+    --modal-bg: var(--grayscale-dark-gray)
+;
+    --modal-title: var(--grayscale-white)
+;
+    --icon-color: var(--grayscale-white)
+;
 }
 
 @font-face {
@@ -75,10 +92,10 @@
 }
 
 .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera*/
+    display: none; /* Chrome, Safari, Opera*/
 }

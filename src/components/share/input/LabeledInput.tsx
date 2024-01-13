@@ -20,14 +20,14 @@ export default function LabeledInput({
     <>
       <Label
         className={
-          "text-inputLabelText mb-[8px] ml-[5px] text-[14px] font-bold"
+          "mb-[8px] ml-[5px] text-[14px] font-bold text-inputLabelText"
         }
         id={id}
         text={label}
       />
       <Input
         className={
-          "focus:shadow-input focus:border-inputFocusBorder min-h-[40px] break-all bg-transparent px-[10px] text-[14px]"
+          "focus:border-primary min-h-[40px] break-all bg-transparent px-[10px] text-[14px] focus:shadow-input"
         }
         id={id}
         placeholder={placeholder}
