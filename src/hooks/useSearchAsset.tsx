@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { searchAsset } from "@/service/stockService";
+import { recommendAsset, searchAsset } from "@/service/stockService";
 
 export function useSearchAsset(search: string) {
   const [searchResult, setSearchResult] = useState<any[]>([]);
+  const [initList, setInitList] = useState<any[]>([]);
   const [isLoad, setIsLoad] = useState(false);
+
   useEffect(() => {
     if (!search) {
       setIsLoad(true);
@@ -19,5 +21,9 @@ export function useSearchAsset(search: string) {
       .finally(() => setIsLoad(false));
   }, [search]);
 
-  return { searchResult, isLoad };
+  useEffect(() => {
+    recommendAsset().then((res) => setInitList([...res]));
+  }, []);
+
+  return { searchResult, isLoad, initList };
 }

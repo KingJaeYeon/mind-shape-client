@@ -18,7 +18,7 @@ export function TypeAddPortfolio() {
     symbol: "",
   });
   const { debouncedValue } = useDebounce(search);
-  const { searchResult, isLoad } = useSearchAsset(debouncedValue);
+  const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
 
   return (
     <Contents className={"mt-[10px] flex h-[500px] flex-col"}>
@@ -26,9 +26,8 @@ export function TypeAddPortfolio() {
         setSearch={setSearch}
         search={search}
         isLoad={isLoad}
-        list={searchResult}
+        list={search ? searchResult : initList}
         chosen={chosen}
-        inputViewElement={<DropDownView item={chosen} />}
         setChosen={setChosen}
         placeholder={"Ticker..."}
       />

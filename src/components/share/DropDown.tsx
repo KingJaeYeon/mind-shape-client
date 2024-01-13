@@ -83,7 +83,7 @@ function DropdownInputOrView() {
 
   const { focus, search, setSearch, placeholder, chosen } = context;
 
-  if (focus || !search) {
+  if (focus) {
     return (
       <input
         value={search}
@@ -103,9 +103,9 @@ function DropDownList() {
     throw new Error("useContext must be used within a ThemeProvider");
   }
 
-  const { list, focus, setChosen, search, isLoad } = context;
+  const { focus, setChosen, search, isLoad } = context;
 
-  if (!focus || !search) {
+  if (!focus) {
     return null;
   }
 
@@ -123,13 +123,11 @@ function DropDownListView() {
 
   const { list, setChosen, isLoad, chosen } = context;
 
-  if (isLoad) {
+  if (isLoad && list?.length === 0) {
     return (
       <DropDownError
         text={"로딩중..."}
-        className={
-          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
-        }
+        className={"z-[1001] h-[48px] w-full cursor-pointer px-[15px]"}
       />
     );
   }
@@ -137,9 +135,7 @@ function DropDownListView() {
     return (
       <DropDownError
         text={"검색 결과가 없습니다."}
-        className={
-          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
-        }
+        className={"z-[1001] h-[48px] w-full cursor-pointer px-[15px]"}
       />
     );
   }
@@ -181,8 +177,14 @@ export function DropDownView({
         }
       }}
     >
-      <Row className={"break-all font-bold"}>{item.name}</Row>
-      <Row className={"text-neutralGray"}>{item.symbol}</Row>
+      {!item.name ? (
+        <Row className={"text-[16px] text-gray"}>Ticker...</Row>
+      ) : (
+        <>
+          <Row className={"break-all font-bold"}>{item.name}</Row>
+          <Row className={"text-neutralGray"}>{item.symbol}</Row>
+        </>
+      )}
     </Contents>
   );
 }

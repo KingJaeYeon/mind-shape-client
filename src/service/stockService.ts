@@ -10,3 +10,10 @@ export function searchAsset(search: string) {
     },
   });
 }
+
+export function recommendAsset() {
+  return request({
+    url: "/asset/list-recommend",
+    method: "GET",
+  });
+}
