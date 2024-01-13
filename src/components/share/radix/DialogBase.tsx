@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import React, { forwardRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
-import { ModalCloseTriggerButton } from "@/components/share/ModalTriggerButton";
+import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import Button from "@/components/layout/Button";
 
 type Props = {

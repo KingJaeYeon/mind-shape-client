@@ -127,7 +127,7 @@ function DropDownListView() {
     return (
       <DropDownError
         text={"로딩중..."}
-        className={"z-[1001] h-[48px] w-full cursor-pointer px-[15px]"}
+        className={"z-[1001] min-h-[48px] w-full cursor-pointer px-[15px]"}
       />
     );
   }
@@ -135,7 +135,7 @@ function DropDownListView() {
     return (
       <DropDownError
         text={"검색 결과가 없습니다."}
-        className={"z-[1001] h-[48px] w-full cursor-pointer px-[15px]"}
+        className={"z-[1001] min-h-[48px] w-full cursor-pointer px-[15px]"}
       />
     );
   }
@@ -146,7 +146,7 @@ function DropDownListView() {
       key={index}
       onClickHandler={setChosen}
       className={cn(
-        "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-weakGray",
+        "z-[1001] min-h-[48px] w-full cursor-pointer px-[15px] hover:bg-weakGray",
         chosen?.index === item.index && "bg-weakGray",
       )}
     />
@@ -165,10 +165,17 @@ export function DropDownView({
   className?: string;
   onClickHandler?: any;
 }) {
+  const context = useContext(DropDownContext);
+  if (!context) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { placeholder } = context;
+
   return (
     <Contents
       className={cn(
-        "flex min-h-[48px] items-center gap-[5px] rounded-[10px] font-Inter text-[14px]",
+        "flex items-center gap-[5px] rounded-[10px] font-Inter text-[14px]",
         className,
       )}
       onMouseDown={() => {
@@ -178,7 +185,7 @@ export function DropDownView({
       }}
     >
       {!item.name ? (
-        <Row className={"text-[16px] text-gray"}>Ticker...</Row>
+        <Row className={"text-[16px] text-gray"}>{placeholder}</Row>
       ) : (
         <>
           <Row className={"break-all font-bold"}>{item.name}</Row>
@@ -258,7 +265,7 @@ function DropdownInputSection({ children }: { children: React.ReactNode }) {
   return (
     <Row
       className={cn(
-        "h-[48px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
+        "min-h-[48px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
         className,
       )}
       onFocus={() => hasFocus(true)}

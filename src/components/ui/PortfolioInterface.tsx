@@ -6,7 +6,7 @@ import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   ShowOrHideAmount,
   ShowOrHideTrigger,
-} from "@/components/share/ShowOrHideAmount";
+} from "@/components/share/button/ShowOrHideAmount";
 import { cn } from "@/lib/utils";
 import SwitchBase from "@/components/share/radix/SwitchBase";
 import DialogBase from "@/components/share/radix/DialogBase";

@@ -12,13 +12,13 @@ import {
   Tooltip,
 } from "chart.js";
 
-import { ModalTriggerButtonTypeChart } from "@/components/share/ModalTriggerButton";
+import { ModalTriggerButtonTypeChart } from "@/components/share/button/ModalTriggerButton";
 import {
   ChartBase,
   ChartCardTitle,
   ChartDuration,
   TextToggleButton,
-} from "@/components/share/ChartPlugIn";
+} from "@/components/share/chart/ChartPlugIn";
 import { ChartOption } from "@/constant/chart";
 
 ChartJS.register(
