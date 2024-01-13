@@ -3,12 +3,12 @@ import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import Contents from "@/components/layout/Contents";
 import DropDown from "@/components/share/input/DropDown";
-
 import { useSearchAsset } from "@/hooks/useSearchAsset";
 import Col from "@/components/layout/Col";
 import Row from "@/components/layout/Row";
 import LabeledInput from "@/components/share/input/LabeledInput";
 import LabeledDisplay from "@/components/share/input/LabeledDisplay";
+import Button from "@/components/layout/Button";
 
 export function TypeAddPortfolio() {
   const [search, setSearch] = useState("");
@@ -54,8 +54,9 @@ export function TypeAddPortfolio() {
       setAmount(Number(e.target.value));
     }
   }
+
   return (
-    <Contents className={"mt-[10px] flex h-[500px] flex-col"}>
+    <Contents className={"mt-[10px] flex h-auto flex-col"}>
       <DropDown
         setSearch={setSearch}
         search={search}
@@ -98,12 +99,28 @@ export function TypeAddPortfolio() {
             value={price}
             valueHandler={priceHandler}
             id={"price"}
-            label={"매수가 ($달러)"}
+            label={"매수가 (USD)"}
             placeholder={"0.00"}
           />
         </Col>
       </Row>
-      <Col></Col>
+      <Col
+        className={
+          "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
+        }
+      >
+        <Row className={"text-[14px]"}>사용된 총액</Row>
+        <Row className={"font-Inter text-[28px] font-bold"}>
+          $ {(Number(amount) * Number(price)).toLocaleString()}
+        </Row>
+      </Col>
+      <Button
+        className={
+          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] bg-orange font-Inter"
+        }
+      >
+        거래 추가
+      </Button>
     </Contents>
   );
 }
