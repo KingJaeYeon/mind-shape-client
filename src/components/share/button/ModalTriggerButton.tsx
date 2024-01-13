@@ -6,7 +6,7 @@ export function ModalTriggerButtonTypeChart({ isShow }: { isShow?: boolean }) {
   if (!isShow) {
     return null;
   }
-  return <IconModalTrigger className={"cursor-pointer text-white"} />;
+  return <IconModalTrigger className={"text-iconColor cursor-pointer"} />;
 }
 
 export function ModalCloseTriggerButton({ className }: { className?: string }) {

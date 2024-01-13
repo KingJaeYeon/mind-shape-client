@@ -1,6 +1,6 @@
 "use client";
 import Contents from "@/components/layout/Contents";
-import { ChartList } from "@/components/share/ChartCard";
+import { ChartList } from "@/components/share/chart/ChartCard";
 import { getDurationDate, getYearAndUint } from "@/lib/utils";
 import { subYears } from "date-fns";
 

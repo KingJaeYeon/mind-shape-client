@@ -27,6 +27,14 @@ const config: Config = {
         dialogOverlay: "var(--dialog-overlay)",
 
         bg: "var(--bg)",
+        modalBg: "var(--modal-bg)",
+        modalTitle: "var(--modal-title)",
+        iconColor: "var(--icon-color)",
+        inputValueText: "var(--input-value-text)",
+        inputLabelText: "var(--input-label-text)",
+        inputReadOnly: "var(--input-readOnly)",
+        inputFocusBorder: "var(--focus-input-border)",
+        inputFocusBorderShadow: "var(--focus-input-border-shadow)",
         orange: "var(--orange)",
         gold1: "var(--gold1)",
         gold2: "var(--gold2)",
@@ -50,6 +58,7 @@ const config: Config = {
         switchThumb: "0 2px 2px var(--grayscale-black)",
         dropdown:
           "rgba(128, 138, 157, 0.12) 0px 1px 2px, rgba(128, 138, 157, 0.24) 0px 8px 32px",
+        input: "var(--focus-input-border-shadow) 0px 0px 0px 4px",
       },
       keyframes: {
         overlayShow: {

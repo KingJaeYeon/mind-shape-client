@@ -59,7 +59,7 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
       <Dialog.Content
         ref={ref}
         className={cn(
-          "fixed left-[50%] top-[50%] z-[1000] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow",
+          "bg-modalBg fixed left-[50%] top-[50%] z-[1000] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow",
           className,
         )}
       >
@@ -69,8 +69,8 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
             event.preventDefault();
           }}
         >
-          <Row className={"justify-between text-deepGray"}>
-            <Row className={"text-[24px] font-bold "}>{title}</Row>
+          <Row className={"text-modalTitle justify-between"}>
+            <Row className={"text-[24px] font-bold"}>{title}</Row>
             <Button onClick={() => setOpen(false)}>
               <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
             </Button>
