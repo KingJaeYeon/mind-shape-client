@@ -3,73 +3,86 @@ import Row from "@/components/layout/Row";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@/assets";
 import Contents from "@/components/layout/Contents";
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useSpring } from "@react-spring/web";
 import AnimatedDiv from "@/components/layout/AnimatedDiv";
 import Col from "@/components/layout/Col";
+
 /*
 우선 기억해야 할 것은 마우스 이벤트의 처리 순서이다
 mousedown -> blur -> mouseup -> click
  */
+
+interface DropDownContextType {
+  className?: string;
+  search: string;
+  setSearch: any;
+  isLoad?: boolean;
+  chosen: any;
+  setChosen: any;
+  placeholder?: string;
+  list: any[];
+  focus: boolean;
+  hasFocus: any;
+}
+
+const DropDownContext = createContext<DropDownContextType | undefined>(
+  undefined,
+);
 export default function DropDown({
   className,
   search,
   setSearch,
   isLoad,
+  chosen,
   setChosen,
   list,
   placeholder,
-  viewElement,
 }: {
   className?: string;
   search: string;
   setSearch: any;
   isLoad?: boolean;
+  chosen: any;
   setChosen: any;
   placeholder?: string;
   list: any[];
-  viewElement: any;
 }) {
   const [focus, hasFocus] = useState(false);
 
   return (
-    <DropdownContainer>
-      <DropdownInputSection
-        className={className}
-        focus={focus}
-        hasFocus={hasFocus}
-      >
-        <DropdownInputOrView
-          focus={focus}
-          placeholder={placeholder}
-          search={search}
-          setSearch={setSearch}
-          viewElement={viewElement}
-        />
-      </DropdownInputSection>
-      <DropDownList
-        list={list}
-        search={search}
-        setChosen={setChosen}
-        focus={focus}
-        isLoad={isLoad}
-      />
-    </DropdownContainer>
+    <DropDownContext.Provider
+      value={{
+        className,
+        search,
+        setSearch,
+        isLoad,
+        chosen,
+        setChosen,
+        list,
+        placeholder,
+        focus,
+        hasFocus,
+      }}
+    >
+      <DropdownContainer>
+        <DropdownInputSection>
+          <DropdownInputOrView />
+        </DropdownInputSection>
+        <DropDownList />
+      </DropdownContainer>
+    </DropDownContext.Provider>
   );
 }
-function DropdownInputOrView({
-  focus,
-  search,
-  setSearch,
-  placeholder,
-  viewElement,
-}: {
-  focus: boolean;
-  search: string;
-  setSearch: any;
-  placeholder?: string;
-  viewElement: any;
-}) {
+
+function DropdownInputOrView() {
+  const context = useContext(DropDownContext);
+  if (!context) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { focus, search, setSearch, placeholder, chosen } = context;
+
   if (focus || !search) {
     return (
       <input
@@ -81,40 +94,35 @@ function DropdownInputOrView({
       />
     );
   }
-  return viewElement;
+  return <DropDownView item={chosen} />;
 }
-function DropDownList({
-  list,
-  focus,
-  setChosen,
-  search,
-  isLoad,
-}: {
-  list: any[];
-  focus: boolean;
-  setChosen: any;
-  search?: string;
-  isLoad?: boolean;
-}) {
+
+function DropDownList() {
+  const context = useContext(DropDownContext);
+  if (!context) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { list, focus, setChosen, search, isLoad } = context;
+
   if (!focus || !search) {
     return null;
   }
 
   return (
     <DropdownListSection focus={focus}>
-      <DropDownListView list={list} setChosen={setChosen} isLoad={isLoad} />
+      <DropDownListView />
     </DropdownListSection>
   );
 }
-function DropDownListView({
-  isLoad,
-  list,
-  setChosen,
-}: {
-  isLoad?: boolean;
-  list: any[];
-  setChosen: any;
-}) {
+function DropDownListView() {
+  const context = useContext(DropDownContext);
+  if (!context) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { list, setChosen, isLoad, chosen } = context;
+
   if (isLoad) {
     return (
       <DropDownError
@@ -136,18 +144,17 @@ function DropDownListView({
     );
   }
 
-  return list?.map((item, index) => {
-    return (
-      <DropDownView
-        item={item}
-        key={index}
-        onClickHandler={setChosen}
-        className={
-          "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-lightGray"
-        }
-      />
-    );
-  });
+  return list?.map((item, index) => (
+    <DropDownView
+      item={item}
+      key={index}
+      onClickHandler={setChosen}
+      className={cn(
+        "z-[1001] h-[48px] w-full cursor-pointer px-[15px] hover:bg-weakGray",
+        chosen?.index === item.index && "bg-weakGray",
+      )}
+    />
+  ));
 }
 export function DropDownView({
   item,
@@ -165,7 +172,7 @@ export function DropDownView({
   return (
     <Contents
       className={cn(
-        "font-Inter flex items-center gap-[5px] text-[14px]",
+        "flex min-h-[48px] items-center gap-[5px] rounded-[10px] font-Inter text-[14px]",
         className,
       )}
       onMouseDown={() => {
@@ -189,7 +196,7 @@ function DropDownError({
   return (
     <Contents
       className={cn(
-        "font-Inter flex items-center gap-[5px] text-[14px]",
+        "flex items-center gap-[5px] font-Inter text-[14px]",
         className,
       )}
     >
@@ -222,24 +229,22 @@ function DropdownListSection({
         visibility: sp.visibility.to((v) => (v ? "visible" : "hidden")),
       }}
       className={
-        "visible absolute top-[48px] flex max-h-[200px] w-full overflow-hidden rounded-[10px] border border-lightGray bg-white shadow-dropdown"
+        "visible absolute top-[48px] flex max-h-[200px] w-full gap-[5px] overflow-auto rounded-[10px] border border-lightGray bg-white px-[7px] py-[7px] shadow-dropdown"
       }
     >
       {children}
     </AnimatedDiv>
   );
 }
-function DropdownInputSection({
-  children,
-  className,
-  focus,
-  hasFocus,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  focus: boolean;
-  hasFocus: any;
-}) {
+
+function DropdownInputSection({ children }: { children: React.ReactNode }) {
+  const context = useContext(DropDownContext);
+
+  if (!context) {
+    throw new Error("useContext must be used within a ThemeProvider");
+  }
+
+  const { focus, hasFocus, className } = context;
   const sp = useSpring({
     transform: focus ? "rotate(180deg)" : "rotate(0deg)",
     config: {
@@ -247,6 +252,7 @@ function DropdownInputSection({
     },
     delay: 0,
   });
+
   return (
     <Row
       className={cn(

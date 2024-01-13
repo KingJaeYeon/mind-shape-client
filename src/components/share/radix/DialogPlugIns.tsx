@@ -27,7 +27,8 @@ export function TypeAddPortfolio() {
         search={search}
         isLoad={isLoad}
         list={searchResult}
-        viewElement={<DropDownView item={chosen} />}
+        chosen={chosen}
+        inputViewElement={<DropDownView item={chosen} />}
         setChosen={setChosen}
         placeholder={"Ticker..."}
       />
