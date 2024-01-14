@@ -6,6 +6,7 @@
     :root {
         --grayscale-white: hsla(0, 0%, 100%, 1);
         --grayscale-pale-gray: hsla(241, 43%, 99%, 1);
+        --grayscale-dark-pale: rgb(239, 242, 245);
         --grayscale-weak-gray: hsla(241, 33%, 97%, 1);
         --grayscale-lightgray: hsla(240, 12%, 89%, 1);
         --grayscale-neutral-gray: hsla(240, 6%, 71%, 1);

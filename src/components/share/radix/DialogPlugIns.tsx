@@ -73,7 +73,7 @@ export function TypeAddPortfolio() {
     e.preventDefault();
   }
   return (
-    <Contents className={"mt-[10px] flex h-auto flex-col"}>
+    <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
       <DropDown
         setSearch={setSearch}
         search={search}
@@ -84,22 +84,7 @@ export function TypeAddPortfolio() {
         placeholder={"Search Ticker..."}
       />
 
-      <Col className={"mt-[16px] font-Inter"}>
-        <LabeledDisplay
-          label={"국가"}
-          id={"country"}
-          displayText={chosen.exChange}
-        />
-      </Col>
-      <Col className={"mt-[16px] font-Inter"}>
-        <LabeledDisplay
-          label={"분류"}
-          id={"category"}
-          displayText={chosen.category.name}
-        />
-      </Col>
-
-      <Row className={"w-full gap-[10px] font-Inter"}>
+      <Col className={"w-full gap-[10px] font-Inter sm:flex-row"}>
         <Col className={"mt-[16px] flex-1"}>
           <LabeledInput
             type={"number"}
@@ -120,6 +105,9 @@ export function TypeAddPortfolio() {
             placeholder={"0.00"}
           />
         </Col>
+      </Col>
+      <Row className={"mt-[16px] w-full"}>
+        <LabeledDisplay id={"category"} displayText={chosen.category.name} />
       </Row>
       <Col
         className={
@@ -135,7 +123,7 @@ export function TypeAddPortfolio() {
         disabled={isSubmitDisable}
         onClick={(e) => submitHandler(e)}
         className={
-          "bg-primary hover:bg-primary-light mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] font-Inter text-white disabled:opacity-50"
+          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] bg-primary font-Inter text-white hover:bg-primary-light disabled:opacity-50"
         }
       >
         거래 추가

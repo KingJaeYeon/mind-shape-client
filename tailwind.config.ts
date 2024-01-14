@@ -38,7 +38,7 @@ const config: Config = {
         iconColor: "var(--icon-color)",
         inputValueText: "var(--input-value-text)",
         inputLabelText: "var(--input-label-text)",
-        inputReadOnly: "var(--input-readOnly)",
+        inputReadOnly: "var(--grayscale-dark-pale)",
         inputFocusBorderShadow: "var(--focus-input-border-shadow)",
         orange: "var(--orange)",
         gold1: "var(--gold1)",

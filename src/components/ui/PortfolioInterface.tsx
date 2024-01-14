@@ -33,7 +33,7 @@ export default function PortfolioInterface({ data }: { data: any }) {
           contents={<TypeAddPortfolio />}
           title={"거래추가"}
           className={
-            "max-w-[496px] rounded-[16px] px-[32px] pb-[32px] pt-[16px]"
+            "rounded-[16px] px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"
           }
         >
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
