@@ -32,9 +32,7 @@ export default function PortfolioInterface({ data }: { data: any }) {
         <DialogBase
           contents={<TypeAddPortfolio />}
           title={"거래추가"}
-          className={
-            "rounded-[16px] px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"
-          }
+          className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
         </DialogBase>

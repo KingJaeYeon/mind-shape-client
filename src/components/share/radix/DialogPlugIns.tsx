@@ -84,7 +84,7 @@ export function TypeAddPortfolio() {
         placeholder={"Search Ticker..."}
       />
 
-      <Col className={"w-full gap-[10px] font-Inter sm:flex-row"}>
+      <Col className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}>
         <Col className={"mt-[16px] flex-1"}>
           <LabeledInput
             type={"number"}
@@ -106,8 +106,17 @@ export function TypeAddPortfolio() {
           />
         </Col>
       </Col>
-      <Row className={"mt-[16px] w-full"}>
-        <LabeledDisplay id={"category"} displayText={chosen.category.name} />
+      <Row className={"mt-[16px] w-full gap-[10px]"}>
+        <LabeledDisplay
+          id={"buyAt"}
+          displayText={"2024년 01월 14일"}
+          className={"px-[14px]"}
+        />
+        <LabeledDisplay
+          id={"dividendsDay"}
+          className={"flex-1 justify-center"}
+          displayText={"배당일"}
+        />
       </Row>
       <Col
         className={

@@ -32,6 +32,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={"hide-scrollbar bg-bg font-Inter"}>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
+        <title>The Mind</title>
+      </head>
       <body className={inter.className}>
         <QueryProvider>
           <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>

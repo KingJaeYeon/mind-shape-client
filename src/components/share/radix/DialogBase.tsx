@@ -59,7 +59,7 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
       <Dialog.Content
         ref={ref}
         className={cn(
-          "fixed left-[50%] top-[50%] z-[1000] min-h-[100dvh] w-full max-w-[100dvw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-modalBg p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow sm:min-h-[auto] sm:max-w-[450px]",
+          "fixed left-[50%] top-[50%] z-[1000] min-h-[100dvh] w-full max-w-[100dvw] translate-x-[-50%] translate-y-[-50%] rounded-[0px] bg-modalBg p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=open]:animate-contentShow sm:min-h-[auto] sm:max-w-[450px] sm:rounded-[16px]",
           className,
         )}
       >
@@ -69,8 +69,14 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
             event.preventDefault();
           }}
         >
-          <Row className={"justify-between text-modalTitle"}>
-            <Row className={"text-[24px] font-bold"}>{title}</Row>
+          <Row className={"py-[10px] text-modalTitle"}>
+            <Row
+              className={
+                "flex-1 justify-center text-[24px] font-bold sm:justify-start"
+              }
+            >
+              {title}
+            </Row>
             <Button onClick={() => setOpen(false)}>
               <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
             </Button>
