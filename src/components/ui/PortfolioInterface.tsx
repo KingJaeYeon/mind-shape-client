@@ -15,7 +15,6 @@ import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
 
 export default function PortfolioInterface({ data }: { data: any }) {
   const { initData } = usePortfolioStore();
-  const [dividendsStep, setDividendsStep] = useState<boolean>(false);
   const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,14 +22,9 @@ export default function PortfolioInterface({ data }: { data: any }) {
   }, []);
 
   function resetHandler() {
-    setDividendsStep(false);
     setBuyAyStep(false);
   }
-  const title = dividendsStep
-    ? "배당일 입력"
-    : buyAyStep
-      ? "매수 일자"
-      : "거래추가";
+  const title = buyAyStep ? "매수 일자" : "거래추가";
   return (
     <Contents
       className={
@@ -44,8 +38,6 @@ export default function PortfolioInterface({ data }: { data: any }) {
           resetHandler={resetHandler}
           contents={
             <TypeAddPortfolio
-              dividendsStep={dividendsStep}
-              setDividendsStep={setDividendsStep}
               buyAyStep={buyAyStep}
               setBuyAyStep={setBuyAyStep}
             />

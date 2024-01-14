@@ -18,6 +18,8 @@ const config: Config = {
           DEFAULT: "var(--primary)",
           light: "var(--primary-light)",
           dark: "var(--primary-dark)",
+          disable: "var(--primary-disable)",
+          shadowBorder: "var(--primary-shadow-input)",
         },
 
         gray: "var(--grayscale-gray)",
@@ -39,7 +41,7 @@ const config: Config = {
         inputValueText: "var(--input-value-text)",
         inputLabelText: "var(--input-label-text)",
         inputReadOnly: "var(--grayscale-dark-pale)",
-        inputFocusBorderShadow: "var(--focus-input-border-shadow)",
+        inputFocusBorderShadow: "var(--primary-shadow-input)",
         orange: "var(--orange)",
         gold1: "var(--gold1)",
         gold2: "var(--gold2)",
@@ -63,6 +65,7 @@ const config: Config = {
         switchThumb: "0 2px 2px var(--grayscale-black)",
         dropdown:
           "rgba(128, 138, 157, 0.12) 0px 1px 2px, rgba(128, 138, 157, 0.24) 0px 8px 32px",
+        dropdown2: "0px 0px 20px (--primary-shadow-input)",
         input: "var(--focus-input-shadow) 0px 0px 0px 4px",
       },
       keyframes: {

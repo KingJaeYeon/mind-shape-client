@@ -20,6 +20,7 @@
         --primary-light: #6fbf73;
         --primary-dark: #285e29;
         --primary-shadow-input: rgb(223, 247, 236);
+        --primary-disable: rgba(51, 138, 62, 0.6);
 
         --line: rgba(255, 255, 255, 0.2);
         --orange: #F7941D;

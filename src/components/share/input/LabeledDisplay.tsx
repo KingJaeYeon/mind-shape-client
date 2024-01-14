@@ -30,7 +30,11 @@ export default function LabeledDisplay({
         />
       )}
       <Row
-        onClick={() => onClickHandler()}
+        onClick={() => {
+          if (!!onClickHandler) {
+            onClickHandler();
+          }
+        }}
         className={cn(
           "min-h-[40px] items-center break-all rounded-[10px] bg-inputReadOnly px-[10px] text-[14px] font-bold text-inputValueText",
           className,

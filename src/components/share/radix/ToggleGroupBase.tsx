@@ -23,7 +23,7 @@ export function ToggleGroupBaseSingle({
       {options.map((option, index) => (
         <ToggleGroup.Item
           disabled={value === option?.value}
-          key={index}
+          key={option.value + "-" + index}
           className={className}
           value={option?.value}
         >

@@ -14,8 +14,10 @@ export const useConvenienceStore = create<ConvenienceStore>(
   (set: any, get: any) => ({
     hideNavBar: true,
     isShowAmount: true,
+
     config: {
       portfolioIsShowChart: true,
+      current: {},
     },
     getValue: (key: string) => {
       let config = get().config;

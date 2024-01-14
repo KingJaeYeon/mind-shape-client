@@ -15,8 +15,14 @@ export function ShowOrHideAmount({
   const { getValue, setValue } = useConvenienceStore();
 
   useEffect(() => {
-    const showAmount = Boolean(localStorage.getItem("showAmount")) || true;
-    setValue("isShowAmount", showAmount);
+    const showAmount = localStorage.getItem("showAmount");
+    let isShowAmount;
+    if (showAmount === "false") {
+      isShowAmount = false;
+    } else {
+      isShowAmount = true;
+    }
+    setValue("isShowAmount", isShowAmount);
   }, []);
 
   if (getValue("isShowAmount")) {
@@ -38,7 +44,9 @@ export function ShowOrHideTrigger({ className }: { className?: string }) {
     <Contents
       className={"flex h-full items-center"}
       onClick={() => {
-        setValue("isShowAmount", !getValue("isShowAmount"));
+        const value = !getValue("isShowAmount");
+        setValue("isShowAmount", value);
+        localStorage.setItem("showAmount", String(value));
       }}
     >
       {getValue("isShowAmount") ? (
