@@ -1,6 +1,6 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
@@ -19,19 +19,30 @@ export default function DialogBase({
   title,
   contents,
   className,
+  resetHandler,
 }: {
   children: React.ReactNode;
   title?: string;
   contents: any;
   className?: string;
+  resetHandler?: any;
 }) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open && !!resetHandler) {
+      resetHandler();
+    }
+  }, [open]);
+
   return (
     <Dialog.Root
       open={open}
       onOpenChange={(open) => {
         if (!open) {
-          if (confirm("정말 닫으시겠습니다?")) setOpen(open);
+          if (confirm("정말 닫으시겠습니다?")) {
+            setOpen(open);
+          }
         } else {
           setOpen(open);
         }

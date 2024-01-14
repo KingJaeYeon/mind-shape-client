@@ -1,7 +1,7 @@
 "use client";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   ShowOrHideAmount,
@@ -15,11 +15,22 @@ import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
 
 export default function PortfolioInterface({ data }: { data: any }) {
   const { initData } = usePortfolioStore();
+  const [dividendsStep, setDividendsStep] = useState<boolean>(false);
+  const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
 
   useEffect(() => {
     initData(data).then(() => console.log("initData load..."));
   }, []);
 
+  function resetHandler() {
+    setDividendsStep(false);
+    setBuyAyStep(false);
+  }
+  const title = dividendsStep
+    ? "배당일 입력"
+    : buyAyStep
+      ? "매수 일자"
+      : "거래추가";
   return (
     <Contents
       className={
@@ -30,8 +41,16 @@ export default function PortfolioInterface({ data }: { data: any }) {
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
         <DialogBase
-          contents={<TypeAddPortfolio />}
-          title={"거래추가"}
+          resetHandler={resetHandler}
+          contents={
+            <TypeAddPortfolio
+              dividendsStep={dividendsStep}
+              setDividendsStep={setDividendsStep}
+              buyAyStep={buyAyStep}
+              setBuyAyStep={setBuyAyStep}
+            />
+          }
+          title={title}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>

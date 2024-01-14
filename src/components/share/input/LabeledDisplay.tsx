@@ -7,6 +7,7 @@ type LabeledDisplayProps = {
   id: string;
   label?: string;
   displayText: any;
+  onClickHandler?: any;
   className?: string;
 };
 
@@ -14,6 +15,7 @@ export default function LabeledDisplay({
   id,
   label,
   displayText,
+  onClickHandler,
   className,
 }: LabeledDisplayProps) {
   return (
@@ -28,9 +30,11 @@ export default function LabeledDisplay({
         />
       )}
       <Row
+        onClick={() => onClickHandler()}
         className={cn(
           "min-h-[40px] items-center break-all rounded-[10px] bg-inputReadOnly px-[10px] text-[14px] font-bold text-inputValueText",
           className,
+          !!onClickHandler && "cursor-pointer",
         )}
         id={id}
       >

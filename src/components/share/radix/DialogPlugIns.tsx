@@ -10,7 +10,17 @@ import LabeledInput from "@/components/share/input/LabeledInput";
 import LabeledDisplay from "@/components/share/input/LabeledDisplay";
 import Button from "@/components/layout/Button";
 
-export function TypeAddPortfolio() {
+export function TypeAddPortfolio({
+  dividendsStep,
+  setDividendsStep,
+  buyAyStep,
+  setBuyAyStep,
+}: {
+  dividendsStep: boolean;
+  setDividendsStep: any;
+  buyAyStep: boolean;
+  setBuyAyStep: any;
+}) {
   const [search, setSearch] = useState("");
   // TODO: 현재 가격도 db에서 가져와야함
   const [chosen, setChosen] = useState<{
@@ -54,7 +64,12 @@ export function TypeAddPortfolio() {
       setAmount(Number(e.target.value));
     }
   }
-
+  function dividendsDayHandler() {
+    setDividendsStep(true);
+  }
+  function buyAtHandler() {
+    setBuyAyStep(true);
+  }
   const isSubmitDisable = !(
     typeof amount === "number" &&
     amount > 0 &&
@@ -72,6 +87,14 @@ export function TypeAddPortfolio() {
     console.log("index::", chosen.index);
     e.preventDefault();
   }
+  if (dividendsStep) {
+    return <TypeChosenDividends />;
+  }
+
+  if (buyAyStep) {
+    return <TypeChosenBuyAt />;
+  }
+
   return (
     <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
       <DropDown
@@ -111,11 +134,13 @@ export function TypeAddPortfolio() {
           id={"buyAt"}
           displayText={"2024년 01월 14일"}
           className={"px-[14px]"}
+          onClickHandler={buyAtHandler}
         />
         <LabeledDisplay
           id={"dividendsDay"}
           className={"flex-1 justify-center"}
           displayText={"배당일"}
+          onClickHandler={dividendsDayHandler}
         />
       </Row>
       <Col
@@ -139,4 +164,12 @@ export function TypeAddPortfolio() {
       </Button>
     </Contents>
   );
+}
+
+export function TypeChosenDividends() {
+  return <Contents className={"min-h-auto mt-[10px] flex flex-col"}></Contents>;
+}
+
+export function TypeChosenBuyAt() {
+  return <Contents className={"min-h-auto mt-[10px] flex flex-col"}></Contents>;
 }
