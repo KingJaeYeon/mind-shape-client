@@ -270,7 +270,7 @@ export function SingleDayPickerTypeModal({
   const [inputValue, setInputValue] = useState<string>("");
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
-    const date = parse(e.currentTarget.value, "y-MM-dd", new Date());
+    const date = parse(e.currentTarget.value, "yyyy-MM-dd", new Date());
     const inputYear = getYear(date);
     if (isValid(date) && year >= inputYear) {
       selectedHandler(date);
@@ -282,7 +282,7 @@ export function SingleDayPickerTypeModal({
   const handleDaySelect: SelectSingleEventHandler = (date) => {
     selectedHandler(date);
     if (date) {
-      setInputValue(format(date, "y-MM-dd"));
+      setInputValue(format(date, "yyyy-MM-dd"));
     } else {
       setInputValue("");
     }
@@ -353,13 +353,19 @@ export function SingleDayPickerTypeModal({
         className={
           "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
         }
-        onClick={() => buyAtCloseHandler()}
+        onClick={() => {
+          if (!selected) {
+            selectedHandler(new Date());
+          }
+          buyAtCloseHandler();
+        }}
       >
         날짜 변경
       </Button>
     </>
   );
 }
+
 function InputOption({
   hasInputOption,
   inputValue,
@@ -390,6 +396,7 @@ function InputOption({
     </Row>
   );
 }
+
 function CustomHeader(props: CaptionProps) {
   const { goToMonth, nextMonth, previousMonth, goToDate } = useNavigation();
   const { selected } = useDayPicker();
