@@ -24,7 +24,7 @@ export default function PortfolioInterface({ data }: { data: any }) {
   function resetHandler() {
     setBuyAyStep(false);
   }
-  const title = buyAyStep ? "매수 일자" : "거래추가";
+  const title = buyAyStep ? "날짜 & 시간" : "거래추가";
   return (
     <Contents
       className={

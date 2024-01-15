@@ -9,12 +9,12 @@ import Row from "@/components/layout/Row";
 import LabeledInput from "@/components/share/input/LabeledInput";
 import LabeledDisplay from "@/components/share/input/LabeledDisplay";
 import Button from "@/components/layout/Button";
-import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
-import SelectBase from "@/components/share/radix/SelectBase";
+
 import {
   CurrentDisplayPrice,
   SelectCurrent,
 } from "@/components/share/input/SelectCurrent";
+import { Calendar, Test } from "@/components/share/calendar/Calendar";
 
 export function TypeAddPortfolio({
   buyAyStep,
@@ -141,13 +141,6 @@ export function TypeAddPortfolio({
           "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
         }
       >
-        <Row className={"items-center justify-between"}>
-          <Row className={"text-[14px]"}>사용된 총액</Row>
-          <SelectCurrent />
-        </Row>
-        <Row className={"font-Inter text-[28px] font-bold"}>
-          $ {(Number(amount) * Number(price)).toLocaleString()}
-        </Row>
         <CurrentDisplayPrice
           price={Number(amount) * Number(price)}
           className={"text-[28px] font-bold"}
@@ -157,7 +150,7 @@ export function TypeAddPortfolio({
         disabled={isSubmitDisable}
         onClick={(e) => submitHandler(e)}
         className={
-          "disabled:bg-primary-disable mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light"
+          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
         }
       >
         거래 추가
@@ -171,5 +164,13 @@ export function TypeChosenDividends() {
 }
 
 export function TypeChosenBuyAt() {
-  return <Contents className={"min-h-auto mt-[10px] flex flex-col"}></Contents>;
+  const date = new Date();
+  const [dateState, setDateState] = useState<Date | undefined>(date);
+
+  return (
+    <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
+      <Row className={"mb-[20px] border-t border-t-lightGray"} />
+      <Test selected={dateState} selectedHandler={setDateState} />
+    </Contents>
+  );
 }

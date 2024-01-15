@@ -1,0 +1,54 @@
+.rdp {
+    --rdp-cell-size: 37px !important;
+    /*--rdp-cell-size: 30px;*/
+    --rdp-caption-font-size: 14px;
+    --rdp-accent-color: #0000ff;
+    --rdp-background-color: #e7edff;
+    --rdp-accent-color-dark: #3003e1;
+    --rdp-background-color-dark: #180270;
+    --rdp-outline: 2px solid var(--rdp-accent-color);
+    --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+    --rdp-selected-color: #fff;
+}
+
+
+.rdp-row{
+
+}
+.rdp-cell{
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.rdp-button{
+    margin: 0 auto;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    font-weight: 300;
+    line-height: 2rem;
+    font-size: 14px;
+}
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+    background-color:#eff2f5;
+}
+
+
+.rdp-day_selected:not([disabled]){
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color:#338a3e;
+    font-size: 15px;
+}
+
+/* day: 주말 날짜 */
+.rdp-cell:nth-child(1){
+    color:red;
+}
+.rdp-cell:nth-child(7){
+    color:#8685FF;
+}
