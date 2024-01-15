@@ -14,7 +14,10 @@ import {
   CurrentDisplayPrice,
   SelectCurrent,
 } from "@/components/share/input/SelectCurrent";
-import { Calendar, Test } from "@/components/share/calendar/Calendar";
+import {
+  Calendar,
+  SingleDayPicker,
+} from "@/components/share/calendar/Calendar";
 
 export function TypeAddPortfolio({
   buyAyStep,
@@ -170,7 +173,11 @@ export function TypeChosenBuyAt() {
   return (
     <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
       <Row className={"mb-[20px] border-t border-t-lightGray"} />
-      <Test selected={dateState} selectedHandler={setDateState} />
+      <SingleDayPicker
+        selected={dateState}
+        selectedHandler={setDateState}
+        hasInputOption={true}
+      />
     </Contents>
   );
 }

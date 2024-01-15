@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { IconCalendar, IconLeft, IconRight } from "@/assets";
 
-// dayPicker
 import {
   format,
   getMonth,
   isSameMonth,
   getYear,
   getDate,
-  endOfDay,
   endOfMonth,
-  startOfDay,
+  parse,
+  isValid,
 } from "date-fns";
 import {
   CaptionProps,
   DateRange,
   DayPicker,
+  SelectSingleEventHandler,
+  useDayPicker,
+  useFocusContext,
   useNavigation,
+  useSelectSingle,
 } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "./daypicker.css";
@@ -238,27 +241,47 @@ export function Calendar({
   );
 }
 
-export function Test({
+export function SingleDayPicker({
   isDialog = true,
   selected,
   selectedHandler,
+  hasInputOption,
 }: {
   isDialog?: boolean;
   selected?: any;
   selectedHandler?: any;
+  hasInputOption?: boolean;
 }) {
   const date = new Date();
   const year = getYear(date);
   const month = getMonth(date);
   const day = getDate(date);
   const endDay = format(endOfMonth(date), "dd");
-
   const disabledDays = [
     {
       from: new Date(year, month, day + 1),
-      to: new Date(year, month, Number(endDay)),
+      to: new Date(year, 11, Number(endDay)),
     },
   ];
+  const [inputValue, setInputValue] = useState<string>("");
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setInputValue(e.currentTarget.value);
+    const date = parse(e.currentTarget.value, "y-MM-dd", new Date());
+    if (isValid(date)) {
+      selectedHandler(date);
+    } else {
+      selectedHandler(undefined);
+    }
+  };
+
+  const handleDaySelect: SelectSingleEventHandler = (date) => {
+    selectedHandler(date);
+    if (date) {
+      setInputValue(format(date, "y-MM-dd"));
+    } else {
+      setInputValue("");
+    }
+  };
   return (
     <DayPicker
       // style
@@ -279,7 +302,6 @@ export function Test({
         transition: "all 0.3s ease-in-out",
       }}
       styles={{
-        months: {},
         month: {
           margin: "0 auto",
           width: "100%",
@@ -304,26 +326,59 @@ export function Test({
       // 단일 날짜 선택
       mode={"single"}
       selected={selected}
-      onSelect={(date) => {
-        if (selectedHandler !== undefined) {
-          selectedHandler(date);
-        }
-      }}
+      onSelect={handleDaySelect}
       disabled={disabledDays}
-      // 오늘 날짜로 이동 버튼
-      // month={month}
-      // onMonthChange={setMonth}
-      // footer={footer({ today, month, setMonth })}
-      // css 커스텀
+      captionLayout="dropdown-buttons"
+      fromYear={2000}
+      toYear={year}
       components={{
         Caption: CustomHeader,
+      }}
+      footer={
+        <InputOption
+          hasInputOption={hasInputOption}
+          inputValue={inputValue}
+          handleInputChange={handleInputChange}
+        />
+      }
+    />
+  );
+}
+function InputOption({
+  hasInputOption,
+  inputValue,
+  handleInputChange,
+}: {
+  hasInputOption?: boolean;
+  inputValue: string;
+  handleInputChange: (e: any) => void;
+}) {
+  if (!hasInputOption) {
+    return null;
+  }
+
+  return (
+    <input
+      size={12}
+      type="text"
+      placeholder={format(new Date(), "y-MM-dd")}
+      value={inputValue}
+      onChange={(e) => {
+        e.preventDefault();
+        handleInputChange(e);
       }}
     />
   );
 }
-
 function CustomHeader(props: CaptionProps) {
-  const { goToMonth, nextMonth, previousMonth } = useNavigation();
+  const { goToMonth, nextMonth, previousMonth, goToDate } = useNavigation();
+  const { selected } = useDayPicker();
+
+  useEffect(() => {
+    if (selected instanceof Date) {
+      goToDate(selected);
+    }
+  }, [selected]);
   return (
     <div
       className={

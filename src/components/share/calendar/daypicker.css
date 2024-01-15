@@ -32,7 +32,7 @@
     line-height: 2rem;
     font-size: 14px;
 }
-.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+.rdp-button:hover:not(.rdp-day_selected) {
     background-color:#eff2f5;
 }
 
