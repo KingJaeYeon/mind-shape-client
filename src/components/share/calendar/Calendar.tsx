@@ -24,6 +24,8 @@ import {
 import "react-day-picker/dist/style.css";
 import "./daypicker.css";
 import { cn } from "@/lib/utils";
+import Row from "@/components/layout/Row";
+import Button from "@/components/layout/Button";
 
 /**
  *   기본 옵션
@@ -241,16 +243,18 @@ export function Calendar({
   );
 }
 
-export function SingleDayPicker({
+export function SingleDayPickerTypeModal({
   isDialog = true,
   selected,
   selectedHandler,
   hasInputOption,
+  buyAtCloseHandler,
 }: {
   isDialog?: boolean;
   selected?: any;
   selectedHandler?: any;
   hasInputOption?: boolean;
+  buyAtCloseHandler: any;
 }) {
   const date = new Date();
   const year = getYear(date);
@@ -267,7 +271,8 @@ export function SingleDayPicker({
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
     const date = parse(e.currentTarget.value, "y-MM-dd", new Date());
-    if (isValid(date)) {
+    const inputYear = getYear(date);
+    if (isValid(date) && year >= inputYear) {
       selectedHandler(date);
     } else {
       selectedHandler(undefined);
@@ -282,66 +287,77 @@ export function SingleDayPicker({
       setInputValue("");
     }
   };
+
   return (
-    <DayPicker
-      // style
-      style={{
-        pointerEvents: "auto",
-        opacity: 1,
-        zIndex: 100,
-        position: isDialog ? "relative" : "absolute",
-        top: "5px",
-        maxWidth: isDialog ? "100%" : "328px",
-        minWidth: isDialog ? "100%" : "228px",
-        width: "100%",
-        margin: isDialog ? "auto" : "0 auto",
-        padding: isDialog ? "" : "16px 10px",
-        backgroundColor: "white",
-        boxShadow: isDialog ? "" : "0px 4px 8px 0px rgba(0, 0, 0, 0.15)",
-        borderRadius: "15px",
-        transition: "all 0.3s ease-in-out",
-      }}
-      styles={{
-        month: {
-          margin: "0 auto",
+    <>
+      <DayPicker
+        // style
+        style={{
+          pointerEvents: "auto",
+          opacity: 1,
+          zIndex: 100,
+          position: isDialog ? "relative" : "absolute",
+          top: "5px",
+          maxWidth: isDialog ? "100%" : "328px",
+          minWidth: isDialog ? "100%" : "228px",
           width: "100%",
-        },
-        // table
-        table: {
-          fontWeight: "400",
-          margin: "0 auto",
-          width: isDialog ? "100%" : "100%",
-          maxWidth: isDialog ? "100%" : "258px",
-        },
-        head: {
-          fontWeight: "300",
-          fontFamily: "Inter",
-          fontSize: "16px",
-          lineHeight: "150%",
-          letterSpacing: "-0.42px",
-          color: "#58667e",
-        },
-        tbody: {},
-      }}
-      // 단일 날짜 선택
-      mode={"single"}
-      selected={selected}
-      onSelect={handleDaySelect}
-      disabled={disabledDays}
-      captionLayout="dropdown-buttons"
-      fromYear={2000}
-      toYear={year}
-      components={{
-        Caption: CustomHeader,
-      }}
-      footer={
-        <InputOption
-          hasInputOption={hasInputOption}
-          inputValue={inputValue}
-          handleInputChange={handleInputChange}
-        />
-      }
-    />
+          margin: isDialog ? "auto" : "0 auto",
+          padding: isDialog ? "" : "16px 10px",
+          backgroundColor: "white",
+          boxShadow: isDialog ? "" : "0px 4px 8px 0px rgba(0, 0, 0, 0.15)",
+          borderRadius: "15px",
+          transition: "all 0.3s ease-in-out",
+        }}
+        styles={{
+          month: {
+            margin: "0 auto",
+            width: "100%",
+          },
+          // table
+          table: {
+            fontWeight: "400",
+            margin: "0 auto",
+            width: isDialog ? "100%" : "100%",
+            maxWidth: isDialog ? "100%" : "258px",
+          },
+          head: {
+            fontWeight: "300",
+            fontFamily: "Inter",
+            fontSize: "16px",
+            lineHeight: "150%",
+            letterSpacing: "-0.42px",
+            color: "#58667e",
+          },
+          tbody: {},
+        }}
+        // 단일 날짜 선택
+        mode={"single"}
+        selected={selected}
+        onSelect={handleDaySelect}
+        disabled={disabledDays}
+        captionLayout="dropdown-buttons"
+        fromYear={2000}
+        toYear={year}
+        components={{
+          Caption: CustomHeader,
+        }}
+        footer={
+          <InputOption
+            hasInputOption={hasInputOption}
+            inputValue={inputValue}
+            handleInputChange={handleInputChange}
+          />
+        }
+      />
+      <Button
+        className={
+          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
+        }
+        onClick={() => buyAtCloseHandler()}
+      >
+        날짜 변경
+      </Button>
+    </>
   );
 }
 function InputOption({
@@ -358,16 +374,20 @@ function InputOption({
   }
 
   return (
-    <input
-      size={12}
-      type="text"
-      placeholder={format(new Date(), "y-MM-dd")}
-      value={inputValue}
-      onChange={(e) => {
-        e.preventDefault();
-        handleInputChange(e);
-      }}
-    />
+    <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
+      <Row>Search:</Row>
+      <input
+        size={12}
+        type="text"
+        className={"outline-none"}
+        placeholder={format(new Date(), "y-MM-dd")}
+        value={inputValue}
+        onChange={(e) => {
+          e.preventDefault();
+          handleInputChange(e);
+        }}
+      />
+    </Row>
   );
 }
 function CustomHeader(props: CaptionProps) {

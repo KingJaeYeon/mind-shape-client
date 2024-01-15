@@ -16,8 +16,9 @@ import {
 } from "@/components/share/input/SelectCurrent";
 import {
   Calendar,
-  SingleDayPicker,
+  SingleDayPickerTypeModal,
 } from "@/components/share/calendar/Calendar";
+import { format } from "date-fns";
 
 export function TypeAddPortfolio({
   buyAyStep,
@@ -50,6 +51,8 @@ export function TypeAddPortfolio({
   const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
   const [amount, setAmount] = useState<number | string>("");
   const [price, setPrice] = useState<number | string>("");
+  const date = new Date();
+  const [dateState, setDateState] = useState<Date>(date);
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -69,8 +72,11 @@ export function TypeAddPortfolio({
       setAmount(Number(e.target.value));
     }
   }
-  function buyAtHandler() {
+  function buyAtOpenHandler() {
     setBuyAyStep(true);
+  }
+  function buyAtCloseHandler() {
+    setBuyAyStep(false);
   }
 
   const isSubmitDisable = !(
@@ -89,7 +95,13 @@ export function TypeAddPortfolio({
     e.preventDefault();
   }
   if (buyAyStep) {
-    return <TypeChosenBuyAt />;
+    return (
+      <TypeChosenBuyAt
+        dateState={dateState}
+        setDateState={setDateState}
+        buyAtCloseHandler={buyAtCloseHandler}
+      />
+    );
   }
 
   return (
@@ -129,9 +141,9 @@ export function TypeAddPortfolio({
       <Row className={"mt-[16px] w-full gap-[10px]"}>
         <LabeledDisplay
           id={"buyAt"}
-          displayText={"2024년 01월 14일"}
+          displayText={format(dateState, "yyyy년 MM월 dd일")}
           className={"px-[14px]"}
-          onClickHandler={buyAtHandler}
+          onClickHandler={buyAtOpenHandler}
         />
         <LabeledDisplay
           id={"dividendsDay"}
@@ -166,17 +178,23 @@ export function TypeChosenDividends() {
   return <Contents className={"min-h-auto mt-[10px] flex flex-col"}></Contents>;
 }
 
-export function TypeChosenBuyAt() {
-  const date = new Date();
-  const [dateState, setDateState] = useState<Date | undefined>(date);
-
+export function TypeChosenBuyAt({
+  dateState,
+  setDateState,
+  buyAtCloseHandler,
+}: {
+  dateState: Date;
+  setDateState: any;
+  buyAtCloseHandler: any;
+}) {
   return (
     <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
       <Row className={"mb-[20px] border-t border-t-lightGray"} />
-      <SingleDayPicker
+      <SingleDayPickerTypeModal
         selected={dateState}
         selectedHandler={setDateState}
         hasInputOption={true}
+        buyAtCloseHandler={buyAtCloseHandler}
       />
     </Contents>
   );
