@@ -7,6 +7,7 @@ import React from "react";
 import NavBar from "@/components/share/NavBar";
 import Row from "@/components/layout/Row";
 import QueryProvider from "@/components/provider/QueryProvider";
+import ToastProvider from "@/components/provider/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
@@ -47,6 +48,7 @@ export default function RootLayout({
               <main className={"hide-scrollbar flex w-full"}>{children}</main>
             </Row>
           </Contents>
+          <ToastProvider />
         </QueryProvider>
       </body>
     </html>
