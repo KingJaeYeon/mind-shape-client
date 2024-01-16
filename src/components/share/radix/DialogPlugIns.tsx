@@ -89,11 +89,6 @@ export function TypeAddPortfolio({
     !!chosen?.name
   );
   async function submitHandler(e: any) {
-    console.log("수량::", amount);
-    console.log("가격::", price);
-    console.log("티커::", chosen.symbol);
-    console.log("주식::", chosen.name);
-    console.log("index::", chosen.index);
     savePortfolio({
       price: Number(price),
       amount: Number(amount),

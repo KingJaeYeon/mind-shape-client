@@ -1,10 +1,11 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import Button from "@/components/layout/Button";
+import { ModalStore } from "@/store/modalStore";
 
 type Props = {
   children: React.ReactNode;
@@ -27,36 +28,36 @@ export default function DialogBase({
   className?: string;
   resetHandler?: any;
 }) {
-  const [open, setOpen] = useState(false);
+  const { getValue, setValue, isOpen } = ModalStore();
 
   useEffect(() => {
-    if (!open && !!resetHandler) {
+    if (!isOpen && !!resetHandler) {
       resetHandler();
     }
-  }, [open]);
+  }, [isOpen]);
 
   return (
     <Dialog.Root
-      open={open}
+      open={getValue("isOpen")}
       onOpenChange={(open) => {
         if (!open) {
           if (confirm("정말 닫으시겠습니다?")) {
-            setOpen(open);
+            setValue("isOpen", open);
           }
         } else {
-          setOpen(open);
+          setValue("isOpen", open);
         }
       }}
     >
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
-          data-state={open ? "open" : "closed"}
+          data-state={getValue("isOpen") ? "open" : "closed"}
           className={
             "fixed inset-0 z-[999] bg-dialogOverlay backdrop-blur-[4px] data-[state=open]:animate-overlayShow"
           }
         />
-        <ModalContainer setOpen={setOpen} className={className} title={title}>
+        <ModalContainer className={className} title={title}>
           {contents}
         </ModalContainer>
       </Dialog.Portal>
@@ -65,7 +66,8 @@ export default function DialogBase({
 }
 
 const ModalContainer = forwardRef<HTMLDivElement, Props>(
-  ({ children, title, className, setOpen }, ref) => {
+  ({ children, title, className }, ref) => {
+    const { setValue } = ModalStore();
     return (
       <Dialog.Content
         ref={ref}
@@ -76,8 +78,8 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
       >
         <form
           onSubmit={(event) => {
-            wait().then(() => setOpen(false));
             event.preventDefault();
+            wait().then(() => setValue("isOpen", false));
           }}
         >
           <Row className={"py-[10px] text-modalTitle"}>
@@ -88,7 +90,13 @@ const ModalContainer = forwardRef<HTMLDivElement, Props>(
             >
               {title}
             </Row>
-            <Button onClick={() => setOpen(false)}>
+            <Button
+              tabIndex={-1}
+              onClick={(e) => {
+                e.preventDefault();
+                setValue("isOpen", false);
+              }}
+            >
               <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
             </Button>
           </Row>
