@@ -12,8 +12,11 @@ import SwitchBase from "@/components/share/radix/SwitchBase";
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/layout/Button";
 import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
-
-export default function PortfolioInterface({ data }: { data: any }) {
+const data = {
+  totalAmountCurrent: 1000000,
+  totalAmountYesterday: 900000,
+};
+export default function PortfolioInterface() {
   const { initData } = usePortfolioStore();
   const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
 
