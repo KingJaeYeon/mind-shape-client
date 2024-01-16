@@ -19,6 +19,7 @@ import {
   SingleDayPickerTypeModal,
 } from "@/components/share/calendar/Calendar";
 import { format } from "date-fns";
+import { useAddPortfolio } from "@/hooks/react-query/portfolio.query";
 
 export function TypeAddPortfolio({
   buyAyStep,
@@ -53,6 +54,7 @@ export function TypeAddPortfolio({
   const [price, setPrice] = useState<number | string>("");
   const date = new Date();
   const [dateState, setDateState] = useState<Date>(date);
+  const { savePortfolio, isPending, data } = useAddPortfolio();
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -86,12 +88,19 @@ export function TypeAddPortfolio({
     price > 0 &&
     !!chosen?.name
   );
-  function submitHandler(e: any) {
+  async function submitHandler(e: any) {
     console.log("수량::", amount);
     console.log("가격::", price);
     console.log("티커::", chosen.symbol);
     console.log("주식::", chosen.name);
     console.log("index::", chosen.index);
+    savePortfolio({
+      price: Number(price),
+      amount: Number(amount),
+      categoryId: chosen.category.index,
+      assetId: chosen.index,
+      buyAt: dateState,
+    });
     e.preventDefault();
   }
   if (buyAyStep) {
@@ -162,7 +171,7 @@ export function TypeAddPortfolio({
         />
       </Col>
       <Button
-        disabled={isSubmitDisable}
+        disabled={isSubmitDisable || isPending}
         onClick={(e) => submitHandler(e)}
         className={
           "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"

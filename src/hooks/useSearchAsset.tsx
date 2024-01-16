@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { recommendAsset, searchAsset } from "@/service/stockService";
+import { recommendAsset, searchAsset } from "@/service/asset-service";
 
 export function useSearchAsset(search: string) {
   const [searchResult, setSearchResult] = useState<any[]>([]);
