@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import Button from "@/components/layout/Button";
-import { ModalStore } from "@/store/modalStore";
+import { useModalStore } from "@/store/modalStore";
 
 type Props = {
   children: React.ReactNode;
@@ -28,7 +28,7 @@ export default function DialogBase({
   className?: string;
   resetHandler?: any;
 }) {
-  const { getValue, setValue, isOpen } = ModalStore();
+  const { getValue, setValue, isOpen } = useModalStore();
 
   useEffect(() => {
     if (!isOpen && !!resetHandler) {
@@ -67,7 +67,7 @@ export default function DialogBase({
 
 const ModalContainer = forwardRef<HTMLDivElement, Props>(
   ({ children, title, className }, ref) => {
-    const { setValue } = ModalStore();
+    const { setValue } = useModalStore();
     return (
       <Dialog.Content
         ref={ref}

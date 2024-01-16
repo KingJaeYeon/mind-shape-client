@@ -9,7 +9,7 @@ interface Props {
   setValue: (key: string, value: any) => void;
 }
 
-export const ModalStore = create<Props>((set: any, get: any) => ({
+export const useModalStore = create<Props>((set: any, get: any) => ({
   isOpen: false,
   isSubContentsOpen: false,
   subContents: "",
