@@ -2,7 +2,9 @@
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
 import Grid from "@/components/layout/Grid";
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import {
+  ArcElement,
   BubbleController,
   CategoryScale,
   Chart as ChartJS,
@@ -19,7 +21,7 @@ import {
   ChartDuration,
   TextToggleButton,
 } from "@/components/share/chart/ChartPlugIn";
-import { ChartOption } from "@/constant/chart";
+import { ChartOption, ChartOptionV1 } from "@/constant/chart";
 
 ChartJS.register(
   CategoryScale,
@@ -28,6 +30,8 @@ ChartJS.register(
   BubbleController,
   Tooltip,
   Legend,
+  ArcElement,
+    ChartDataLabels
 );
 
 export function ChartList({ options }: { options: ChartOption[] }) {
@@ -56,6 +60,27 @@ export function ChartItem({ option }: { option: ChartOption }) {
       </Row>
       <ChartDuration options={option.duration} />
       <ChartBase value={option.value} chartType={option.chartType} />
+    </Card>
+  );
+}
+export function ChartItemV1({
+  option,
+  chart,
+}: {
+  option: ChartOptionV1;
+  chart: any;
+}) {
+  return (
+    <Card className={"min-h-[300px] px-[30px] transition-all duration-700"}>
+      <Row className={"items-center justify-between pt-[20px]"}>
+        <ChartCardTitle title={option?.title} />
+        <Row className={"flex min-h-[24px] gap-[10px]"}>
+          <TextToggleButton options={option?.toggleList} />
+          <ModalTriggerButtonTypeChart isShow={option?.hasModal} />
+        </Row>
+      </Row>
+      <ChartDuration options={option?.duration} />
+      {chart}
     </Card>
   );
 }

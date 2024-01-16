@@ -5,3 +5,5 @@ export type AddPortfolio = {
   assetId: number;
   buyAt: Date;
 };
+
+export const IS_SHOW_CHART = "portfolioIsShowChart";

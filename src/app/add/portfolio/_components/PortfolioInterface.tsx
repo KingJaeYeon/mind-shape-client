@@ -12,6 +12,7 @@ import SwitchBase from "@/components/share/radix/SwitchBase";
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/layout/Button";
 import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
+import { IS_SHOW_CHART } from "@/constant/portfolio";
 const data = {
   totalAmountCurrent: 1000000,
   totalAmountYesterday: 900000,
@@ -62,7 +63,7 @@ function ShowChartSwitch() {
         <label htmlFor="portfolio-chart" className={"break-all pr-[15px]"}>
           Show charts
         </label>
-        <SwitchBase id={"portfolio-chart"} switchKey={"portfolioIsShowChart"} />
+        <SwitchBase id={"portfolio-chart"} switchKey={IS_SHOW_CHART} />
       </Row>
     </form>
   );
