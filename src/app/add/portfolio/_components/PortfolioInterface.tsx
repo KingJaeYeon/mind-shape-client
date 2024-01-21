@@ -3,19 +3,17 @@ import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
 import { useEffect, useState } from "react";
 import { usePortfolioStore } from "@/store/portfolioStore";
-import {
-  ShowOrHideAmount,
-  ShowOrHideTrigger,
-} from "@/components/share/button/ShowOrHideAmount";
-import { cn } from "@/lib/utils";
-import SwitchBase from "@/components/share/radix/SwitchBase";
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/layout/Button";
 import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
-import { IS_SHOW_CHART } from "@/constant/portfolio";
+import {
+  PriceView,
+  ShowChartSwitch,
+} from "@/app/add/portfolio/_components/index";
+
 const data = {
-  totalAmountCurrent: 1000000,
-  totalAmountYesterday: 900000,
+  totalPriceCurrent: 1000000,
+  totalPriceYesterday: 900000,
 };
 export default function PortfolioInterface() {
   const { initData } = usePortfolioStore();
@@ -51,50 +49,6 @@ export default function PortfolioInterface() {
         >
           <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
         </DialogBase>
-      </Row>
-    </Contents>
-  );
-}
-
-function ShowChartSwitch() {
-  return (
-    <form>
-      <Row className={"items-center text-white"}>
-        <label htmlFor="portfolio-chart" className={"break-all pr-[15px]"}>
-          Show charts
-        </label>
-        <SwitchBase id={"portfolio-chart"} switchKey={IS_SHOW_CHART} />
-      </Row>
-    </form>
-  );
-}
-
-function PriceView() {
-  const { totalAmountCurrent, totalAmountYesterday } = usePortfolioStore();
-  const isPlus = totalAmountCurrent - totalAmountYesterday > 0;
-  return (
-    <Contents className={"flex flex-col"}>
-      <Row className={"gap-[5px]"}>
-        <Row className={"break-all text-[32px] text-white"}>
-          <ShowOrHideAmount text={`₩ ${totalAmountCurrent.toLocaleString()}`} />
-        </Row>
-        <ShowOrHideTrigger className={"h-[24px] w-[24px]"} />
-      </Row>
-      <Row
-        className={cn(
-          "break-all text-[16px]",
-          isPlus ? "text-green" : "text-red",
-        )}
-      >
-        <Row> {isPlus ? "+" : "-"}</Row>
-        <Row>
-          <ShowOrHideAmount
-            text={`₩ ${(
-              totalAmountCurrent - totalAmountYesterday
-            ).toLocaleString()} (24시간)`}
-            length={4}
-          />
-        </Row>
       </Row>
     </Contents>
   );

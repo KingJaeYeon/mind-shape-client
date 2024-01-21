@@ -4,13 +4,16 @@ import { useEffect } from "react";
 import Contents from "@/components/layout/Contents";
 import { IconEye, IconEyeOff } from "@/assets";
 import { cn } from "@/lib/utils";
+import Text from "@/components/layout/Text";
 
 export function ShowOrHideAmount({
   text,
   length = 10,
+  className,
 }: {
   text: string;
   length?: number;
+  className?: string;
 }) {
   const { getValue, setValue } = useConvenienceStore();
 
@@ -27,12 +30,14 @@ export function ShowOrHideAmount({
 
   if (getValue("isShowAmount")) {
     return (
-      <Contents className={"flex items-center break-all"}>{text}</Contents>
+      <Contents className={cn("flex items-center break-all", className)}>
+        <Text>{text}</Text>
+      </Contents>
     );
   }
   return (
-    <Contents className={"flex items-center break-all"}>
-      {Array.from(Array(length), () => "*")}
+    <Contents className={cn("flex items-center break-all", className)}>
+      <Text>{Array.from(Array(length), () => "*")}</Text>
     </Contents>
   );
 }
