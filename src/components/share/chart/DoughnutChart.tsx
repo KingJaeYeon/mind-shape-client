@@ -11,8 +11,6 @@ import {
   PieProps,
 } from "@/components/share/chart/pieTypes";
 import { animated, to, useTransition } from "@react-spring/web";
-import { scaleOrdinal } from "@visx/scale";
-import { doughnutColor } from "@/components/share/chart/colors";
 import { usePortfolioStore } from "@/store/portfolioStore";
 import {useEffect, useMemo} from "react";
 
@@ -57,6 +55,10 @@ export default function DoughnutChart({
   const displayPrice = selected
     ? transformedData[selected]?.toLocaleString()
     : totalPrice.toLocaleString();
+
+  if (data?.length ===0 || !data){
+    return  null
+  }
 
   return (
       <div className={'flex'}>

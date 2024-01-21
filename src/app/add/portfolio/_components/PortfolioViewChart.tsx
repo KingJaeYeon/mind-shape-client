@@ -52,7 +52,7 @@ export default function PortfolioViewChart() {
       <Contents className={"flex flex-1 flex-col"}>
         <ParentSize>
           {({ width }) => (
-            <DoughnutChart height={366} width={width} data={priceAndSymbol} />
+            <DoughnutChart height={366} width={width} data={priceAndSymbol} legend={  <ChartLabel />}/>
           )}
         </ParentSize>
       </Contents>
