@@ -15,7 +15,7 @@
         --grayscale-dark-gray: hsla(240, 3%, 16%, 1);
         --grayscale-black: hsla(0, 0%, 0%, 1);
 
-
+        --chart-shadow: 0 1px 2px 0 rgba(88,102,126,.12), 0 4px 24px 0 rgba(88,102,126,.08);
         --primary: #338a3e;
         --primary-light: #6fbf73;
         --primary-dark: #285e29;

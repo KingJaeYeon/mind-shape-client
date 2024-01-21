@@ -6,7 +6,7 @@ import { PieArcDatum } from "@visx/shape/lib/shapes/Pie";
 import {
   AnimatedPieProps,
   AnimatedStyles,
-  defaultMargin,
+  defaultMargin, getTransformedData, ordinalColorScale,
   PiePortfolioData,
   PieProps,
 } from "@/components/share/chart/pieTypes";
@@ -14,28 +14,17 @@ import { animated, to, useTransition } from "@react-spring/web";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
 import { usePortfolioStore } from "@/store/portfolioStore";
-import { useMemo } from "react";
+import {useEffect, useMemo} from "react";
 
 const getTotalPrice = (data: PiePortfolioData[]) =>
   data.reduce(
     (previousValue, currentValue) => previousValue + currentValue.price,
     0,
   );
-const getTransformedData = (data: PiePortfolioData[]) =>
-  data.reduce<{ [key: string]: number }>((acc, item) => {
-    acc[item?.symbol] = item?.price;
-    return acc;
-  }, {});
+
 const symbols = (data: PiePortfolioData[]) => data.map((item) => item?.symbol);
 const getSymbol = (symbol: PiePortfolioData) => symbol.symbol;
 const getPrice = (price: PiePortfolioData) => price.price;
-
-const ordinalColorScale = scaleOrdinal({
-  domain: usePortfolioStore
-    .getState()
-    .priceAndSymbol.map((item) => item.symbol),
-  range: doughnutColor,
-});
 
 export default function DoughnutChart({
   width,
@@ -45,6 +34,7 @@ export default function DoughnutChart({
   event = true,
   showPrice = true,
   data,
+                                        legend
 }: PieProps) {
   const { getValue, setValue } = usePortfolioStore();
   const selected = getValue("portfolioSelected");
@@ -58,13 +48,18 @@ export default function DoughnutChart({
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
 
-  const totalPrice = useMemo(() => getTotalPrice(data), [data]);
+  const totalPrice = getTotalPrice(data)
+
+  useEffect(()=>{
+    setValue('totalPrice', totalPrice)
+  },[totalPrice])
 
   const displayPrice = selected
     ? transformedData[selected]?.toLocaleString()
     : totalPrice.toLocaleString();
 
   return (
+      <div className={'flex'}>
     <svg width={width} height={height}>
       <rect rx={14} width={width} height={height} fill="white" />
       <Group top={centerY + margin?.top} left={centerX}>
@@ -97,6 +92,8 @@ export default function DoughnutChart({
         <DisplayPrice showPrice={showPrice} displayPrice={displayPrice} />
       </Group>
     </svg>
+        {legend}
+      </div>
   );
 }
 

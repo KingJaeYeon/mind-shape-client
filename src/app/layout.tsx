@@ -44,7 +44,7 @@ export default function RootLayout({
           <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
             <Header />
             <Row>
-              <NavBar />
+              {/*<NavBar />*/}
               <main className={"hide-scrollbar flex w-full"}>{children}</main>
             </Row>
           </Contents>

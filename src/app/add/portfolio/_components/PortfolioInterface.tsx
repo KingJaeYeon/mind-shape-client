@@ -10,6 +10,7 @@ import {
   PriceView,
   ShowChartSwitch,
 } from "@/app/add/portfolio/_components/index";
+import {PiePortfolioData} from "@/components/share/chart/pieTypes";
 
 const data = {
   totalPriceCurrent: 1000000,

@@ -7,6 +7,7 @@ interface State {
     totalPriceCurrent: number;
     totalPriceYesterday: number;
     portfolioSelected: string | null;
+    totalPrice:number
   };
   priceAndSymbol: PiePortfolioData[];
 }
@@ -24,6 +25,7 @@ export const usePortfolioStore = create<State & Action>(
       totalPriceCurrent: 0,
       totalPriceYesterday: 0,
       portfolioSelected: null,
+      totalPrice:0
     },
     priceAndSymbol: [
       {

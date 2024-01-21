@@ -1,10 +1,7 @@
 "use client";
-import { ChartData } from "chart.js";
-import BubbleChart from "@/components/share/chart/BubbleChart";
 import Text from "@/components/layout/Text";
 import { ChartOption, ToggleListProps } from "@/constant/chart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
-import Contents from "@/components/layout/Contents";
 import SelectBase from "@/components/share/radix/SelectBase";
 
 const options = {
@@ -28,19 +25,6 @@ export function ChartDuration({
   return (
     <SelectBase options={options.options} defaultValue={options.defaultValue} />
   );
-}
-
-export function ChartBase({
-  value,
-  chartType,
-}: {
-  value: ChartData<any>;
-  chartType: string;
-}) {
-  switch (chartType) {
-    case "bubble":
-      return <BubbleChart data={value} options={options} />;
-  }
 }
 
 export function ChartCardTitle({ title }: { title: string }) {

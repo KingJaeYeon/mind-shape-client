@@ -2,37 +2,15 @@
 import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
 import Grid from "@/components/layout/Grid";
-import ChartDataLabels from 'chartjs-plugin-datalabels'
-import {
-  ArcElement,
-  BubbleController,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  PointElement,
-  Tooltip,
-} from "chart.js";
+
 
 import { ModalTriggerButtonTypeChart } from "@/components/share/button/ModalTriggerButton";
 import {
-  ChartBase,
   ChartCardTitle,
   ChartDuration,
   TextToggleButton,
 } from "@/components/share/chart/ChartPlugIn";
 import { ChartOption, ChartOptionV1 } from "@/constant/chart";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  BubbleController,
-  Tooltip,
-  Legend,
-  ArcElement,
-    ChartDataLabels
-);
 
 export function ChartList({ options }: { options: ChartOption[] }) {
   return (
@@ -42,28 +20,14 @@ export function ChartList({ options }: { options: ChartOption[] }) {
       }
     >
       {options?.map((option, index) => (
-        <ChartItem key={index} option={option} />
+          <ChartItem key={index} option={option} chart={<div>d</div>} />
       ))}
     </Grid>
   );
 }
 
-export function ChartItem({ option }: { option: ChartOption }) {
-  return (
-    <Card className={"min-h-[300px] px-[30px] transition-all duration-700"}>
-      <Row className={"items-center justify-between pt-[20px]"}>
-        <ChartCardTitle title={option.title} />
-        <Row className={"flex min-h-[24px] gap-[10px]"}>
-          <TextToggleButton options={option?.toggleList} />
-          <ModalTriggerButtonTypeChart isShow={option?.hasModal} />
-        </Row>
-      </Row>
-      <ChartDuration options={option.duration} />
-      <ChartBase value={option.value} chartType={option.chartType} />
-    </Card>
-  );
-}
-export function ChartItemV1({
+
+export function ChartItem({
   option,
   chart,
 }: {
