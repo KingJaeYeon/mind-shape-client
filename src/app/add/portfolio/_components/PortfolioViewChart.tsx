@@ -71,7 +71,9 @@ export default function PortfolioViewChart() {
     };
     return acc;
   }, {});
-  const array = Object.values(list);
+  const array: any[] = Object.values(list).sort(
+    (a: any, b: any) => b.price - a.price,
+  );
   console.log(list);
   const totalPrice = array?.reduce((acc: any, cur: any) => {
     acc += cur?.price;

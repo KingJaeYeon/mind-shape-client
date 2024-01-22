@@ -22,7 +22,9 @@ export default function PortfolioContents() {
     };
     return acc;
   }, {});
-  const array: any[] = Object.values(list);
+  const array: any[] = Object.values(list).sort(
+    (a: any, b: any) => b.price - a.price,
+  );
   return (
     <Contents className={"flex w-full flex-col"}>
       <PortfolioViewChart />
