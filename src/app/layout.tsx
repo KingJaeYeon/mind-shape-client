@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={"hide-scrollbar bg-bg font-Inter"}>
+    <html lang="en" className={"hide-scrollbar bg-bg  "}>
       <head>
         <meta
           name="viewport"
@@ -41,7 +41,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <QueryProvider>
-          <Contents className={"grid grid-rows-[auto_1fr_auto] font-maple"}>
+          <Contents className={"grid grid-rows-[auto_1fr_auto] font-Inter"}>
             <Header />
             <Row>
               {/*<NavBar />*/}
