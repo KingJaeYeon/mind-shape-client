@@ -10,7 +10,8 @@ import {
   PriceView,
   ShowChartSwitch,
 } from "@/app/add/portfolio/_components/index";
-import {PiePortfolioData} from "@/components/share/chart/pieTypes";
+
+import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 
 const data = {
   totalPriceCurrent: 1000000,
@@ -18,11 +19,13 @@ const data = {
 };
 export default function PortfolioInterface() {
   const { initData } = usePortfolioStore();
+  const { data, isPending } = usePortfolio();
   const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
 
   useEffect(() => {
+    if (isPending) return;
     initData(data).then(() => console.log("initData load..."));
-  }, []);
+  }, [data]);
 
   function resetHandler() {
     setBuyAyStep(false);

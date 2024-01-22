@@ -6,13 +6,16 @@ import { PieArcDatum } from "@visx/shape/lib/shapes/Pie";
 import {
   AnimatedPieProps,
   AnimatedStyles,
-  defaultMargin, getTransformedData, ordinalColorScale,
+  defaultMargin,
+  getTransformedData,
   PiePortfolioData,
   PieProps,
 } from "@/components/share/chart/pieTypes";
 import { animated, to, useTransition } from "@react-spring/web";
 import { usePortfolioStore } from "@/store/portfolioStore";
-import {useEffect, useMemo} from "react";
+import { useEffect } from "react";
+import { scaleOrdinal } from "@visx/scale";
+import { doughnutColor } from "@/components/share/chart/colors";
 
 const getTotalPrice = (data: PiePortfolioData[]) =>
   data.reduce(
@@ -32,7 +35,7 @@ export default function DoughnutChart({
   event = true,
   showPrice = true,
   data,
-                                        legend
+  legend,
 }: PieProps) {
   const { getValue, setValue } = usePortfolioStore();
   const selected = getValue("portfolioSelected");
@@ -46,56 +49,59 @@ export default function DoughnutChart({
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
 
-  const totalPrice = getTotalPrice(data)
+  const totalPrice = getTotalPrice(data);
 
-  useEffect(()=>{
-    setValue('totalPrice', totalPrice)
-  },[totalPrice])
+  useEffect(() => {
+    setValue("totalPrice", totalPrice);
+  }, [totalPrice]);
 
   const displayPrice = selected
     ? transformedData[selected]?.toLocaleString()
     : totalPrice.toLocaleString();
 
-  if (data?.length ===0 || !data){
-    return  null
+  if (data?.length === 0 || !data) {
+    return null;
   }
-
+  const ordinalColorScale = scaleOrdinal({
+    domain: data.map((item) => item.symbol),
+    range: doughnutColor,
+  });
   return (
-      <div className={'flex'}>
-    <svg width={width} height={height}>
-      <rect rx={14} width={width} height={height} fill="white" />
-      <Group top={centerY + margin?.top} left={centerX}>
-        <Pie
-          data={
-            selected ? data.filter(({ symbol }) => symbol === selected) : data
-          }
-          pieValue={getPrice}
-          outerRadius={radius}
-          innerRadius={radius - donutThickness}
-        >
-          {(pie) => (
-            <AnimatedPie
-              {...pie}
-              animate={animate}
-              getKey={(arc) => arc.data.symbol}
-              getColor={(arc) => ordinalColorScale(arc.data.symbol)}
-              onClickDatum={({ data: { symbol } }) => {
-                if (event) {
-                  animate &&
-                    setValue(
-                      "portfolioSelected",
-                      selected && selected === symbol ? null : symbol,
-                    );
-                }
-              }}
-            />
-          )}
-        </Pie>
-        <DisplayPrice showPrice={showPrice} displayPrice={displayPrice} />
-      </Group>
-    </svg>
-        {legend}
-      </div>
+    <div className={"flex"}>
+      <svg width={width} height={height}>
+        <rect rx={14} width={width} height={height} fill="white" />
+        <Group top={centerY + margin?.top} left={centerX}>
+          <Pie
+            data={
+              selected ? data.filter(({ symbol }) => symbol === selected) : data
+            }
+            pieValue={getPrice}
+            outerRadius={radius}
+            innerRadius={radius - donutThickness}
+          >
+            {(pie) => (
+              <AnimatedPie
+                {...pie}
+                animate={animate}
+                getKey={(arc) => arc.data.symbol}
+                getColor={(arc) => ordinalColorScale(arc.data.symbol)}
+                onClickDatum={({ data: { symbol } }) => {
+                  if (event) {
+                    animate &&
+                      setValue(
+                        "portfolioSelected",
+                        selected && selected === symbol ? null : symbol,
+                      );
+                  }
+                }}
+              />
+            )}
+          </Pie>
+          <DisplayPrice showPrice={showPrice} displayPrice={displayPrice} />
+        </Group>
+      </svg>
+      {legend}
+    </div>
   );
 }
 

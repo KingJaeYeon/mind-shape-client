@@ -1,7 +1,7 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addPortfolio } from "@/service/portfolio-service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addPortfolio, getPortfolio } from "@/service/portfolio-service";
 import { useModalStore } from "@/store/modalStore";
 import toast from "react-hot-toast";
 
@@ -14,8 +14,8 @@ export function useAddPortfolio() {
     isPending,
   } = useMutation({
     mutationFn: addPortfolio,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ["myPortfolio"],
       });
       setValue("isOpen", false);
@@ -27,4 +27,13 @@ export function useAddPortfolio() {
   });
 
   return { savePortfolio, isPending, data };
+}
+
+export function usePortfolio() {
+  const { data, isPending } = useQuery({
+    queryKey: ["myPortfolio"],
+    queryFn: getPortfolio,
+  });
+
+  return { data, isPending };
 }

@@ -6,13 +6,34 @@ import { IS_SHOW_CHART } from "@/constant/portfolio";
 import { ChartOptionV1 } from "@/constant/chart";
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
 import { usePortfolioStore } from "@/store/portfolioStore";
-import { ParentSize } from "@visx/responsive";
 import ChartLabel from "@/components/share/chart/ChartLegend";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
-  const { priceAndSymbol } = usePortfolioStore();
+  const { data, isPending } = usePortfolio();
 
+  const ref = useRef();
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const newWidth = entry.contentRect.width;
+        setWidth(newWidth);
+      }
+    });
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref?.current);
+      }
+    };
+  }, []);
 
   if (!getValue(IS_SHOW_CHART)) {
     return null;
@@ -37,24 +58,63 @@ export default function PortfolioViewChart() {
       },
     },
   };
+  if (isPending) {
+    return null;
+  }
 
+  const list = data?.myList.reduce((acc: any, cur: any) => {
+    acc[cur?.asset?.symbol] = {
+      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
+      amount:
+        Number(acc[cur?.asset?.symbol]?.amount ?? 0) + Number(cur?.amount),
+      symbol: cur?.asset?.symbol,
+    };
+    return acc;
+  }, {});
+  const array = Object.values(list);
+  console.log(list);
+  const totalPrice = array?.reduce((acc: any, cur: any) => {
+    acc += cur?.price;
+    return acc;
+  }, 0);
   return (
     <Contents
-      className={"mt-[40px] flex flex-col gap-[20px] font-Inter md:flex-row"}
+      className={
+        "mt-[40px] flex max-w-full flex-col gap-[20px] font-Inter md:flex-row"
+      }
+      ref={ref as any}
     >
-      <Contents className={"flex flex-col max-w-[600px] bg-white"}>
-        <ParentSize>
-          {({ width }) => (
-            <DoughnutChart height={366} width={width} data={priceAndSymbol} legend={  <ChartLabel />}/>
-          )}
-        </ParentSize>
+      <Contents
+        className={cn("flex w-full flex-col bg-white", `max-w-[${width / 2}]`)}
+      >
+        <DoughnutChart
+          height={366}
+          width={400}
+          data={array}
+          legend={
+            <ChartLabel
+              data={array}
+              object={list}
+              totalPrice={Number(totalPrice)}
+            />
+          }
+        />
       </Contents>
-      <Contents className={"flex flex-1 flex-col"}>
-        <ParentSize>
-          {({ width }) => (
-            <DoughnutChart height={366} width={width} data={priceAndSymbol} legend={  <ChartLabel />}/>
-          )}
-        </ParentSize>
+      <Contents
+        className={cn("flex w-full flex-col bg-white", `max-w-[${width / 2}]`)}
+      >
+        <DoughnutChart
+          height={366}
+          width={400}
+          data={array}
+          legend={
+            <ChartLabel
+              data={array}
+              object={list}
+              totalPrice={Number(totalPrice)}
+            />
+          }
+        />
       </Contents>
     </Contents>
   );

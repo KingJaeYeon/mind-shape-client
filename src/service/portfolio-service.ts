@@ -20,3 +20,10 @@ export function addPortfolio({
     },
   });
 }
+
+export function getPortfolio() {
+  return request({
+    url: "/portfolio",
+    method: "GET",
+  });
+}
