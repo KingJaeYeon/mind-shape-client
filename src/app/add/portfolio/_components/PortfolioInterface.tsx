@@ -1,17 +1,25 @@
 "use client";
 import Contents from "@/components/layout/Contents";
+import dynamic from "next/dynamic";
 import Row from "@/components/layout/Row";
 import { useEffect, useState } from "react";
 import { usePortfolioStore } from "@/store/portfolioStore";
-import DialogBase from "@/components/share/radix/DialogBase";
-import Button from "@/components/layout/Button";
-import { TypeAddPortfolio } from "@/components/share/radix/DialogPlugIns";
 import {
   PriceView,
   ShowChartSwitch,
 } from "@/app/add/portfolio/_components/index";
-
+import Button from "@/components/layout/Button";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
+
+const TypeAddPortfolio = dynamic(
+  () => import("@/components/share/radix/dialog/TypeAddPortfolio"),
+  { ssr: false },
+);
+
+const DialogBase = dynamic(
+  () => import("@/components/share/radix/DialogBase"),
+  { ssr: false },
+);
 
 const data = {
   totalPriceCurrent: 1000000,
