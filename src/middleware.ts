@@ -1,34 +1,29 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-let locales = ["en-US", "nl-NL", "nl"];
+import { i18n } from "@/app/[locale]/i18n/i18-config";
 
 // Get the preferred locale, similar to the above or using a library
-function getLocale(request: NextRequest) {
-  return "";
+function getLocale(request: NextRequest, defaultLocale: string) {
+  return defaultLocale;
 }
 
-export function middleware(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
-  const { pathname } = request.nextUrl;
+export async function middleware(request: NextRequest) {
+  const { locales, defaultLocale } = i18n;
+  const { pathname, basePath } = request.nextUrl;
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
-
   if (pathnameHasLocale) return;
 
   // Redirect if there is no locale
-  const locale = getLocale(request);
+  const locale = getLocale(request, defaultLocale);
   request.nextUrl.pathname = `/${locale}${pathname}`;
   // e.g. incoming request is /products
   // The new URL is now /en-US/products
-  return Response.redirect(request.nextUrl);
+  return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next).*)",
-    // Optional: only run on root (/) URL
-    // '/'
-  ],
+  matcher: "/((?!api|_next/static|_next/image|img/|favicon.ico).*)",
 };
