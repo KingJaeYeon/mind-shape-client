@@ -7,7 +7,7 @@ import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   PriceView,
   ShowChartSwitch,
-} from "@/app/add/portfolio/_components/index";
+} from "@/app/[lang]/add/portfolio/_components/index";
 import Button from "@/components/layout/Button";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 

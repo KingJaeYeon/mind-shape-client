@@ -4,7 +4,6 @@ import "./globals.css";
 import { Header } from "@/components/share/Header";
 import Contents from "@/components/layout/Contents";
 import React from "react";
-import NavBar from "@/components/share/NavBar";
 import Row from "@/components/layout/Row";
 import QueryProvider from "@/components/provider/QueryProvider";
 import ToastProvider from "@/components/provider/ToastProvider";
@@ -31,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={"hide-scrollbar bg-bg  "}>
+    <html lang="en" className={"hide-scrollbar bg-bg"}>
       <head>
         <meta
           name="viewport"

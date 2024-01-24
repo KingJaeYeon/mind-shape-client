@@ -5,7 +5,6 @@ import { IS_SHOW_CHART } from "@/constant/portfolio";
 
 import { ChartOptionV1 } from "@/constant/chart";
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
-import { usePortfolioStore } from "@/store/portfolioStore";
 import ChartLabel from "@/components/share/chart/ChartLegend";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";

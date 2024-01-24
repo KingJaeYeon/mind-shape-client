@@ -1,4 +1,3 @@
-import Page from "@/components/layout/Page";
 import PageContainer from "@/components/layout/page/index/PageContainer";
 
 export default function page() {
