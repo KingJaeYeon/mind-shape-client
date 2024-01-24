@@ -7,10 +7,9 @@ import React from "react";
 import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import "./globals.css";
+import { dir } from "i18next";
+import { i18nLocales } from "@/app/[locale]/i18n/i18-config";
 
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "ko" }, { lang: "ja" }];
-}
 const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
   width: "device-width",
@@ -26,6 +25,11 @@ export const metadata: Metadata = {
     icon: "./favicon.ico",
   },
 };
+
+export async function generateStaticParams() {
+  return i18nLocales.locales.map((lang) => ({ lang }));
+}
+
 export default function Root({
   children,
   params,
@@ -34,7 +38,11 @@ export default function Root({
   params: any;
 }) {
   return (
-    <html lang={params?.lang} className={"hide-scrollbar bg-bg"}>
+    <html
+      lang={params?.lang}
+      className={"hide-scrollbar bg-bg"}
+      dir={dir(params?.lang)}
+    >
       <head>
         <meta
           name="viewport"
