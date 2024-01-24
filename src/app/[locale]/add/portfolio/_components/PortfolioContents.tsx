@@ -1,7 +1,7 @@
 "use client";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
-import PortfolioViewChart from "@/app/[lang]/add/portfolio/_components/PortfolioViewChart";
+import PortfolioViewChart from "@/app/[locale]/add/portfolio/_components/PortfolioViewChart";
 import Col from "@/components/layout/Col";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 
