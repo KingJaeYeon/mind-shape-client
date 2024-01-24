@@ -12,7 +12,7 @@ export function getOptions(lng = i18nLocales.defaultLocale, nsInput = ns) {
   return {
     // debug: true,
     backend: {
-      loadPath: "./src/app/[locale]/i18n/{{lng}}/{{ns}}.json",
+      loadPath: "./src/app/[locale]/i18n/locales/{{lng}}/{{ns}}.json",
     },
     fallbackLng: lng,
     lng,

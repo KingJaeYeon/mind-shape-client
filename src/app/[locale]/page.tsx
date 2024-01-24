@@ -2,8 +2,7 @@ import CardSection from "@/components/layout/page/index/CardSection";
 import ChartSection from "@/components/layout/page/index/ChartSection";
 import React from "react";
 import PageContainer from "@/components/layout/page/index/PageContainer";
-import { getDictionary } from "@/app/[locale]/dictionaries";
-import { Translation } from "@/app/[locale]/i18n/i18n";
+import { useTranslation } from "@/app/[locale]/i18n/i18n";
 
 type Props = {
   params: {
@@ -11,12 +10,12 @@ type Props = {
   };
 };
 
-export default async function page({ params: { locale } }: Props) {
-  // console.log(lang);
-  const { t } = await Translation(locale, "home");
-  console.log(t("test"));
+export default async function Page({ params: { locale } }: Props) {
+  const { t } = await useTranslation(locale, "home");
+
   return (
     <PageContainer>
+        <div className={'flex text-white'}>{t("test", {data:'text'})}</div>
       <CardSection />
       <ChartSection />
     </PageContainer>

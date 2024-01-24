@@ -22,7 +22,7 @@ const createJsonFormSheet = async (spreadsheetId, sheetName) => {
 
   for (let i = 1; i < key.length; i++) {
     let locale = rows[0][i].toLowerCase();
-    let fileName = `./src/app/[locale]/i18n/${locale}/${sheetName.toLowerCase()}.json`;
+    let fileName = `./src/app/[locale]/i18n/locales/${locale}/${sheetName.toLowerCase()}.json`;
     let object = {};
     for (let j = 2; j < rows.length; j++) {
       object[rows[j][0]] = rows[j][i];

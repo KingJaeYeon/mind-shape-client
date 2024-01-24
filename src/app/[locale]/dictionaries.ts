@@ -2,7 +2,7 @@ import "server-only";
 
 const loadLocaleData = async (local: string, key: string) => {
   try {
-    return await import(`./i18n/${local}/${key}.json`).then(
+    return await import(`./i18n/locales/${local}/${key}.json`).then(
       (module) => module.default,
     );
   } catch (e) {
