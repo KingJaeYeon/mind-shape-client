@@ -29,3 +29,7 @@ export const request = async function (options: any) {
     .then(onSuccess)
     .catch(() => console.log("error"));
 };
+export const changeServerLang = (lang: string) => {
+  console.log("changeServerLang", lang);
+  instance.defaults.headers.common["x-lang"] = lang;
+};

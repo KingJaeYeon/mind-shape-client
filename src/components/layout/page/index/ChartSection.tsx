@@ -3,6 +3,7 @@ import Contents from "@/components/layout/Contents";
 import { ChartList } from "@/components/share/chart/ChartCard";
 import { getDurationDate, getYearAndUint } from "@/lib/utils";
 import { subYears } from "date-fns";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 const bubbleData = {
   datasets: [
@@ -17,8 +18,10 @@ const bubbleData = {
   ],
 };
 export default function ChartSection() {
+  const { t } = useTranslation("home");
   return (
     <Contents className={"h-auto w-full"}>
+      <div className={"text-white"}>{t("test", { data: "ddd" })}</div>
       <ChartList
         options={[
           {
