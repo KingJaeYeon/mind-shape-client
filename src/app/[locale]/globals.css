@@ -43,11 +43,9 @@
 
         --button: var(--primary);
         --button-hover: var(--primary-light);
-        --button-disable: var(--primary-disable);
 
         --button-secondary: var(--grayscale-white);
         --button-secondary-hover: var(--primary-light);
-        --button-secondary-disable: hsla(0, 0%, 100%, 0.5);
 
 
         --modal-bg: var(--grayscale-white);

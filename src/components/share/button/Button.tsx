@@ -32,10 +32,10 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     function getStyle() {
       // Lg / default
       let defaultClass = cn(
-        "disabled:cursor-default px-[24px] text-[14px] h-[48px] hover:bg-button-hover rounded-[8px] flex border outline-none disabled:bg-button-disable cursor-pointer items-center justify-center bg-button text-white",
+        "disabled:pointer-events-none disabled:cursor-default px-[24px] text-[14px] h-[48px] hover:bg-button-hover rounded-[8px] flex border outline-none disabled:bg-button disabled:opacity-50 cursor-pointer items-center justify-center bg-button text-white",
       );
       const secondaryClass =
-        "text-button bg-white disabled:bg-button-secondary-disable disabled:bg-button-secondary-disable border border-button hover:border-button-secondary-hover hover:text-button-secondary-hover hover:bg-white";
+        "text-button bg-white disabled:opacity-50 disabled:bg-button-secondary-disable border border-button hover:border-button-secondary-hover hover:text-button-secondary-hover hover:bg-white";
       const smClass = "text-[12px] h-[32px] px-[16px]";
 
       if (secondary) {
