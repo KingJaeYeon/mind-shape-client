@@ -22,6 +22,8 @@
         --primary-shadow-input: rgb(223, 247, 236);
         --primary-disable: rgba(51, 138, 62, 0.6);
 
+
+
         --line: rgba(255, 255, 255, 0.2);
         --orange: #F7941D;
 
@@ -36,7 +38,16 @@
         --dialog-overlay: rgba(0, 0, 0, 0.4);
 
 
-        --bg: var(--grayscale-black);
+        --bg: var(--grayscale-white);
+        --border: var(--grayscale-dark-pale);
+
+        --button: var(--primary);
+        --button-hover: var(--primary-light);
+        --button-disable: var(--primary-disable);
+
+        --button-secondary: var(--grayscale-white);
+        --button-secondary-hover: var(--primary-light);
+        --button-secondary-disable: hsla(0, 0%, 100%, 0.5);
 
 
         --modal-bg: var(--grayscale-white);
@@ -78,14 +89,6 @@
 }
 
 @font-face {
-    font-family: 'MaplestoryOTFBold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
     src: url('/fonts/Inter-Regular.ttf') format('ttf');
     font-family: 'Inter';
     font-style: normal;
@@ -100,4 +103,10 @@
 
 .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+}
+
+@layer base {
+    html {
+        font-family: "Inter", system-ui, sans-serif;
+    }
 }

@@ -34,7 +34,6 @@ const config: Config = {
         switchBg: "var(--switch-bg)",
         dialogOverlay: "var(--dialog-overlay)",
 
-        bg: "var(--bg)",
         modalBg: "var(--modal-bg)",
         modalTitle: "var(--modal-title)",
         iconColor: "var(--icon-color)",
@@ -47,12 +46,24 @@ const config: Config = {
         gold2: "var(--gold2)",
         red: "var(--red)",
         green: "var(--primary)",
+
+        bg: "var(--bg)",
+        border: "var(--border)",
+        button: {
+          DEFAULT: "var(--button)",
+          hover: "var(--button-hover)",
+          disable: "var(--button-disable)",
+          secondary: {
+            DEFAULT: "var(--button-secondary)",
+            hover: "var(--button-secondary-hover)",
+            disable: "var(--button-secondary-disable)",
+          },
+        },
       },
       borderColor: {
         line: "var(--line)",
       },
       fontFamily: {
-        maple: ["MaplestoryOTFBold", "sans-serif"],
         Inter: ["Inter", "sans-serif"],
       },
       boxShadow: {

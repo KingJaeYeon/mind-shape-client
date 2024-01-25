@@ -1,26 +1,21 @@
-"use client";
 import Contents from "@/components/layout/Contents";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
-import { useConvenienceStore } from "@/store/convenienceStore";
-import { IconMenu } from "@/assets";
 import { Desktop, Mobile } from "@/components/layout/responsive";
-export function Header({ className }: { className?: string }) {
+import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
+import Button from "@/components/share/button/Button";
+export function Header() {
   return (
     <>
       <Desktop>
         <Contents
-          className={cn(
-            "z-[2] flex h-[70px] w-full items-center border-b border-line bg-white px-[20px]",
-            className,
-          )}
+          className={
+            "border-border z-[2] flex h-[70px] w-full items-center border-b bg-white px-[20px]"
+          }
         >
-          <Row className={"relative ml-[10px] gap-[20px]"}>
-            <Link href={"/"} className={"flex text-black"}>
-              <img alt={"img"} className={"h-[30px] w-[30px]"} />
-              <p>HOME</p>
-            </Link>
+          <Row className={"relative ml-[10px]"}>
+            <HomeButtonTypeLogo />
           </Row>
           <Row className={"ml-[70px] gap-[30px] text-[14px]"}>
             <p>대시보드</p>
@@ -44,17 +39,25 @@ export function Header({ className }: { className?: string }) {
             >
               회원가입
             </button>
+            <Button>default / Lg</Button>
+            <Button secondary={true}>Secondary / Lg</Button>
+            <Button disabled={true} secondary={true}>
+              Secondary / disable
+            </Button>
+            <Button disabled={true}>default / disable</Button>
+            <Button size={"sm"}>default / sm</Button>
+            <Button size={"sm"} secondary={true}>
+              Secondary / sm
+            </Button>
           </Row>
         </Contents>
       </Desktop>
 
       <Mobile>
         <Contents
-          className={cn(
-            // "flex h-[75px] items-center justify-between bg-darkGray px-[20px] font-maple",
-            "z-[2] flex h-[75px] w-full items-center border-b border-line bg-white px-[20px]",
-            className,
-          )}
+          className={
+            "z-[2] flex h-[75px] w-full items-center border-b border-line bg-white px-[20px]"
+          }
         >
           <Row className={"relative ml-[10px] gap-[20px]"}>
             <Link href={"/"} className={"flex text-black"}>
