@@ -26,23 +26,9 @@ export const metadata: Metadata = {
   },
 };
 
-export async function generateStaticParams() {
-  return i18nLocales.locales.map((lang) => ({ lang }));
-}
-
-export default function Root({
-  children,
-  params,
-}: {
-  children: any;
-  params: any;
-}) {
+export default function Root({ children }: { children: any }) {
   return (
-    <html
-      lang={params?.lang}
-      className={"hide-scrollbar bg-bg"}
-      dir={dir(params?.lang)}
-    >
+    <html className={"hide-scrollbar bg-bg"}>
       <head>
         <meta
           name="viewport"

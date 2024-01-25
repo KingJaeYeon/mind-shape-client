@@ -12,7 +12,6 @@ export function Header({ className }: { className?: string }) {
       <Desktop>
         <Contents
           className={cn(
-            // "flex h-[75px] items-center justify-between bg-darkGray px-[20px] font-maple",
             "z-[2] flex h-[70px] w-full items-center border-b border-line bg-white px-[20px]",
             className,
           )}
@@ -48,6 +47,7 @@ export function Header({ className }: { className?: string }) {
           </Row>
         </Contents>
       </Desktop>
+
       <Mobile>
         <Contents
           className={cn(
