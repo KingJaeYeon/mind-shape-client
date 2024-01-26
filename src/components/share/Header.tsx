@@ -53,20 +53,10 @@ export function Header() {
             <p>세팅</p>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
-            <button
-              className={
-                "flex h-[32px] cursor-pointer items-center justify-center rounded-[8px] border border-primary px-[16px] text-[12px] font-bold text-primary outline-none"
-              }
-            >
+            <Button secondary={true} size={"sm"}>
               로그인
-            </button>
-            <button
-              className={
-                "flex h-[32px] cursor-pointer items-center justify-center rounded-[8px] border border-primary bg-primary px-[16px] text-[12px] font-bold text-white outline-none"
-              }
-            >
-              회원가입
-            </button>
+            </Button>
+            <Button size={"sm"}>회원가입</Button>
           </Row>
         </Contents>
       </Mobile>
