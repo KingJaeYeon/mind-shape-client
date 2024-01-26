@@ -11,7 +11,7 @@ export function Header() {
       <Desktop>
         <Contents
           className={
-            "border-border z-[2] flex h-[70px] w-full items-center border-b bg-white px-[20px]"
+            "z-[2] flex h-[70px] w-full items-center border-b border-border bg-white px-[20px]"
           }
         >
           <Row className={"relative ml-[10px]"}>
@@ -25,30 +25,10 @@ export function Header() {
             <p>세팅</p>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
-            <button
-              className={
-                "flex h-[32px] cursor-pointer items-center justify-center rounded-[8px] border border-primary px-[16px] text-[12px] font-bold text-primary outline-none"
-              }
-            >
+            <Button secondary={true} size={"sm"}>
               로그인
-            </button>
-            <button
-              className={
-                "flex h-[32px] cursor-pointer items-center justify-center rounded-[8px] border border-primary bg-primary px-[16px] text-[12px] font-bold text-white outline-none"
-              }
-            >
-              회원가입
-            </button>
-            <Button>default / Lg</Button>
-            <Button secondary={true}>Secondary / Lg</Button>
-            <Button disabled={true} secondary={true}>
-              Secondary / disable
             </Button>
-            <Button disabled={true}>default / disable</Button>
-            <Button size={"sm"}>default / sm</Button>
-            <Button size={"sm"} secondary={true}>
-              Secondary / sm
-            </Button>
+            <Button size={"sm"}>회원가입</Button>
           </Row>
         </Contents>
       </Desktop>
