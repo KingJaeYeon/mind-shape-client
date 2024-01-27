@@ -20,11 +20,7 @@ export function ShowOrHideAmount({
   useEffect(() => {
     const showAmount = localStorage.getItem("showAmount");
     let isShowAmount;
-    if (showAmount === "false") {
-      isShowAmount = false;
-    } else {
-      isShowAmount = true;
-    }
+    isShowAmount = showAmount !== "false";
     setValue("isShowAmount", isShowAmount);
   }, []);
 
@@ -55,9 +51,9 @@ export function ShowOrHideTrigger({ className }: { className?: string }) {
       }}
     >
       {getValue("isShowAmount") ? (
-        <IconEyeOff className={cn("cursor-pointer text-weakGray", className)} />
+        <IconEye className={cn("cursor-pointer text-gray", className)} />
       ) : (
-        <IconEye className={cn("cursor-pointer text-white", className)} />
+        <IconEyeOff className={cn("cursor-pointer text-gray", className)} />
       )}
     </Contents>
   );

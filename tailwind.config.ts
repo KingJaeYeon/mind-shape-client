@@ -31,7 +31,7 @@ const config: Config = {
         deepGray: "var(--grayscale-deep-gray)",
         darkGray: "var(--grayscale-dark-gray)",
         black: "var(--grayscale-black)",
-        switchBg: "var(--switch-bg)",
+        switchBg: "var(--primary-light)",
         dialogOverlay: "var(--dialog-overlay)",
 
         modalBg: "var(--modal-bg)",
@@ -58,6 +58,10 @@ const config: Config = {
             hover: "var(--button-secondary-hover)",
             disable: "var(--button-secondary-disable)",
           },
+        },
+        text: {
+          DEFAULT: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
         },
       },
       borderColor: {

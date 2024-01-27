@@ -1,14 +1,11 @@
 import QueryProvider from "@/components/provider/QueryProvider";
-import Contents from "@/components/layout/Contents";
-import { Header } from "@/components/share/Header";
-import Row from "@/components/layout/Row";
+import Header from "@/components/share/Header";
 import ToastProvider from "@/components/provider/ToastProvider";
 import React from "react";
 import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import "./globals.css";
-import { dir } from "i18next";
-import { i18nLocales } from "@/app/[locale]/i18n/i18-config";
+import Footer from "@/components/share/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
@@ -38,13 +35,9 @@ export default function Root({ children }: { children: any }) {
       </head>
       <body className={inter.className}>
         <QueryProvider>
-          <Contents className={"grid grid-rows-[auto_1fr_auto] font-Inter"}>
-            <Header />
-            <Row>
-              {/*<NavBar />*/}
-              <main className={"hide-scrollbar flex w-full"}>{children}</main>
-            </Row>
-          </Contents>
+          <Header />
+          <main className={"hide-scrollbar flex w-full"}>{children}</main>
+          <Footer />
           <ToastProvider />
         </QueryProvider>
       </body>

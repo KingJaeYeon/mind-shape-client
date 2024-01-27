@@ -13,18 +13,7 @@ type Props = {
 } & ComponentProps<"button">;
 
 const Button = forwardRef<HTMLButtonElement, Props>(
-  (
-    {
-      children,
-      className,
-      secondary,
-      disabled,
-      size = "lg",
-      onClick,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ children, className, secondary, size = "lg", ...props }, ref) => {
     const style = {
       addPortfolio: `border-deepGray hover:border-gray rounded-[10px] border-2 px-[15px] py-[7px] text-white`,
     };
@@ -50,8 +39,6 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     return (
       <button
         ref={ref}
-        disabled={disabled}
-        onClick={onClick}
         className={cn("disabled:bg-button-secondary-disable", getStyle())}
         {...props}
       >

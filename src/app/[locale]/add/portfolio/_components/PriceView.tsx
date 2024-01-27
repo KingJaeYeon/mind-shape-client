@@ -17,18 +17,23 @@ export default function PriceView() {
 
   return (
     <Contents className={"flex flex-col"}>
-      <Row className={"gap-[5px]"}>
+      <Row className={"gap-[8px]"}>
         <ShowOrHideAmount
-          text={`₩ ${totalPriceCurrent?.toLocaleString()}`}
-          className={"text-[32px] text-white"}
+          text={`₩${totalPriceCurrent?.toLocaleString() ?? 0}`}
+          className={"text-text text-[32px] font-bold"}
         />
-        <ShowOrHideTrigger className={"h-[24px] w-[24px]"} />
+        <ShowOrHideTrigger className={"h-[20px] w-[24px]"} />
       </Row>
-      <Row className={cn("text-[16px]", isPlus ? "text-green" : "text-red")}>
+      <Row
+        className={cn(
+          "text-[16px] font-medium",
+          isPlus ? "text-green" : "text-red",
+        )}
+      >
         <p> {isPlus ? "+" : "-"}</p>
         <ShowOrHideAmount
           length={4}
-          text={`₩ ${priceDifference.toLocaleString()} (24시간)`}
+          text={`₩ ${priceDifference?.toLocaleString() ?? 0} (24h)`}
           className={"text-[16px]"}
         />
       </Row>

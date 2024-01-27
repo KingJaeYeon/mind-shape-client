@@ -11,7 +11,7 @@ export default function SwitchBase({
   const { getValue, setValue } = useConvenienceStore();
 
   const rootStyle =
-    "duration-400 shadow-switch bg-switchBg h-[25px] w-[42px] rounded-[999px] transition-all data-[state='checked']:bg-orange";
+    "duration-400 bg-lightGray h-[25px] w-[42px] rounded-[999px] transition-all data-[state='checked']:bg-switchBg";
   const thumbStyle =
     "shadow-switchThumb block h-[21px] w-[21px] translate-x-[2px] rounded-[999px] bg-white transition-all duration-100 will-change-transform data-[state='checked']:translate-x-[19px]";
 

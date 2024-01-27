@@ -39,14 +39,15 @@
 
 
         --bg: var(--grayscale-white);
-        --border: var(--grayscale-dark-pale);
+        --border: var(--grayscale-lightgray);
 
         --button: var(--primary);
         --button-hover: var(--primary-light);
 
         --button-secondary: var(--grayscale-white);
         --button-secondary-hover: var(--primary-light);
-
+        --text-primary: var(--grayscale-black);
+        --text-secondary: var(--grayscale-gray);
 
         --modal-bg: var(--grayscale-white);
         --modal-title: var(--grayscale-deep-gray);

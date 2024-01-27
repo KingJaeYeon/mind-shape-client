@@ -5,13 +5,13 @@ import Row from "@/components/layout/Row";
 import { Desktop, Mobile } from "@/components/layout/responsive";
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
-export function Header() {
+export default function Header() {
   return (
     <>
       <Desktop>
         <Contents
           className={
-            "z-[2] flex h-[70px] w-full items-center border-b border-border bg-white px-[20px]"
+            "z-[2] flex h-[70px] w-full items-center border-b-2 border-border bg-white px-[20px]"
           }
         >
           <Row className={"relative ml-[10px]"}>
