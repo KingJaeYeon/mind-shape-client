@@ -67,7 +67,7 @@ export default function DialogBase({
 function DisPlayContents() {
   const { getValue } = useModalStore();
 
-  if (!!getValue("subContents")) {
+  if (!getValue("isContentsClose")) {
     return getValue("subContents");
   }
   return getValue("mainContents");

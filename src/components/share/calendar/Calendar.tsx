@@ -26,6 +26,7 @@ import "./daypicker.css";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import Button from "@/components/layout/Button";
+import { useModalStore } from "@/store/modalStore";
 
 /**
  *   기본 옵션
@@ -265,6 +266,8 @@ export function SingleDayPickerTypeModal({
       to: new Date(year, 11, Number(endDay)),
     },
   ];
+
+  const { backHandler } = useModalStore();
   const [inputValue, setInputValue] = useState<string>("");
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
@@ -278,9 +281,9 @@ export function SingleDayPickerTypeModal({
   };
 
   const handleDaySelect: SelectSingleEventHandler = (date) => {
-    selectedHandler(date);
     if (date) {
       setInputValue(format(date, "yyyy-MM-dd"));
+      selectedHandler(date);
     } else {
       setInputValue("");
     }
@@ -355,9 +358,11 @@ export function SingleDayPickerTypeModal({
           if (!selected) {
             selectedHandler(new Date());
           }
+          selectedHandler(selected);
+          backHandler();
         }}
       >
-        날짜 변경
+        날짜 변경 {JSON.stringify(selected)}
       </Button>
     </>
   );

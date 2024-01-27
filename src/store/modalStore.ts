@@ -2,18 +2,18 @@ import { create } from "zustand";
 
 interface Props {
   isOpen: boolean;
+  subContents: any;
+  isContentsClose: boolean;
+  mainContents: any;
   closeHandler: () => void;
   backHandler: () => void;
-  isSubContentsOpen: boolean;
-  subContents: any;
-  mainContents: any;
   getValue: (key: string) => any;
   setValue: (key: string, value: any) => void;
 }
 
 export const useModalStore = create<Props>((set: any, get: any) => ({
   isOpen: false,
-  isSubContentsOpen: false,
+  isContentsClose: true,
   subContents: undefined,
   mainContents: undefined,
   closeHandler: () => {
@@ -25,7 +25,7 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
   },
   backHandler: () => {
     set({
-      subContents: undefined,
+      isContentsClose: true,
     });
   },
   getValue: (key: string) => {
@@ -34,10 +34,10 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
         return get().isOpen;
       case "mainContents":
         return get().mainContents;
+      case "isContentsClose":
+        return get().isContentsClose;
       case "subContents":
         return get().subContents;
-      case "isSubContentsOpen":
-        return get().isSubContentsOpen;
     }
   },
   setValue: (key: string, value: any) => {
@@ -45,17 +45,14 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
       case "isOpen":
         set({ isOpen: value });
         return;
-      case "mainTitle":
-        set({ mainTitle: value });
-        return;
       case "mainContents":
         set({ mainContents: value });
         return;
       case "subContents":
         set({ subContents: value });
         return;
-      case "isSubContentsOpen":
-        set({ isSubContentsOpen: value });
+      case "isContentsClose":
+        set({ isContentsClose: value });
         return;
     }
   },
