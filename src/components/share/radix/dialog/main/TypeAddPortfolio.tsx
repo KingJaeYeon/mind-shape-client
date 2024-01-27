@@ -151,7 +151,7 @@ export default function TypeAddPortfolio() {
           }
         >
           <p className={"text-text-secondary text-[14px]"}>
-            {t("total_price")}
+            {t("total_use_price")}
           </p>
           <CurrentDisplayPrice
             price={

@@ -76,13 +76,17 @@ export default function PortfolioViewChart() {
     acc += cur?.price;
     return acc;
   }, 0);
+
   return (
     <Contents
-      className={"flex max-w-full flex-col gap-[20px] font-Inter md:flex-row"}
+      className={
+        "flex w-full max-w-full flex-col gap-[20px] font-Inter md:flex-row"
+      }
       ref={ref as any}
     >
       <Contents
-        className={cn("flex w-full flex-col bg-white", `max-w-[${width / 2}]`)}
+        className={"flex w-full flex-col border border-border bg-white"}
+        style={{ maxWidth: `${width / 2 - 10}px` }}
       >
         <DoughnutChart
           height={366}
@@ -98,7 +102,8 @@ export default function PortfolioViewChart() {
         />
       </Contents>
       <Contents
-        className={cn("flex w-full flex-col bg-white", `max-w-[${width / 2}]`)}
+        className={"flex w-full flex-col border border-border bg-white"}
+        style={{ maxWidth: `${width / 2 - 10}px` }}
       >
         <DoughnutChart
           height={366}

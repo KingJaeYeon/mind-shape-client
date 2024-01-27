@@ -8,7 +8,14 @@
   "buy_price": "매수가",
   "asset_type": "분류",
   "date_format": "yyyy년 MM월 dd일",
-  "total_price": "사용된 총액",
+  "total_use_price": "사용된 총액",
   "change_date": "날짜 변경",
-  "search": "검색"
+  "search": "검색",
+  "ticker": "티커",
+  "country": "국가",
+  "investment_total": "총금액",
+  "valuation_amount": "평가금액",
+  "profit_loss": "이익/손실",
+  "avg_buy_price": "평균매수가",
+  "edit": "수정"
 }

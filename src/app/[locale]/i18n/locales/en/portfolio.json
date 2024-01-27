@@ -8,7 +8,14 @@
   "buy_price": "Entry Price",
   "asset_type": "Asset Type",
   "date_format": "MM.dd.yyyy",
-  "total_price": "Total Spent",
+  "total_use_price": "Total Spent",
   "change_date": "Change Date",
-  "search": "Search"
+  "search": "Search",
+  "ticker": "Ticker",
+  "country": "Country",
+  "investment_total": "Investment Total",
+  "valuation_amount": "Valuation Amount",
+  "profit_loss": "Profit Loss",
+  "avg_buy_price": "AvgBuyPrice",
+  "edit": "Edit"
 }
