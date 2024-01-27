@@ -1,7 +1,11 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "modal_add_portfolio": "거래추가",
+  "modal_add_portfolio": "거래 추가",
   "modal_calendar": "날짜 & 시간",
-  "24h": "24시간"
+  "24h": "24시간",
+  "amount": "수량",
+  "buy_price": "매수가",
+  "asset_type": "분류",
+  "date_format": "yyyy년 MM월 dd일"
 }

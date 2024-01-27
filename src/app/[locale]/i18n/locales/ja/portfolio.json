@@ -3,5 +3,9 @@
   "switch_label": "Show charts",
   "modal_add_portfolio": "取引を追加",
   "modal_calendar": "日時",
-  "24h": "24時間"
+  "24h": "24時間",
+  "amount": "数量",
+  "buy_price": "買値",
+  "asset_type": "分類",
+  "date_format": "yyyy年MM月dd日"
 }

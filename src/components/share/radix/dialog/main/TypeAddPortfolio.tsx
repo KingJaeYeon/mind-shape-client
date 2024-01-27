@@ -136,7 +136,7 @@ export default function TypeAddPortfolio({
               value={amount}
               valueHandler={amountHandler}
               id={"amount"}
-              label={"수량"}
+              label={t("amount")}
               placeholder={"0.00"}
             />
           </Col>
@@ -146,7 +146,7 @@ export default function TypeAddPortfolio({
               value={price}
               valueHandler={priceHandler}
               id={"price"}
-              label={"매수가 (USD)"}
+              label={`${t("buy_price")} (USD)`}
               placeholder={"0.00"}
             />
           </Col>
@@ -154,14 +154,16 @@ export default function TypeAddPortfolio({
         <Row className={"mt-[16px] w-full gap-[10px]"}>
           <LabeledDisplay
             id={"buyAt"}
-            displayText={format(dateState, "yyyy년 MM월 dd일")}
+            displayText={format(dateState, t("date_format"))}
             className={"px-[14px]"}
             onClickHandler={buyAtOpenHandler}
           />
           <LabeledDisplay
             id={"dividendsDay"}
             className={"flex-1 justify-center"}
-            displayText={!!chosen.category.name ? chosen.category.name : "분류"}
+            displayText={
+              !!chosen.category.name ? chosen.category.name : t("asset_type")
+            }
           />
         </Row>
         <Col
@@ -181,7 +183,7 @@ export default function TypeAddPortfolio({
             "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
           }
         >
-          거래 추가
+          {t("modal_add_portfolio")}
         </Button>
       </Contents>
     </form>

@@ -3,5 +3,9 @@
   "switch_label": "Show charts",
   "modal_add_portfolio": "Add Transaction",
   "modal_calendar": "Date & Time",
-  "24h": "24h"
+  "24h": "24h",
+  "amount": "amount",
+  "buy_price": "Entry Price",
+  "asset_type": "Asset Type",
+  "date_format": "MM.dd.yyyy"
 }
