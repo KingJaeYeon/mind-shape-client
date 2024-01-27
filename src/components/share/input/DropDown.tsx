@@ -178,10 +178,12 @@ export function DropDownView({
         "flex items-center gap-[5px] rounded-[10px] font-Inter text-[14px]",
         className,
       )}
-      onMouseDown={() => {
+      onMouseDown={(e) => {
+        console.log("onMouseDown");
         if (!!onClickHandler) {
           onClickHandler(item);
         }
+        e.stopPropagation();
       }}
     >
       {!item.name ? (
@@ -214,9 +216,6 @@ function DropDownError({
   );
 }
 
-function DropdownContainer({ children }: { children: React.ReactNode }) {
-  return <Col className={"relative"}>{children}</Col>;
-}
 function DropdownListSection({
   children,
   focus,
@@ -261,16 +260,21 @@ function DropdownInputSection({ children }: { children: React.ReactNode }) {
     },
     delay: 0,
   });
-
   return (
     <Row
       className={cn(
         "min-h-[48px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
         className,
       )}
-      onFocus={() => hasFocus(true)}
-      onBlur={() => hasFocus(false)}
-      tabIndex={1}
+      onFocus={(e) => {
+        console.log("onFocus");
+        hasFocus(true);
+      }}
+      onBlur={() => {
+        console.log("onBlur");
+        hasFocus(false);
+      }}
+      tabIndex={-1}
     >
       {children}
       <Contents
@@ -282,4 +286,8 @@ function DropdownInputSection({ children }: { children: React.ReactNode }) {
       </Contents>
     </Row>
   );
+}
+
+function DropdownContainer({ children }: { children: React.ReactNode }) {
+  return <Col className={"relative"}>{children}</Col>;
 }

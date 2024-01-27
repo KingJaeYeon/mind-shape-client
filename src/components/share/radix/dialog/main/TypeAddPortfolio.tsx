@@ -14,6 +14,10 @@ import { format } from "date-fns";
 import { CurrentDisplayPrice } from "@/components/share/input/SelectCurrent";
 import Button from "@/components/layout/Button";
 import TypeChosenBuyAt from "@/components/share/radix/dialog/TypeChosenBuyAt";
+import { wait } from "@/components/share/radix/DialogBase";
+import { useModalStore } from "@/store/modalStore";
+import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 export default function TypeAddPortfolio({
   buyAyStep,
@@ -49,6 +53,8 @@ export default function TypeAddPortfolio({
   const date = new Date();
   const [dateState, setDateState] = useState<Date>(date);
   const { savePortfolio, isPending, data } = useAddPortfolio();
+  const { setValue } = useModalStore();
+  const { t } = useTranslation("portfolio");
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -103,71 +109,81 @@ export default function TypeAddPortfolio({
   }
 
   return (
-    <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
-      <DropDown
-        setSearch={setSearch}
-        search={search}
-        isLoad={isLoad}
-        list={search ? searchResult : initList}
-        chosen={chosen}
-        setChosen={setChosen}
-        placeholder={"Search Ticker..."}
-      />
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        wait().then(() => setValue("isOpen", false));
+      }}
+    >
+      <MainModalHeader title={t("modal_add_portfolio")} />
+      <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
+        <DropDown
+          setSearch={setSearch}
+          search={search}
+          isLoad={isLoad}
+          list={search ? searchResult : initList}
+          chosen={chosen}
+          setChosen={setChosen}
+          placeholder={"Search Ticker..."}
+        />
 
-      <Col className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}>
-        <Col className={"mt-[16px] flex-1"}>
-          <LabeledInput
-            type={"number"}
-            value={amount}
-            valueHandler={amountHandler}
-            id={"amount"}
-            label={"수량"}
-            placeholder={"0.00"}
+        <Col
+          className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}
+        >
+          <Col className={"mt-[16px] flex-1"}>
+            <LabeledInput
+              type={"number"}
+              value={amount}
+              valueHandler={amountHandler}
+              id={"amount"}
+              label={"수량"}
+              placeholder={"0.00"}
+            />
+          </Col>
+          <Col className={"mt-[16px] flex-1"}>
+            <LabeledInput
+              type={"number"}
+              value={price}
+              valueHandler={priceHandler}
+              id={"price"}
+              label={"매수가 (USD)"}
+              placeholder={"0.00"}
+            />
+          </Col>
+        </Col>
+        <Row className={"mt-[16px] w-full gap-[10px]"}>
+          <LabeledDisplay
+            id={"buyAt"}
+            displayText={format(dateState, "yyyy년 MM월 dd일")}
+            className={"px-[14px]"}
+            onClickHandler={buyAtOpenHandler}
+          />
+          <LabeledDisplay
+            id={"dividendsDay"}
+            className={"flex-1 justify-center"}
+            displayText={!!chosen.category.name ? chosen.category.name : "분류"}
+          />
+        </Row>
+        <Col
+          className={
+            "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
+          }
+        >
+          <CurrentDisplayPrice
+            price={Number(amount) * Number(price)}
+            className={"text-[28px] font-bold"}
           />
         </Col>
-        <Col className={"mt-[16px] flex-1"}>
-          <LabeledInput
-            type={"number"}
-            value={price}
-            valueHandler={priceHandler}
-            id={"price"}
-            label={"매수가 (USD)"}
-            placeholder={"0.00"}
-          />
-        </Col>
-      </Col>
-      <Row className={"mt-[16px] w-full gap-[10px]"}>
-        <LabeledDisplay
-          id={"buyAt"}
-          displayText={format(dateState, "yyyy년 MM월 dd일")}
-          className={"px-[14px]"}
-          onClickHandler={buyAtOpenHandler}
-        />
-        <LabeledDisplay
-          id={"dividendsDay"}
-          className={"flex-1 justify-center"}
-          displayText={!!chosen.category.name ? chosen.category.name : "분류"}
-        />
-      </Row>
-      <Col
-        className={
-          "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
-        }
-      >
-        <CurrentDisplayPrice
-          price={Number(amount) * Number(price)}
-          className={"text-[28px] font-bold"}
-        />
-      </Col>
-      <Button
-        disabled={isSubmitDisable || isPending}
-        onClick={(e) => submitHandler(e)}
-        className={
-          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
-        }
-      >
-        거래 추가
-      </Button>
-    </Contents>
+        <Button
+          disabled={isSubmitDisable || isPending}
+          onClick={(e) => submitHandler(e)}
+          className={
+            "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
+          }
+        >
+          거래 추가
+        </Button>
+      </Contents>
+    </form>
   );
 }

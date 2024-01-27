@@ -24,15 +24,17 @@ export default function LabeledInput({
         }
         id={id}
         text={label}
+        tabIndex={-1}
       />
       <Input
         className={
-          "focus:border-primary min-h-[40px] break-all bg-transparent px-[10px] text-[14px] focus:shadow-input"
+          "min-h-[40px] break-all bg-transparent px-[10px] text-[14px] focus:border-primary focus:shadow-input"
         }
         id={id}
         placeholder={placeholder}
         type={type}
         value={value ?? ""}
+        tabIndex={-1}
         onChange={(e) => valueHandler(e)}
       />
     </>
