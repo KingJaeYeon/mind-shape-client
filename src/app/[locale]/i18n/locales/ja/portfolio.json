@@ -9,5 +9,6 @@
   "asset_type": "分類",
   "date_format": "yyyy年MM月dd日",
   "total_price": "消費高",
-  "change_date": "日付の変更"
+  "change_date": "日付の変更",
+  "search": "検索"
 }

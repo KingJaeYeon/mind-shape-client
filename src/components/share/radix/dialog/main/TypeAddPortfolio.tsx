@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useSearchAsset } from "@/hooks/useSearchAsset";
 import { useAddPortfolio } from "@/hooks/react-query/portfolio.query";
@@ -151,7 +150,9 @@ export default function TypeAddPortfolio() {
             "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
           }
         >
-          <p className={"text-text-secondary text-[14px]"}>사용된 총액</p>
+          <p className={"text-text-secondary text-[14px]"}>
+            {t("total_price")}
+          </p>
           <CurrentDisplayPrice
             price={
               Number(getContentsValue("amount") ?? 0) *

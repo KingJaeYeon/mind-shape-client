@@ -11,8 +11,8 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 export default function PriceView() {
   const { getValue } = usePortfolioStore();
-  const totalPriceCurrent = getValue("totalPriceCurrent");
-  const totalPriceYesterday = getValue("totalPriceYesterday");
+  const totalPriceCurrent = getValue("totalPriceCurrent") ?? 0;
+  const totalPriceYesterday = getValue("totalPriceYesterday") ?? 0;
   const isPlus = totalPriceCurrent - totalPriceYesterday > 0;
   const priceDifference = totalPriceCurrent - totalPriceYesterday;
   const { t } = useTranslation("portfolio");
@@ -20,8 +20,8 @@ export default function PriceView() {
     <Contents className={"flex flex-col"}>
       <Row className={"gap-[8px]"}>
         <ShowOrHideAmount
-          text={`₩${totalPriceCurrent?.toLocaleString() ?? 0}`}
-          className={"text-[32px] font-bold text-text"}
+          text={`₩${totalPriceCurrent?.toLocaleString()}`}
+          className={"text-text text-[32px] font-bold"}
         />
         <ShowOrHideTrigger className={"h-[20px] w-[24px]"} />
       </Row>
@@ -34,7 +34,7 @@ export default function PriceView() {
         <p> {isPlus ? "+" : "-"}</p>
         <ShowOrHideAmount
           length={4}
-          text={`₩ ${priceDifference?.toLocaleString() ?? 0} (${t("24h")})`}
+          text={`₩ ${priceDifference.toLocaleString()} (${t("24h")})`}
           className={"text-[16px]"}
         />
       </Row>

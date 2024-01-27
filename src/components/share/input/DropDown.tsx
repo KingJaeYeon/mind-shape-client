@@ -179,7 +179,6 @@ export function DropDownView({
         className,
       )}
       onMouseDown={(e) => {
-        console.log("onMouseDown");
         if (!!onClickHandler) {
           onClickHandler(item);
         }

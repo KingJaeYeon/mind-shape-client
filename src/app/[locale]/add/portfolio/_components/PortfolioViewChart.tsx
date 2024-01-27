@@ -72,16 +72,13 @@ export default function PortfolioViewChart() {
   const array: any[] = Object.values(list).sort(
     (a: any, b: any) => b.price - a.price,
   );
-  console.log(list);
   const totalPrice = array?.reduce((acc: any, cur: any) => {
     acc += cur?.price;
     return acc;
   }, 0);
   return (
     <Contents
-      className={
-        "mt-[40px] flex max-w-full flex-col gap-[20px] font-Inter md:flex-row"
-      }
+      className={"flex max-w-full flex-col gap-[20px] font-Inter md:flex-row"}
       ref={ref as any}
     >
       <Contents

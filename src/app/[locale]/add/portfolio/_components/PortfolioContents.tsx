@@ -26,7 +26,7 @@ export default function PortfolioContents() {
     (a: any, b: any) => b.price - a.price,
   );
   return (
-    <Contents className={"flex w-full flex-col"}>
+    <Contents className={"mt-[40px] flex w-full flex-col"}>
       <PortfolioViewChart />
       <Col className={"text-primary"}>
         <p>PortfolioContents</p>
