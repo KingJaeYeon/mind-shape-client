@@ -3,7 +3,6 @@ import { create } from "zustand";
 interface Props {
   isOpen: boolean;
   subContents: any;
-  isContentsClose: boolean;
   mainContents: any;
   closeHandler: () => void;
   backHandler: () => void;
@@ -13,9 +12,9 @@ interface Props {
 
 export const useModalStore = create<Props>((set: any, get: any) => ({
   isOpen: false,
-  isContentsClose: true,
   subContents: undefined,
   mainContents: undefined,
+  config: {},
   closeHandler: () => {
     set({
       isOpen: false,
@@ -28,6 +27,7 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
       isContentsClose: true,
     });
   },
+
   getValue: (key: string) => {
     switch (key) {
       case "isOpen":

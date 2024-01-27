@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useSearchAsset } from "@/hooks/useSearchAsset";
 import { useAddPortfolio } from "@/hooks/react-query/portfolio.query";
@@ -73,7 +73,6 @@ export default function TypeAddPortfolio() {
       "subContents",
       <TypeChosenBuyAt dateState={dateState} setDateState={setDateState} />,
     );
-    setValue("isContentsClose", false);
   }
 
   const isSubmitDisable = !(
