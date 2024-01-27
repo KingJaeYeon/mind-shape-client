@@ -29,8 +29,6 @@ export function CurrentDisplayPrice({
 }) {
   const { getValue, setValue } = useConvenienceStore();
   return (
-    <Row className={cn("font-Inter", className)}>
-      $ {price.toLocaleString()}
-    </Row>
+    <p className={cn("font-Inter", className)}>$ {price.toLocaleString()}</p>
   );
 }

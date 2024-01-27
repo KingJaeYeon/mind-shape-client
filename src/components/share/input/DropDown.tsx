@@ -266,14 +266,8 @@ function DropdownInputSection({ children }: { children: React.ReactNode }) {
         "min-h-[48px] w-full items-center overflow-hidden rounded-[10px] border border-lightGray pl-[15px] pr-[50px]",
         className,
       )}
-      onFocus={(e) => {
-        console.log("onFocus");
-        hasFocus(true);
-      }}
-      onBlur={() => {
-        console.log("onBlur");
-        hasFocus(false);
-      }}
+      onFocus={() => hasFocus(true)}
+      onBlur={() => hasFocus(false)}
       tabIndex={-1}
     >
       {children}

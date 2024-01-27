@@ -12,12 +12,12 @@ import Row from "@/components/layout/Row";
 import LabeledDisplay from "@/components/share/input/LabeledDisplay";
 import { format } from "date-fns";
 import { CurrentDisplayPrice } from "@/components/share/input/SelectCurrent";
-import Button from "@/components/layout/Button";
-import TypeChosenBuyAt from "@/components/share/radix/dialog/TypeChosenBuyAt";
+import TypeChosenBuyAt from "@/components/share/radix/dialog/sub/TypeChosenBuyAt";
 import { wait } from "@/components/share/radix/DialogBase";
 import { useModalStore } from "@/store/modalStore";
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import Button from "@/components/share/button/Button";
 
 export default function TypeAddPortfolio({
   buyAyStep,
@@ -75,7 +75,7 @@ export default function TypeAddPortfolio({
     }
   }
   function buyAtOpenHandler() {
-    setBuyAyStep(true);
+    setValue("");
   }
   function buyAtCloseHandler() {
     setBuyAyStep(false);
@@ -178,10 +178,8 @@ export default function TypeAddPortfolio({
         </Col>
         <Button
           disabled={isSubmitDisable || isPending}
-          onClick={(e) => submitHandler(e)}
-          className={
-            "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
-          }
+          onClick={submitHandler}
+          className={"mt-[20px] border-2 text-[16px]"}
         >
           {t("modal_add_portfolio")}
         </Button>

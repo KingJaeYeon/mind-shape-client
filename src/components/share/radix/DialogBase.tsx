@@ -1,10 +1,7 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { forwardRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
-import Row from "@/components/layout/Row";
-import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
-import Button from "@/components/layout/Button";
 import { useModalStore } from "@/store/modalStore";
 
 type Props = {
@@ -19,19 +16,17 @@ export default function DialogBase({
   children,
   contents,
   className,
-  resetHandler,
 }: {
   children: React.ReactNode;
   contents: any;
   className?: string;
-  resetHandler?: any;
 }) {
   const { getValue, setValue, isOpen } = useModalStore();
 
   useEffect(() => {
-    if (!isOpen && !!resetHandler) {
-      resetHandler();
-    }
+    // if (!isOpen && !!resetHandler) {
+    //   resetHandler();
+    // }
   }, [isOpen]);
 
   return (
