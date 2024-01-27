@@ -7,10 +7,11 @@ import {
   PriceView,
   ShowChartSwitch,
 } from "@/app/[locale]/add/portfolio/_components/index";
-import Button from "@/components/layout/Button";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import TypeAddPortfolio from "@/components/share/radix/dialog/TypeAddPortfolio";
 import DialogBase from "@/components/share/radix/DialogBase";
+import Button from "@/components/share/button/Button";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 const data = {
   totalPriceCurrent: 1000000,
@@ -20,6 +21,7 @@ export default function PortfolioInterface() {
   const { initData } = usePortfolioStore();
   const { data, isPending } = usePortfolio();
   const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
+  const { t } = useTranslation("portfolio");
 
   useEffect(() => {
     if (isPending) return;
@@ -50,7 +52,7 @@ export default function PortfolioInterface() {
           title={title}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
-          <Button styleType={"addPortfolioButton"}>+ 거래 추가</Button>
+          <Button size={"sm"}>+ {t("modal_add_portfolio")}</Button>
         </DialogBase>
       </Row>
     </Contents>

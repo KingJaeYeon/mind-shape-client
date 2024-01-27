@@ -1,3 +1,9 @@
 {
-  "test": "テスト{{data}}"
+  "sign_in": "ログイン",
+  "sign_up": "登録",
+  "dashboard": "ダッシュボード",
+  "asset_view": "資産照会",
+  "asset_add": "資産登録",
+  "community": "コミュニティ",
+  "setting": "設定"
 }

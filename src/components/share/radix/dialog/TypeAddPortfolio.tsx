@@ -13,7 +13,7 @@ import LabeledDisplay from "@/components/share/input/LabeledDisplay";
 import { format } from "date-fns";
 import { CurrentDisplayPrice } from "@/components/share/input/SelectCurrent";
 import Button from "@/components/layout/Button";
-import { TypeChosenBuyAt } from "@/components/share/radix/DialogPlugIns";
+import TypeChosenBuyAt from "@/components/share/radix/dialog/TypeChosenBuyAt";
 
 export default function TypeAddPortfolio({
   buyAyStep,

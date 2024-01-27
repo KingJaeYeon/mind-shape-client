@@ -1,11 +1,12 @@
 import Contents from "@/components/layout/Contents";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
 import { Desktop, Mobile } from "@/components/layout/responsive";
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
-export default function Header() {
+import { useTranslation } from "@/app/[locale]/i18n/i18n";
+
+export default async function Header({ locale }: { locale: string }) {
+  const { t } = await useTranslation(locale, "home");
   return (
     <>
       <Desktop>
@@ -18,17 +19,17 @@ export default function Header() {
             <HomeButtonTypeLogo />
           </Row>
           <Row className={"ml-[70px] gap-[30px] text-[14px]"}>
-            <p>대시보드</p>
-            <p>주식조회</p>
-            <p>주식등록</p>
-            <p>커뮤니티</p>
-            <p>세팅</p>
+            <p>{t("dashboard")}</p>
+            <p>{t("asset_view")}</p>
+            <p>{t("asset_add")}</p>
+            <p>{t("community")}</p>
+            <p>{t("setting")}</p>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
             <Button secondary={true} size={"sm"}>
-              로그인
+              {t("sign_in")}
             </Button>
-            <Button size={"sm"}>회원가입</Button>
+            <Button size={"sm"}>{t("sign_up")}</Button>
           </Row>
         </Contents>
       </Desktop>
@@ -39,24 +40,21 @@ export default function Header() {
             "z-[2] flex h-[75px] w-full items-center border-b border-line bg-white px-[20px]"
           }
         >
-          <Row className={"relative ml-[10px] gap-[20px]"}>
-            <Link href={"/"} className={"flex text-black"}>
-              <img alt={"img"} className={"h-[30px] w-[30px]"} />
-              <p>HOME</p>
-            </Link>
+          <Row className={"relative ml-[10px]"}>
+            <HomeButtonTypeLogo />
           </Row>
           <Row className={"ml-[70px] gap-[30px]"}>
-            <p>대시보드</p>
-            <p>주식조회</p>
-            <p>주식등록</p>
-            <p>커뮤니티</p>
-            <p>세팅</p>
+            <p>{t("dashboard")}</p>
+            <p>{t("asset_view")}</p>
+            <p>{t("asset_add")}</p>
+            <p>{t("community")}</p>
+            <p>{t("setting")}</p>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
             <Button secondary={true} size={"sm"}>
-              로그인
+              {t("sign_in")}
             </Button>
-            <Button size={"sm"}>회원가입</Button>
+            <Button size={"sm"}>{t("sign_up")}</Button>
           </Row>
         </Contents>
       </Mobile>

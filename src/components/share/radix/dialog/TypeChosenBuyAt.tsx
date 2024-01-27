@@ -3,11 +3,7 @@ import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
 import { SingleDayPickerTypeModal } from "@/components/share/calendar/Calendar";
 
-export function TypeChosenDividends() {
-  return <Contents className={"min-h-auto mt-[10px] flex flex-col"}></Contents>;
-}
-
-export function TypeChosenBuyAt({
+export default function TypeChosenBuyAt({
   dateState,
   setDateState,
   buyAtCloseHandler,

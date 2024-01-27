@@ -23,7 +23,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Root({ children }: { children: any }) {
+export default function Root({
+  children,
+  params: { locale },
+}: {
+  children: any;
+  params: { locale: string };
+}) {
   return (
     <html className={"hide-scrollbar bg-bg"}>
       <head>
@@ -35,9 +41,9 @@ export default function Root({ children }: { children: any }) {
       </head>
       <body className={inter.className}>
         <QueryProvider>
-          <Header />
+          <Header locale={locale} />
           <main className={"hide-scrollbar flex w-full"}>{children}</main>
-          <Footer />
+          <Footer locale={locale} />
           <ToastProvider />
         </QueryProvider>
       </body>

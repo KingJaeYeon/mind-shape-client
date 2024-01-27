@@ -24,7 +24,7 @@ export default function PageContainer({
   return (
     <Page
       className={cn(
-        "hide-scrollbar w-full flex-col gap-[40px] " +
+        "hide-scrollbar w-full flex-col items-center gap-[40px] " +
           "overflow-auto p-[20px] transition-all duration-700",
         className,
       )}

@@ -1,6 +1,6 @@
 import Contents from "@/components/layout/Contents";
 
-export default function Footer() {
+export default function Footer({ locale }: { locale: string }) {
   return (
     <Contents
       className={

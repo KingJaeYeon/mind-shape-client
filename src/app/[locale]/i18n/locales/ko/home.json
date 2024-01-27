@@ -1,4 +1,10 @@
 {
-  "test": "테스트{{data}}",
+  "sign_in": "로그인",
+  "sign_up": "가입하기",
+  "dashboard": "대시보드",
+  "asset_view": "자산조회",
+  "asset_add": "주산등록",
+  "community": "커뮤니티",
+  "setting": "세팅",
   "": ""
 }

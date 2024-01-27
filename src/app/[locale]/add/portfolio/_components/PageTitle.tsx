@@ -10,7 +10,7 @@ export default function PageTitle({
   emoji?: string;
 }) {
   return (
-    <Contents className={"flex items-center gap-[10px]"}>
+    <Contents className={"flex w-full max-w-full items-center gap-[10px]"}>
       <Row
         className={
           "h-[24px] w-[24px] items-center justify-center rounded-[999px] border border-lightGray bg-lightGray text-[12px]"
@@ -18,7 +18,7 @@ export default function PageTitle({
       >
         {emoji}
       </Row>
-      <Text className={"text-text-secondary text-[16px] font-medium"}>
+      <Text className={"text-[16px] font-medium text-text-secondary"}>
         {title}
       </Text>
     </Contents>

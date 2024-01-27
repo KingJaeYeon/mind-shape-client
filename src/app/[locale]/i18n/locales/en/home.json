@@ -1,4 +1,10 @@
 {
-  "test": "test{{data}}",
+  "sign_in": "Log In",
+  "sign_up": "Sign up",
+  "dashboard": "Dashboard",
+  "asset_view": "Asset View",
+  "asset_add": "Asset Registration",
+  "community": "Community",
+  "setting": "Setting",
   "": "fdsfds"
 }

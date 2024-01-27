@@ -1,4 +1,7 @@
 {
   "title": "My Portfolio",
-  "switch_label": "Show charts"
+  "switch_label": "Show charts",
+  "modal_add_portfolio": "Add Transaction",
+  "modal_calendar": "Date & Time",
+  "24h": "24h"
 }
