@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useSearchAsset } from "@/hooks/useSearchAsset";
 import { useAddPortfolio } from "@/hooks/react-query/portfolio.query";
@@ -19,78 +19,71 @@ import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
 
-export default function TypeAddPortfolio() {
-  const [search, setSearch] = useState("");
-  // TODO: 현재 가격도 db에서 가져와야함
-  const [chosen, setChosen] = useState<{
+type Chosen = {
+  index: number;
+  name: string;
+  symbol: string;
+  category: {
     index: number;
     name: string;
-    symbol: string;
-    category: {
-      index: number;
-      name: string;
-    };
-  }>({
-    index: 0,
-    name: "",
-    symbol: "",
-    category: {
-      index: 0,
-      name: "",
-    },
-  });
-
-  const { debouncedValue } = useDebounce(search);
+  };
+};
+export default function TypeAddPortfolio() {
+  const { setValue, getContentsValue, setContentsValue } = useModalStore();
+  const { debouncedValue } = useDebounce(getContentsValue("search"));
   const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
-  const [amount, setAmount] = useState<number | string>("");
-  const [price, setPrice] = useState<number | string>("");
-  const date = new Date();
-  const [dateState, setDateState] = useState<Date>(date);
   const { savePortfolio, isPending, data } = useAddPortfolio();
-  const { setValue } = useModalStore();
   const { t } = useTranslation("portfolio");
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
-      setPrice("");
+      setContentsValue("price", "");
     } else if (Number(e.target.value) < 0) {
-      setPrice(0);
+      setContentsValue("price", 0);
     } else {
-      setPrice(Number(e.target.value));
+      setContentsValue("price", Number(e.target.value));
     }
   }
+
   function amountHandler(e: any) {
     if (e.target.value === "") {
-      setAmount("");
+      setContentsValue("amount", "");
     } else if (Number(e.target.value) < 0) {
-      setAmount(0);
+      setContentsValue("amount", 0);
     } else {
-      setAmount(Number(e.target.value));
+      setContentsValue("amount", Number(e.target.value));
     }
   }
+
   function buyAtOpenHandler() {
-    setValue(
-      "subContents",
-      <TypeChosenBuyAt dateState={dateState} setDateState={setDateState} />,
-    );
+    setValue("subContents", <TypeChosenBuyAt />);
   }
 
   const isSubmitDisable = !(
-    typeof amount === "number" &&
-    amount > 0 &&
-    typeof price === "number" &&
-    price > 0 &&
-    !!chosen?.name
+    typeof getContentsValue("amount") === "number" &&
+    getContentsValue("amount") > 0 &&
+    typeof getContentsValue("price") === "number" &&
+    getContentsValue("price") > 0 &&
+    !!getContentsValue("chosen")?.name
   );
+
   async function submitHandler(e: any) {
     savePortfolio({
-      price: Number(price),
-      amount: Number(amount),
-      categoryId: chosen.category.index,
-      assetId: chosen.index,
-      buyAt: dateState,
+      price: Number(getContentsValue("price")),
+      amount: Number(getContentsValue("amount")),
+      categoryId: getContentsValue("chosen")?.category?.index,
+      assetId: getContentsValue("chosen")?.index,
+      buyAt: getContentsValue("date"),
     });
     e.preventDefault();
+  }
+
+  function searchHandler(value: string) {
+    setContentsValue("search", value);
+  }
+
+  function chosenHandler(value: string) {
+    setContentsValue("chosen", value);
   }
 
   return (
@@ -103,12 +96,12 @@ export default function TypeAddPortfolio() {
       <MainModalHeader title={t("modal_add_portfolio")} />
       <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
         <DropDown
-          setSearch={setSearch}
-          search={search}
+          setSearch={searchHandler}
+          search={getContentsValue("search")}
           isLoad={isLoad}
-          list={search ? searchResult : initList}
-          chosen={chosen}
-          setChosen={setChosen}
+          list={getContentsValue("search") ? searchResult : initList}
+          chosen={getContentsValue("chosen")}
+          setChosen={chosenHandler}
           placeholder={"Search Ticker..."}
         />
 
@@ -118,7 +111,7 @@ export default function TypeAddPortfolio() {
           <Col className={"mt-[16px] flex-1"}>
             <LabeledInput
               type={"number"}
-              value={amount}
+              value={getContentsValue("amount")}
               valueHandler={amountHandler}
               id={"amount"}
               label={t("amount")}
@@ -128,7 +121,7 @@ export default function TypeAddPortfolio() {
           <Col className={"mt-[16px] flex-1"}>
             <LabeledInput
               type={"number"}
-              value={price}
+              value={getContentsValue("price")}
               valueHandler={priceHandler}
               id={"price"}
               label={`${t("buy_price")} (USD)`}
@@ -139,7 +132,7 @@ export default function TypeAddPortfolio() {
         <Row className={"mt-[16px] w-full gap-[10px]"}>
           <LabeledDisplay
             id={"buyAt"}
-            displayText={format(dateState, t("date_format"))}
+            displayText={format(getContentsValue("date"), t("date_format"))}
             className={"px-[14px]"}
             onClickHandler={buyAtOpenHandler}
           />
@@ -147,7 +140,9 @@ export default function TypeAddPortfolio() {
             id={"dividendsDay"}
             className={"flex-1 justify-center"}
             displayText={
-              !!chosen.category.name ? chosen.category.name : t("asset_type")
+              !!getContentsValue("chosen")?.category?.name
+                ? getContentsValue("chosen")?.category?.name
+                : t("asset_type")
             }
           />
         </Row>
@@ -156,9 +151,12 @@ export default function TypeAddPortfolio() {
             "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
           }
         >
-          <p className={"text-[14px] text-text-secondary"}>사용된 총액</p>
+          <p className={"text-text-secondary text-[14px]"}>사용된 총액</p>
           <CurrentDisplayPrice
-            price={Number(amount) * Number(price)}
+            price={
+              Number(getContentsValue("amount") ?? 0) *
+              Number(getContentsValue("price") ?? 0)
+            }
             className={"text-[28px] font-bold"}
           />
         </Col>

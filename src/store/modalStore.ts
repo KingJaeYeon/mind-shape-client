@@ -4,6 +4,10 @@ interface Props {
   isOpen: boolean;
   subContents: any;
   mainContents: any;
+  contentsValue: any;
+
+  getContentsValue: (key: string) => any;
+  setContentsValue: (key: string, value: any) => void;
   closeHandler: () => void;
   backHandler: () => void;
   getValue: (key: string) => any;
@@ -14,28 +18,39 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
   isOpen: false,
   subContents: undefined,
   mainContents: undefined,
-  config: {},
+  contentsValue: {
+    date: new Date(),
+  },
+  getContentsValue: (key: string) => {
+    const contentsValue = get().contentsValue;
+    return contentsValue[key];
+  },
+  setContentsValue: (key: string, value: any) => {
+    const contentsValue = get().contentsValue;
+    contentsValue[key] = value;
+    set({ contentsValue });
+  },
   closeHandler: () => {
     set({
       isOpen: false,
       mainContents: undefined,
       subContents: undefined,
+      contentsValue: {
+        date: new Date(),
+      },
     });
   },
   backHandler: () => {
     set({
-      isContentsClose: true,
+      subContents: undefined,
     });
   },
-
   getValue: (key: string) => {
     switch (key) {
       case "isOpen":
         return get().isOpen;
       case "mainContents":
         return get().mainContents;
-      case "isContentsClose":
-        return get().isContentsClose;
       case "subContents":
         return get().subContents;
     }
@@ -50,9 +65,6 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
         return;
       case "subContents":
         set({ subContents: value });
-        return;
-      case "isContentsClose":
-        set({ isContentsClose: value });
         return;
     }
   },

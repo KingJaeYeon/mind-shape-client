@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export function useAddPortfolio() {
   const queryClient = useQueryClient();
-  const { setValue } = useModalStore();
+  const { closeHandler } = useModalStore();
   const {
     mutate: savePortfolio,
     data,
@@ -18,7 +18,7 @@ export function useAddPortfolio() {
       await queryClient.invalidateQueries({
         queryKey: ["myPortfolio"],
       });
-      setValue("isOpen", false);
+      closeHandler();
       toast.success("포트폴리오가 등록되었습니다.");
     },
     onError: () => {

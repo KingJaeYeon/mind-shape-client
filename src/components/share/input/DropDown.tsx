@@ -147,7 +147,7 @@ function DropDownListView() {
       onClickHandler={setChosen}
       className={cn(
         "z-[1001] min-h-[48px] w-full cursor-pointer px-[15px] hover:bg-weakGray",
-        chosen?.index === item.index && "bg-weakGray",
+        chosen?.index === item?.index && "bg-weakGray",
       )}
     />
   ));
@@ -186,12 +186,12 @@ export function DropDownView({
         e.stopPropagation();
       }}
     >
-      {!item.name ? (
+      {!item?.name ? (
         <Row className={"text-[16px] text-gray"}>{placeholder}</Row>
       ) : (
         <>
-          <Row className={"break-all font-bold"}>{item.name}</Row>
-          <Row className={"text-neutralGray"}>{item.symbol}</Row>
+          <Row className={"break-all font-bold"}>{item?.name}</Row>
+          <Row className={"text-neutralGray"}>{item?.symbol}</Row>
         </>
       )}
     </Contents>

@@ -3,16 +3,14 @@ import Card from "@/components/layout/Card";
 import Row from "@/components/layout/Row";
 import Grid from "@/components/layout/Grid";
 
-
 import { ModalTriggerButtonTypeChart } from "@/components/share/button/ModalTriggerButton";
 import {
   ChartCardTitle,
   ChartDuration,
   TextToggleButton,
 } from "@/components/share/chart/ChartPlugIn";
-import { ChartOption, ChartOptionV1 } from "@/constant/chart";
 
-export function ChartList({ options }: { options: ChartOption[] }) {
+export function ChartList({ options }: { options: any[] }) {
   return (
     <Grid
       className={
@@ -20,20 +18,13 @@ export function ChartList({ options }: { options: ChartOption[] }) {
       }
     >
       {options?.map((option, index) => (
-          <ChartItem key={index} option={option} chart={<div>d</div>} />
+        <ChartItem key={index} option={option} chart={<div>d</div>} />
       ))}
     </Grid>
   );
 }
 
-
-export function ChartItem({
-  option,
-  chart,
-}: {
-  option: ChartOptionV1;
-  chart: any;
-}) {
+export function ChartItem({ option, chart }: { option: any; chart: any }) {
   return (
     <Card className={"min-h-[300px] px-[30px] transition-all duration-700"}>
       <Row className={"items-center justify-between pt-[20px]"}>

@@ -17,16 +17,15 @@ import {
   DayPicker,
   SelectSingleEventHandler,
   useDayPicker,
-  useFocusContext,
   useNavigation,
-  useSelectSingle,
 } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "./daypicker.css";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
-import Button from "@/components/layout/Button";
 import { useModalStore } from "@/store/modalStore";
+import Button from "@/components/share/button/Button";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 /**
  *   기본 옵션
@@ -269,24 +268,35 @@ export function SingleDayPickerTypeModal({
 
   const { backHandler } = useModalStore();
   const [inputValue, setInputValue] = useState<string>("");
+  const [display, setDisplay] = useState<Date | undefined>(selected);
+  const { t } = useTranslation("portfolio");
+
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
     const date = parse(e.currentTarget.value, "yyyy-MM-dd", new Date());
     const inputYear = getYear(date);
     if (isValid(date) && year >= inputYear) {
-      selectedHandler(date);
+      setDisplay(date);
     } else {
-      selectedHandler(undefined);
+      setDisplay(undefined);
     }
   };
 
   const handleDaySelect: SelectSingleEventHandler = (date) => {
     if (date) {
       setInputValue(format(date, "yyyy-MM-dd"));
-      selectedHandler(date);
+      setDisplay(date);
     } else {
       setInputValue("");
     }
+  };
+
+  const changeDateHandler = () => {
+    if (!display) {
+      selectedHandler(new Date());
+    }
+    selectedHandler(display);
+    backHandler();
   };
 
   return (
@@ -333,7 +343,7 @@ export function SingleDayPickerTypeModal({
         }}
         // 단일 날짜 선택
         mode={"single"}
-        selected={selected}
+        selected={display}
         onSelect={handleDaySelect}
         disabled={disabledDays}
         captionLayout="dropdown-buttons"
@@ -350,19 +360,8 @@ export function SingleDayPickerTypeModal({
           />
         }
       />
-      <Button
-        className={
-          "mt-[20px] flex min-h-[45px] items-center justify-center rounded-[10px] border bg-primary font-Inter text-white hover:bg-primary-light disabled:bg-primary-disable"
-        }
-        onClick={() => {
-          if (!selected) {
-            selectedHandler(new Date());
-          }
-          selectedHandler(selected);
-          backHandler();
-        }}
-      >
-        날짜 변경 {JSON.stringify(selected)}
+      <Button className={"mt-[20px]"} onClick={() => changeDateHandler()}>
+        {t("change_date")}
       </Button>
     </>
   );
@@ -383,7 +382,7 @@ function InputOption({
 
   return (
     <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
-      <Row>Search:</Row>
+      <p>Search:</p>
       <input
         size={12}
         type="text"
@@ -408,6 +407,7 @@ function CustomHeader(props: CaptionProps) {
       goToDate(selected);
     }
   }, [selected]);
+
   return (
     <div
       className={

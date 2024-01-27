@@ -1,6 +1,5 @@
 "use client";
 import Text from "@/components/layout/Text";
-import { ChartOption, ToggleListProps } from "@/constant/chart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import SelectBase from "@/components/share/radix/SelectBase";
 
@@ -10,11 +9,7 @@ const options = {
   // ... 기타 옵션
 };
 
-export function ChartDuration({
-  options,
-}: {
-  options: ChartOption["duration"];
-}) {
+export function ChartDuration({ options }: { options: any["duration"] }) {
   if (options.isFixedDuration) {
     return (
       <Text className={"text-[0.8rem] text-neutralGray"}>
@@ -31,7 +26,7 @@ export function ChartCardTitle({ title }: { title: string }) {
   return <Text className={"text-[20px] text-white"}>{title}</Text>;
 }
 
-export function TextToggleButton({ options }: { options?: ToggleListProps }) {
+export function TextToggleButton({ options }: { options?: any }) {
   const toggleGroupItemClasses =
     "border-b border-r border-t border-line px-[10px] text-[12px] text-white first:border-l hover:bg-black focus:outline-none data-[state=on]:bg-black data-[state=on]:text-orange";
 

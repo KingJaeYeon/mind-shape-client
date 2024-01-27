@@ -3,7 +3,6 @@ import Contents from "@/components/layout/Contents";
 import { useConvenienceStore } from "@/store/convenienceStore";
 import { IS_SHOW_CHART } from "@/constant/portfolio";
 
-import { ChartOptionV1 } from "@/constant/chart";
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
 import ChartLabel from "@/components/share/chart/ChartLegend";
 import { useEffect, useRef, useState } from "react";
@@ -37,7 +36,7 @@ export default function PortfolioViewChart() {
   if (!getValue(IS_SHOW_CHART)) {
     return null;
   }
-  const option1: ChartOptionV1 = {
+  const option1: any = {
     title: "포트폴리오 비중 도넛 차트",
     duration: {
       isFixedDuration: true,
@@ -47,7 +46,7 @@ export default function PortfolioViewChart() {
       },
     },
   };
-  const option2: ChartOptionV1 = {
+  const option2: any = {
     title: "포트폴리오 비중 트리맵 차트",
     duration: {
       isFixedDuration: true,
