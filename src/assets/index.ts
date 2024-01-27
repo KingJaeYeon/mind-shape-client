@@ -7,7 +7,7 @@ import {
 } from "@/assets/IconChart";
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
 import { IconModalTrigger, IconModalClose } from "@/assets/IconModal";
-import { IconChevronDown } from "@/assets/IconChevron";
+import { IconChevronDown, IconChevronLeft } from "@/assets/IconChevron";
 import { IconEyeOff, IconEye } from "@/assets/IconEye";
 import { IconCalendar, IconLeft, IconRight } from "@/assets/IconCalendar";
 
@@ -23,6 +23,7 @@ export {
   IconModalTrigger,
   IconModalClose,
   IconChevronDown,
+  IconChevronLeft,
   IconEyeOff,
   IconEye,
   IconCalendar,

@@ -4,9 +4,10 @@ import Button from "@/components/layout/Button";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import React from "react";
 import { useModalStore } from "@/store/modalStore";
+import { IconChevronLeft } from "@/assets";
 
 export function MainModalHeader({ title }: { title?: string }) {
-  const { setValue } = useModalStore();
+  const { closeHandler } = useModalStore();
   return (
     <Row className={"py-[10px] text-modalTitle"}>
       <h3
@@ -20,7 +21,7 @@ export function MainModalHeader({ title }: { title?: string }) {
         tabIndex={-1}
         onClick={(e) => {
           e.preventDefault();
-          setValue("isOpen", false);
+          closeHandler();
         }}
       >
         <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
@@ -30,9 +31,20 @@ export function MainModalHeader({ title }: { title?: string }) {
 }
 
 export function SubModalHeader({ title }: { title?: string }) {
-  const { setValue } = useModalStore();
+  const { backHandler } = useModalStore();
   return (
-    <Row className={"py-[10px] text-modalTitle"}>
+    <Row
+      className={"ml-[-8px] items-center gap-[8px] py-[10px] text-modalTitle"}
+    >
+      <Button
+        tabIndex={-1}
+        onClick={(e) => {
+          e.preventDefault();
+          backHandler();
+        }}
+      >
+        <IconChevronLeft className={"h-[28px] w-[28px]"} />
+      </Button>
       <Row
         className={
           "flex-1 justify-center text-[24px] font-bold sm:justify-start"
@@ -40,15 +52,6 @@ export function SubModalHeader({ title }: { title?: string }) {
       >
         {title}
       </Row>
-      <Button
-        tabIndex={-1}
-        onClick={(e) => {
-          e.preventDefault();
-          setValue("isOpen", false);
-        }}
-      >
-        <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
-      </Button>
     </Row>
   );
 }

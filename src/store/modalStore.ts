@@ -3,8 +3,9 @@ import { create } from "zustand";
 interface Props {
   isOpen: boolean;
   closeHandler: () => void;
+  backHandler: () => void;
   isSubContentsOpen: boolean;
-  subContents: string;
+  subContents: any;
   mainContents: any;
   getValue: (key: string) => any;
   setValue: (key: string, value: any) => void;
@@ -13,10 +14,19 @@ interface Props {
 export const useModalStore = create<Props>((set: any, get: any) => ({
   isOpen: false,
   isSubContentsOpen: false,
-  subContents: "",
+  subContents: undefined,
   mainContents: undefined,
   closeHandler: () => {
-    set({ isOpen: false });
+    set({
+      isOpen: false,
+      mainContents: undefined,
+      subContents: undefined,
+    });
+  },
+  backHandler: () => {
+    set({
+      subContents: undefined,
+    });
   },
   getValue: (key: string) => {
     switch (key) {

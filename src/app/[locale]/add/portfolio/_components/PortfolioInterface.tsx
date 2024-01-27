@@ -1,7 +1,7 @@
 "use client";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   PriceView,
@@ -20,7 +20,6 @@ const data = {
 export default function PortfolioInterface() {
   const { initData } = usePortfolioStore();
   const { data, isPending } = usePortfolio();
-  const [buyAyStep, setBuyAyStep] = useState<boolean>(false);
   const { t } = useTranslation("portfolio");
 
   useEffect(() => {
@@ -28,10 +27,6 @@ export default function PortfolioInterface() {
     initData(data).then(() => console.log("initData load..."));
   }, [data]);
 
-  function resetHandler() {
-    setBuyAyStep(false);
-  }
-  const title = buyAyStep ? "날짜 & 시간" : "거래추가";
   return (
     <Contents
       className={
@@ -42,13 +37,7 @@ export default function PortfolioInterface() {
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
         <DialogBase
-          resetHandler={resetHandler}
-          contents={
-            <TypeAddPortfolio
-              buyAyStep={buyAyStep}
-              setBuyAyStep={setBuyAyStep}
-            />
-          }
+          contents={<TypeAddPortfolio />}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
           <Button size={"sm"}>+ {t("modal_add_portfolio")}</Button>

@@ -248,13 +248,11 @@ export function SingleDayPickerTypeModal({
   selected,
   selectedHandler,
   hasInputOption,
-  buyAtCloseHandler,
 }: {
   isDialog?: boolean;
   selected?: any;
   selectedHandler?: any;
   hasInputOption?: boolean;
-  buyAtCloseHandler: any;
 }) {
   const date = new Date();
   const year = getYear(date);
@@ -357,7 +355,6 @@ export function SingleDayPickerTypeModal({
           if (!selected) {
             selectedHandler(new Date());
           }
-          buyAtCloseHandler();
         }}
       >
         날짜 변경
@@ -386,7 +383,7 @@ function InputOption({
         size={12}
         type="text"
         className={"outline-none"}
-        placeholder={format(new Date(), "y-MM-dd")}
+        placeholder={format(new Date(), "yyyy-MM-dd")}
         value={inputValue}
         onChange={(e) => {
           e.preventDefault();

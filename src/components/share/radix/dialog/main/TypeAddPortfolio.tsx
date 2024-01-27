@@ -19,13 +19,7 @@ import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
 
-export default function TypeAddPortfolio({
-  buyAyStep,
-  setBuyAyStep,
-}: {
-  buyAyStep: boolean;
-  setBuyAyStep: any;
-}) {
+export default function TypeAddPortfolio() {
   const [search, setSearch] = useState("");
   // TODO: 현재 가격도 db에서 가져와야함
   const [chosen, setChosen] = useState<{
@@ -75,10 +69,10 @@ export default function TypeAddPortfolio({
     }
   }
   function buyAtOpenHandler() {
-    setValue("");
-  }
-  function buyAtCloseHandler() {
-    setBuyAyStep(false);
+    setValue(
+      "subContents",
+      <TypeChosenBuyAt dateState={dateState} setDateState={setDateState} />,
+    );
   }
 
   const isSubmitDisable = !(
@@ -97,15 +91,6 @@ export default function TypeAddPortfolio({
       buyAt: dateState,
     });
     e.preventDefault();
-  }
-  if (buyAyStep) {
-    return (
-      <TypeChosenBuyAt
-        dateState={dateState}
-        setDateState={setDateState}
-        buyAtCloseHandler={buyAtCloseHandler}
-      />
-    );
   }
 
   return (
@@ -171,6 +156,7 @@ export default function TypeAddPortfolio({
             "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
           }
         >
+          <p className={"text-[14px] text-text-secondary"}>사용된 총액</p>
           <CurrentDisplayPrice
             price={Number(amount) * Number(price)}
             className={"text-[28px] font-bold"}

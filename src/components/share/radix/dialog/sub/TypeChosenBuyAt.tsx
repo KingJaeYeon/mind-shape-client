@@ -8,11 +8,9 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 export default function TypeChosenBuyAt({
   dateState,
   setDateState,
-  buyAtCloseHandler,
 }: {
   dateState: Date;
   setDateState: any;
-  buyAtCloseHandler: any;
 }) {
   const { t } = useTranslation("portfolio");
   return (
@@ -24,7 +22,6 @@ export default function TypeChosenBuyAt({
           selected={dateState}
           selectedHandler={setDateState}
           hasInputOption={true}
-          buyAtCloseHandler={buyAtCloseHandler}
         />
       </Contents>
     </>

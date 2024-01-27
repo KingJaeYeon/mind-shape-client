@@ -21,13 +21,7 @@ export default function DialogBase({
   contents: any;
   className?: string;
 }) {
-  const { getValue, setValue, isOpen } = useModalStore();
-
-  useEffect(() => {
-    // if (!isOpen && !!resetHandler) {
-    //   resetHandler();
-    // }
-  }, [isOpen]);
+  const { getValue, setValue, closeHandler } = useModalStore();
 
   return (
     <Dialog.Root
@@ -35,7 +29,7 @@ export default function DialogBase({
       onOpenChange={(open) => {
         if (!open) {
           if (confirm("정말 닫으시겠습니다?")) {
-            setValue("isOpen", open);
+            closeHandler();
           }
         } else {
           setValue("isOpen", open);
@@ -63,9 +57,18 @@ export default function DialogBase({
             className,
           )}
         >
-          {getValue("mainContents")}
+          <DisPlayContents />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );
+}
+
+function DisPlayContents() {
+  const { getValue } = useModalStore();
+
+  if (!!getValue("subContents")) {
+    return getValue("subContents");
+  }
+  return getValue("mainContents");
 }
