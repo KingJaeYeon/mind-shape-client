@@ -15,13 +15,27 @@ const Desktop = ({
 
   return isDesktop ? children : null;
 };
-const Tablet = ({
+
+const DesktopTypeTM = ({
+  children,
+}: {
+  children: React.ReactNode | React.ReactNode[];
+}) => {
+  const [isDesktop, setDesktop] = React.useState(false);
+  const desktop = useMediaQuery({ minWidth: 964 });
+  useEffect(() => {
+    setDesktop(desktop);
+  }, [desktop]);
+
+  return isDesktop ? children : null;
+};
+const TabletAndMobile = ({
   children,
 }: {
   children: React.ReactNode | React.ReactNode[];
 }) => {
   const [isTablet, setDesktop] = React.useState(false);
-  const tablet = useMediaQuery({ minWidth: 481, maxWidth: 768 });
+  const tablet = useMediaQuery({ maxWidth: 963 });
   useEffect(() => {
     setDesktop(tablet);
   }, [tablet]);
@@ -48,4 +62,4 @@ const Default = ({
   return isNotMobile ? children : null;
 };
 
-export { Desktop, Tablet, Mobile, Default };
+export { Desktop, TabletAndMobile, Mobile, Default, DesktopTypeTM };

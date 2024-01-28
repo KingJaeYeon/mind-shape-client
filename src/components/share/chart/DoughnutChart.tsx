@@ -36,11 +36,13 @@ export default function DoughnutChart({
   showPrice = true,
   data,
   legend,
+  type,
 }: PieProps) {
   const { getValue, setValue } = usePortfolioStore();
   const selected = getValue("portfolioSelected");
 
-  const innerWidth = width - margin.left - margin.right - 120;
+  const innerWidth =
+    type === "mobile" ? width - 120 - margin?.left - margin?.right : width - 80;
   const innerHeight = height - margin.top - margin.bottom;
   const radius = 80; // 반지름길이
   const donutThickness = 20; // 도넛 두께

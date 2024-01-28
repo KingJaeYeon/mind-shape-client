@@ -28,7 +28,11 @@ export default function ChartLegend({
   return (
     <LegendOrdinal scale={ordinalColorScale} labelFormat={(label) => label}>
       {(labels) => (
-        <div className={"flex w-[200px] flex-col justify-center pl-[10px]"}>
+        <div
+          className={
+            "flex w-[200px] flex-col justify-center pl-[10px] font-medium"
+          }
+        >
           {labels.map((label, i) => (
             <LegendItem
               key={`legend-quantile-${i}`}

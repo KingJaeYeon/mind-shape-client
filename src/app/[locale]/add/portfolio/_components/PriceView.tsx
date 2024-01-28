@@ -18,7 +18,7 @@ export default function PriceView() {
   const { t } = useTranslation("portfolio");
   return (
     <Contents className={"flex flex-col"}>
-      <Row className={"gap-[8px]"}>
+      <Row className={"items-center gap-[8px]"}>
         <ShowOrHideAmount
           text={`₩${totalPriceCurrent?.toLocaleString()}`}
           className={"text-text text-[32px] font-bold"}

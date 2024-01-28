@@ -8,6 +8,11 @@ import ChartLabel from "@/components/share/chart/ChartLegend";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
+import {
+  Desktop,
+  DesktopTypeTM,
+  TabletAndMobile,
+} from "@/components/layout/responsive";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
@@ -84,40 +89,68 @@ export default function PortfolioViewChart() {
       }
       ref={ref as any}
     >
-      <Contents
-        className={"flex w-full flex-col border border-border bg-white"}
-        style={{ maxWidth: `${width / 2 - 10}px` }}
-      >
-        <DoughnutChart
-          height={366}
-          width={400}
-          data={array}
-          legend={
-            <ChartLabel
-              data={array}
-              object={list}
-              totalPrice={Number(totalPrice)}
-            />
+      <DesktopTypeTM>
+        <Contents
+          className={
+            "flex w-full flex-col border border-border bg-white p-[20px]"
           }
-        />
-      </Contents>
-      <Contents
-        className={"flex w-full flex-col border border-border bg-white"}
-        style={{ maxWidth: `${width / 2 - 10}px` }}
-      >
-        <DoughnutChart
-          height={366}
-          width={400}
-          data={array}
-          legend={
-            <ChartLabel
-              data={array}
-              object={list}
-              totalPrice={Number(totalPrice)}
-            />
+          style={{ maxWidth: `${width / 2 - 10}px` }}
+        >
+          <DoughnutChart
+            height={366}
+            width={width / 2 - 210}
+            data={array}
+            legend={
+              <ChartLabel
+                data={array}
+                object={list}
+                totalPrice={Number(totalPrice)}
+              />
+            }
+          />
+        </Contents>
+        <Contents
+          className={
+            "flex w-full flex-col border border-border bg-white p-[20px]"
           }
-        />
-      </Contents>
+          style={{ maxWidth: `${width / 2 - 10}px` }}
+        >
+          <DoughnutChart
+            height={366}
+            width={width / 2 - 210}
+            data={array}
+            legend={
+              <ChartLabel
+                data={array}
+                object={list}
+                totalPrice={Number(totalPrice)}
+              />
+            }
+          />
+        </Contents>
+      </DesktopTypeTM>
+      <TabletAndMobile>
+        <Contents
+          className={
+            "flex w-full flex-col border border-border bg-white p-[20px]"
+          }
+          style={{ maxWidth: `${width}px` }}
+        >
+          <DoughnutChart
+            height={366}
+            width={width}
+            data={array}
+            type={"mobile"}
+            legend={
+              <ChartLabel
+                data={array}
+                object={list}
+                totalPrice={Number(totalPrice)}
+              />
+            }
+          />
+        </Contents>
+      </TabletAndMobile>
     </Contents>
   );
 }

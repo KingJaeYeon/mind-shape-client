@@ -14,6 +14,7 @@ export type PieProps = {
   event?: boolean;
   data: any[];
   legend?: any;
+  type?: any;
 };
 
 export type AnimatedPieProps<Datum> = ProvidedProps<Datum> & {
