@@ -1,14 +1,11 @@
 import SelectBase from "@/components/share/radix/SelectBase";
-import { useConvenienceStore } from "@/store/convenienceStore";
-import Row from "@/components/layout/Row";
 import { cn } from "@/lib/utils";
 
 export function SelectCurrent() {
-  const { getValue, setValue } = useConvenienceStore();
   return (
     <SelectBase
       triggerClassName={"w-auto"}
-      contentClassName={"bg-white shadow-dropdown2"}
+      contentClassName={"bg-white shadow-dropdown"}
       selectClassName={
         "text-deepGray font-Inter data-[highlighted]:bg-primary-light data-[highlighted]:text-white"
       }
@@ -27,8 +24,7 @@ export function CurrentDisplayPrice({
   price: number;
   className?: string;
 }) {
-  const { getValue, setValue } = useConvenienceStore();
   return (
-    <p className={cn("font-Inter", className)}>$ {price.toLocaleString()}</p>
+    <p className={cn("font-Inter", className)}>$ {price?.toLocaleString()}</p>
   );
 }

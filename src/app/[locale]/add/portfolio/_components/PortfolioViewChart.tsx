@@ -6,13 +6,9 @@ import { IS_SHOW_CHART } from "@/constant/portfolio";
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
 import ChartLabel from "@/components/share/chart/ChartLegend";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
-import {
-  Desktop,
-  DesktopTypeTM,
-  TabletAndMobile,
-} from "@/components/layout/responsive";
+import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
+import Row from "@/components/layout/Row";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
@@ -92,12 +88,12 @@ export default function PortfolioViewChart() {
       <DesktopTypeTM>
         <Contents
           className={
-            "flex w-full flex-col border border-border bg-white p-[20px]"
+            "shadow-chart flex w-full flex-col rounded-[10px] bg-white p-[20px]"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
           <DoughnutChart
-            height={366}
+            height={330}
             width={width / 2 - 210}
             data={array}
             legend={
@@ -111,13 +107,12 @@ export default function PortfolioViewChart() {
         </Contents>
         <Contents
           className={
-            "flex w-full flex-col border border-border bg-white p-[20px]"
+            "shadow-chart flex w-full flex-col rounded-[10px] bg-white p-[20px]"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
-          {width}
           <DoughnutChart
-            height={366}
+            height={330}
             width={width / 2 - 210}
             data={array}
             legend={
@@ -132,13 +127,14 @@ export default function PortfolioViewChart() {
       </DesktopTypeTM>
       <TabletAndMobile>
         <Contents
-          className={
-            "flex w-full flex-col border border-border bg-white p-[20px]"
-          }
+          className={"flex w-full flex-col rounded-[10px] bg-white p-[20px]"}
           style={{ maxWidth: `${width}px` }}
         >
+          <Row>
+            <h3 className={"text-[18px] font-bold"}>Allocation</h3>
+          </Row>
           <DoughnutChart
-            height={366}
+            height={300}
             width={width}
             data={array}
             type={"mobile"}

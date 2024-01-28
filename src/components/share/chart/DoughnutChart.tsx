@@ -122,7 +122,7 @@ function DisplayPrice({
     <Text
       verticalAnchor="start"
       textAnchor="middle"
-      className={"break-all text-[12px]"}
+      className={"break-all text-[12px] font-bold"}
       width={200}
     >
       {displayPrice}
@@ -172,6 +172,7 @@ function AnimatedPie<Datum>({
               fontSize={9}
               textAnchor="middle"
               pointerEvents="none"
+              fontWeight={500}
             >
               {getKey(arc)}
             </text>

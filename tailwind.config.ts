@@ -80,7 +80,8 @@ const config: Config = {
         switchThumb: "0 2px 2px var(--grayscale-black)",
         dropdown:
           "rgba(128, 138, 157, 0.12) 0px 1px 2px, rgba(128, 138, 157, 0.24) 0px 8px 32px",
-        dropdown2: "0px 0px 20px (--primary-shadow-input)",
+        chart:
+          "rgba(88, 102, 126, 0.12) 0px 1px 2px, rgba(88, 102, 126, 0.08) 0px 4px 24px",
         input: "var(--focus-input-shadow) 0px 0px 0px 4px",
       },
       keyframes: {
