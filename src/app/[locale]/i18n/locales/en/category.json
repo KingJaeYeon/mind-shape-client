@@ -1,0 +1,15 @@
+{
+  "information_technology": "Information Technology",
+  "financials": "Financials",
+  "energy": "Energy",
+  "materials": "Materials",
+  "industrials": "Industrials",
+  "consumer_discretionary": "Consumer Discretionary / Cyclical",
+  "consumer_staples": "Consumer Staples / Defensive",
+  "health_care": "Health Care",
+  "telecommunication_services": "Telecommunication Services",
+  "utilities": "Utilities",
+  "real_estate": "Real Estate",
+  "currency": "Currency",
+  "crypto_currency": "Crypto Currency"
+}

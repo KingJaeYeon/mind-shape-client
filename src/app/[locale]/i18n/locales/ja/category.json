@@ -1,0 +1,15 @@
+{
+  "information_technology": "情報技術",
+  "financials": "金融",
+  "energy": "エネルギー",
+  "materials": "素材",
+  "industrials": "産業財",
+  "consumer_discretionary": "任意消費財",
+  "consumer_staples": "必須消費財",
+  "health_care": "ヘルスケア",
+  "telecommunication_services": "通信サービス",
+  "utilities": "ユーティリティ",
+  "real_estate": "不動産",
+  "currency": "通貨",
+  "crypto_currency": "仮想通貨"
+}

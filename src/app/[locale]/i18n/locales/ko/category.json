@@ -1,0 +1,15 @@
+{
+  "information_technology": "정보기술",
+  "financials": "금융",
+  "energy": "에너지",
+  "materials": "소재",
+  "industrials": "산업재",
+  "consumer_discretionary": "임의소비재",
+  "consumer_staples": "필수소비재",
+  "health_care": "헬스케어",
+  "telecommunication_services": "커뮤니케이션 서비스",
+  "utilities": "유틸리티",
+  "real_estate": "부동산",
+  "currency": "통화",
+  "crypto_currency": "암호화폐"
+}

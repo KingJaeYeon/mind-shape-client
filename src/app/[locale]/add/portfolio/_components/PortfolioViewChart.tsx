@@ -10,10 +10,11 @@ import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import TreeMapChart from "@/components/share/chart/TreeMapChart";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
-  const { data, isPending } = usePortfolio();
+  const { myList, isPending } = usePortfolio();
   const { t } = useTranslation("portfolio");
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
@@ -40,31 +41,11 @@ export default function PortfolioViewChart() {
     return null;
   }
 
-  const option1: any = {
-    title: "포트폴리오 비중 도넛 차트",
-    duration: {
-      isFixedDuration: true,
-      options: {
-        label: "현재",
-        value: "",
-      },
-    },
-  };
-  const option2: any = {
-    title: "포트폴리오 비중 트리맵 차트",
-    duration: {
-      isFixedDuration: true,
-      options: {
-        label: "현재",
-        value: "",
-      },
-    },
-  };
   if (isPending) {
     return null;
   }
 
-  const list = data?.myList.reduce((acc: any, cur: any) => {
+  const list = myList.reduce((acc: any, cur: any) => {
     acc[cur?.asset?.symbol] = {
       price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
       amount:
@@ -91,7 +72,7 @@ export default function PortfolioViewChart() {
       <DesktopTypeTM>
         <Contents
           className={
-            "shadow-chart mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px]"
+            "mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px] shadow-chart"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
@@ -110,22 +91,11 @@ export default function PortfolioViewChart() {
         </Contents>
         <Contents
           className={
-            "shadow-chart mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px]"
+            "mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px] shadow-chart"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
-          <DoughnutChart
-            height={330}
-            width={width / 2 - 210}
-            data={array}
-            legend={
-              <ChartLabel
-                data={array}
-                object={list}
-                totalPrice={Number(totalPrice)}
-              />
-            }
-          />
+          <TreeMapChart height={330} width={width / 2 - 40} />
         </Contents>
       </DesktopTypeTM>
       <TabletAndMobile>

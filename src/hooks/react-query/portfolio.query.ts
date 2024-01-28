@@ -34,6 +34,6 @@ export function usePortfolio() {
     queryKey: ["myPortfolio"],
     queryFn: getPortfolio,
   });
-
-  return { data, isPending };
+  const { myList, sum } = data ?? "";
+  return { data, isPending, myList, sum };
 }

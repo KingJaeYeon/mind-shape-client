@@ -33,6 +33,7 @@ export default function TypeAddPortfolio() {
   const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
   const { savePortfolio, isPending, data } = useAddPortfolio();
   const { t } = useTranslation("portfolio");
+  const { t: t2 } = useTranslation("category");
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -140,7 +141,7 @@ export default function TypeAddPortfolio() {
             className={"flex-1 justify-center"}
             displayText={
               !!getContentsValue("chosen")?.category?.name
-                ? getContentsValue("chosen")?.category?.name
+                ? t2(getContentsValue("chosen")?.category?.name)
                 : t("asset_type")
             }
           />
@@ -150,7 +151,7 @@ export default function TypeAddPortfolio() {
             "mt-[16px] gap-[5px] rounded-[10px] bg-weakGray px-[16px] pb-[5px] pt-[15px] text-gray"
           }
         >
-          <p className={"text-text-secondary text-[14px]"}>
+          <p className={"text-[14px] text-text-secondary"}>
             {t("total_use_price")}
           </p>
           <CurrentDisplayPrice
