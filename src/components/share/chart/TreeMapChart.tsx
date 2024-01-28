@@ -1,46 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Group } from "@visx/group";
-import {
-  Treemap,
-  hierarchy,
-  stratify,
-  treemapSquarify,
-  treemapBinary,
-  treemapDice,
-  treemapResquarify,
-  treemapSlice,
-  treemapSliceDice,
-} from "@visx/hierarchy";
-import { TileMethod } from "@visx/hierarchy/lib/types";
+import { Treemap, hierarchy, stratify, treemapSquarify } from "@visx/hierarchy";
 import shakespeare, {
   Shakespeare,
 } from "@visx/mock-data/lib/mocks/shakespeare";
-
 import { scaleLinear } from "@visx/scale";
+import { tempData } from "@/components/share/chart/pieTypes";
 
 export const color1 = "#f3e9d2";
 const color2 = "#4281a4";
 export const background = "#fff";
 
 const colorScale = scaleLinear<string>({
-  domain: [0, Math.max(...shakespeare?.map((d) => d.size ?? 0))],
+  domain: [0, Math.max(...tempData.slice(0, 30)?.map((d) => d.size ?? 0))],
   range: [color2, color1],
 });
 
 const data = stratify<Shakespeare>()
   .id((d) => d.id)
-  .parentId((d) => d.parent)(shakespeare)
+  .parentId((d) => d.parent)(tempData)
   .sum((d) => d.size ?? 0);
-
-const tileMethods: { [tile: string]: TileMethod<typeof data> } = {
-  treemapSquarify,
-  treemapBinary,
-  treemapDice,
-  treemapResquarify,
-  treemapSlice,
-  treemapSliceDice,
-};
 
 const defaultMargin = { top: 10, left: 10, right: 10, bottom: 10 };
 
@@ -55,28 +35,16 @@ export default function TreeMapChart({
   height,
   margin = defaultMargin,
 }: TreemapProps) {
-  const [tileMethod, setTileMethod] = useState<string>("treemapSquarify");
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const root = hierarchy(data).sort((a, b) => (b.value || 0) - (a.value || 0));
 
-  console.log("root::", root);
-  console.log("Shakespeare::", shakespeare);
+  console.log("root::", data);
+  console.log("Shakespeare::", shakespeare.slice(0, 30));
 
   return width < 10 ? null : (
     <div>
       <label>tile method</label>{" "}
-      <select
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => setTileMethod(e.target.value)}
-        value={tileMethod}
-      >
-        {Object.keys(tileMethods).map((tile) => (
-          <option key={tile} value={tile}>
-            {tile}
-          </option>
-        ))}
-      </select>
       <div>
         <svg width={width} height={height}>
           <rect width={width} height={height} rx={14} fill={background} />
@@ -84,7 +52,7 @@ export default function TreeMapChart({
             top={margin.top}
             root={root}
             size={[xMax, yMax]}
-            tile={tileMethods[tileMethod]}
+            tile={treemapSquarify}
             round
           >
             {(treemap) => (
@@ -129,16 +97,3 @@ export default function TreeMapChart({
     </div>
   );
 }
-
-const tempData = [
-  {
-    id: "Category",
-    parent: null,
-    size: 0,
-  },
-  {
-    id: "Category",
-    parent: null,
-    size: 0,
-  },
-];

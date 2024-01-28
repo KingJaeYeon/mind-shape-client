@@ -45,3 +45,151 @@ export const getTransformedData = (data: PiePortfolioData[]) =>
     acc[item?.symbol] = item?.price;
     return acc;
   }, {});
+
+export const tempData = [
+  {
+    id: "Category",
+    parent: null,
+    size: 0,
+  },
+  {
+    id: "C1",
+    parent: "Category",
+    size: null,
+  },
+  {
+    id: "C2",
+    parent: "Category",
+    size: null,
+  },
+  {
+    id: "C3",
+    parent: "Category",
+    size: null,
+  },
+  {
+    id: "C4",
+    parent: "C3",
+    size: null,
+  },
+  {
+    id: "Adam",
+    parent: "C4",
+    size: 5,
+  },
+  {
+    id: "Amiens",
+    parent: "C4",
+    size: 10,
+  },
+  {
+    id: "Audrey",
+    parent: "C4",
+    size: 12,
+  },
+  {
+    id: "Celia",
+    parent: "C1",
+    size: 108,
+  },
+  {
+    id: "Charles",
+    parent: "C4",
+    size: 8,
+  },
+  {
+    id: "Corin",
+    parent: "C4",
+    size: 24,
+  },
+  {
+    id: "Dennis",
+    parent: "C4",
+    size: 2,
+  },
+  {
+    id: "Duke",
+    parent: "C4",
+    size: 32,
+  },
+  {
+    id: "Frederick",
+    parent: "C4",
+    size: 20,
+  },
+  {
+    id: "Hymen",
+    parent: "C4",
+    size: 1,
+  },
+  {
+    id: "Jaques (lord)",
+    parent: "C4",
+    size: 57,
+  },
+  {
+    id: "Jaques (son)",
+    parent: "C4",
+    size: 2,
+  },
+  {
+    id: "Le Beau",
+    parent: "C4",
+    size: 14,
+  },
+  {
+    id: "Oliver",
+    parent: "C4",
+    size: 37,
+  },
+  {
+    id: "Orlando",
+    parent: "C4",
+    size: 120,
+  },
+  {
+    id: "Phebe",
+    parent: "C4",
+    size: 23,
+  },
+  {
+    id: "Rosalind",
+    parent: "C4",
+    size: 201,
+  },
+  {
+    id: "Silvius",
+    parent: "C4",
+    size: 24,
+  },
+  {
+    id: "Sir Oliver Martext",
+    parent: "C4",
+    size: 3,
+  },
+  {
+    id: "Touchstone",
+    parent: "C4",
+    size: 74,
+  },
+  {
+    id: "William",
+    parent: "C4",
+    size: 11,
+  },
+  {
+    id: "Adriana",
+    parent: "C4",
+    size: 79,
+  },
+  {
+    id: "Aegeon",
+    parent: "C4",
+    size: 17,
+  },
+  {
+    id: "Aemilia",
+    parent: "C4",
+    size: 16,
+  },
+];
