@@ -11,11 +11,13 @@
   "total_use_price": "消費高",
   "change_date": "日付の変更",
   "search": "検索",
-  "ticker": "ティッカー",
+  "ticker": "名前",
   "country": "国名",
   "investment_total": "投資総額",
   "valuation_amount": "評価額",
   "profit_loss": "利益額",
   "avg_buy_price": "平均購入価格",
-  "edit": "編集"
+  "edit": "編集",
+  "allocation": "資産構成",
+  "assets": "資産"
 }

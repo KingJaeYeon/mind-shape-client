@@ -1,6 +1,6 @@
 "use client";
 import Row from "@/components/layout/Row";
-import Button from "@/components/layout/Button";
+import ButtonBase from "@/components/layout/ButtonBase";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import React from "react";
 import { useModalStore } from "@/store/modalStore";
@@ -17,7 +17,7 @@ export function MainModalHeader({ title }: { title?: string }) {
       >
         {title}
       </h3>
-      <Button
+      <ButtonBase
         tabIndex={-1}
         onClick={(e) => {
           e.preventDefault();
@@ -25,7 +25,7 @@ export function MainModalHeader({ title }: { title?: string }) {
         }}
       >
         <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
-      </Button>
+      </ButtonBase>
     </Row>
   );
 }
@@ -36,7 +36,7 @@ export function SubModalHeader({ title }: { title?: string }) {
     <Row
       className={"ml-[-8px] items-center gap-[8px] py-[10px] text-modalTitle"}
     >
-      <Button
+      <ButtonBase
         tabIndex={-1}
         onClick={(e) => {
           e.preventDefault();
@@ -44,7 +44,7 @@ export function SubModalHeader({ title }: { title?: string }) {
         }}
       >
         <IconChevronLeft className={"h-[28px] w-[28px]"} />
-      </Button>
+      </ButtonBase>
       <Row
         className={
           "flex-1 justify-center text-[24px] font-bold sm:justify-start"

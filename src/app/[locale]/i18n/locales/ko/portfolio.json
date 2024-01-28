@@ -11,11 +11,13 @@
   "total_use_price": "사용된 총액",
   "change_date": "날짜 변경",
   "search": "검색",
-  "ticker": "티커",
+  "ticker": "이름",
   "country": "국가",
   "investment_total": "총금액",
   "valuation_amount": "평가금액",
   "profit_loss": "이익/손실",
   "avg_buy_price": "평균매수가",
-  "edit": "수정"
+  "edit": "수정",
+  "allocation": "배분",
+  "assets": "자산"
 }

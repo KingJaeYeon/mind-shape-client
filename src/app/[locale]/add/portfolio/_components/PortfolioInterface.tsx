@@ -28,11 +28,7 @@ export default function PortfolioInterface() {
   }, [data]);
 
   return (
-    <Contents
-      className={
-        "flex flex-col justify-between gap-[20px] md:flex-row md:gap-[0px]"
-      }
-    >
+    <Contents className={"flex flex-col justify-between gap-[5px] md:flex-row"}>
       <PriceView />
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />

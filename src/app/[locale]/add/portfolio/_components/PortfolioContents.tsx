@@ -26,40 +26,69 @@ export default function PortfolioContents() {
   const array: any[] = Object.values(list).sort(
     (a: any, b: any) => b.price - a.price,
   );
+
   return (
-    <Contents className={"mt-[40px] flex w-full flex-col"}>
+    <Contents className={"flex w-full flex-col"}>
       <PortfolioViewChart />
-      <Col className={"text-text font-bold"}>
-        <p className={"flex h-[75px] items-center text-[18px]"}>Assets</p>
-        <Row
-          className={
-            "h-[47px] items-center gap-[20px] border-y border-border text-[14px]"
-          }
-        >
-          <p>{t("ticker")}</p>
-          <p>{t("country")}</p>
-          <p>{t("amount")}</p>
-          <p>{t("investment_total")}</p>
-          <p>{t("valuation_amount")}</p>
-          <p>{t("profit_loss")}</p>
-          <p>{t("avg_buy_price")}</p>
-          <p>{t("edit")}</p>
-        </Row>
-        {array?.map((item) => {
-          return (
-            <Row className={"gap-[20px]"} key={item?.symbol}>
-              <p>{item?.symbol}</p>
-              <p>{item?.exChange}</p>
-              <p>{item?.amount}</p>
-              <p>{item?.price}</p>
-              <p>현재 평가금액</p>
-              <p>이익/손실</p>
-              <p>{(item?.price / item?.amount).toFixed(2)}</p>
-              <p>수정</p>
-            </Row>
-          );
-        })}
+      <Col className={"font-bold text-text"}>
+        <p className={"flex h-[75px] items-center text-[18px]"}>
+          {t("assets")}
+        </p>
+        <Contents className={"flex w-full max-w-full"}>
+          <Contents className={"w-full overflow-x-auto overflow-y-hidden"}>
+            <table className={"w-full"}>
+              <thead className={"z-1 sticky"}>
+                <tr>
+                  <Th>{t("ticker")}</Th>
+                  <Th>{t("country")}</Th>
+                  <Th>{t("amount")}</Th>
+                  <Th>{t("investment_total")}</Th>
+                  <Th>{t("valuation_amount")}</Th>
+                  <Th>{t("profit_loss")}</Th>
+                  <Th>{t("avg_buy_price")}</Th>
+                  <Th>{t("edit")}</Th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            {array?.map((item) => {
+              return (
+                <Row className={"gap-[20px]"} key={item?.symbol}>
+                  <p>{item?.symbol}</p>
+                  <p>{item?.exChange}</p>
+                  <p>{item?.amount}</p>
+                  <p>{item?.price}</p>
+                  <p>현재 평가금액</p>
+                  <p>이익/손실</p>
+                  <p>{(item?.price / item?.amount).toFixed(2)}</p>
+                  <p>수정</p>
+                </Row>
+              );
+            })}
+          </Contents>
+        </Contents>
       </Col>
     </Contents>
+  );
+}
+
+function Th({ children }: any) {
+  return (
+    <th
+      className={
+        "h-[38px] border-y border-border px-[10px] py-[11px] text-[12px]"
+      }
+    >
+      {children}
+    </th>
   );
 }

@@ -9,11 +9,12 @@ import { useEffect, useRef, useState } from "react";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
   const { data, isPending } = usePortfolio();
-
+  const { t } = useTranslation("portfolio");
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
   const isShow = getValue(IS_SHOW_CHART);
@@ -88,7 +89,7 @@ export default function PortfolioViewChart() {
       <DesktopTypeTM>
         <Contents
           className={
-            "shadow-chart flex w-full flex-col rounded-[10px] bg-white p-[20px]"
+            "shadow-chart mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px]"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
@@ -107,7 +108,7 @@ export default function PortfolioViewChart() {
         </Contents>
         <Contents
           className={
-            "shadow-chart flex w-full flex-col rounded-[10px] bg-white p-[20px]"
+            "shadow-chart mt-[40px] flex w-full flex-col rounded-[10px] bg-white p-[20px]"
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
@@ -127,11 +128,11 @@ export default function PortfolioViewChart() {
       </DesktopTypeTM>
       <TabletAndMobile>
         <Contents
-          className={"flex w-full flex-col rounded-[10px] bg-white p-[20px]"}
+          className={"flex w-full flex-col rounded-[10px] bg-white py-[20px]"}
           style={{ maxWidth: `${width}px` }}
         >
           <Row>
-            <h3 className={"text-[18px] font-bold"}>Allocation</h3>
+            <h3 className={"text-[18px] font-bold"}>{t("allocation")}</h3>
           </Row>
           <DoughnutChart
             height={300}
