@@ -43,6 +43,7 @@ export default function DoughnutChart({
 
   const innerWidth =
     type === "mobile" ? width - 120 - margin?.left - margin?.right : width - 80;
+  console.log(width);
   const innerHeight = height - margin.top - margin.bottom;
   const radius = 80; // 반지름길이
   const donutThickness = 20; // 도넛 두께

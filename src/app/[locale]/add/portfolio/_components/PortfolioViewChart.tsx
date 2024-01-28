@@ -20,7 +20,7 @@ export default function PortfolioViewChart() {
 
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
-
+  const isShow = getValue(IS_SHOW_CHART);
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -36,7 +36,7 @@ export default function PortfolioViewChart() {
         observer.unobserve(ref?.current);
       }
     };
-  }, []);
+  }, [isShow]);
 
   if (!getValue(IS_SHOW_CHART)) {
     return null;
@@ -115,6 +115,7 @@ export default function PortfolioViewChart() {
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
+          {width}
           <DoughnutChart
             height={366}
             width={width / 2 - 210}
