@@ -16,8 +16,10 @@
   "investment_total": "Investment Total",
   "valuation_amount": "Valuation Amount",
   "profit_loss": "Profit Loss",
-  "avg_buy_price": "AvgBuyPrice",
+  "avg_buy_price": "Avg. Buy Price",
   "edit": "Edit",
   "allocation": "Allocation",
-  "assets": "Assets"
+  "assets": "Assets",
+  "price": "Price",
+  "assets_holdings": "Holdings"
 }

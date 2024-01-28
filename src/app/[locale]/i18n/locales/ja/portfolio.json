@@ -19,5 +19,7 @@
   "avg_buy_price": "平均購入価格",
   "edit": "編集",
   "allocation": "資産構成",
-  "assets": "資産"
+  "assets": "資産",
+  "price": "値段",
+  "assets_holdings": "保有数"
 }

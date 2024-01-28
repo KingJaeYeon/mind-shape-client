@@ -1,10 +1,13 @@
 "use client";
 import Contents from "@/components/layout/Contents";
-import Row from "@/components/layout/Row";
 import PortfolioViewChart from "@/app/[locale]/add/portfolio/_components/PortfolioViewChart";
 import Col from "@/components/layout/Col";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import Table, { TRow } from "@/components/share/Table";
+import Text from "@/components/layout/Text";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 export default function PortfolioContents() {
   const { data, isPending } = usePortfolio();
@@ -31,49 +34,51 @@ export default function PortfolioContents() {
     <Contents className={"flex w-full flex-col"}>
       <PortfolioViewChart />
       <Col className={"font-bold text-text"}>
-        <p className={"flex h-[75px] items-center text-[18px]"}>
+        <Text className={"flex h-[75px] items-center text-[18px]"}>
           {t("assets")}
-        </p>
-        <Contents className={"flex w-full max-w-full"}>
-          <Contents className={"w-full overflow-x-auto overflow-y-hidden"}>
-            <table className={"w-full"}>
-              <thead className={"z-1 sticky"}>
-                <tr>
-                  <Th>{t("ticker")}</Th>
-                  <Th>{t("country")}</Th>
-                  <Th>{t("amount")}</Th>
-                  <Th>{t("investment_total")}</Th>
-                  <Th>{t("valuation_amount")}</Th>
-                  <Th>{t("profit_loss")}</Th>
-                  <Th>{t("avg_buy_price")}</Th>
-                  <Th>{t("edit")}</Th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-            {array?.map((item) => {
-              return (
-                <Row className={"gap-[20px]"} key={item?.symbol}>
-                  <p>{item?.symbol}</p>
-                  <p>{item?.exChange}</p>
-                  <p>{item?.amount}</p>
-                  <p>{item?.price}</p>
-                  <p>현재 평가금액</p>
-                  <p>이익/손실</p>
-                  <p>{(item?.price / item?.amount).toFixed(2)}</p>
-                  <p>수정</p>
-                </Row>
-              );
-            })}
+        </Text>
+        <Contents
+          className={"flex w-full max-w-full overflow-x-auto overflow-y-hidden"}
+        >
+          <Contents className={"isolate flex w-full flex-col"}>
+            <Table columns="minmax(115px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto)">
+              <Table.Header>
+                <Th className={"z-4 sticky left-0 justify-start bg-white"}>
+                  {t("ticker")}
+                </Th>
+                <Th>{t("price")}</Th>
+                <Th>{t("assets_holdings")}</Th>
+                <Th>{t("profit_loss")}</Th>
+                <Th>{t("amount")}</Th>
+                <Th>{t("avg_buy_price")}</Th>
+                <Th>{t("country")}</Th>
+                <Th>{t("edit")}</Th>
+              </Table.Header>
+              <Table.Body
+                data={array}
+                render={(item: any) => (
+                  <TRow
+                    key={item?.symbol}
+                    className={"cursor-pointer hover:bg-paleGray"}
+                  >
+                    <Td
+                      className={
+                        "z-4 sticky left-0 justify-start bg-white font-semibold"
+                      }
+                    >
+                      {item?.symbol}
+                    </Td>
+                    <Td>현재 주가</Td>
+                    <Td>{item?.price}</Td>
+                    <Td>이익/손실</Td>
+                    <Td>{item?.amount}</Td>
+                    <Td>{(item?.price / item?.amount).toFixed(2)}</Td>
+                    <Td>{item?.exChange}</Td>
+                    <Td>수정</Td>
+                  </TRow>
+                )}
+              />
+            </Table>
           </Contents>
         </Contents>
       </Col>
@@ -81,14 +86,40 @@ export default function PortfolioContents() {
   );
 }
 
-function Th({ children }: any) {
+function Th({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <th
-      className={
-        "h-[38px] border-y border-border px-[10px] py-[11px] text-[12px]"
-      }
+    <Text
+      className={cn(
+        "flex h-[48px] justify-end border-y border-border px-[10px] py-[11px] text-[12px]",
+        className,
+      )}
     >
       {children}
-    </th>
+    </Text>
+  );
+}
+
+function Td({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Text
+      className={cn(
+        "flex justify-end px-[10px] text-[14px] font-medium",
+        className,
+      )}
+    >
+      {children}
+    </Text>
   );
 }

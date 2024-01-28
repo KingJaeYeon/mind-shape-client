@@ -16,8 +16,10 @@
   "investment_total": "총금액",
   "valuation_amount": "평가금액",
   "profit_loss": "이익/손실",
-  "avg_buy_price": "평균매수가",
+  "avg_buy_price": "평균 매수가",
   "edit": "수정",
   "allocation": "배분",
-  "assets": "자산"
+  "assets": "자산",
+  "price": "가격",
+  "assets_holdings": "자산"
 }

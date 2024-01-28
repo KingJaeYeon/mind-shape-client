@@ -18,6 +18,7 @@ export default function PortfolioViewChart() {
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
   const isShow = getValue(IS_SHOW_CHART);
+
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -38,6 +39,7 @@ export default function PortfolioViewChart() {
   if (!getValue(IS_SHOW_CHART)) {
     return null;
   }
+
   const option1: any = {
     title: "포트폴리오 비중 도넛 차트",
     duration: {

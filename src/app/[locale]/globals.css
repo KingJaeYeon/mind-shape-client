@@ -39,7 +39,7 @@
 
 
         --bg: var(--grayscale-white);
-        --border: var(--grayscale-lightgray);
+        --border: var(--grayscale-dark-pale);
 
         --button: var(--primary);
         --button-hover: var(--primary-light);
