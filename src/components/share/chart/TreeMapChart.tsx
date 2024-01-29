@@ -72,8 +72,8 @@ export default function TreeMapChart({
                             <rect
                               width={nodeWidth}
                               height={nodeHeight}
-                              stroke={"transparent"}
-                              strokeWidth={10}
+                              stroke={"white"}
+                              strokeWidth={4}
                               fill="transparent"
                             />
                           )}
