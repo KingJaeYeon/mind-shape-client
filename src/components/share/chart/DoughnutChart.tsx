@@ -122,7 +122,7 @@ function DisplayPrice({
     <Text
       verticalAnchor="start"
       textAnchor="middle"
-      className={"break-all text-[12px] font-bold"}
+      className={"break-all text-[14px] font-bold"}
       width={200}
     >
       {displayPrice}

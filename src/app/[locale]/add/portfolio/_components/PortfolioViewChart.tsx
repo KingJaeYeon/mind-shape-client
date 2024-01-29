@@ -11,10 +11,19 @@ import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import TreeMapChart from "@/components/share/chart/TreeMapChart";
+type MyList = {
+  amount: number;
+  asset: { symbol: string; exChange: string };
+  assetId: number;
+  category: { assetType: string; name: string };
+  index: 1;
+  price: 100;
+}[];
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
-  const { myList, isPending } = usePortfolio();
+  const { myList, isPending }: { myList: MyList; isPending: boolean } =
+    usePortfolio();
   const { t } = useTranslation("portfolio");
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
@@ -55,7 +64,13 @@ export default function PortfolioViewChart() {
     return acc;
   }, {});
   let donut = [];
-  let treeMap = [];
+  let treeMap = [
+    {
+      id: "Assets",
+      parent: null,
+      size: 0,
+    },
+  ];
   for (let i = 0; i < myList.length; i++) {}
 
   console.log(myList);
