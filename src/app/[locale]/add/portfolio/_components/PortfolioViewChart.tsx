@@ -45,7 +45,7 @@ export default function PortfolioViewChart() {
     return null;
   }
 
-  const list = myList.reduce((acc: any, cur: any) => {
+  const donutChartData = myList.reduce((acc: any, cur: any) => {
     acc[cur?.asset?.symbol] = {
       price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
       amount:
@@ -54,10 +54,16 @@ export default function PortfolioViewChart() {
     };
     return acc;
   }, {});
-  const array: any[] = Object.values(list).sort(
+  let donut = [];
+  let treeMap = [];
+  for (let i = 0; i < myList.length; i++) {}
+
+  console.log(myList);
+  const sortToPrice: any[] = Object.values(donutChartData).sort(
     (a: any, b: any) => b.price - a.price,
   );
-  const totalPrice = array?.reduce((acc: any, cur: any) => {
+
+  const totalPrice = sortToPrice?.reduce((acc: any, cur: any) => {
     acc += cur?.price;
     return acc;
   }, 0);
@@ -79,11 +85,11 @@ export default function PortfolioViewChart() {
           <DoughnutChart
             height={330}
             width={width / 2 - 210}
-            data={array}
+            data={sortToPrice}
             legend={
               <ChartLabel
-                data={array}
-                object={list}
+                data={sortToPrice}
+                object={donutChartData}
                 totalPrice={Number(totalPrice)}
               />
             }
@@ -109,12 +115,12 @@ export default function PortfolioViewChart() {
           <DoughnutChart
             height={300}
             width={width}
-            data={array}
+            data={sortToPrice}
             type={"mobile"}
             legend={
               <ChartLabel
-                data={array}
-                object={list}
+                data={sortToPrice}
+                object={donutChartData}
                 totalPrice={Number(totalPrice)}
               />
             }

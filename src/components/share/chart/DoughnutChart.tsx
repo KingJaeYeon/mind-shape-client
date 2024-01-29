@@ -40,15 +40,15 @@ export default function DoughnutChart({
 }: PieProps) {
   const { getValue, setValue } = usePortfolioStore();
   const selected = getValue("portfolioSelected");
-
+  const tempMargin = type === "mobile" ? 0 : -30;
   const innerWidth =
     type === "mobile" ? width - 120 - margin?.left - margin?.right : width - 80;
 
   const innerHeight = height - margin.top - margin.bottom;
-  const radius = 80; // 반지름길이
-  const donutThickness = 20; // 도넛 두께
+  const radius = type === "mobile" ? 80 : 100; // 반지름길이
+  const donutThickness = type === "mobile" ? 20 : 30; // 도넛 두께
 
-  const centerX = innerWidth / 2;
+  const centerX = innerWidth / 2 - tempMargin;
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
 
@@ -146,9 +146,6 @@ function AnimatedPie<Datum>({
     keys: getKey,
   });
   return transitions((props, arc, { key }) => {
-    const [centroidX, centroidY] = path.centroid(arc);
-    const hasSpaceForLabel = arc.endAngle - arc.startAngle >= 0.1;
-
     return (
       <g key={key}>
         <animated.path
@@ -162,22 +159,6 @@ function AnimatedPie<Datum>({
           fill={getColor(arc)}
           onClick={() => onClickDatum(arc)}
         />
-        {hasSpaceForLabel && (
-          <animated.g style={{ opacity: props.opacity }}>
-            <text
-              fill="black"
-              x={centroidX}
-              y={centroidY}
-              dy=".33em"
-              fontSize={9}
-              textAnchor="middle"
-              pointerEvents="none"
-              fontWeight={500}
-            >
-              {getKey(arc)}
-            </text>
-          </animated.g>
-        )}
       </g>
     );
   });

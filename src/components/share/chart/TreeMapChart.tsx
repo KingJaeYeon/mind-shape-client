@@ -39,9 +39,6 @@ export default function TreeMapChart({
   const yMax = height - margin.top - margin.bottom;
   const root = hierarchy(data).sort((a, b) => (b.value || 0) - (a.value || 0));
 
-  console.log("root::", data);
-  console.log("Shakespeare::", shakespeare.slice(0, 30));
-
   return width < 10 ? null : (
     <div>
       <label>tile method</label>{" "}
