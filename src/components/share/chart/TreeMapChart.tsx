@@ -7,6 +7,7 @@ import shakespeare, {
 } from "@visx/mock-data/lib/mocks/shakespeare";
 import { scaleLinear } from "@visx/scale";
 import { tempData } from "@/components/share/chart/pieTypes";
+import { Text } from "@visx/text";
 
 export const color1 = "#f3e9d2";
 const color2 = "#4281a4";
@@ -38,7 +39,7 @@ export default function TreeMapChart({
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const root = hierarchy(data).sort((a, b) => (b.value || 0) - (a.value || 0));
-
+  console.log(root);
   return width < 10 ? null : (
     <div>
       <label>tile method</label>{" "}
@@ -53,40 +54,77 @@ export default function TreeMapChart({
             round
           >
             {(treemap) => (
-              <Group>
-                {treemap
-                  .descendants()
-                  .reverse()
-                  .map((node, i) => {
-                    const nodeWidth = node.x1 - node.x0;
-                    const nodeHeight = node.y1 - node.y0;
-                    return (
-                      <Group
-                        key={`node-${i}`}
-                        top={node.y0 + margin.top}
-                        left={node.x0 + margin.left}
-                      >
-                        {node.depth === 1 && (
-                          <rect
-                            width={nodeWidth}
-                            height={nodeHeight}
-                            stroke={background}
-                            strokeWidth={4}
-                            fill="transparent"
-                          />
-                        )}
-                        {node.depth > 2 && (
-                          <rect
-                            width={nodeWidth}
-                            height={nodeHeight}
-                            stroke={background}
-                            fill={colorScale(node.value || 0)}
-                          />
-                        )}
-                      </Group>
-                    );
-                  })}
-              </Group>
+              <>
+                <Group>
+                  {treemap
+                    .descendants()
+                    .reverse()
+                    .map((node, i) => {
+                      const nodeWidth = node.x1 - node.x0;
+                      const nodeHeight = node.y1 - node.y0;
+                      return (
+                        <Group
+                          key={`node-${i}`}
+                          top={node.y0 + margin.top}
+                          left={node.x0 + margin.left}
+                        >
+                          {node.depth === 1 && (
+                            <rect
+                              width={nodeWidth}
+                              height={nodeHeight}
+                              stroke={"transparent"}
+                              strokeWidth={10}
+                              fill="transparent"
+                            />
+                          )}
+                          {node.depth > 2 && (
+                            <rect
+                              width={nodeWidth}
+                              height={nodeHeight}
+                              stroke={background}
+                              fill={colorScale(node.value || 0)}
+                            />
+                          )}
+                        </Group>
+                      );
+                    })}
+                </Group>
+                <Group>
+                  {treemap
+                    .descendants()
+                    .reverse()
+                    .map((node, i) => {
+                      const nodeWidth = node.x1 - node.x0;
+                      const nodeHeight = node.y1 - node.y0;
+                      return (
+                        <Group
+                          key={`node-${i}`}
+                          top={node.y0 + margin.top + nodeHeight / 2}
+                          left={node.x0 + margin.left + nodeWidth / 2}
+                        >
+                          {node.depth > 2 && (
+                            // <rect
+                            //   width={nodeWidth}
+                            //   height={nodeHeight}
+                            //   stroke={background}
+                            //   fill={colorScale(node.value || 0)}
+                            // />
+                            <text
+                              dy=".33em"
+                              fontSize={9}
+                              fontFamily="Arial"
+                              textAnchor="middle"
+                              style={{ pointerEvents: "none" }}
+                              fill={"blue"}
+                            >
+                              {"name"}
+                            </text>
+                          )}
+                        </Group>
+                      );
+                    })}
+                </Group>
+              </>
             )}
           </Treemap>
         </svg>

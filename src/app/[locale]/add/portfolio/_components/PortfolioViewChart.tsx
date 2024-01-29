@@ -50,11 +50,11 @@ export default function PortfolioViewChart() {
     return null;
   }
 
-  if (isPending) {
+  if (isPending || !myList) {
     return null;
   }
 
-  const donutChartData = myList.reduce((acc: any, cur: any) => {
+  const donutChartData = myList?.reduce((acc: any, cur: any) => {
     acc[cur?.asset?.symbol] = {
       price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
       amount:
@@ -74,8 +74,8 @@ export default function PortfolioViewChart() {
   for (let i = 0; i < myList.length; i++) {}
 
   console.log(myList);
-  const sortToPrice: any[] = Object.values(donutChartData).sort(
-    (a: any, b: any) => b.price - a.price,
+  const sortToPrice: any[] = Object?.values(donutChartData)?.sort(
+    (a: any, b: any) => b?.price - a?.price,
   );
 
   const totalPrice = sortToPrice?.reduce((acc: any, cur: any) => {

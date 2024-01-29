@@ -24,6 +24,7 @@
     "@visx/scale": "^3.5.0",
     "@visx/shape": "^3.5.0",
     "@visx/text": "^3.3.0",
+    "@visx/tooltip": "^3.3.0",
     "accept-language": "^3.0.18",
     "axios": "^1.6.5",
     "clsx": "^2.1.0",

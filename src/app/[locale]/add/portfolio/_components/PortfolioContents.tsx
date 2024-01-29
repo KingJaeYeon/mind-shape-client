@@ -54,9 +54,7 @@ function List({ data }: { data: any }) {
     <Contents className={"isolate flex w-full flex-col"}>
       <Table columns="minmax(115px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto)">
         <Table.Header>
-          <Th className={"z-4 sticky left-0 justify-start bg-white"}>
-            {t("ticker")}
-          </Th>
+          <Th className={"z-4 sticky left-0 justify-start"}>{t("ticker")}</Th>
           <Th>{t("price")}</Th>
           <Th>{t("assets_holdings")}</Th>
           <Th>{t("profit_loss")}</Th>
