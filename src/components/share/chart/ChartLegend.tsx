@@ -4,6 +4,7 @@ import { getTransformedData } from "@/components/share/chart/pieTypes";
 import { usePortfolioStore } from "@/store/portfolioStore";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
+import { cn } from "@/lib/utils";
 
 export default function ChartLegend({
   data,
@@ -45,9 +46,10 @@ export default function ChartLegend({
               }}
             >
               <div
-                className={
-                  "hover:bg-gray-200 flex flex-1 rounded-full px-[5px] py-[2px] text-[14px] text-[#0D1421]"
-                }
+                className={cn(
+                  "flex flex-1 rounded-full px-[10px] py-[2px] text-[14px] text-[#0D1421] hover:bg-weakGray",
+                  selected === label.text && "bg-weakGray",
+                )}
               >
                 <div className={"flex flex-1 items-center"}>
                   <svg width={legendGlyphSize} height={legendGlyphSize}>
