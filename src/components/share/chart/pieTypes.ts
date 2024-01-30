@@ -93,11 +93,7 @@ export const tempData = [
     parent: "Assets",
     size: null,
   },
-  {
-    id: "List9",
-    parent: "Assets",
-    size: null,
-  },
+
   {
     id: "information_technology",
     parent: "List1",
@@ -138,11 +134,7 @@ export const tempData = [
     parent: "List8",
     size: null,
   },
-  {
-    id: "telecommunication_services",
-    parent: "List9",
-    size: null,
-  },
+
   { id: "YUYR", parent: "information_technology", size: 10 },
   { id: "XJLP", parent: "information_technology", size: 10 },
   { id: "MATK", parent: "information_technology", size: 10 },

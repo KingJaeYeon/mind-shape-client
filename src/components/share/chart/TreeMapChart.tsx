@@ -69,21 +69,32 @@ export default function TreeMapChart({
                           left={node.x0 + margin.left}
                         >
                           {node.depth === 1 && (
-                            <rect
-                              width={nodeWidth}
-                              height={nodeHeight}
-                              stroke={"white"}
-                              strokeWidth={4}
-                              fill="transparent"
-                            />
+                            <>
+                              <rect
+                                width={nodeWidth}
+                                height={nodeHeight + 10}
+                                y={-5}
+                                stroke={"white"}
+                                strokeWidth={4}
+                                fill="transparent"
+                              />
+                              {/*<rect*/}
+                              {/*  width={nodeWidth}*/}
+                              {/*  height={4}*/}
+                              {/*  stroke={"blue"}*/}
+                              {/*  fill={colorScale(node.value || 0)}*/}
+                              {/*/>*/}
+                            </>
                           )}
                           {node.depth > 2 && (
-                            <rect
-                              width={nodeWidth}
-                              height={nodeHeight}
-                              stroke={background}
-                              fill={colorScale(node.value || 0)}
-                            />
+                            <>
+                              <rect
+                                width={nodeWidth}
+                                height={nodeHeight}
+                                stroke={background}
+                                fill={colorScale(node.value || 0)}
+                              />
+                            </>
                           )}
                         </Group>
                       );
@@ -103,12 +114,6 @@ export default function TreeMapChart({
                           left={node.x0 + margin.left + nodeWidth / 2}
                         >
                           {node.depth > 2 && (
-                            // <rect
-                            //   width={nodeWidth}
-                            //   height={nodeHeight}
-                            //   stroke={background}
-                            //   fill={colorScale(node.value || 0)}
-                            // />
                             <text
                               dy=".33em"
                               fontSize={9}
