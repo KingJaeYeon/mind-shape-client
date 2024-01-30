@@ -71,6 +71,7 @@ export default function PortfolioViewChart() {
       size: 0,
     },
   ];
+  console.log(myList);
   for (let i = 0; i < myList.length; i++) {}
 
   // console.log(myList);
