@@ -73,7 +73,7 @@ export default function PortfolioViewChart() {
   ];
   for (let i = 0; i < myList.length; i++) {}
 
-  console.log(myList);
+  // console.log(myList);
   const sortToPrice: any[] = Object?.values(donutChartData)?.sort(
     (a: any, b: any) => b?.price - a?.price,
   );
@@ -97,6 +97,9 @@ export default function PortfolioViewChart() {
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
+          <Row>
+            <h3 className={"text-[18px] font-bold"}>{t("allocation")}</h3>
+          </Row>
           <DoughnutChart
             height={330}
             width={width / 2 - 210}
@@ -116,6 +119,11 @@ export default function PortfolioViewChart() {
           }
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
+          <Row>
+            <h3 className={"text-[18px] font-bold"}>
+              포트폴리오 비중 트리맵 차트
+            </h3>
+          </Row>
           <TreeMapChart height={330} width={width / 2 - 40} />
         </Contents>
       </DesktopTypeTM>
@@ -140,6 +148,17 @@ export default function PortfolioViewChart() {
               />
             }
           />
+        </Contents>
+        <Contents
+          className={"flex w-full flex-col rounded-[10px] bg-white py-[20px]"}
+          style={{ maxWidth: `${width}px` }}
+        >
+          <Row>
+            <h3 className={"text-[18px] font-bold"}>
+              포트폴리오 비중 트리맵 차트
+            </h3>
+          </Row>
+          <TreeMapChart height={500} width={width} type={"mobile"} />
         </Contents>
       </TabletAndMobile>
     </Contents>
