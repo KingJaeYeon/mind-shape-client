@@ -23,17 +23,18 @@ export default function PortfolioContents() {
         Number(acc[cur?.asset?.symbol]?.amount ?? 0) + Number(cur?.amount),
       symbol: cur?.asset?.symbol,
       exChange: cur?.asset?.exChange,
+      name: cur?.category?.name,
     };
     return acc;
   }, {});
 
-  const array: any[] = Object.values(list).sort(
-    (a: any, b: any) => b.price - a.price,
+  const formattedData: any[] = Object.values(list).sort(
+    (a: any, b: any) => b?.price - a?.price,
   );
 
   return (
     <Contents className={"flex w-full flex-col"}>
-      <PortfolioViewChart />
+      <PortfolioViewChart formattedData={formattedData} data={list} />
       <Col className={"font-bold text-text"}>
         <Text className={"flex h-[75px] items-center text-[18px]"}>
           {t("assets")}
@@ -41,7 +42,7 @@ export default function PortfolioContents() {
         <Contents
           className={"flex w-full max-w-full overflow-x-auto overflow-y-hidden"}
         >
-          <List data={array} />
+          <List data={formattedData} />
         </Contents>
       </Col>
     </Contents>

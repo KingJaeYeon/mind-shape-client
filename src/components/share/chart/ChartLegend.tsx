@@ -61,12 +61,13 @@ export default function ChartLegend({
                     />
                   </svg>
                   <LegendLabel align="left" margin="0 0 0 4px">
-                    {labels[i].text}
+                    {labels[i]?.text}
                   </LegendLabel>
                 </div>
                 <div>
                   <p>
-                    {((object[labels[i].text].price / totalPrice) * 100)
+                    {}
+                    {((object[labels[i]?.text]?.price / totalPrice) * 100)
                       .toFixed(2)
                       .toLocaleString() + "%"}
                   </p>

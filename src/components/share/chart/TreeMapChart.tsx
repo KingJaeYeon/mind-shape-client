@@ -31,6 +31,7 @@ export type TreemapProps = {
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   type?: string;
+  formattedData?: any;
 };
 
 export default function TreeMapChart({
@@ -38,11 +39,12 @@ export default function TreeMapChart({
   height,
   type,
   margin = defaultMargin,
+  formattedData,
 }: TreemapProps) {
   const xMax = type === "mobile" ? width : width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const root = hierarchy(data).sort((a, b) => (b.value || 0) - (a.value || 0));
-  console.log(root);
+
   const mobileMargin = type === "mobile" ? 0 : 10;
   const { t } = useTranslation("category");
   return width < 10 ? null : (
@@ -66,9 +68,7 @@ export default function TreeMapChart({
                   .map((node, i) => {
                     const nodeWidth = node.x1 - node.x0;
                     const nodeHeight = node.y1 - node.y0;
-                    if (node.depth === 1) {
-                      console.log(node);
-                    }
+
                     return (
                       <Group
                         key={`node-${i}`}

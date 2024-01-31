@@ -11,6 +11,7 @@ import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import TreeMapChart from "@/components/share/chart/TreeMapChart";
+
 type MyList = {
   amount: number;
   asset: { symbol: string; exChange: string };
@@ -20,10 +21,15 @@ type MyList = {
   price: 100;
 }[];
 
-export default function PortfolioViewChart() {
+export default function PortfolioViewChart({
+  formattedData,
+  data,
+}: {
+  formattedData: any;
+  data: any;
+}) {
   const { getValue } = useConvenienceStore();
-  const { myList, isPending }: { myList: MyList; isPending: boolean } =
-    usePortfolio();
+
   const { t } = useTranslation("portfolio");
   const ref = useRef();
   const [width, setWidth] = useState<number>(0);
@@ -49,37 +55,27 @@ export default function PortfolioViewChart() {
   if (!getValue(IS_SHOW_CHART)) {
     return null;
   }
+  console.log(formattedData);
 
-  if (isPending || !myList) {
-    return null;
-  }
-
-  const donutChartData = myList?.reduce((acc: any, cur: any) => {
-    acc[cur?.asset?.symbol] = {
-      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
-      amount:
-        Number(acc[cur?.asset?.symbol]?.amount ?? 0) + Number(cur?.amount),
-      symbol: cur?.asset?.symbol,
-    };
-    return acc;
-  }, {});
-  let donut = [];
-  let treeMap = [
-    {
-      id: "Assets",
-      parent: null,
-      size: 0,
+  const treeMapData = formattedData?.reduce(
+    (acc: any, cur: any) => {
+      acc.push({
+        id: cur?.symbol,
+        parent: "Assets",
+        size: cur?.price,
+      });
+      return acc;
     },
-  ];
-  console.log(myList);
-  for (let i = 0; i < myList.length; i++) {}
-
-  // console.log(myList);
-  const sortToPrice: any[] = Object?.values(donutChartData)?.sort(
-    (a: any, b: any) => b?.price - a?.price,
+    [
+      {
+        id: "Assets",
+        parent: null,
+        size: 0,
+      },
+    ],
   );
 
-  const totalPrice = sortToPrice?.reduce((acc: any, cur: any) => {
+  const totalPrice = formattedData?.reduce((acc: any, cur: any) => {
     acc += cur?.price;
     return acc;
   }, 0);
@@ -104,11 +100,11 @@ export default function PortfolioViewChart() {
           <DoughnutChart
             height={330}
             width={width / 2 - 210}
-            data={sortToPrice}
+            data={formattedData}
             legend={
               <ChartLabel
-                data={sortToPrice}
-                object={donutChartData}
+                data={formattedData}
+                object={data}
                 totalPrice={Number(totalPrice)}
               />
             }
@@ -125,7 +121,11 @@ export default function PortfolioViewChart() {
               포트폴리오 비중 트리맵 차트
             </h3>
           </Row>
-          <TreeMapChart height={330} width={width / 2 - 40} />
+          <TreeMapChart
+            height={330}
+            width={width / 2 - 40}
+            formattedData={formattedData}
+          />
         </Contents>
       </DesktopTypeTM>
       <TabletAndMobile>
@@ -139,12 +139,12 @@ export default function PortfolioViewChart() {
           <DoughnutChart
             height={300}
             width={width}
-            data={sortToPrice}
+            data={formattedData}
             type={"mobile"}
             legend={
               <ChartLabel
-                data={sortToPrice}
-                object={donutChartData}
+                data={formattedData}
+                object={data}
                 totalPrice={Number(totalPrice)}
               />
             }
