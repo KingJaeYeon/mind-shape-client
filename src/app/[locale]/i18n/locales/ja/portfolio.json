@@ -20,5 +20,7 @@
   "allocation": "資産構成",
   "assets": "資産",
   "price": "値段",
-  "assets_holdings": "保有数"
+  "assets_holdings": "保有数",
+  "industry_treemap_title": "業種別比重ツリーマップチャート",
+  "industry": "業種別比率"
 }

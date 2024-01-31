@@ -6,21 +6,24 @@ import { useState } from "react";
 export function ToggleGroupBaseSingle({
   options,
   className,
+  value,
+  setValue,
 }: {
   options: { value: any; label: string }[];
   className?: string;
+  value: string;
+  setValue: any;
 }) {
-  const [value, setValue] = useState(options[0]?.value);
   return (
     <ToggleGroup.Root
       type="single"
-      className={"flex"}
+      className={"flex h-[30px]"}
       value={value}
       onValueChange={(value) => {
         if (value) setValue(value);
       }}
     >
-      {options.map((option, index) => (
+      {options?.map((option, index) => (
         <ToggleGroup.Item
           disabled={value === option?.value}
           key={option.value + "-" + index}

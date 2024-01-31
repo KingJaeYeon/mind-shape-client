@@ -20,5 +20,7 @@
   "allocation": "배분",
   "assets": "자산",
   "price": "가격",
-  "assets_holdings": "자산"
+  "assets_holdings": "자산",
+  "industry_treemap_title": "업종별 비중 트리맵 차트",
+  "industry": "업종별 비중"
 }

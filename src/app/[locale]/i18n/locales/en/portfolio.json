@@ -20,5 +20,7 @@
   "allocation": "Allocation",
   "assets": "Assets",
   "price": "Price",
-  "assets_holdings": "Holdings"
+  "assets_holdings": "Holdings",
+  "industry_treemap_title": "Industry Treemap",
+  "industry": "Industry"
 }

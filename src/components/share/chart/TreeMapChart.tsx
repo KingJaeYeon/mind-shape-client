@@ -2,27 +2,13 @@
 import React from "react";
 import { Group } from "@visx/group";
 import { Treemap, hierarchy, stratify, treemapBinary } from "@visx/hierarchy";
-import shakespeare, {
-  Shakespeare,
-} from "@visx/mock-data/lib/mocks/shakespeare";
+import { Shakespeare } from "@visx/mock-data/lib/mocks/shakespeare";
 import { scaleLinear } from "@visx/scale";
-import { tempData } from "@/components/share/chart/pieTypes";
-import { Text } from "@visx/text";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
-export const color1 = "#f3e9d2";
-const color2 = "#4281a4";
+const color1 = "#338a3e";
+const color2 = "#fff";
 export const background = "#fff";
-
-const colorScale = scaleLinear<string>({
-  domain: [0, Math.max(...tempData.slice(0, 30)?.map((d) => d.size ?? 0))],
-  range: [color2, color1],
-});
-
-const data = stratify<Shakespeare>()
-  .id((d) => d.id)
-  .parentId((d) => d.parent)(tempData)
-  .sum((d) => d.size ?? 0);
 
 const defaultMargin = { top: 10, left: 10, right: 10, bottom: 10 };
 
@@ -41,6 +27,16 @@ export default function TreeMapChart({
   margin = defaultMargin,
   formattedData,
 }: TreemapProps) {
+  const colorScale = scaleLinear<string>({
+    domain: [0, Math.max(...formattedData?.map((d: any) => d.size ?? 0))],
+    range: ["#68b0ab", "#4a7c59"],
+  });
+
+  const data = stratify<Shakespeare>()
+    .id((d) => d.id)
+    .parentId((d) => d.parent)(formattedData)
+    .sum((d) => d.size ?? 0);
+
   const xMax = type === "mobile" ? width : width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
   const root = hierarchy(data).sort((a, b) => (b.value || 0) - (a.value || 0));
@@ -77,7 +73,11 @@ export default function TreeMapChart({
                       >
                         {node.depth === 1 && (
                           <>
-                            <rect width={nodeWidth} height={16} fill={"gray"} />
+                            <rect
+                              width={nodeWidth}
+                              height={16}
+                              fill={"#5c99c6"}
+                            />
                             <rect
                               width={nodeWidth}
                               height={nodeHeight}
@@ -94,7 +94,7 @@ export default function TreeMapChart({
                               textAnchor="middle"
                               fontWeight={700}
                               style={{ pointerEvents: "none" }}
-                              fill={"black"}
+                              fill={"#ffffff"}
                             >
                               {t(node.data.id ?? "")}
                             </text>
@@ -134,7 +134,7 @@ export default function TreeMapChart({
                             fontSize={type === "mobile" ? 8 : 9}
                             fontFamily="Arial"
                             textAnchor="middle"
-                            fontWeight={500}
+                            fontWeight={700}
                             style={{ pointerEvents: "none" }}
                             fill={"black"}
                           >

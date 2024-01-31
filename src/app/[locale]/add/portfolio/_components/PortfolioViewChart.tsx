@@ -6,11 +6,11 @@ import { IS_SHOW_CHART } from "@/constant/portfolio";
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
 import ChartLabel from "@/components/share/chart/ChartLegend";
 import { useEffect, useRef, useState } from "react";
-import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import TreeMapChart from "@/components/share/chart/TreeMapChart";
+import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 
 type MyList = {
   amount: number;
@@ -29,11 +29,18 @@ export default function PortfolioViewChart({
   data: any;
 }) {
   const { getValue } = useConvenienceStore();
-
   const { t } = useTranslation("portfolio");
   const ref = useRef();
+
+  const toggleOptions = [
+    { value: "allocation", label: t("allocation") },
+    { value: "industry", label: t("industry") },
+  ];
   const [width, setWidth] = useState<number>(0);
+  const [toggle, setToggle] = useState(toggleOptions[0].value);
   const isShow = getValue(IS_SHOW_CHART);
+  const toggleGroupItemClasses =
+    "border-b border-r border-t border-line px-[10px] text-[14px] text-white first:rounded-tl-[5px] first:rounded-bl-[5px] last:rounded-tr-[5px] last:rounded-br-[5px] hover:bg-primary-light focus:outline-none data-[state=on]:bg-primary-light bg-primary";
 
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
@@ -55,15 +62,15 @@ export default function PortfolioViewChart({
   if (!getValue(IS_SHOW_CHART)) {
     return null;
   }
-  console.log(formattedData);
 
   const treeMapData = formattedData?.reduce(
     (acc: any, cur: any) => {
-      acc.push({
-        id: cur?.symbol,
-        parent: "Assets",
-        size: cur?.price,
-      });
+      const isExistCategory = acc.find((item: any) => item.id === cur.name);
+      if (!isExistCategory) {
+        acc.push({ id: cur.name, parent: "Assets", size: null });
+        acc.push({ id: `list_${cur.name}`, parent: cur.name, size: 0 });
+      }
+      acc.push({ id: cur.symbol, parent: `list_${cur.name}`, size: cur.price });
       return acc;
     },
     [
@@ -74,7 +81,6 @@ export default function PortfolioViewChart({
       },
     ],
   );
-
   const totalPrice = formattedData?.reduce((acc: any, cur: any) => {
     acc += cur?.price;
     return acc;
@@ -82,9 +88,7 @@ export default function PortfolioViewChart({
 
   return (
     <Contents
-      className={
-        "flex w-full max-w-full flex-col gap-[20px] font-Inter md:flex-row"
-      }
+      className={"flex w-full max-w-full gap-[20px] font-Inter"}
       ref={ref as any}
     >
       <DesktopTypeTM>
@@ -118,13 +122,13 @@ export default function PortfolioViewChart({
         >
           <Row>
             <h3 className={"text-[18px] font-bold"}>
-              포트폴리오 비중 트리맵 차트
+              {t("industry_treemap_title")}
             </h3>
           </Row>
           <TreeMapChart
             height={330}
             width={width / 2 - 40}
-            formattedData={formattedData}
+            formattedData={treeMapData}
           />
         </Contents>
       </DesktopTypeTM>
@@ -133,33 +137,39 @@ export default function PortfolioViewChart({
           className={"flex w-full flex-col rounded-[10px] bg-white py-[20px]"}
           style={{ maxWidth: `${width}px` }}
         >
-          <Row>
-            <h3 className={"text-[18px] font-bold"}>{t("allocation")}</h3>
-          </Row>
-          <DoughnutChart
-            height={300}
-            width={width}
-            data={formattedData}
-            type={"mobile"}
-            legend={
-              <ChartLabel
-                data={formattedData}
-                object={data}
-                totalPrice={Number(totalPrice)}
-              />
-            }
-          />
-        </Contents>
-        <Contents
-          className={"flex w-full flex-col rounded-[10px] bg-white py-[20px]"}
-          style={{ maxWidth: `${width}px` }}
-        >
-          <Row>
+          <Row className={"items-center justify-between"}>
             <h3 className={"text-[18px] font-bold"}>
-              포트폴리오 비중 트리맵 차트
+              {toggle === "allocation" ? t("allocation") : t("industry")}
             </h3>
+            <ToggleGroupBaseSingle
+              value={toggle}
+              setValue={setToggle}
+              options={toggleOptions}
+              className={toggleGroupItemClasses}
+            />
           </Row>
-          <TreeMapChart height={500} width={width} type={"mobile"} />
+          {toggle === "allocation" ? (
+            <DoughnutChart
+              height={300}
+              width={width}
+              data={formattedData}
+              type={"mobile"}
+              legend={
+                <ChartLabel
+                  data={formattedData}
+                  object={data}
+                  totalPrice={Number(totalPrice)}
+                />
+              }
+            />
+          ) : (
+            <TreeMapChart
+              height={300}
+              width={width}
+              type={"mobile"}
+              formattedData={treeMapData}
+            />
+          )}
         </Contents>
       </TabletAndMobile>
     </Contents>

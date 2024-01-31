@@ -2,6 +2,7 @@
 import Text from "@/components/layout/Text";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import SelectBase from "@/components/share/radix/SelectBase";
+import { useState } from "react";
 
 const options = {
   responsive: true,
@@ -29,15 +30,16 @@ export function ChartCardTitle({ title }: { title: string }) {
 export function TextToggleButton({ options }: { options?: any }) {
   const toggleGroupItemClasses =
     "border-b border-r border-t border-line px-[10px] text-[12px] text-white first:border-l hover:bg-black focus:outline-none data-[state=on]:bg-black data-[state=on]:text-orange";
-
-  if (!options?.showToggleList) {
-    return null;
-  }
+  const [value, setValue] = useState(() => {
+    return !options?.showToggleList ? null : options[0]?.value;
+  });
 
   return (
     <ToggleGroupBaseSingle
-      options={options.options}
+      options={options?.options}
       className={toggleGroupItemClasses}
+      value={value}
+      setValue={setValue}
     />
   );
 }
