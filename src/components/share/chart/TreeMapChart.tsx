@@ -131,7 +131,7 @@ export default function TreeMapChart({
                         {node.depth > 2 && (
                           <text
                             dy=".33em"
-                            fontSize={type === "mobile" ? 8 : 9}
+                            fontSize={type === "mobile" ? 10 : 9}
                             fontFamily="Arial"
                             textAnchor="middle"
                             fontWeight={700}
