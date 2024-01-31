@@ -53,9 +53,15 @@ function List({ data }: { data: any }) {
   const { t } = useTranslation("portfolio");
   return (
     <Contents className={"isolate flex w-full flex-col"}>
-      <Table columns="minmax(115px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto) minmax(80px, auto)">
+      <Table columns="minmax(115px, auto) minmax(80px, auto) minmax(80px, auto) minmax(100px, auto) minmax(80px, auto) minmax(120px, auto) minmax(80px, auto) minmax(80px, auto)">
         <Table.Header>
-          <Th className={"z-4 sticky left-0 justify-start"}>{t("ticker")}</Th>
+          <Th
+            className={
+              "z-4 sticky left-0 h-full items-center justify-start bg-bg"
+            }
+          >
+            {t("ticker")}
+          </Th>
           <Th>{t("price")}</Th>
           <Th>{t("assets_holdings")}</Th>
           <Th>{t("profit_loss")}</Th>
@@ -73,7 +79,7 @@ function List({ data }: { data: any }) {
             >
               <Td
                 className={
-                  "z-4 sticky left-0 justify-start bg-white font-semibold"
+                  "z-4 sticky left-0 h-full items-center justify-start bg-bg font-semibold"
                 }
               >
                 {item?.symbol}
@@ -105,7 +111,7 @@ function Th({
   return (
     <Text
       className={cn(
-        "flex h-[48px] justify-end border-y border-border px-[10px] py-[11px] text-[12px]",
+        "flex h-[48px] items-center justify-end border-y border-border px-[10px] py-[11px] text-[12px]",
         className,
       )}
     >

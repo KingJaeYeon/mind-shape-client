@@ -121,9 +121,7 @@ export default function PortfolioViewChart({
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
           <Row>
-            <h3 className={"text-[18px] font-bold"}>
-              {t("industry_treemap_title")}
-            </h3>
+            <h3 className={"text-[18px] font-bold"}>{t("industry")}</h3>
           </Row>
           <TreeMapChart
             height={330}
