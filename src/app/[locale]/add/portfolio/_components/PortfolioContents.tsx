@@ -10,17 +10,20 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 export default function PortfolioContents() {
-  const { myList, isPending } = usePortfolio();
+  const { data, isPending } = usePortfolio();
   const { t } = useTranslation("portfolio");
   if (isPending) {
     return null;
   }
 
-  const list = myList?.reduce((acc: any, cur: any) => {
+  const list = data?.reduce((acc: any, cur: any) => {
+    const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
+    const amount =
+      cur?.transactionType === "BUY" ? cur?.amount : cur?.amount * -1;
+
     acc[cur?.asset?.symbol] = {
-      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + Number(cur?.price),
-      amount:
-        Number(acc[cur?.asset?.symbol]?.amount ?? 0) + Number(cur?.amount),
+      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + price,
+      amount: Number(acc[cur?.asset?.symbol]?.amount ?? 0) + amount,
       symbol: cur?.asset?.symbol,
       exChange: cur?.asset?.exChange,
       name: cur?.category?.name,
