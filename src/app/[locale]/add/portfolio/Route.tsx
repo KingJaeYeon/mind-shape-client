@@ -12,6 +12,7 @@ export default function Route() {
       setValue("symbol", undefined);
     };
   }, []);
+
   if (!!getValue("symbol")) {
     return <ViewTransactionsPage />;
   }

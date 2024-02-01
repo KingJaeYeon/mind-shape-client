@@ -4,13 +4,8 @@ import PortfolioViewChart from "@/app/[locale]/add/portfolio/_components/main/Po
 import Col from "@/components/layout/Col";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
-import Table, { TRow } from "@/components/share/Table";
 import Text from "@/components/layout/Text";
 import React from "react";
-import { cn } from "@/lib/utils";
-import { IconMore } from "@/assets";
-import Popovers from "@/components/share/radix/Popovers";
-import * as Popover from "@radix-ui/react-popover";
 import List from "@/app/[locale]/add/portfolio/_components/main/TableList";
 
 export default function PortfolioContents() {

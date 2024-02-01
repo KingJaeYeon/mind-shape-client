@@ -1,13 +1,16 @@
+"use client";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
 import { Desktop, Mobile } from "@/components/layout/responsive";
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
-import { useTranslation } from "@/app/[locale]/i18n/i18n";
 import Link from "next/link";
+import { usePortfolioStore } from "@/store/portfolioStore";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
-export default async function Header({ locale }: { locale: string }) {
-  const { t } = await useTranslation(locale, "home");
+export default function Header() {
+  const { t } = useTranslation("home");
+  const { setValue } = usePortfolioStore();
   return (
     <>
       <Desktop>
@@ -22,7 +25,14 @@ export default async function Header({ locale }: { locale: string }) {
           <Row className={"ml-[70px] gap-[30px] text-[14px]"}>
             <Link href={"/add/dividends"}>{t("dashboard")}</Link>
             <Link href={"/add/forex"}>{t("asset_view")}</Link>
-            <Link href={"/add/portfolio"}>{t("asset_add")}</Link>
+            <Link
+              href={"/add/portfolio"}
+              onClick={() => {
+                setValue("symbol", undefined);
+              }}
+            >
+              {t("asset_add")}
+            </Link>
             <Link href={"/add/realized"}>{t("community")}</Link>
             <Link href={"/add/"}>{t("setting")}</Link>
           </Row>
