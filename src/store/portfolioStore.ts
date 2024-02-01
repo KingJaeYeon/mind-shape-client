@@ -73,13 +73,29 @@ export const usePortfolioStore = create<State & Action>(
       set({ data: dataList });
     },
     getValue: (key: string) => {
-      let config = get().config;
-      return config[key];
+      switch (key) {
+        case "symbol":
+          return get().data["symbol"];
+        case "list":
+          return get().data["list"];
+        default:
+          let config = get().config;
+          return config[key];
+      }
     },
     setValue: (key: string, value: any) => {
-      let config = get().config;
-      config[key] = value;
-      set({ config });
+      switch (key) {
+        case "symbol":
+          let dataList = get().data;
+          dataList["symbol"] = value;
+          set({ data: dataList });
+          return;
+        default:
+          let config = get().config;
+          config[key] = value;
+          set({ config });
+          return;
+      }
     },
   }),
 );

@@ -4,6 +4,7 @@ import { Desktop, Mobile } from "@/components/layout/responsive";
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n";
+import Link from "next/link";
 
 export default async function Header({ locale }: { locale: string }) {
   const { t } = await useTranslation(locale, "home");
@@ -19,11 +20,11 @@ export default async function Header({ locale }: { locale: string }) {
             <HomeButtonTypeLogo />
           </Row>
           <Row className={"ml-[70px] gap-[30px] text-[14px]"}>
-            <p>{t("dashboard")}</p>
-            <p>{t("asset_view")}</p>
-            <p>{t("asset_add")}</p>
-            <p>{t("community")}</p>
-            <p>{t("setting")}</p>
+            <Link href={"/add/dividends"}>{t("dashboard")}</Link>
+            <Link href={"/add/forex"}>{t("asset_view")}</Link>
+            <Link href={"/add/portfolio"}>{t("asset_add")}</Link>
+            <Link href={"/add/realized"}>{t("community")}</Link>
+            <Link href={"/add/"}>{t("setting")}</Link>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
             <Button secondary={true} size={"sm"}>

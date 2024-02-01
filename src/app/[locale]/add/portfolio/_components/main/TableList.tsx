@@ -4,13 +4,12 @@ import Contents from "@/components/layout/Contents";
 import Table, { TRow } from "@/components/share/Table";
 import Popovers from "@/components/share/radix/Popovers";
 import { IconMore } from "@/assets";
-import * as Popover from "@radix-ui/react-popover";
-import Col from "@/components/layout/Col";
 import React from "react";
 import Text from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@/assets/IconFile";
-import Row from "@/components/layout/Row";
+import ButtonBase from "@/components/layout/ButtonBase";
+import { usePortfolioStore } from "@/store/portfolioStore";
 
 export default function List({ data }: { data: any }) {
   const { t } = useTranslation("portfolio");
@@ -62,7 +61,7 @@ export default function List({ data }: { data: any }) {
                       <IconMore />
                     </button>
                   }
-                  contents={<PopoverContent />}
+                  contents={<PopoverContent symbol={item?.symbol} />}
                 />
               </Td>
             </TRow>
@@ -72,23 +71,21 @@ export default function List({ data }: { data: any }) {
     </Contents>
   );
 }
-function PopoverContent() {
+
+function PopoverContent({ symbol }: { symbol: string }) {
+  const { setValue } = usePortfolioStore();
   return (
-    <Popover.Content
-      side={"bottom"}
-      align={"end"}
-      className="shadow-popover rounded-[10px] bg-white p-[8px]"
-      sideOffset={5}
+    <ButtonBase
+      onClick={() => {
+        setValue("symbol", symbol);
+      }}
+      className={
+        "w-[170px] cursor-pointer items-center rounded-[4px] px-[8px] py-[12px] text-[14px] hover:bg-weakGray"
+      }
     >
-      <Row
-        className={
-          "w-[170px] cursor-pointer items-center rounded-[4px] px-[8px] py-[12px] text-[14px] hover:bg-weakGray"
-        }
-      >
-        <IconFile className={"mr-[8px] h-[18px] w-[18px] text-[#808A9D]"} />
-        View transactions
-      </Row>
-    </Popover.Content>
+      <IconFile className={"mr-[8px] h-[18px] w-[18px] text-[#808A9D]"} />
+      View transactions
+    </ButtonBase>
   );
 }
 

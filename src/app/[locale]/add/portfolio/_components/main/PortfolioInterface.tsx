@@ -6,7 +6,7 @@ import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   PriceView,
   ShowChartSwitch,
-} from "@/app/[locale]/add/portfolio/_components/index";
+} from "@/app/[locale]/add/portfolio/_components";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import TypeAddPortfolio from "@/components/share/radix/dialog/main/TypeAddPortfolio";
 import DialogBase from "@/components/share/radix/DialogBase";

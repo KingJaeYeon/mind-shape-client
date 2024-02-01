@@ -1,6 +1,6 @@
 "use client";
 import Contents from "@/components/layout/Contents";
-import PortfolioViewChart from "@/app/[locale]/add/portfolio/_components/PortfolioViewChart";
+import PortfolioViewChart from "@/app/[locale]/add/portfolio/_components/main/PortfolioViewChart";
 import Col from "@/components/layout/Col";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { IconMore } from "@/assets";
 import Popovers from "@/components/share/radix/Popovers";
 import * as Popover from "@radix-ui/react-popover";
-import List from "@/app/[locale]/add/portfolio/_components/TableList";
+import List from "@/app/[locale]/add/portfolio/_components/main/TableList";
 
 export default function PortfolioContents() {
   const { data, isPending } = usePortfolio();
