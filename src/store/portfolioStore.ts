@@ -4,11 +4,10 @@ import { PiePortfolioData } from "@/components/share/chart/pieTypes";
 interface State {
   config: {
     isShowChart: boolean;
-    totalPriceCurrent: number;
-    totalPriceYesterday: number;
     portfolioSelected: string | null;
-    totalPrice:number
+    totalPrice: number;
   };
+  data: {};
   priceAndSymbol: PiePortfolioData[];
 }
 
@@ -22,10 +21,8 @@ export const usePortfolioStore = create<State & Action>(
   (set: any, get: any) => ({
     config: {
       isShowChart: true,
-      totalPriceCurrent: 0,
-      totalPriceYesterday: 0,
       portfolioSelected: null,
-      totalPrice:0
+      totalPrice: 0,
     },
     priceAndSymbol: [
       {
@@ -69,11 +66,11 @@ export const usePortfolioStore = create<State & Action>(
         price: 100000,
       },
     ],
+    data: {},
     initData: async (data: any) => {
-      let config = get().config;
-      config["totalPriceCurrent"] = data.totalPriceCurrent;
-      config["totalPriceYesterday"] = data.totalPriceYesterday;
-      set({ config });
+      let dataList = get().data;
+      dataList["list"] = data;
+      set({ data: dataList });
     },
     getValue: (key: string) => {
       let config = get().config;

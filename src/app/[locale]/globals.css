@@ -15,14 +15,14 @@
         --grayscale-dark-gray: hsla(240, 3%, 16%, 1);
         --grayscale-black: hsla(0, 0%, 0%, 1);
 
-        --chart-shadow: 0 1px 2px 0 rgba(88,102,126,.12), 0 4px 24px 0 rgba(88,102,126,.08);
+        --chart-shadow: 0 1px 2px 0 rgba(88, 102, 126, .12), 0 4px 24px 0 rgba(88, 102, 126, .08);
         --primary: #338a3e;
         --primary-light: #6fbf73;
         --primary-dark: #285e29;
         --primary-shadow-input: rgb(223, 247, 236);
         --primary-disable: rgba(51, 138, 62, 0.6);
 
-
+        --popover-shadow: 0px 8px 32px 0px rgba(128, 138, 157, 0.24), 0px 1px 2px 0px rgba(128, 138, 157, 0.12);
 
         --line: rgba(255, 255, 255, 0.2);
         --orange: #F7941D;

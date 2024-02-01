@@ -83,6 +83,7 @@ const config: Config = {
         chart:
           "rgba(88, 102, 126, 0.12) 0px 1px 2px, rgba(88, 102, 126, 0.08) 0px 4px 24px",
         input: "var(--focus-input-shadow) 0px 0px 0px 4px",
+        popover: "var(--popover-shadow)",
       },
       keyframes: {
         overlayShow: {

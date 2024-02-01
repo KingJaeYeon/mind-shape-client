@@ -41,7 +41,7 @@ const getPortfolioSymbol = (symbol: PiePortfolioData) => symbol.symbol;
 const getPortfolioPrice = (price: PiePortfolioData) => price.price;
 
 export const getTransformedData = (data: PiePortfolioData[]) =>
-  data.reduce<{ [key: string]: number }>((acc, item) => {
+  data?.reduce<{ [key: string]: number }>((acc, item) => {
     acc[item?.symbol] = item?.price;
     return acc;
   }, {});
