@@ -73,7 +73,8 @@ export default function TypeAddPortfolio() {
       amount: Number(getContentsValue("amount")),
       categoryId: getContentsValue("chosen")?.category?.index,
       assetId: getContentsValue("chosen")?.index,
-      buyAt: getContentsValue("date"),
+      transactionDate: getContentsValue("date"),
+      transactionType: "BUY",
     });
     e.preventDefault();
   }

@@ -6,7 +6,8 @@ export function addPortfolio({
   price,
   amount,
   categoryId,
-  buyAt,
+  transactionDate,
+  transactionType,
 }: AddPortfolio) {
   return request({
     url: "/portfolio",
@@ -16,7 +17,8 @@ export function addPortfolio({
       price,
       amount,
       categoryId,
-      buyAt,
+      transactionDate,
+      transactionType,
     },
   });
 }

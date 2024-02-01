@@ -3,7 +3,8 @@ export type AddPortfolio = {
   price: number;
   categoryId: number;
   assetId: number;
-  buyAt: Date;
+  transactionDate: Date;
+  transactionType: string;
 };
 
 export const IS_SHOW_CHART = "portfolioIsShowChart";
