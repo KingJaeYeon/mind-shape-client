@@ -17,6 +17,8 @@ import { useModalStore } from "@/store/modalStore";
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
+import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
+import { useState } from "react";
 
 type Chosen = {
   index: number;
@@ -34,6 +36,12 @@ export default function TypeAddPortfolio() {
   const { savePortfolio, isPending, data } = useAddPortfolio();
   const { t } = useTranslation("portfolio");
   const { t: t2 } = useTranslation("category");
+
+  const toggleOptions = [
+    { value: "BUY", label: "BUY" },
+    { value: "SELL", label: "SELL" },
+  ];
+  const [toggle, setToggle] = useState(toggleOptions[0].value);
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -74,7 +82,7 @@ export default function TypeAddPortfolio() {
       categoryId: getContentsValue("chosen")?.category?.index,
       assetId: getContentsValue("chosen")?.index,
       transactionDate: getContentsValue("date"),
-      transactionType: "BUY",
+      transactionType: toggle,
     });
     e.preventDefault();
   }
@@ -95,7 +103,16 @@ export default function TypeAddPortfolio() {
       }}
     >
       <MainModalHeader title={t("modal_add_portfolio")} />
-      <Contents className={"min-h-auto mt-[10px] flex flex-col"}>
+
+      <ToggleGroupBaseSingle
+        options={toggleOptions}
+        value={toggle}
+        setValue={setToggle}
+        className={
+          "flex h-[34px] w-full items-center justify-center break-all bg-inputReadOnly text-[14px] text-inputLabelText first:rounded-bl-[5px] first:rounded-tl-[5px] last:rounded-br-[5px] last:rounded-tr-[5px] hover:bg-paleGray focus:outline-none data-[state=on]:bg-lightGray"
+        }
+      />
+      <Contents className={"min-h-auto mt-[20px] flex flex-col"}>
         <DropDown
           setSearch={searchHandler}
           search={getContentsValue("search")}
@@ -125,14 +142,18 @@ export default function TypeAddPortfolio() {
               value={getContentsValue("price")}
               valueHandler={priceHandler}
               id={"price"}
-              label={`${t("buy_price")} (USD)`}
+              label={
+                toggle === "BUY"
+                  ? `${t("buy_price")} (USD)`
+                  : `${t("sell_price")} (USD)`
+              }
               placeholder={"0.00"}
             />
           </Col>
         </Col>
         <Row className={"mt-[16px] w-full gap-[10px]"}>
           <LabeledDisplay
-            id={"buyAt"}
+            id={"transactionDate"}
             displayText={format(getContentsValue("date"), t("date_format"))}
             className={"px-[14px]"}
             onClickHandler={buyAtOpenHandler}
@@ -153,7 +174,7 @@ export default function TypeAddPortfolio() {
           }
         >
           <p className={"text-[14px] text-text-secondary"}>
-            {t("total_use_price")}
+            {toggle === "BUY" ? t("total_use_price") : t("total_sell_price")}
           </p>
           <CurrentDisplayPrice
             price={
