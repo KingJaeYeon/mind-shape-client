@@ -8,6 +8,7 @@ import Table, { TRow } from "@/components/share/Table";
 import Text from "@/components/layout/Text";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { IconMore } from "@/assets";
 
 export default function PortfolioContents() {
   const { data, isPending } = usePortfolio();
@@ -95,7 +96,11 @@ function List({ data }: { data: any }) {
                 {(item?.price / item?.amount).toFixed(2).toLocaleString()}
               </Td>
               <Td>{item?.exChange}</Td>
-              <Td>수정</Td>
+              <Td>
+                <button>
+                  <IconMore />
+                </button>
+              </Td>
             </TRow>
           )}
         />

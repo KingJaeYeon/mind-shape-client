@@ -1,15 +1,16 @@
 import IconMenu from "@/assets/IconMenu";
 import {
   IconChart,
+  IconChartInsights,
   IconTrading,
   IconTradingDown,
-  IconChartInsights,
 } from "@/assets/IconChart";
 import { IconMoney, IconMoney2, IconMoney3 } from "@/assets/IconMoney";
-import { IconModalTrigger, IconModalClose } from "@/assets/IconModal";
+import { IconModalClose, IconModalTrigger } from "@/assets/IconModal";
 import { IconChevronDown, IconChevronLeft } from "@/assets/IconChevron";
-import { IconEyeOff, IconEye } from "@/assets/IconEye";
+import { IconEye, IconEyeOff } from "@/assets/IconEye";
 import { IconCalendar, IconLeft, IconRight } from "@/assets/IconCalendar";
+import { IconMore } from "@/assets/IconMore";
 
 export {
   IconMenu,
@@ -29,4 +30,5 @@ export {
   IconCalendar,
   IconLeft,
   IconRight,
+  IconMore,
 };
