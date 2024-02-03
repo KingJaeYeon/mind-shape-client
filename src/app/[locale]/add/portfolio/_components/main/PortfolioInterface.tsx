@@ -36,7 +36,7 @@ export default function PortfolioInterface() {
           contents={<TypeAddPortfolio />}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
-          <Button size={"sm"}>+ {t("modal_add_portfolio")}</Button>
+          <Button size={"sm"}>+ {t("add_transactions")}</Button>
         </DialogBase>
       </Row>
     </Contents>

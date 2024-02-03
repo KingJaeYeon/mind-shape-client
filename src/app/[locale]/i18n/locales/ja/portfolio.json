@@ -1,10 +1,10 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "modal_add_portfolio": "取引を追加",
+  "add_transactions": "取引を追加",
   "modal_calendar": "日時",
   "24h": "24時間",
-  "amount": "数量",
+  "quantity": "数量",
   "buy_price": "買値",
   "sell_price": "売値",
   "asset_type": "分類",
@@ -24,5 +24,7 @@
   "price": "値段",
   "assets_holdings": "保有数",
   "industry_treemap_title": "業種別比重ツリーマップチャート",
-  "industry": "業種別比率"
+  "industry": "業種別比率",
+  "transactions": "トランザクション",
+  "total_holdings": "ホールディングス合計"
 }

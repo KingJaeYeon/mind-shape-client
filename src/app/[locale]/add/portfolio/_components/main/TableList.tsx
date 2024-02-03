@@ -27,7 +27,7 @@ export default function List({ data }: { data: any }) {
           <Th>{t("price")}</Th>
           <Th>{t("assets_holdings")}</Th>
           <Th>{t("profit_loss")}</Th>
-          <Th>{t("amount")}</Th>
+          <Th>{t("quantity")}</Th>
           <Th>{t("avg_buy_price")}</Th>
           <Th>{t("country")}</Th>
           <Th>{t("edit")}</Th>

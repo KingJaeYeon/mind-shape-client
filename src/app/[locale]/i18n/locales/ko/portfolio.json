@@ -1,10 +1,10 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "modal_add_portfolio": "거래 추가",
+  "add_transactions": "거래 추가",
   "modal_calendar": "날짜 & 시간",
   "24h": "24시간",
-  "amount": "수량",
+  "quantity": "수량",
   "buy_price": "매수가",
   "sell_price": "매도가",
   "asset_type": "분류",
@@ -24,5 +24,7 @@
   "price": "가격",
   "assets_holdings": "자산",
   "industry_treemap_title": "업종별 비중 트리맵 차트",
-  "industry": "업종별 비중"
+  "industry": "업종별 비중",
+  "transactions": "거래",
+  "total_holdings": "총 보유액"
 }

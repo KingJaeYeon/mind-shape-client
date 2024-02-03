@@ -1,10 +1,10 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "modal_add_portfolio": "Add Transaction",
+  "add_transactions": "Add Transaction",
   "modal_calendar": "Date & Time",
   "24h": "24h",
-  "amount": "Amount",
+  "quantity": "Quantity",
   "buy_price": "Entry Price",
   "sell_price": "Exit Price",
   "asset_type": "Asset Type",
@@ -24,5 +24,7 @@
   "price": "Price",
   "assets_holdings": "Holdings",
   "industry_treemap_title": "Industry Treemap",
-  "industry": "Industry"
+  "industry": "Industry",
+  "transactions": "Transactions",
+  "total_holdings": "Total Holdings"
 }

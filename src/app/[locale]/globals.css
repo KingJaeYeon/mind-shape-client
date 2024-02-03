@@ -110,3 +110,9 @@
         font-family: "Inter", system-ui, sans-serif;
     }
 }
+
+body {
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif
+}

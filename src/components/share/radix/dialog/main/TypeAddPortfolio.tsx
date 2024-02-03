@@ -102,7 +102,7 @@ export default function TypeAddPortfolio() {
         wait().then(() => setValue("isOpen", false));
       }}
     >
-      <MainModalHeader title={t("modal_add_portfolio")} />
+      <MainModalHeader title={t("add_transactions")} />
 
       <ToggleGroupBaseSingle
         options={toggleOptions}
@@ -132,7 +132,7 @@ export default function TypeAddPortfolio() {
               value={getContentsValue("amount")}
               valueHandler={amountHandler}
               id={"amount"}
-              label={t("amount")}
+              label={t("quantity")}
               placeholder={"0.00"}
             />
           </Col>
@@ -189,7 +189,7 @@ export default function TypeAddPortfolio() {
           onClick={submitHandler}
           className={"mt-[20px] border-2 text-[16px]"}
         >
-          {t("modal_add_portfolio")}
+          {t("add_transactions")}
         </Button>
       </Contents>
     </form>

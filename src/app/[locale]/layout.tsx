@@ -7,7 +7,6 @@ import { Metadata, Viewport } from "next";
 import "./globals.css";
 import Footer from "@/components/share/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -39,9 +38,9 @@ export default function Root({
         />
         <title>The Mind</title>
       </head>
-      <body className={inter.className}>
+      <body>
         <QueryProvider>
-          <Header locale={locale} />
+          <Header />
           <main className={"hide-scrollbar flex w-full"}>{children}</main>
           <Footer locale={locale} />
           <ToastProvider />

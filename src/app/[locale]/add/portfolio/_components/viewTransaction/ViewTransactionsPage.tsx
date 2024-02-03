@@ -36,6 +36,7 @@ export default function ViewTransactionsPage() {
           totalAmount={detail[getValue("symbol")].amount}
         />
         <h3>{getValue("symbol")}</h3>
+        <h3>{getValue("symbol")}</h3>
         {list?.map((item: any, index: number) => {
           return <div key={index}>{item.symbol}</div>;
         })}
