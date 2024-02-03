@@ -6,12 +6,10 @@ import BackButton from "@/app/[locale]/add/portfolio/_components/viewTransaction
 import Header from "@/app/[locale]/add/portfolio/_components/viewTransaction/Header";
 import Body from "@/app/[locale]/add/portfolio/_components/viewTransaction/Body";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
-import { useRouter } from "next/navigation";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolioStore();
   const { data, isPending } = usePortfolio();
-  const { replace } = useRouter();
 
   const list = data?.filter((item: any) => {
     return item.asset.symbol === getValue("symbol");

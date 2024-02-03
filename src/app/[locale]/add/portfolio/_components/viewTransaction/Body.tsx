@@ -25,13 +25,13 @@ export default function Body({ data }: { data: any[] }) {
       </h3>
       <Table columns="repeat(auto-fit, minmax(100px, 1fr))">
         <Table.Header>
-          <Th className={"left-0 h-full items-center justify-start"}>
+          <Th className={"left-0 h-full items-center justify-start font-bold"}>
             {t("type")}
           </Th>
-          <Th className={"hidden sm:flex"}>{t("price")}</Th>
-          <Th className={"hidden sm:flex"}>{t("quantity")}</Th>
-          <Th>{t("total_price")}</Th>
-          <Th className={"hidden sm:flex"}>{t("edit")}</Th>
+          <Th className={"hidden font-bold sm:flex"}>{t("price")}</Th>
+          <Th className={"hidden font-bold sm:flex"}>{t("quantity")}</Th>
+          <Th className={"font-bold"}>{t("total_price")}</Th>
+          <Th className={"hidden font-bold sm:flex"}>{t("edit")}</Th>
         </Table.Header>
         <Table.Body
           data={data}
