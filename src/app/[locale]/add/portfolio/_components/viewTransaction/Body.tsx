@@ -41,12 +41,12 @@ export default function Body({ data }: { data: any[] }) {
                 <DesktopRow
                   item={item}
                   t={t}
-                  key={`desktop_${item?.updateAt}_${index}_${item?.symbol}`}
+                  key={`desktop_${item?.transactionDate}_${index}_${item?.symbol}`}
                 />
                 <MobileRow
                   item={item}
                   t={t}
-                  key={`mobile_${item?.updateAt}_${index}_${item?.symbol}`}
+                  key={`mobile_${item?.transactionDate}_${index}_${item?.symbol}`}
                 />
               </>
             );
@@ -64,7 +64,7 @@ function MobileRow({ item, t }: { item: any; t: any }) {
         <Td className={"left-0 h-full flex-col justify-center"}>
           <div>{item?.transactionType}</div>
           <div className={"text-[12px] text-text-secondary"}>
-            {format(item?.updateAt, t("date_format"))}
+            {format(item?.transactionDate, t("date_format"))}
           </div>
         </Td>
         <Td>
@@ -84,7 +84,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
         <Td className={"left-0 h-full flex-col justify-center"}>
           <div>{item?.transactionType}</div>
           <div className={"text-[12px] text-text-secondary"}>
-            {format(item?.updateAt, t("date_format"))}
+            {format(item?.transactionDate, t("date_format"))}
           </div>
         </Td>
         <Td className={"hidden sm:flex"}>
