@@ -1,12 +1,18 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addPortfolio, getPortfolio } from "@/service/portfolio-service";
+import {
+  addPortfolio,
+  deleteTransaction,
+  getPortfolio,
+} from "@/service/portfolio-service";
 import { useModalStore } from "@/store/modalStore";
 import toast from "react-hot-toast";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 export function useAddPortfolio() {
   const queryClient = useQueryClient();
+  const { t } = useTranslation("toast");
   const { closeHandler } = useModalStore();
   const {
     mutate: savePortfolio,
@@ -19,10 +25,10 @@ export function useAddPortfolio() {
         queryKey: ["myPortfolio"],
       });
       closeHandler();
-      toast.success("포트폴리오가 등록되었습니다.");
+      toast.success(t("add_transaction"));
     },
     onError: () => {
-      toast.error("error:: 다시 시도해 주세요.");
+      toast.error(t("error"));
     },
   });
 
@@ -34,6 +40,26 @@ export function usePortfolio() {
     queryKey: ["myPortfolio"],
     queryFn: getPortfolio,
   });
-  console.log(data);
+
   return { data, isPending };
+}
+
+export function useDeleteTransaction() {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation("toast");
+  const { closeHandler } = useModalStore();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: deleteTransaction,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["myPortfolio"] });
+      closeHandler();
+      toast.success(t("remove_transaction"));
+    },
+    onError: () => {
+      toast.error(t("error"));
+    },
+  });
+
+  return { mutate, isPending };
 }

@@ -28,5 +28,8 @@
   "industry": "Industry",
   "transactions": "Transactions",
   "total_holdings": "Total Holdings",
-  "type": "Type"
+  "type": "Type",
+  "remove_transactions": "Remove Transaction",
+  "remove": "Remove",
+  "cancel": "Cancel"
 }

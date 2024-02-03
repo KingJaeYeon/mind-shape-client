@@ -4,7 +4,14 @@ console.log("loadTextJson.js");
 
 const API_KEY = "AIzaSyD4P9BKh6yMo6_RjuA6rJhP5n8ET5szCqk";
 const SHEET_ID = "15qI35t2KVoXaH9XZhwi0uf7TSLUloMlbOvlkhAR2eX0";
-const SHEET_LIST = ["Home", "Account", "Portfolio", "Common", "Category"];
+const SHEET_LIST = [
+  "Home",
+  "Account",
+  "Portfolio",
+  "Common",
+  "Category",
+  "Toast",
+];
 
 const createJsonFormSheet = async (spreadsheetId, sheetName) => {
   const res = await axios.get(

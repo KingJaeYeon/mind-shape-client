@@ -1,0 +1,5 @@
+{
+  "remove_transaction": "Transaction was removed",
+  "add_transaction": "Transaction was added",
+  "error": "Error: network error"
+}

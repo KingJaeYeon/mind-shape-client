@@ -11,7 +11,7 @@ import { IconChevronDown, IconChevronLeft } from "@/assets/IconChevron";
 import { IconEye, IconEyeOff } from "@/assets/IconEye";
 import { IconCalendar, IconLeft, IconRight } from "@/assets/IconCalendar";
 import { IconMore } from "@/assets/IconMore";
-
+import IconEdit from "@/assets/IconEdit";
 export {
   IconMenu,
   IconChart,
@@ -31,4 +31,5 @@ export {
   IconLeft,
   IconRight,
   IconMore,
+  IconEdit,
 };

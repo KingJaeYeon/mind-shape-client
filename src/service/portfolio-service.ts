@@ -29,3 +29,13 @@ export function getPortfolio() {
     method: "GET",
   });
 }
+
+export function deleteTransaction({ index }: { index: number }) {
+  return request({
+    url: "/portfolio/delete",
+    method: "POST",
+    data: {
+      index,
+    },
+  });
+}

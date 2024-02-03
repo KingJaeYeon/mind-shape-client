@@ -1,13 +1,10 @@
 "use client";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
-import { useEffect } from "react";
-import { usePortfolioStore } from "@/store/portfolioStore";
 import {
   PriceView,
   ShowChartSwitch,
 } from "@/app/[locale]/add/portfolio/_components";
-import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 import TypeAddPortfolio from "@/components/share/radix/dialog/main/TypeAddPortfolio";
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/share/button/Button";
@@ -18,14 +15,7 @@ const data = {
   totalPriceYesterday: 900000,
 };
 export default function PortfolioInterface() {
-  const { initData } = usePortfolioStore();
-  const { data, isPending } = usePortfolio();
   const { t } = useTranslation("portfolio");
-
-  useEffect(() => {
-    if (isPending) return;
-    initData(data).then(() => console.log("initData load..."));
-  }, [data]);
 
   return (
     <Contents className={"flex flex-col justify-between gap-[5px] md:flex-row"}>

@@ -12,7 +12,6 @@ interface State {
 }
 
 interface Action {
-  initData: (data: any) => Promise<void>;
   getValue: (key: string) => any;
   setValue: (key: string, value: any) => void;
 }
@@ -67,11 +66,6 @@ export const usePortfolioStore = create<State & Action>(
       },
     ],
     data: {},
-    initData: async (data: any) => {
-      let dataList = get().data;
-      dataList["list"] = data;
-      set({ data: dataList });
-    },
     getValue: (key: string) => {
       switch (key) {
         case "symbol":

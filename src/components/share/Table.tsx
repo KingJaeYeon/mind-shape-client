@@ -50,7 +50,7 @@ export function Body({
   if (!data || !data.length)
     return <Row className={"w-full"}>There is no data</Row>;
 
-  return <section className={"w-full"}>{data?.map(render)}</section>;
+  return <div className={"w-full"}>{data?.map(render)}</div>;
 }
 
 export function TRow({

@@ -9,6 +9,11 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 import { Desktop, Mobile } from "@/components/layout/responsive";
+import IconEdit from "../../../../../../assets/IconEdit";
+import IconTrash from "@/assets/IconTrash";
+import DialogBase from "@/components/share/radix/DialogBase";
+import RemovePortfolio from "@/components/share/radix/dialog/main/RemovePortfolio";
+import ButtonBase from "@/components/layout/ButtonBase";
 
 export default function Body({ data }: { data: any[] }) {
   const { t } = useTranslation("portfolio");
@@ -30,11 +35,19 @@ export default function Body({ data }: { data: any[] }) {
         </Table.Header>
         <Table.Body
           data={data}
-          render={(item: any) => {
+          render={(item: any, index: number) => {
             return (
               <>
-                <DesktopRow item={item} t={t} />
-                <MobileRow item={item} t={t} />
+                <DesktopRow
+                  item={item}
+                  t={t}
+                  key={`desktop_${item?.updateAt}_${index}_${item?.symbol}`}
+                />
+                <MobileRow
+                  item={item}
+                  t={t}
+                  key={`mobile_${item?.updateAt}_${index}_${item?.symbol}`}
+                />
               </>
             );
           }}
@@ -49,10 +62,10 @@ function MobileRow({ item, t }: { item: any; t: any }) {
     <Mobile>
       <TRow key={item?.symbol} className={"cursor-pointer hover:bg-paleGray"}>
         <Td className={"left-0 h-full flex-col justify-center"}>
-          <p>{item?.transactionType}</p>
-          <p className={"text-[12px] text-text-secondary"}>
+          <div>{item?.transactionType}</div>
+          <div className={"text-[12px] text-text-secondary"}>
             {format(item?.updateAt, t("date_format"))}
-          </p>
+          </div>
         </Td>
         <Td>
           <ShowOrHideAmount
@@ -69,10 +82,10 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
     <Desktop>
       <TRow key={item?.symbol} className={"cursor-pointer hover:bg-paleGray"}>
         <Td className={"left-0 h-full flex-col justify-center"}>
-          <p>{item?.transactionType}</p>
-          <p className={"text-[12px] text-text-secondary"}>
+          <div>{item?.transactionType}</div>
+          <div className={"text-[12px] text-text-secondary"}>
             {format(item?.updateAt, t("date_format"))}
-          </p>
+          </div>
         </Td>
         <Td className={"hidden sm:flex"}>
           <ShowOrHideAmount
@@ -87,7 +100,17 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
             text={item?.price && item?.price.toLocaleString()}
           />
         </Td>
-        <Td className={"hidden sm:flex"}>d</Td>
+        <Td className={"hidden text-text-secondary sm:flex"}>
+          <IconEdit className={"mr-[16px] h-[16px] w-[16px]"} />
+          <DialogBase
+            contents={<RemovePortfolio index={item?.index} />}
+            className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
+          >
+            <ButtonBase>
+              <IconTrash className={"h-[16px] w-[16px]"} />
+            </ButtonBase>
+          </DialogBase>
+        </Td>
       </TRow>
     </Desktop>
   );
@@ -120,13 +143,13 @@ function Td({
   className?: string;
 }) {
   return (
-    <Text
+    <div
       className={cn(
         "flex justify-end px-[10px] text-[14px] font-medium",
         className,
       )}
     >
       {children}
-    </Text>
+    </div>
   );
 }
