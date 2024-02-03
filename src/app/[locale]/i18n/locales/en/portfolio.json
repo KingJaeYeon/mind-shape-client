@@ -11,6 +11,7 @@
   "date_format": "MM.dd.yyyy",
   "total_use_price": "Total Spent",
   "total_sell_price": "Total Income",
+  "total_price": "Total Price",
   "change_date": "Change Date",
   "search": "Search",
   "ticker": "Name",
@@ -26,5 +27,6 @@
   "industry_treemap_title": "Industry Treemap",
   "industry": "Industry",
   "transactions": "Transactions",
-  "total_holdings": "Total Holdings"
+  "total_holdings": "Total Holdings",
+  "type": "Type"
 }

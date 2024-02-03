@@ -11,6 +11,7 @@
   "date_format": "yyyy年MM月dd日",
   "total_use_price": "総支出",
   "total_sell_price": "総収入",
+  "total_price": "合計価格",
   "change_date": "日付の変更",
   "search": "検索",
   "ticker": "名前",
@@ -26,5 +27,6 @@
   "industry_treemap_title": "業種別比重ツリーマップチャート",
   "industry": "業種別比率",
   "transactions": "トランザクション",
-  "total_holdings": "ホールディングス合計"
+  "total_holdings": "ホールディングス合計",
+  "type": "タイプ"
 }

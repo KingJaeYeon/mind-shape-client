@@ -4,6 +4,7 @@ import Col from "@/components/layout/Col";
 import Contents from "@/components/layout/Contents";
 import BackButton from "@/app/[locale]/add/portfolio/_components/viewTransaction/BackButton";
 import Header from "@/app/[locale]/add/portfolio/_components/viewTransaction/Header";
+import Body from "@/app/[locale]/add/portfolio/_components/viewTransaction/Body";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolioStore();
@@ -35,11 +36,7 @@ export default function ViewTransactionsPage() {
           totalPrice={detail[getValue("symbol")].price}
           totalAmount={detail[getValue("symbol")].amount}
         />
-        <h3>{getValue("symbol")}</h3>
-        <h3>{getValue("symbol")}</h3>
-        {list?.map((item: any, index: number) => {
-          return <div key={index}>{item.symbol}</div>;
-        })}
+        <Body data={list} />
       </Col>
     </Contents>
   );

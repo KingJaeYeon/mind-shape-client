@@ -11,6 +11,7 @@
   "date_format": "yyyy년 MM월 dd일",
   "total_use_price": "사용된 총액",
   "total_sell_price": "판매총액",
+  "total_price": "총액",
   "change_date": "날짜 변경",
   "search": "검색",
   "ticker": "이름",
@@ -26,5 +27,6 @@
   "industry_treemap_title": "업종별 비중 트리맵 차트",
   "industry": "업종별 비중",
   "transactions": "거래",
-  "total_holdings": "총 보유액"
+  "total_holdings": "총 보유액",
+  "type": "유형"
 }
