@@ -24,7 +24,7 @@ export default function Header({
     <Col className={"w-full pb-[24px] pt-[28px]"}>
       <h3 className={"text-text-secondary"}>{`${name} (${symbol})`}</h3>
       <Row
-        className={"items-center justify-between gap-[8px] md:justify-start"}
+        className={"items-center justify-between gap-[8px] sm:justify-start"}
       >
         <ShowOrHideAmount
           text={`₩ ${totalPrice?.toLocaleString()}`}
@@ -33,7 +33,7 @@ export default function Header({
         <ShowOrHideTrigger className={"h-[20px] w-[24px]"} />
       </Row>
       <Col
-        className={"mt-[24px] w-full text-[12px] md:flex-row md:items-center"}
+        className={"mt-[24px] w-full text-[12px] sm:flex-row sm:items-center"}
       >
         <CardBox>
           <p className={"font-medium text-text-secondary"}>{t("quantity")}</p>
@@ -66,7 +66,7 @@ function CardBox({ children }: { children: React.ReactNode }) {
   return (
     <Row
       className={
-        "mb-[12px] h-[108px] items-center justify-between rounded-[12px] px-[24px] py-[16px] shadow-chart md:mr-[24px] md:h-auto md:flex-col md:items-start"
+        "mb-[12px] h-[108px] items-center justify-between rounded-[12px] px-[24px] py-[16px] shadow-chart sm:mr-[24px] sm:h-auto sm:flex-col sm:items-start"
       }
     >
       {children}
