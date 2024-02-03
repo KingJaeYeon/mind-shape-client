@@ -6,10 +6,12 @@ import BackButton from "@/app/[locale]/add/portfolio/_components/viewTransaction
 import Header from "@/app/[locale]/add/portfolio/_components/viewTransaction/Header";
 import Body from "@/app/[locale]/add/portfolio/_components/viewTransaction/Body";
 import { usePortfolio } from "@/hooks/react-query/portfolio.query";
+import { useRouter } from "next/navigation";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolioStore();
-  const { data } = usePortfolio();
+  const { data, isPending } = usePortfolio();
+  const { replace } = useRouter();
 
   const list = data?.filter((item: any) => {
     return item.asset.symbol === getValue("symbol");
@@ -28,15 +30,19 @@ export default function ViewTransactionsPage() {
     return acc;
   }, {});
 
+  if (!detail[getValue("symbol")]) {
+    setValue("symbol", undefined);
+  }
+
   return (
     <Contents className={"w-full max-w-[1230px]"}>
       <Col className={"w-full items-start"}>
         <BackButton />
         <Header
-          symbol={detail[getValue("symbol")].symbol}
-          name={detail[getValue("symbol")].name}
-          totalPrice={detail[getValue("symbol")].price}
-          totalAmount={detail[getValue("symbol")].amount}
+          symbol={detail[getValue("symbol")]?.symbol}
+          name={detail[getValue("symbol")]?.name}
+          totalPrice={detail[getValue("symbol")]?.price}
+          totalAmount={detail[getValue("symbol")]?.amount}
         />
         <Body data={list} />
       </Col>

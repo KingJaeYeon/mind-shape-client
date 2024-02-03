@@ -46,7 +46,7 @@ export default function Header({
             {t("avg_buy_price")}
           </p>
           <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
-            <ShowOrHideAmount text={`₩ ${avgPrice.toFixed(2)}`} />
+            <ShowOrHideAmount text={`₩ ${avgPrice?.toFixed(2)}`} />
           </h3>
         </CardBox>
         <CardBox>
@@ -54,7 +54,7 @@ export default function Header({
             {t("total_holdings")}
           </p>
           <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
-            <ShowOrHideAmount text={`₩ ${totalPrice.toLocaleString()}`} />
+            <ShowOrHideAmount text={`₩ ${totalPrice?.toLocaleString()}`} />
           </h3>
         </CardBox>
       </Col>
