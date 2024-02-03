@@ -54,7 +54,7 @@ export default function Header({
             {t("total_holdings")}
           </p>
           <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
-            <ShowOrHideAmount text={`₩ ${totalPrice}`} />
+            <ShowOrHideAmount text={`₩ ${totalPrice.toLocaleString()}`} />
           </h3>
         </CardBox>
       </Col>
