@@ -25,7 +25,7 @@ export default function DialogBase({
   setIsOpen: any;
   className?: string;
 }) {
-  const { getValue, setValue, closeHandler } = useModalStore();
+  const { setValue } = useModalStore();
 
   return (
     <Dialog.Root

@@ -8,7 +8,6 @@ interface Props {
 
   getContentsValue: (key: string) => any;
   setContentsValue: (key: string, value: any) => void;
-  closeHandler: () => void;
   backHandler: () => void;
   getValue: (key: string) => any;
   setValue: (key: string, value: any) => void;
@@ -29,16 +28,6 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
     const contentsValue = get().contentsValue;
     contentsValue[key] = value;
     set({ contentsValue });
-  },
-  closeHandler: () => {
-    set({
-      isOpen: false,
-      mainContents: undefined,
-      subContents: undefined,
-      contentsValue: {
-        date: new Date(),
-      },
-    });
   },
   backHandler: () => {
     set({

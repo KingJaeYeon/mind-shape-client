@@ -6,8 +6,13 @@ import React from "react";
 import { useModalStore } from "@/store/modalStore";
 import { IconChevronLeft } from "@/assets";
 
-export function MainModalHeader({ title }: { title?: string }) {
-  const { closeHandler } = useModalStore();
+export function MainModalHeader({
+  title,
+  setIsOpen,
+}: {
+  title?: string;
+  setIsOpen: any;
+}) {
   return (
     <Row className={"py-[10px] text-modalTitle"}>
       <h3
@@ -21,7 +26,7 @@ export function MainModalHeader({ title }: { title?: string }) {
         tabIndex={-1}
         onClick={(e) => {
           e.preventDefault();
-          closeHandler();
+          setIsOpen(false);
         }}
       >
         <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />

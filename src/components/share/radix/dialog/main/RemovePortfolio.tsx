@@ -13,7 +13,7 @@ export default function RemovePortfolio({
   setIsOpen: any;
 }) {
   const { t } = useTranslation("portfolio");
-  const { mutate, isPending } = useDeleteTransaction();
+  const { mutate, isPending } = useDeleteTransaction({ setIsOpen });
   return (
     <form
       onSubmit={(event) => {
@@ -21,7 +21,7 @@ export default function RemovePortfolio({
         wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("remove_transactions")} />
+      <MainModalHeader title={t("remove_transactions")} setIsOpen={setIsOpen} />
       <div className={"mb-[32px] text-[14px] text-text-secondary"}>
         Are you sure you want to remove this transaction?
       </div>

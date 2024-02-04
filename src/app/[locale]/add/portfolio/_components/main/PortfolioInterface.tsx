@@ -9,6 +9,7 @@ import TypeAddPortfolio from "@/components/share/radix/dialog/main/TypeAddPortfo
 import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import { useState } from "react";
 
 const data = {
   totalPriceCurrent: 1000000,
@@ -16,14 +17,16 @@ const data = {
 };
 export default function PortfolioInterface() {
   const { t } = useTranslation("portfolio");
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Contents className={"flex flex-col justify-between gap-[5px] md:flex-row"}>
       <PriceView />
       <Row className={"h-min items-center justify-between gap-[20px]"}>
         <ShowChartSwitch />
         <DialogBase
-          contents={<TypeAddPortfolio />}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          contents={<TypeAddPortfolio setIsOpen={setIsOpen} />}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
           <Button size={"sm"}>+ {t("add_transactions")}</Button>

@@ -6,14 +6,12 @@ import {
   deleteTransaction,
   getPortfolio,
 } from "@/service/portfolio-service";
-import { useModalStore } from "@/store/modalStore";
 import toast from "react-hot-toast";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
-export function useAddPortfolio() {
+export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
   const queryClient = useQueryClient();
   const { t } = useTranslation("toast");
-  const { closeHandler } = useModalStore();
   const {
     mutate: savePortfolio,
     data,
@@ -24,7 +22,7 @@ export function useAddPortfolio() {
       await queryClient.invalidateQueries({
         queryKey: ["myPortfolio"],
       });
-      closeHandler();
+      setIsOpen(false);
       toast.success(t("add_transaction"));
     },
     onError: () => {
@@ -44,17 +42,16 @@ export function usePortfolio() {
   return { data, isPending };
 }
 
-export function useDeleteTransaction() {
+export function useDeleteTransaction({ setIsOpen }: { setIsOpen: any }) {
   const queryClient = useQueryClient();
   const { t } = useTranslation("toast");
-  const { closeHandler } = useModalStore();
 
   const { mutate, isPending } = useMutation({
     mutationFn: deleteTransaction,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["myPortfolio"] });
-      closeHandler();
       toast.success(t("remove_transaction"));
+      setIsOpen(false);
     },
     onError: () => {
       toast.error(t("error"));

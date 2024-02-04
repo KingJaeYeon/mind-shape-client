@@ -29,11 +29,11 @@ type Chosen = {
     name: string;
   };
 };
-export default function TypeAddPortfolio() {
+export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
   const { setValue, getContentsValue, setContentsValue } = useModalStore();
   const { debouncedValue } = useDebounce(getContentsValue("search"));
   const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
-  const { savePortfolio, isPending, data } = useAddPortfolio();
+  const { savePortfolio, isPending } = useAddPortfolio({ setIsOpen });
   const { t } = useTranslation("portfolio");
   const { t: t2 } = useTranslation("category");
 
@@ -99,10 +99,10 @@ export default function TypeAddPortfolio() {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        wait().then(() => setValue("isOpen", false));
+        wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("add_transactions")} />
+      <MainModalHeader title={t("add_transactions")} setIsOpen={setIsOpen} />
 
       <ToggleGroupBaseSingle
         options={toggleOptions}
