@@ -3,15 +3,22 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
 import { useModalStore } from "@/store/modalStore";
 import { useDeleteTransaction } from "@/hooks/react-query/portfolio.query";
+import { wait } from "@/components/share/radix/DialogBase";
 
-export default function RemovePortfolio({ index }: { index: number }) {
+export default function RemovePortfolio({
+  index,
+  setIsOpen,
+}: {
+  index: number;
+  setIsOpen: any;
+}) {
   const { t } = useTranslation("portfolio");
-  const { closeHandler } = useModalStore();
   const { mutate, isPending } = useDeleteTransaction();
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        wait().then(() => setIsOpen(false));
       }}
     >
       <MainModalHeader title={t("remove_transactions")} />
@@ -29,7 +36,7 @@ export default function RemovePortfolio({ index }: { index: number }) {
       <Button
         secondary={true}
         className={"mt-[6px] w-full"}
-        onClick={closeHandler}
+        onClick={() => setIsOpen(false)}
       >
         {t("cancel")}
       </Button>

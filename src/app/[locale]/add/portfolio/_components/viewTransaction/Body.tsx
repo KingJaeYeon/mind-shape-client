@@ -3,7 +3,7 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Col from "@/components/layout/Col";
 import Table, { TRow } from "@/components/share/Table";
 
-import React from "react";
+import React, { useState } from "react";
 import Text from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -78,6 +78,7 @@ function MobileRow({ item, t }: { item: any; t: any }) {
 }
 
 function DesktopRow({ item, t }: { item: any; t: any }) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <Desktop>
       <TRow key={item?.symbol} className={"cursor-pointer hover:bg-paleGray"}>
@@ -103,7 +104,11 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
         <Td className={"hidden text-text-secondary sm:flex"}>
           <IconEdit className={"mr-[16px] h-[16px] w-[16px]"} />
           <DialogBase
-            contents={<RemovePortfolio index={item?.index} />}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            contents={
+              <RemovePortfolio index={item?.index} setIsOpen={setIsOpen} />
+            }
             className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
           >
             <ButtonBase>

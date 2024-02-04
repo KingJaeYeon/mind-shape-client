@@ -15,24 +15,28 @@ export const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
 export default function DialogBase({
   children,
   contents,
+  isOpen,
+  setIsOpen,
   className,
 }: {
   children: React.ReactNode;
   contents: any;
+  isOpen: boolean;
+  setIsOpen: any;
   className?: string;
 }) {
   const { getValue, setValue, closeHandler } = useModalStore();
 
   return (
     <Dialog.Root
-      open={getValue("isOpen")}
+      open={isOpen}
       onOpenChange={(open) => {
         if (!open) {
           if (confirm("정말 닫으시겠습니다?")) {
-            closeHandler();
+            setIsOpen(false);
           }
         } else {
-          setValue("isOpen", open);
+          setIsOpen(open);
         }
       }}
     >
@@ -46,7 +50,7 @@ export default function DialogBase({
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
-          data-state={getValue("isOpen") ? "open" : "closed"}
+          data-state={isOpen ? "open" : "closed"}
           className={
             "fixed inset-0 z-[999] bg-dialogOverlay backdrop-blur-[4px] data-[state=open]:animate-overlayShow"
           }
