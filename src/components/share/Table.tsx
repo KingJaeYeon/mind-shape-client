@@ -46,7 +46,15 @@ export function Body({
 }) {
   if (isLoading) return <div>Loading...</div>;
   if (!data || !data?.length)
-    return <Row className={"w-full"}>There is no data</Row>;
+    return (
+      <Row
+        className={
+          "flex h-[60px] items-center justify-start border-y border-border px-[10px] py-[11px] text-[15px]"
+        }
+      >
+        There is no data
+      </Row>
+    );
 
   return data?.map(render);
 }
