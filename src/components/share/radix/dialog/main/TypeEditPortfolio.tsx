@@ -1,10 +1,10 @@
 "use client";
 
-import useDebounce from "@/hooks/useDebounce";
-import { useSearchAsset } from "@/hooks/useSearchAsset";
-import { useAddPortfolio } from "@/hooks/react-query/portfolio.query";
+import {
+  useAddPortfolio,
+  useUpdateTransaction,
+} from "@/hooks/react-query/portfolio.query";
 import Contents from "@/components/layout/Contents";
-import DropDown from "@/components/share/input/DropDown";
 import Col from "@/components/layout/Col";
 import LabeledInput from "@/components/share/input/LabeledInput";
 import Row from "@/components/layout/Row";
@@ -17,8 +17,6 @@ import { useModalStore } from "@/store/modalStore";
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
-import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
-import { useState } from "react";
 
 type Chosen = {
   index: number;
@@ -29,19 +27,17 @@ type Chosen = {
     name: string;
   };
 };
-export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
+export default function TypeEditPortfolio({
+  item,
+  setIsOpen,
+}: {
+  item: any;
+  setIsOpen: any;
+}) {
   const { setValue, getContentsValue, setContentsValue } = useModalStore();
-  const { debouncedValue } = useDebounce(getContentsValue("search"));
-  const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
-  const { savePortfolio, isPending } = useAddPortfolio({ setIsOpen });
+  const { mutate, isPending } = useUpdateTransaction({ setIsOpen });
   const { t } = useTranslation("portfolio");
   const { t: t2 } = useTranslation("category");
-
-  const toggleOptions = [
-    { value: "BUY", label: "BUY" },
-    { value: "SELL", label: "SELL" },
-  ];
-  const [toggle, setToggle] = useState(toggleOptions[0].value);
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -71,30 +67,20 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
     typeof getContentsValue("amount") === "number" &&
     getContentsValue("amount") > 0 &&
     typeof getContentsValue("price") === "number" &&
-    getContentsValue("price") > 0 &&
-    !!getContentsValue("chosen")?.name
+    getContentsValue("price") > 0
   );
 
   async function submitHandler(e: any) {
-    savePortfolio({
+    mutate({
       price: Number(getContentsValue("price")),
       amount: Number(getContentsValue("amount")),
-      categoryId: getContentsValue("chosen")?.category?.index,
-      assetId: getContentsValue("chosen")?.index,
+      index: item.index,
       transactionDate: getContentsValue("date"),
-      transactionType: toggle,
     });
     e.preventDefault();
   }
 
-  function searchHandler(value: string) {
-    setContentsValue("search", value);
-  }
-
-  function chosenHandler(value: string) {
-    setContentsValue("chosen", value);
-  }
-
+  console.log(item);
   return (
     <form
       onSubmit={(event) => {
@@ -102,27 +88,8 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
         wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("add_transaction")} setIsOpen={setIsOpen} />
-
-      <ToggleGroupBaseSingle
-        options={toggleOptions}
-        value={toggle}
-        setValue={setToggle}
-        className={
-          "flex h-[34px] w-full items-center justify-center break-all bg-inputReadOnly text-[14px] text-inputLabelText first:rounded-bl-[5px] first:rounded-tl-[5px] last:rounded-br-[5px] last:rounded-tr-[5px] hover:bg-paleGray focus:outline-none data-[state=on]:bg-lightGray"
-        }
-      />
-      <Contents className={"min-h-auto mt-[20px] flex flex-col"}>
-        <DropDown
-          setSearch={searchHandler}
-          search={getContentsValue("search")}
-          isLoad={isLoad}
-          list={getContentsValue("search") ? searchResult : initList}
-          chosen={getContentsValue("chosen")}
-          setChosen={chosenHandler}
-          placeholder={"Search Ticker..."}
-        />
-
+      <MainModalHeader title={t("edit_transaction")} setIsOpen={setIsOpen} />
+      <Contents className={"min-h-auto flex flex-col"}>
         <Col
           className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}
         >
@@ -157,11 +124,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
           <LabeledDisplay
             id={"dividendsDay"}
             className={"flex-1 justify-center"}
-            displayText={
-              !!getContentsValue("chosen")?.category?.name
-                ? t2(getContentsValue("chosen")?.category?.name)
-                : t("asset_type")
-            }
+            displayText={t2(item.category?.name)}
           />
         </Row>
         <Col
@@ -170,7 +133,9 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
           }
         >
           <p className={"text-[14px] text-text-secondary"}>
-            {toggle === "BUY" ? t("total_use_price") : t("total_sell_price")}
+            {item?.transactionType === "BUY"
+              ? t("total_use_price")
+              : t("total_sell_price")}
           </p>
           <CurrentDisplayPrice
             price={
@@ -185,7 +150,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
           onClick={submitHandler}
           className={"mt-[20px] border-2 text-[16px]"}
         >
-          {t("add_transaction")}
+          {t("edit_transaction")}
         </Button>
       </Contents>
     </form>

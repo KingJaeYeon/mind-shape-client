@@ -6,7 +6,7 @@ import Table, { TRow } from "@/components/share/Table";
 import React, { useState } from "react";
 import Text from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 import { Desktop, Mobile } from "@/components/layout/responsive";
 import IconEdit from "../../../../../../assets/IconEdit";
@@ -14,6 +14,8 @@ import IconTrash from "@/assets/IconTrash";
 import DialogBase from "@/components/share/radix/DialogBase";
 import RemovePortfolio from "@/components/share/radix/dialog/main/RemovePortfolio";
 import ButtonBase from "@/components/layout/ButtonBase";
+import TypeEditPortfolio from "@/components/share/radix/dialog/main/TypeEditPortfolio";
+import { useModalStore } from "@/store/modalStore";
 
 export default function Body({ data }: { data: any[] }) {
   const { t } = useTranslation("portfolio");
@@ -38,16 +40,12 @@ export default function Body({ data }: { data: any[] }) {
           render={(item: any, index: number) => {
             return (
               <>
-                <DesktopRow
-                  item={item}
-                  t={t}
-                  key={`desktop_${item?.transactionDate}_${index}_${item?.symbol}`}
-                />
-                <MobileRow
-                  item={item}
-                  t={t}
-                  key={`mobile_${item?.transactionDate}_${index}_${item?.symbol}`}
-                />
+                <Desktop>
+                  <DesktopRow item={item} t={t} key={`desktop_${index}`} />
+                </Desktop>
+                <Mobile>
+                  <MobileRow item={item} t={t} key={`mobile_${index}`} />
+                </Mobile>
               </>
             );
           }}
@@ -59,65 +57,85 @@ export default function Body({ data }: { data: any[] }) {
 
 function MobileRow({ item, t }: { item: any; t: any }) {
   return (
-    <Mobile>
-      <TRow key={item?.symbol} className={"cursor-pointer hover:bg-paleGray"}>
-        <Td className={"left-0 h-full flex-col justify-center"}>
-          <div>{item?.transactionType}</div>
-          <div className={"text-[12px] text-text-secondary"}>
-            {format(item?.transactionDate, t("date_format"))}
-          </div>
-        </Td>
-        <Td>
-          <ShowOrHideAmount
-            text={item?.price && item?.price.toLocaleString()}
-          />
-        </Td>
-      </TRow>
-    </Mobile>
+    <TRow className={"cursor-pointer hover:bg-paleGray"}>
+      <Td className={"left-0 h-full flex-col justify-center"}>
+        <div>{item?.transactionType}</div>
+        <div className={"text-[12px] text-text-secondary"}>
+          {format(item?.transactionDate, t("date_format"))}
+        </div>
+      </Td>
+      <Td>
+        <ShowOrHideAmount text={item?.price && item?.price.toLocaleString()} />
+      </Td>
+    </TRow>
   );
 }
 
 function DesktopRow({ item, t }: { item: any; t: any }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { setContentsValue } = useModalStore();
   return (
-    <Desktop>
-      <TRow key={item?.symbol} className={"cursor-pointer hover:bg-paleGray"}>
-        <Td className={"left-0 h-full flex-col justify-center"}>
-          <div>{item?.transactionType}</div>
-          <div className={"text-[12px] text-text-secondary"}>
-            {format(item?.transactionDate, t("date_format"))}
-          </div>
-        </Td>
-        <Td className={"hidden sm:flex"}>
-          <ShowOrHideAmount
-            text={(item?.price / item?.amount).toFixed(2).toLocaleString()}
-          />
-        </Td>
-        <Td className={"hidden sm:flex"}>
-          <ShowOrHideAmount text={item?.amount} />
-        </Td>
-        <Td>
-          <ShowOrHideAmount
-            text={item?.price && item?.price.toLocaleString()}
-          />
-        </Td>
-        <Td className={"hidden text-text-secondary sm:flex"}>
-          <IconEdit className={"mr-[16px] h-[16px] w-[16px]"} />
-          <DialogBase
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            contents={
-              <RemovePortfolio index={item?.index} setIsOpen={setIsOpen} />
-            }
-            className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
+    <TRow className={"cursor-pointer hover:bg-paleGray"}>
+      <Td className={"left-0 h-full flex-col justify-center"}>
+        <div>{item?.transactionType}</div>
+        <div className={"text-[12px] text-text-secondary"}>
+          {format(item?.transactionDate, t("date_format"))}
+        </div>
+      </Td>
+      <Td className={"hidden sm:flex"}>
+        <ShowOrHideAmount
+          text={(item?.price / item?.amount).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        />
+      </Td>
+      <Td className={"hidden sm:flex"}>
+        <ShowOrHideAmount text={item?.amount} />
+      </Td>
+      <Td>
+        <ShowOrHideAmount
+          text={
+            item?.price &&
+            (item?.price).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          }
+        />
+      </Td>
+      <Td className={"hidden text-text-secondary sm:flex"}>
+        <DialogBase
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          contents={<TypeEditPortfolio setIsOpen={setIsOpen} item={item} />}
+          className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
+        >
+          <ButtonBase
+            onClick={() => {
+              setContentsValue("amount", item?.amount);
+              setContentsValue("price", item?.price / item.amount);
+              const formattedDate = parseISO(item?.transactionDate);
+              setContentsValue("date", formattedDate);
+            }}
           >
-            <ButtonBase>
-              <IconTrash className={"h-[16px] w-[16px]"} />
-            </ButtonBase>
-          </DialogBase>
-        </Td>
-      </TRow>
-    </Desktop>
+            <IconEdit className={"mr-[16px] h-[16px] w-[16px]"} />
+          </ButtonBase>
+        </DialogBase>
+        <DialogBase
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          contents={
+            <RemovePortfolio index={item?.index} setIsOpen={setIsOpen} />
+          }
+          className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
+        >
+          <ButtonBase>
+            <IconTrash className={"h-[16px] w-[16px]"} />
+          </ButtonBase>
+        </DialogBase>
+      </Td>
+    </TRow>
   );
 }
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const Desktop = ({

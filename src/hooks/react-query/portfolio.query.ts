@@ -5,6 +5,7 @@ import {
   addPortfolio,
   deleteTransaction,
   getPortfolio,
+  updateTransaction,
 } from "@/service/portfolio-service";
 import toast from "react-hot-toast";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
@@ -55,6 +56,25 @@ export function useDeleteTransaction({ setIsOpen }: { setIsOpen: any }) {
     },
     onError: () => {
       toast.error(t("error"));
+    },
+  });
+
+  return { mutate, isPending };
+}
+
+export function useUpdateTransaction({ setIsOpen }: { setIsOpen: any }) {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation("toast");
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateTransaction,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["myPortfolio"] });
+      toast.success(t("add_transaction"));
+      setIsOpen(false);
+    },
+    onError: (e) => {
+      toast.error(t("error2", { message: e.message }));
     },
   });
 

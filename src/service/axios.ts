@@ -23,12 +23,22 @@ instance.interceptors.response.use(async (res) => {
 const onSuccess = function (response: any) {
   return response.data;
 };
+const onError = function (error: any) {
+  if (error?.response?.status) {
+    const message = error.response.data.message ?? "uncaught error";
+    const status = error.response.status;
+
+    console.log(message + ", " + status);
+    throw new Error(message, { cause: { status } });
+  }
+
+  throw new Error("uncaught error");
+};
 
 export const request = async function (options: any) {
-  return instance(options)
-    .then(onSuccess)
-    .catch(() => console.log("error"));
+  return instance(options).then(onSuccess).catch(onError);
 };
+
 export const changeServerLang = (lang: string) => {
   console.log("changeServerLang", lang);
   instance.defaults.headers.common["x-lang"] = lang;

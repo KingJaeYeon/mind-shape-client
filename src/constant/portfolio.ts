@@ -6,5 +6,11 @@ export type AddPortfolio = {
   transactionDate: Date;
   transactionType: string;
 };
+export type UpdatePortfolio = {
+  price: number;
+  amount: number;
+  index: number;
+  transactionDate: Date;
+};
 
 export const IS_SHOW_CHART = "portfolioIsShowChart";

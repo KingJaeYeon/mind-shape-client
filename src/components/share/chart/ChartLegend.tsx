@@ -15,10 +15,9 @@ export default function ChartLegend({
   object: any;
   totalPrice: number;
 }) {
-  const { getValue, setValue, priceAndSymbol } = usePortfolioStore();
+  const { getValue, setValue } = usePortfolioStore();
   const selected = getValue("portfolioSelected");
 
-  const transformedData = getTransformedData(priceAndSymbol);
   const legendGlyphSize = 12;
 
   const ordinalColorScale = scaleOrdinal({

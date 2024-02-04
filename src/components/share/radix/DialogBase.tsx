@@ -34,6 +34,7 @@ export default function DialogBase({
         if (!open) {
           if (confirm("정말 닫으시겠습니다?")) {
             setIsOpen(false);
+            setValue("subContents", undefined);
           }
         } else {
           setIsOpen(open);

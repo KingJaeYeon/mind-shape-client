@@ -9,10 +9,10 @@ import { usePortfolio } from "@/hooks/react-query/portfolio.query";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolioStore();
-  const { data, isPending } = usePortfolio();
+  const { data } = usePortfolio();
 
   const list = data?.filter((item: any) => {
-    return item.asset.symbol === getValue("symbol");
+    return item?.asset?.symbol === getValue("symbol");
   });
 
   const detail = list?.reduce((acc: any, cur: any) => {

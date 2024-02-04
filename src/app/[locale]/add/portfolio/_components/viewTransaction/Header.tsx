@@ -37,7 +37,7 @@ export default function Header({
       >
         <CardBox>
           <p className={"font-medium text-text-secondary"}>{t("quantity")}</p>
-          <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
+          <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
             <ShowOrHideAmount text={`${totalAmount} ${symbol}`} />
           </h3>
         </CardBox>
@@ -45,16 +45,26 @@ export default function Header({
           <p className={"font-medium text-text-secondary"}>
             {t("avg_buy_price")}
           </p>
-          <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
-            <ShowOrHideAmount text={`₩ ${avgPrice?.toFixed(2)}`} />
+          <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
+            <ShowOrHideAmount
+              text={`₩ ${avgPrice?.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
+            />
           </h3>
         </CardBox>
         <CardBox>
           <p className={"font-medium text-text-secondary"}>
             {t("total_holdings")}
           </p>
-          <h3 className={"mt-[4px] text-[25px] font-bold text-black"}>
-            <ShowOrHideAmount text={`₩ ${totalPrice?.toLocaleString()}`} />
+          <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
+            <ShowOrHideAmount
+              text={`₩ ${totalPrice.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
+            />
           </h3>
         </CardBox>
       </Col>

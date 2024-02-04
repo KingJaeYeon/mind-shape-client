@@ -1,5 +1,5 @@
 import { request } from "@/service/axios";
-import { AddPortfolio } from "@/constant/portfolio";
+import { AddPortfolio, UpdatePortfolio } from "@/constant/portfolio";
 
 export function addPortfolio({
   assetId,
@@ -36,6 +36,24 @@ export function deleteTransaction({ index }: { index: number }) {
     method: "POST",
     data: {
       index,
+    },
+  });
+}
+
+export function updateTransaction({
+  price,
+  amount,
+  index,
+  transactionDate,
+}: UpdatePortfolio) {
+  return request({
+    url: "/portfolio/update",
+    method: "POST",
+    data: {
+      price,
+      amount,
+      index,
+      transactionDate,
     },
   });
 }

@@ -3,7 +3,6 @@
 import { createContext, useContext } from "react";
 import React from "react";
 import Row from "@/components/layout/Row";
-import Col from "@/components/layout/Col";
 import Contents from "@/components/layout/Contents";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +32,6 @@ export function Header({ children }: { children: React.ReactNode }) {
       className={"grid w-full"}
     >
       {children}
-      {/*{"250 130 108 108 108 190 170 185 150"}*/}
     </header>
   );
 }
@@ -47,10 +45,10 @@ export function Body({
   isLoading?: boolean;
 }) {
   if (isLoading) return <div>Loading...</div>;
-  if (!data || !data.length)
+  if (!data || !data?.length)
     return <Row className={"w-full"}>There is no data</Row>;
 
-  return <div className={"w-full"}>{data?.map(render)}</div>;
+  return data?.map(render);
 }
 
 export function TRow({

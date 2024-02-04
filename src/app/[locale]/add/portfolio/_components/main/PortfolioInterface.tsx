@@ -10,6 +10,8 @@ import DialogBase from "@/components/share/radix/DialogBase";
 import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import { useState } from "react";
+import { useModalStore } from "@/store/modalStore";
+import { parseISO } from "date-fns";
 
 const data = {
   totalPriceCurrent: 1000000,
@@ -18,6 +20,7 @@ const data = {
 export default function PortfolioInterface() {
   const { t } = useTranslation("portfolio");
   const [isOpen, setIsOpen] = useState(false);
+  const { setContentsValue } = useModalStore();
   return (
     <Contents className={"flex flex-col justify-between gap-[5px] md:flex-row"}>
       <PriceView />
@@ -29,7 +32,16 @@ export default function PortfolioInterface() {
           contents={<TypeAddPortfolio setIsOpen={setIsOpen} />}
           className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
         >
-          <Button size={"sm"}>+ {t("add_transactions")}</Button>
+          <Button
+            size={"sm"}
+            onClick={() => {
+              setContentsValue("amount", undefined);
+              setContentsValue("price", undefined);
+              setContentsValue("date", new Date());
+            }}
+          >
+            + {t("add_transaction")}
+          </Button>
         </DialogBase>
       </Row>
     </Contents>
