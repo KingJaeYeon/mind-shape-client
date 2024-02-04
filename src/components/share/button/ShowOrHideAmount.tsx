@@ -22,7 +22,7 @@ export function ShowOrHideAmount({
     let isShowAmount;
     isShowAmount = showAmount !== "false";
     setValue("isShowAmount", isShowAmount);
-  }, []);
+  }, [setValue]);
 
   if (getValue("isShowAmount")) {
     return (
