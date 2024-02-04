@@ -17,7 +17,6 @@ import ButtonBase from "@/components/layout/ButtonBase";
 import TypeEditPortfolio from "@/components/share/radix/dialog/main/TypeEditPortfolio";
 import { useModalStore } from "@/store/modalStore";
 import Button from "@/components/share/button/Button";
-import Row from "@/components/layout/Row";
 import { useDeleteTransaction } from "@/hooks/react-query/portfolio.query";
 
 export default function Body({ data }: { data: any[] }) {
@@ -60,12 +59,31 @@ export default function Body({ data }: { data: any[] }) {
 
 function MobileRow({ item, t }: { item: any; t: any }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { setContentsValue, setValue } = useModalStore();
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const { setContentsValue } = useModalStore();
+  const { mutate } = useDeleteTransaction({ setIsOpen });
   return (
     <DialogBase
       isOpen={isOpen}
       setIsOpen={setIsOpen}
-      contents={<TypeEditPortfolio setIsOpen={setIsOpen} item={item} />}
+      contents={
+        <>
+          <TypeEditPortfolio setIsOpen={setIsOpen} item={item} />
+          <Button
+            secondary={true}
+            disabled={isFetching}
+            className={"mt-[6px] w-full"}
+            onClick={() => {
+              if (isFetching) return;
+              setIsFetching(true);
+              mutate({ index: item?.index });
+              setIsFetching(false);
+            }}
+          >
+            {t("remove")}
+          </Button>
+        </>
+      }
       className={"sm:max-w-[496px]"}
     >
       <TRow

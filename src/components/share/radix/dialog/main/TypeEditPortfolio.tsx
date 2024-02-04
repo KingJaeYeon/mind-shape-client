@@ -92,7 +92,7 @@ export default function TypeEditPortfolio({
         <Col
           className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}
         >
-          <Col className={"mt-[0px] flex-1 sm:mt-[16px]"}>
+          <Col className={"mt-[16px] flex-1 sm:mt-[0px]"}>
             <LabeledInput
               type={"number"}
               value={getContentsValue("amount")}
@@ -102,7 +102,7 @@ export default function TypeEditPortfolio({
               placeholder={"0.00"}
             />
           </Col>
-          <Col className={"mt-[16px] flex-1"}>
+          <Col className={"mt-[10px] flex-1 sm:mt-[0px]"}>
             <LabeledInput
               type={"number"}
               value={getContentsValue("price")}

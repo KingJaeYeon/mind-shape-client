@@ -60,7 +60,7 @@ export default function Header({
           </p>
           <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
             <ShowOrHideAmount
-              text={`₩ ${totalPrice.toLocaleString(undefined, {
+              text={`₩ ${totalPrice?.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}
