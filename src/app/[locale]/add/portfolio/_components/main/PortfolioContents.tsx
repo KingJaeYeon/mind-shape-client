@@ -30,7 +30,11 @@ export default function PortfolioContents() {
     return acc;
   }, {});
 
-  const formattedData: any[] = Object.values(list).sort(
+  if (!list) {
+    return null;
+  }
+
+  const formattedData: any[] = Object.values(list)?.sort(
     (a: any, b: any) => b?.price - a?.price,
   );
 
