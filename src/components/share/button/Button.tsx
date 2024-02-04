@@ -21,7 +21,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     function getStyle() {
       // Lg / default
       let defaultClass = cn(
-        "font-semibold disabled:pointer-events-none disabled:cursor-default px-[24px] text-[14px] h-[48px] hover:bg-button-hover rounded-[8px] flex border outline-none disabled:bg-button disabled:opacity-50 cursor-pointer items-center justify-center bg-button text-white",
+        "font-semibold disabled:pointer-events-none disabled:cursor-default px-[24px] text-[14px] h-[50px] hover:bg-button-hover rounded-[8px] flex border outline-none disabled:bg-button disabled:opacity-50 cursor-pointer items-center justify-center bg-button text-white",
       );
       const secondaryClass =
         "text-button bg-white disabled:opacity-50 disabled:bg-button-secondary-disable border border-button hover:border-button-secondary-hover hover:text-button-secondary-hover hover:bg-white";

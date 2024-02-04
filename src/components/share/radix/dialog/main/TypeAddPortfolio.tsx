@@ -183,7 +183,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
         <Button
           disabled={isSubmitDisable || isPending}
           onClick={submitHandler}
-          className={"mt-[20px] border-2 text-[16px]"}
+          className={"mt-[20px] border-2"}
         >
           {t("add_transaction")}
         </Button>

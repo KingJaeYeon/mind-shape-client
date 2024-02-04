@@ -14,10 +14,10 @@ export function MainModalHeader({
   setIsOpen: any;
 }) {
   return (
-    <Row className={"py-[10px] text-modalTitle"}>
+    <Row className={"w-full py-[16px] text-modalTitle sm:py-[10px]"}>
       <h3
         className={
-          "flex-1 justify-center text-[24px] font-bold sm:justify-start"
+          "flex flex-1 justify-center text-[16px] font-bold sm:justify-start sm:text-[24px]"
         }
       >
         {title}
@@ -29,7 +29,9 @@ export function MainModalHeader({
           setIsOpen(false);
         }}
       >
-        <ModalCloseTriggerButton className={"h-[28px] w-[28px]"} />
+        <ModalCloseTriggerButton
+          className={"h-[24px] w-[24px] sm:h-[28px] sm:w-[28px]"}
+        />
       </ButtonBase>
     </Row>
   );

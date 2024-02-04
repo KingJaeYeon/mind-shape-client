@@ -30,7 +30,7 @@ export default function PortfolioInterface() {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           contents={<TypeAddPortfolio setIsOpen={setIsOpen} />}
-          className={"px-[32px] pb-[32px] pt-[16px] sm:max-w-[496px]"}
+          className={"sm:max-w-[496px]"}
         >
           <Button
             size={"sm"}

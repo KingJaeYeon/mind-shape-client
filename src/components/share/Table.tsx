@@ -53,14 +53,17 @@ export function Body({
 
 export function TRow({
   children,
+  onClick,
   className,
 }: {
   children: React.ReactNode;
+  onClick?: () => void;
   className?: string;
 }) {
   const { columns } = useContext(TableContext);
   return (
     <Row
+      onClick={onClick}
       className={cn(
         "grid h-[80px] w-full items-center border-b border-border",
         className,

@@ -80,7 +80,6 @@ export default function TypeEditPortfolio({
     e.preventDefault();
   }
 
-  console.log(item);
   return (
     <form
       onSubmit={(event) => {
@@ -93,7 +92,7 @@ export default function TypeEditPortfolio({
         <Col
           className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}
         >
-          <Col className={"mt-[16px] flex-1"}>
+          <Col className={"mt-[0px] flex-1 sm:mt-[16px]"}>
             <LabeledInput
               type={"number"}
               value={getContentsValue("amount")}
@@ -148,7 +147,7 @@ export default function TypeEditPortfolio({
         <Button
           disabled={isSubmitDisable || isPending}
           onClick={submitHandler}
-          className={"mt-[20px] border-2 text-[16px]"}
+          className={"mt-[20px] border-2"}
         >
           {t("edit_transaction")}
         </Button>

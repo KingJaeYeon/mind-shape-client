@@ -58,7 +58,7 @@ export default function DialogBase({
         />
         <Dialog.Content
           className={cn(
-            "fixed left-[50%] top-[50%] z-[1000] min-h-[100dvh] w-full max-w-[100dvw] translate-x-[-50%] translate-y-[-50%] rounded-[0px] bg-modalBg p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] duration-150 focus:outline-none data-[state=open]:animate-contentShow sm:min-h-[auto] sm:max-w-[450px] sm:rounded-[16px]",
+            "fixed left-[50%] top-[50%] z-[1000] min-h-[100dvh] w-full max-w-[100dvw] translate-x-[-50%] translate-y-[-50%] rounded-[0px] bg-modalBg px-[16px] pb-[32px] pt-[0px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] duration-150 focus:outline-none data-[state=open]:animate-contentShow sm:min-h-[auto] sm:max-w-[450px] sm:rounded-[16px] sm:px-[32px] sm:pt-[16px]",
             className,
           )}
         >
