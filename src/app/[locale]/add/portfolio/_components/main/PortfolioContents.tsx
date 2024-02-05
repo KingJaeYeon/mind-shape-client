@@ -11,8 +11,8 @@ import List from "@/app/[locale]/add/portfolio/_components/main/TableList";
 export default function PortfolioContents() {
   const { data, isPending } = usePortfolio();
   const { t } = useTranslation("portfolio");
-  if (isPending) {
-    return null;
+  if (isPending || !data) {
+    return <div>network error...</div>;
   }
 
   const list = data?.reduce((acc: any, cur: any) => {
