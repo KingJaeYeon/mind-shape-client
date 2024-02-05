@@ -19,13 +19,15 @@ export default function PortfolioContents() {
     const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
     const amount =
       cur?.transactionType === "BUY" ? cur?.amount : cur?.amount * -1;
-
-    acc[cur?.asset?.symbol] = {
-      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + price,
-      amount: Number(acc[cur?.asset?.symbol]?.amount ?? 0) + amount,
-      symbol: cur?.asset?.symbol,
-      exChange: cur?.asset?.exChange,
-      name: cur?.category?.name,
+    const symbol = cur?.asset?.symbol;
+    const name = cur?.category?.name;
+    const exChange = cur?.asset?.exChange;
+    acc[symbol] = {
+      price: Number(acc[symbol]?.price ?? 0) + price * amount,
+      amount: Number(acc[symbol]?.amount ?? 0) + amount,
+      symbol: symbol,
+      exChange: exChange,
+      name: name,
     };
     return acc;
   }, {});

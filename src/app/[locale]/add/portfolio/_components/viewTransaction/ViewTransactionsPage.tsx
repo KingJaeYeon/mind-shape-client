@@ -19,11 +19,14 @@ export default function ViewTransactionsPage() {
     const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
     const amount =
       cur?.transactionType === "BUY" ? cur?.amount : cur?.amount * -1;
+    const symbol = cur?.asset?.symbol;
+    const name = cur?.category?.name;
+
     acc[cur?.asset?.symbol] = {
-      price: Number(acc[cur?.asset?.symbol]?.price ?? 0) + price,
-      amount: Number(acc[cur?.asset?.symbol]?.amount ?? 0) + amount,
-      symbol: cur?.asset?.symbol,
-      name: cur?.asset?.name,
+      price: Number(acc[symbol]?.price ?? 0) + price * amount,
+      amount: Number(acc[symbol]?.amount ?? 0) + amount,
+      symbol: symbol,
+      name: name,
     };
     return acc;
   }, {});
