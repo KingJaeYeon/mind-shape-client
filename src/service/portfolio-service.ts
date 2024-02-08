@@ -4,7 +4,7 @@ import { AddPortfolio, UpdatePortfolio } from "@/constant/portfolio";
 export function addPortfolio({
   assetId,
   price,
-  amount,
+  quantity,
   categoryId,
   transactionDate,
   transactionType,
@@ -15,7 +15,7 @@ export function addPortfolio({
     data: {
       assetId,
       price,
-      amount,
+      quantity,
       categoryId,
       transactionDate,
       transactionType,
@@ -42,7 +42,7 @@ export function deleteTransaction({ index }: { index: number }) {
 
 export function updateTransaction({
   price,
-  amount,
+  quantity,
   index,
   transactionDate,
 }: UpdatePortfolio) {
@@ -51,7 +51,7 @@ export function updateTransaction({
     method: "POST",
     data: {
       price,
-      amount,
+      quantity,
       index,
       transactionDate,
     },

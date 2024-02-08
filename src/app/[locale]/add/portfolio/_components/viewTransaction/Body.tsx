@@ -89,7 +89,7 @@ function MobileRow({ item, t }: { item: any; t: any }) {
       <TRow
         className={"cursor-pointer hover:bg-paleGray"}
         onClick={() => {
-          setContentsValue("amount", item?.amount);
+          setContentsValue("quantity", item?.quantity);
           setContentsValue("price", item?.price);
           const formattedDate = parseISO(item?.transactionDate);
           setContentsValue("date", formattedDate);
@@ -124,14 +124,14 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
       </Td>
       <Td className={"hidden sm:flex"}>
         <ShowOrHideAmount
-          text={(item?.price * item?.amount).toLocaleString(undefined, {
+          text={(item?.price * item?.quantity).toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}
         />
       </Td>
       <Td className={"hidden sm:flex"}>
-        <ShowOrHideAmount text={item?.amount} />
+        <ShowOrHideAmount text={item?.quantity} />
       </Td>
       <Td>
         <ShowOrHideAmount
@@ -153,7 +153,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
         >
           <ButtonBase
             onClick={() => {
-              setContentsValue("amount", item?.amount);
+              setContentsValue("quantity", item?.quantity);
               setContentsValue("price", item?.price);
               const formattedDate = parseISO(item?.transactionDate);
               setContentsValue("date", formattedDate);

@@ -13,7 +13,7 @@ import TreeMapChart from "@/components/share/chart/TreeMapChart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 
 type MyList = {
-  amount: number;
+  quantity: number;
   asset: { symbol: string; exChange: string };
   assetId: number;
   category: { assetType: string; name: string };

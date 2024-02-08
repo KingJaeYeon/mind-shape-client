@@ -1,5 +1,5 @@
 export type AddPortfolio = {
-  amount: number;
+  quantity: number;
   price: number;
   categoryId: number;
   assetId: number;
@@ -8,7 +8,7 @@ export type AddPortfolio = {
 };
 export type UpdatePortfolio = {
   price: number;
-  amount: number;
+  quantity: number;
   index: number;
   transactionDate: Date;
 };

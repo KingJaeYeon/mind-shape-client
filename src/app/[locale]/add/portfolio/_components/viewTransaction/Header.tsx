@@ -11,14 +11,14 @@ export default function Header({
   symbol,
   name,
   totalPrice,
-  totalAmount,
+  totalQuantity,
 }: {
   symbol: string;
   name: string;
   totalPrice: number;
-  totalAmount: number;
+  totalQuantity: number;
 }) {
-  const avgPrice = totalPrice / totalAmount;
+  const avgPrice = totalPrice / totalQuantity;
   const { t } = useTranslation("portfolio");
   return (
     <Col className={"w-full pb-[24px] pt-[28px]"}>
@@ -38,7 +38,7 @@ export default function Header({
         <CardBox>
           <p className={"font-medium text-text-secondary"}>{t("quantity")}</p>
           <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
-            <ShowOrHideAmount text={`${totalAmount} ${symbol}`} />
+            <ShowOrHideAmount text={`${totalQuantity} ${symbol}`} />
           </h3>
         </CardBox>
         <CardBox>

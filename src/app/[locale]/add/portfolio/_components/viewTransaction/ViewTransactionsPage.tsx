@@ -17,14 +17,14 @@ export default function ViewTransactionsPage() {
 
   const detail = list?.reduce((acc: any, cur: any) => {
     const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
-    const amount =
-      cur?.transactionType === "BUY" ? cur?.amount : cur?.amount * -1;
+    const quantity =
+      cur?.transactionType === "BUY" ? cur?.quantity : cur?.quantity * -1;
     const symbol = cur?.asset?.symbol;
     const name = cur?.category?.name;
 
     acc[cur?.asset?.symbol] = {
-      price: Number(acc[symbol]?.price ?? 0) + price * amount,
-      amount: Number(acc[symbol]?.amount ?? 0) + amount,
+      price: Number(acc[symbol]?.price ?? 0) + price * quantity,
+      quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
       symbol: symbol,
       name: name,
     };
@@ -43,7 +43,7 @@ export default function ViewTransactionsPage() {
           symbol={detail[getValue("symbol")]?.symbol}
           name={detail[getValue("symbol")]?.name}
           totalPrice={detail[getValue("symbol")]?.price}
-          totalAmount={detail[getValue("symbol")]?.amount}
+          totalQuantity={detail[getValue("symbol")]?.quantity}
         />
         <Body data={list} />
       </Col>

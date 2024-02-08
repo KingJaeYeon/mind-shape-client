@@ -49,9 +49,9 @@ export default function List({ data }: { data: any }) {
               <Td>현재 주가</Td>
               <Td>{item?.price.toLocaleString()}</Td>
               <Td>이익/손실</Td>
-              <Td>{item?.amount}</Td>
+              <Td>{item?.quantity}</Td>
               <Td>
-                {(item?.price / item?.amount).toFixed(2).toLocaleString()}
+                {(item?.price / item?.quantity).toFixed(2).toLocaleString()}
               </Td>
               <Td>{item?.exChange}</Td>
               <Td>

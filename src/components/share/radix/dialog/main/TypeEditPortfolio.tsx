@@ -51,11 +51,11 @@ export default function TypeEditPortfolio({
 
   function amountHandler(e: any) {
     if (e.target.value === "") {
-      setContentsValue("amount", "");
+      setContentsValue("quantity", "");
     } else if (Number(e.target.value) < 0) {
-      setContentsValue("amount", 0);
+      setContentsValue("quantity", 0);
     } else {
-      setContentsValue("amount", Number(e.target.value));
+      setContentsValue("quantity", Number(e.target.value));
     }
   }
 
@@ -64,8 +64,8 @@ export default function TypeEditPortfolio({
   }
 
   const isSubmitDisable = !(
-    typeof getContentsValue("amount") === "number" &&
-    getContentsValue("amount") > 0 &&
+    typeof getContentsValue("quantity") === "number" &&
+    getContentsValue("quantity") > 0 &&
     typeof getContentsValue("price") === "number" &&
     getContentsValue("price") > 0
   );
@@ -73,7 +73,7 @@ export default function TypeEditPortfolio({
   async function submitHandler(e: any) {
     mutate({
       price: Number(getContentsValue("price")),
-      amount: Number(getContentsValue("amount")),
+      quantity: Number(getContentsValue("quantity")),
       index: item.index,
       transactionDate: getContentsValue("date"),
     });
@@ -95,9 +95,9 @@ export default function TypeEditPortfolio({
           <Col className={"mt-[16px] flex-1 sm:mt-[0px]"}>
             <LabeledInput
               type={"number"}
-              value={getContentsValue("amount")}
+              value={getContentsValue("quantity")}
               valueHandler={amountHandler}
-              id={"amount"}
+              id={"quantity"}
               label={t("quantity")}
               placeholder={"0.00"}
             />
@@ -138,7 +138,7 @@ export default function TypeEditPortfolio({
           </p>
           <CurrentDisplayPrice
             price={
-              Number(getContentsValue("amount") ?? 0) *
+              Number(getContentsValue("quantity") ?? 0) *
               Number(getContentsValue("price") ?? 0)
             }
             className={"text-[28px] font-bold"}

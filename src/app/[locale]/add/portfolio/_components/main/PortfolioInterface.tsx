@@ -35,7 +35,7 @@ export default function PortfolioInterface() {
           <Button
             size={"sm"}
             onClick={() => {
-              setContentsValue("amount", undefined);
+              setContentsValue("quantity", undefined);
               setContentsValue("price", undefined);
               setContentsValue("date", new Date());
             }}
