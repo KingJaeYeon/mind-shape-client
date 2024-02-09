@@ -1,8 +1,8 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "add_transaction": "取引を追加",
-  "edit_transaction": "トランザクションを編集",
+  "transaction_add": "取引を追加",
+  "transaction_edit": "トランザクションを編集",
   "modal_calendar": "日時",
   "24h": "24時間",
   "quantity": "数量",

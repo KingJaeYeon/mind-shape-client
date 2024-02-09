@@ -87,7 +87,7 @@ export default function TypeEditPortfolio({
         wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("edit_transaction")} setIsOpen={setIsOpen} />
+      <MainModalHeader title={t("transaction_edit")} setIsOpen={setIsOpen} />
       <Contents className={"min-h-auto flex flex-col"}>
         <Col
           className={"w-full gap-[5px] font-Inter sm:flex-row sm:gap-[10px]"}
@@ -149,7 +149,7 @@ export default function TypeEditPortfolio({
           onClick={submitHandler}
           className={"mt-[20px] border-2"}
         >
-          {t("edit_transaction")}
+          {t("transaction_edit")}
         </Button>
       </Contents>
     </form>

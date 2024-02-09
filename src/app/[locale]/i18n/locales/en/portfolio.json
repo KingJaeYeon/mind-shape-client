@@ -1,8 +1,8 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "add_transaction": "Add Transaction",
-  "edit_transaction": "Edit Transaction",
+  "transaction_add": "Add Transaction",
+  "transaction_edit": "Edit Transaction",
   "modal_calendar": "Date & Time",
   "24h": "24h",
   "quantity": "Quantity",

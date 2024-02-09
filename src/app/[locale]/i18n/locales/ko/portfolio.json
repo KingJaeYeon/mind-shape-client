@@ -1,8 +1,8 @@
 {
   "title": "My Portfolio",
   "switch_label": "Show charts",
-  "add_transaction": "거래 추가",
-  "edit_transaction": "거래 수정",
+  "transaction_add": "거래 추가",
+  "transaction_edit": "거래 수정",
   "modal_calendar": "날짜 & 시간",
   "24h": "24시간",
   "quantity": "수량",
