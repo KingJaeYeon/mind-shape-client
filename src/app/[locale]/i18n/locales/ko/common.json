@@ -39,5 +39,7 @@
   "{{day}}DayMovingAverage ": "{{day}}일 이동평균",
   "sharesOutstanding ": "발행 주식",
   "dividendDate ": "배당금 지급일",
-  "exDividendDate": "배당금 지급 기준일"
+  "exDividendDate": "배당금 지급 기준일",
+  "bookValueOfEquityPerShare": "주당순자산",
+  "bookValueOfEquityPerShare_description": "기업의 총자산에서 총부채를 뺀 것이 자기자본인데 여기서 무형자산, 이연자산 및 사외유출분(배당금, 임원상여금) 등을 제외한 것을 순자산이라 하고 순자산을 발행주식수로 나눈 것이 주당순자산이다. 따라서 주당순자산이 크면 클수록 기업내용이 충실하다고 볼 수 있다. 특히 금융기관 및 광업 등의 업종에서는 주당순자산이 투자결정의 중심지표가 되고 있다."
 }

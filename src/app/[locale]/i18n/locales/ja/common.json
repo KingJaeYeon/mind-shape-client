@@ -39,5 +39,7 @@
   "{{day}}DayMovingAverage ": "{{day}}日移動平均",
   "sharesOutstanding ": " 流通株式数",
   "dividendDate ": "配当金支払日",
-  "exDividendDate": "配当金の基準日"
+  "exDividendDate": "配当金の基準日",
+  "bookValueOfEquityPerShare": "1株当たり純資産",
+  "bookValueOfEquityPerShare_description": "企業の総資産から総負債を差し引いたものが自己資本であるが、ここで無形資産、繰延資産及び社外流出分(配当金、役員賞与)などを除いたものを純資産とし、純資産を発行株式数で割ったものが1株当たり純資産である。 したがって、1株当たり純資産が大きければ大きいほど、企業内容が充実しているといえる。特に金融機関や鉱業などの業種では、1株当たり純資産が投資決定の中心指標となっている。"
 }

@@ -39,5 +39,7 @@
   "{{day}}DayMovingAverage ": "{{day}}DayMovingAverage",
   "sharesOutstanding ": "Shares outstanding",
   "dividendDate ": "Dividend Date",
-  "exDividendDate": "Ex-Dividend Date"
+  "exDividendDate": "Ex-Dividend Date",
+  "bookValueOfEquityPerShare": "BPS(Book Value Of Equity Per Share)",
+  "bookValueOfEquityPerShare_description": "A company's total assets minus total liabilities is equity, which excludes intangible assets, deferred assets, and external outflows (dividends, executive bonuses), and net assets divided by the number of shares outstanding is net assets per share. Therefore, the larger the net assets per share, the stronger the company. Especially in industries such as financial institutions and mining, net assets per share is becoming a central indicator for investment decisions."
 }
