@@ -21,9 +21,10 @@ export default function ViewTransactionsPage() {
       cur?.transactionType === "BUY" ? cur?.quantity : cur?.quantity * -1;
     const symbol = cur?.asset?.symbol;
     const name = cur?.category?.name;
-
+    const resultPrice =
+      cur.transactionType === "BUY" ? price * quantity : price * quantity * -1;
     acc[cur?.asset?.symbol] = {
-      price: Number(acc[symbol]?.price ?? 0) + price * quantity,
+      price: Number(acc[symbol]?.price ?? 0) + resultPrice,
       quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
       symbol: symbol,
       name: name,

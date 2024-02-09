@@ -14,7 +14,7 @@ export default function PortfolioContents() {
   if (isPending || !data) {
     return <div>network error...</div>;
   }
-
+  console.log(data);
   const list = data?.reduce((acc: any, cur: any) => {
     const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
     const quantity =
@@ -22,8 +22,10 @@ export default function PortfolioContents() {
     const symbol = cur?.asset?.symbol;
     const name = cur?.category?.name;
     const exChange = cur?.asset?.exChange;
+    const resultPrice =
+      cur.transactionType === "BUY" ? price * quantity : price * quantity * -1;
     acc[symbol] = {
-      price: Number(acc[symbol]?.price ?? 0) + price * quantity,
+      price: Number(acc[symbol]?.price ?? 0) + resultPrice,
       quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
       symbol: symbol,
       exChange: exChange,
