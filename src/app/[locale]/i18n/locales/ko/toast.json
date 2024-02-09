@@ -1,6 +1,6 @@
 {
-  "remove_transaction": "트랜잭션이 삭제되었습니다",
-  "add_transaction": "포트폴리오가 등록되었습니다.",
+  "transaction_remove": "트랜잭션이 삭제되었습니다",
+  "transaction_add": "포트폴리오가 등록되었습니다.",
   "error": "Error:: 다시 시도해 주세요.",
   "error2": "Error:: {{message}}"
 }

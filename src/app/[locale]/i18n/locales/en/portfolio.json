@@ -29,7 +29,7 @@
   "transactions": "Transactions",
   "total_holdings": "Total Holdings",
   "type": "Type",
-  "remove_transactions": "Remove Transaction",
+  "transaction_remove": "Remove Transaction",
   "remove": "Remove",
   "cancel": "Cancel"
 }

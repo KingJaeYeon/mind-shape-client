@@ -102,7 +102,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
         wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("add_transaction")} setIsOpen={setIsOpen} />
+      <MainModalHeader title={t("transaction_add")} setIsOpen={setIsOpen} />
 
       <ToggleGroupBaseSingle
         options={toggleOptions}
@@ -185,7 +185,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
           onClick={submitHandler}
           className={"mt-[20px] border-2"}
         >
-          {t("add_transaction")}
+          {t("transaction_add")}
         </Button>
       </Contents>
     </form>

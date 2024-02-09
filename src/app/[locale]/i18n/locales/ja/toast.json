@@ -1,6 +1,6 @@
 {
-  "remove_transaction": "取引が削除されました",
-  "add_transaction": "取引が追加されました",
+  "transaction_remove": "取引が削除されました",
+  "transaction_add": "取引が追加されました",
   "error": "Error: ネットワークエラー",
   "error2": "Error:: {{message}}"
 }

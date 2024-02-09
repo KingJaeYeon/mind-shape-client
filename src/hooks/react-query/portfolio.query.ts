@@ -24,7 +24,7 @@ export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
         queryKey: ["myPortfolio"],
       });
       setIsOpen(false);
-      toast.success(t("add_transaction"));
+      toast.success(t("transaction_add"));
     },
     onError: () => {
       toast.error(t("error"));
@@ -51,7 +51,7 @@ export function useDeleteTransaction({ setIsOpen }: { setIsOpen: any }) {
     mutationFn: deleteTransaction,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["myPortfolio"] });
-      toast.success(t("remove_transaction"));
+      toast.success(t("transaction_remove"));
       setIsOpen(false);
     },
     onError: () => {
@@ -70,7 +70,7 @@ export function useUpdateTransaction({ setIsOpen }: { setIsOpen: any }) {
     mutationFn: updateTransaction,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["myPortfolio"] });
-      toast.success(t("add_transaction"));
+      toast.success(t("transaction_add"));
       setIsOpen(false);
     },
     onError: (e) => {

@@ -29,7 +29,7 @@
   "transactions": "거래",
   "total_holdings": "총 보유액",
   "type": "유형",
-  "remove_transactions": "거래 삭제",
+  "transaction_remove": "거래 삭제",
   "remove": "삭제",
   "cancel": "취소"
 }

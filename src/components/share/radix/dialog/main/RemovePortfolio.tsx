@@ -21,7 +21,7 @@ export default function RemovePortfolio({
         wait().then(() => setIsOpen(false));
       }}
     >
-      <MainModalHeader title={t("remove_transactions")} setIsOpen={setIsOpen} />
+      <MainModalHeader title={t("transaction_remove")} setIsOpen={setIsOpen} />
       <div className={"mb-[32px] text-[14px] text-text-secondary"}>
         Are you sure you want to remove this transaction?
       </div>

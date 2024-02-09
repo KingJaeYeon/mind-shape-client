@@ -29,7 +29,7 @@
   "transactions": "トランザクション",
   "total_holdings": "ホールディングス合計",
   "type": "タイプ",
-  "remove_transactions": "取引を削除",
+  "transaction_remove": "取引を削除",
   "remove": "削除",
   "cancel": "キャンセルする"
 }

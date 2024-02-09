@@ -40,7 +40,7 @@ export default function PortfolioInterface() {
               setContentsValue("date", new Date());
             }}
           >
-            + {t("add_transaction")}
+            + {t("transaction_add")}
           </Button>
         </DialogBase>
       </Row>
