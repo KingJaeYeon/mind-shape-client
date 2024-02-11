@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 interface ConvenienceStore {
   hideNavBar: boolean;
-  isShowQuantity: boolean;
+  isShowText: boolean;
   config: {
     portfolioIsShowChart: boolean;
   };
@@ -13,7 +13,7 @@ interface ConvenienceStore {
 export const useConvenienceStore = create<ConvenienceStore>(
   (set: any, get: any) => ({
     hideNavBar: true,
-    isShowQuantity: true,
+    isShowText: true,
 
     config: {
       portfolioIsShowChart: true,

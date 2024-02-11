@@ -33,7 +33,7 @@ export default function ChartLegend({
             "flex w-[200px] flex-col justify-center pl-[10px] font-medium"
           }
         >
-          {labels.map((label, i) => {
+          {labels?.map((label, i) => {
             const symbol = label.text;
             const value = label.value;
             const price = object[symbol]?.dailyPrice * object[symbol]?.quantity;

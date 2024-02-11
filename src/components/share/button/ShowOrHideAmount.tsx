@@ -19,12 +19,12 @@ export function ShowOrHideAmount({
 
   useEffect(() => {
     const showQuantity = localStorage.getItem("showQuantity");
-    let isShowQuantity;
-    isShowQuantity = showQuantity !== "false";
-    setValue("isShowQuantity", isShowQuantity);
+    let isShowText;
+    isShowText = showQuantity !== "false";
+    setValue("isShowText", isShowText);
   }, [setValue]);
 
-  if (getValue("isShowQuantity")) {
+  if (getValue("isShowText")) {
     return (
       <Contents className={cn("flex items-center break-all", className)}>
         <Text>{text}</Text>
@@ -45,12 +45,12 @@ export function ShowOrHideTrigger({ className }: { className?: string }) {
     <Contents
       className={"flex h-full items-center"}
       onClick={() => {
-        const value = !getValue("isShowQuantity");
-        setValue("isShowQuantity", value);
+        const value = !getValue("isShowText");
+        setValue("isShowText", value);
         localStorage.setItem("showQuantity", String(value));
       }}
     >
-      {getValue("isShowQuantity") ? (
+      {getValue("isShowText") ? (
         <IconEye className={cn("cursor-pointer text-gray", className)} />
       ) : (
         <IconEyeOff className={cn("cursor-pointer text-gray", className)} />

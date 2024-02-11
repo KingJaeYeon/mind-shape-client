@@ -16,6 +16,7 @@ import { usePortfolioStore } from "@/store/portfolioStore";
 import { useEffect } from "react";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
+import { useConvenienceStore } from "@/store/convenienceStore";
 
 const getTotalPrice = (data: any[]) =>
   data?.reduce((acc: any, cur: any) => {
@@ -114,6 +115,7 @@ function DisplayPrice({
   showPrice: boolean;
   displayPrice?: string | undefined;
 }) {
+  const { getValue } = useConvenienceStore();
   if (!showPrice) {
     return null;
   }
@@ -124,7 +126,7 @@ function DisplayPrice({
       className={"break-all text-[14px] font-bold"}
       width={200}
     >
-      {displayPrice}
+      {getValue("isShowText") ? displayPrice : "****"}
     </Text>
   );
 }

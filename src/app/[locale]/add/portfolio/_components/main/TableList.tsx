@@ -12,6 +12,7 @@ import ButtonBase from "@/components/layout/ButtonBase";
 import { usePortfolioStore } from "@/store/portfolioStore";
 import { format } from "date-fns";
 import Col from "@/components/layout/Col";
+import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 
 export default function List({ data }: { data: any }) {
   const { t } = useTranslation("portfolio");
@@ -58,7 +59,9 @@ export default function List({ data }: { data: any }) {
                   {symbol}
                 </Td>
                 <Td>{dailyPrice}</Td>
-                <Td>{price}</Td>
+                <Td>
+                  <ShowOrHideAmount text={price} />
+                </Td>
                 <Td
                   className={cn(
                     "flex-col items-end",
@@ -66,17 +69,27 @@ export default function List({ data }: { data: any }) {
                     isPlus === "green" && "text-primary",
                   )}
                 >
-                  <p>
-                    {isPlus === "black"
-                      ? profit_loss
-                      : "green"
-                        ? `+ ${profit_loss.toFixed(2)}`
-                        : `- ${profit_loss.toFixed(2)}`}
-                  </p>
-                  <p>{`${profit_loss_percent.toFixed(2)} %`}</p>
+                  <ShowOrHideAmount
+                    text={
+                      isPlus === "black"
+                        ? profit_loss.toFixed(2)
+                        : "green"
+                          ? `+ ${profit_loss.toFixed(2)}`
+                          : `- ${profit_loss.toFixed(2)}`
+                    }
+                  />
+                  <ShowOrHideAmount
+                    text={`${profit_loss_percent.toFixed(2)} %`}
+                    length={4}
+                  />
                 </Td>
-                <Td>{quantity}</Td>
-                <Td>{avg_buy_price.toFixed(2)}</Td>
+                <Td>
+                  {" "}
+                  <ShowOrHideAmount text={quantity} length={4} />
+                </Td>
+                <Td>
+                  <ShowOrHideAmount text={avg_buy_price.toFixed(2)} />
+                </Td>
                 <Td>{updatedAt}</Td>
                 <Td>
                   <Popovers
