@@ -34,6 +34,7 @@ export default function DoughnutChart({
   animate = true,
   event = true,
   showPrice = true,
+  totalPrice,
   data,
   legend,
   type,
@@ -51,8 +52,6 @@ export default function DoughnutChart({
   const centerX = innerWidth / 2 - tempMargin;
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
-
-  const totalPrice = getTotalPrice(data);
 
   useEffect(() => {
     setValue("totalPrice", totalPrice);

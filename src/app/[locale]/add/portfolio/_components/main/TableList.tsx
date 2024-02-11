@@ -76,7 +76,7 @@ export default function List({ data }: { data: any }) {
                   <p>{`${profit_loss_percent.toFixed(2)} %`}</p>
                 </Td>
                 <Td>{quantity}</Td>
-                <Td>{avg_buy_price}</Td>
+                <Td>{avg_buy_price.toFixed(2)}</Td>
                 <Td>{updatedAt}</Td>
                 <Td>
                   <Popovers
