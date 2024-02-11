@@ -17,11 +17,11 @@ import { useEffect } from "react";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
 
-const getTotalPrice = (data: PiePortfolioData[]) =>
-  data.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.price,
-    0,
-  );
+const getTotalPrice = (data: any[]) =>
+  data?.reduce((acc: any, cur: any) => {
+    acc += cur?.dailyPrice * cur?.quantity;
+    return acc;
+  }, 0.0);
 
 const symbols = (data: PiePortfolioData[]) => data.map((item) => item?.symbol);
 const getSymbol = (symbol: PiePortfolioData) => symbol.symbol;

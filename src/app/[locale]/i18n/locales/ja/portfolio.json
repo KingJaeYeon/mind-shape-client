@@ -22,7 +22,7 @@
   "edit": "編集",
   "allocation": "資産構成",
   "assets": "資産",
-  "price": "値段",
+  "current_price": "現在の相場",
   "assets_holdings": "保有数",
   "industry_treemap_title": "業種別比重ツリーマップチャート",
   "industry": "業種別比率",
@@ -31,5 +31,6 @@
   "type": "タイプ",
   "transaction_remove": "取引を削除",
   "remove": "削除",
-  "cancel": "キャンセルする"
+  "cancel": "キャンセルする",
+  "updated_at": "データ更新日"
 }

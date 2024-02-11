@@ -10,12 +10,14 @@ import { cn } from "@/lib/utils";
 import { IconFile } from "@/assets/IconFile";
 import ButtonBase from "@/components/layout/ButtonBase";
 import { usePortfolioStore } from "@/store/portfolioStore";
+import { format } from "date-fns";
+import Col from "@/components/layout/Col";
 
 export default function List({ data }: { data: any }) {
   const { t } = useTranslation("portfolio");
   return (
     <Contents className={"isolate flex w-full flex-col"}>
-      <Table columns="minmax(115px, auto) minmax(80px, auto) minmax(80px, auto) minmax(100px, auto) minmax(80px, auto) minmax(120px, auto) minmax(80px, auto) minmax(80px, auto)">
+      <Table columns="minmax(80px, auto) minmax(90px, auto) minmax(110px, auto) minmax(110px, auto) minmax(60px, auto) minmax(100px, auto) minmax(180px, 160px) minmax(60px, auto)">
         <Table.Header>
           <Th
             className={
@@ -24,48 +26,71 @@ export default function List({ data }: { data: any }) {
           >
             {t("ticker")}
           </Th>
-          <Th>{t("price")}</Th>
+          <Th>{t("current_price")}</Th>
           <Th>{t("assets_holdings")}</Th>
           <Th>{t("profit_loss")}</Th>
           <Th>{t("quantity")}</Th>
           <Th>{t("avg_buy_price")}</Th>
-          <Th>{t("country")}</Th>
+          <Th>{t("updated_at")}</Th>
           <Th>{t("edit")}</Th>
         </Table.Header>
         <Table.Body
           data={data}
-          render={(item: any) => (
-            <TRow
-              key={item?.symbol}
-              className={"cursor-pointer hover:bg-paleGray"}
-            >
-              <Td
-                className={
-                  "z-4 sticky left-0 h-full items-center justify-start bg-bg font-semibold"
-                }
-              >
-                {item?.symbol}
-              </Td>
-              <Td>현재 주가</Td>
-              <Td>{item?.price.toLocaleString()}</Td>
-              <Td>이익/손실</Td>
-              <Td>{item?.quantity}</Td>
-              <Td>
-                {(item?.price / item?.quantity).toFixed(2).toLocaleString()}
-              </Td>
-              <Td>{item?.exChange}</Td>
-              <Td>
-                <Popovers
-                  trigger={
-                    <button>
-                      <IconMore />
-                    </button>
+          render={(item: any) => {
+            const dailyPrice = item?.dailyPrice;
+            const quantity = item?.quantity;
+            const avg_buy_price = item?.price / quantity;
+            const symbol = item?.symbol;
+            const price = (item?.dailyPrice * quantity).toFixed(2);
+            const profit_loss = (dailyPrice - avg_buy_price) * quantity;
+            const profit_loss_percent =
+              ((dailyPrice - avg_buy_price) / avg_buy_price) * 100;
+            const updatedAt = format(item?.updatedAt, t("date_format"));
+            const isPlus =
+              profit_loss === 0 ? "black" : profit_loss > 0 ? "green" : "red";
+            return (
+              <TRow key={symbol} className={"cursor-pointer hover:bg-paleGray"}>
+                <Td
+                  className={
+                    "z-4 sticky left-0 h-full items-center justify-start bg-bg font-semibold"
                   }
-                  contents={<PopoverContent symbol={item?.symbol} />}
-                />
-              </Td>
-            </TRow>
-          )}
+                >
+                  {symbol}
+                </Td>
+                <Td>{dailyPrice}</Td>
+                <Td>{price}</Td>
+                <Td
+                  className={cn(
+                    "flex-col items-end",
+                    isPlus === "red" && "text-red",
+                    isPlus === "green" && "text-primary",
+                  )}
+                >
+                  <p>
+                    {isPlus === "black"
+                      ? profit_loss
+                      : "green"
+                        ? `+ ${profit_loss.toFixed(2)}`
+                        : `- ${profit_loss.toFixed(2)}`}
+                  </p>
+                  <p>{`${profit_loss_percent.toFixed(2)} %`}</p>
+                </Td>
+                <Td>{quantity}</Td>
+                <Td>{avg_buy_price}</Td>
+                <Td>{updatedAt}</Td>
+                <Td>
+                  <Popovers
+                    trigger={
+                      <button>
+                        <IconMore />
+                      </button>
+                    }
+                    contents={<PopoverContent symbol={symbol} />}
+                  />
+                </Td>
+              </TRow>
+            );
+          }}
         />
       </Table>
     </Contents>

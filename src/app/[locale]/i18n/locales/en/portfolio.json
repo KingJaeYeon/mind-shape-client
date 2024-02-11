@@ -22,7 +22,7 @@
   "edit": "Edit",
   "allocation": "Allocation",
   "assets": "Assets",
-  "price": "Price",
+  "current_price": "Current Price",
   "assets_holdings": "Holdings",
   "industry_treemap_title": "Industry Treemap",
   "industry": "Industry",
@@ -31,5 +31,6 @@
   "type": "Type",
   "transaction_remove": "Remove Transaction",
   "remove": "Remove",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "updated_at": "Data update date"
 }

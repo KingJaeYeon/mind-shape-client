@@ -35,12 +35,21 @@ export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
 }
 
 export function usePortfolio() {
-  const { data, isPending } = useQuery({
+  const { data = {}, isPending } = useQuery({
     queryKey: ["myPortfolio"],
     queryFn: getPortfolio,
   });
+  const { portfolio, dailyPriceData } = data;
 
-  return { data, isPending };
+  const newDailyPriceData = dailyPriceData?.reduce((acc: any, cur: any) => {
+    acc[cur?.assetId] = {
+      closePrice: cur?.closePrice,
+      createdAt: cur?.createdAt,
+    };
+    return acc;
+  }, {});
+
+  return { portfolio, isPending, dailyPriceData: newDailyPriceData };
 }
 
 export function useDeleteTransaction({ setIsOpen }: { setIsOpen: any }) {

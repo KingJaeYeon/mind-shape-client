@@ -22,8 +22,8 @@
   "edit": "수정",
   "allocation": "배분",
   "assets": "자산",
-  "price": "가격",
-  "assets_holdings": "자산",
+  "current_price": "현재 시세",
+  "assets_holdings": "총 자산",
   "industry_treemap_title": "업종별 비중 트리맵 차트",
   "industry": "업종별 비중",
   "transactions": "거래",
@@ -31,5 +31,6 @@
   "type": "유형",
   "transaction_remove": "거래 삭제",
   "remove": "삭제",
-  "cancel": "취소"
+  "cancel": "취소",
+  "updated_at": "데이터갱신날짜"
 }

@@ -65,7 +65,6 @@ export default function ChartLegend({
                 </div>
                 <div>
                   <p>
-                    {}
                     {((object[labels[i]?.text]?.price / totalPrice) * 100)
                       .toFixed(2)
                       .toLocaleString() + "%"}

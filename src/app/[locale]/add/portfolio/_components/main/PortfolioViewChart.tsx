@@ -81,11 +81,12 @@ export default function PortfolioViewChart({
       },
     ],
   );
+  console.log(formattedData);
   const totalPrice = formattedData?.reduce((acc: any, cur: any) => {
-    acc += cur?.price;
+    acc += cur?.dailyPrice * cur?.quantity;
     return acc;
-  }, 0);
-
+  }, 0.0);
+  console.log(totalPrice);
   return (
     <Contents
       className={"flex w-full max-w-full gap-[20px] font-Inter"}

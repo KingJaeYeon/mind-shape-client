@@ -7,35 +7,72 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Text from "@/components/layout/Text";
 import React from "react";
 import List from "@/app/[locale]/add/portfolio/_components/main/TableList";
+// 필요한 타입 정의
+type Asset = {
+  assetId: string;
+  price: number;
+  quantity: number;
+  transactionType: "BUY" | "SELL";
+  asset: {
+    symbol: string;
+  };
+  category: {
+    name: string;
+  };
+};
+
+type PortfolioItem = {
+  price: number;
+  quantity: number;
+  symbol: string;
+  name: string;
+  dailyPrice: number;
+  updatedAt: Date | null;
+};
 
 export default function PortfolioContents() {
-  const { data, isPending } = usePortfolio();
+  const { portfolio, dailyPriceData, isPending } = usePortfolio();
   const { t } = useTranslation("portfolio");
-  if (isPending || !data) {
+  if (isPending || !portfolio || !dailyPriceData) {
     return <div>network error...</div>;
   }
-  console.log(data);
-  const list = data?.reduce((acc: any, cur: any) => {
-    const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
-    const quantity =
-      cur?.transactionType === "BUY" ? cur?.quantity : cur?.quantity * -1;
-    const symbol = cur?.asset?.symbol;
-    const name = cur?.category?.name;
-    const exChange = cur?.asset?.exChange;
-    const resultPrice =
-      cur.transactionType === "BUY" ? price * quantity : price * quantity * -1;
-    acc[symbol] = {
-      price: Number(acc[symbol]?.price ?? 0) + resultPrice,
-      quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
-      symbol: symbol,
-      exChange: exChange,
-      name: name,
-    };
-    return acc;
-  }, {});
 
-  const formattedData: any[] = Object.values(list)?.sort(
-    (a: any, b: any) => b?.price - a?.price,
+  const list: Record<string, PortfolioItem> = portfolio.reduce(
+    (acc: any, cur: Asset) => {
+      const { assetId, transactionType, price, quantity, asset, category } =
+        cur;
+      const symbol = asset.symbol;
+      const name = category.name;
+      const adjustedPrice =
+        transactionType === "BUY" ? price * quantity : price * quantity * -1;
+
+      // 기존 항목 업데이트 또는 새 항목 생성
+      const existingItem = acc[symbol] || {
+        price: 0,
+        quantity: 0,
+        symbol,
+        name,
+        dailyPrice: -1,
+        updatedAt: null,
+      };
+
+      existingItem.price += adjustedPrice;
+      existingItem.quantity += transactionType === "BUY" ? quantity : -quantity;
+
+      // 일일 가격 데이터 업데이트
+      if (dailyPriceData[assetId] && existingItem.dailyPrice === -1) {
+        existingItem.dailyPrice = dailyPriceData[assetId].closePrice;
+        existingItem.updatedAt = dailyPriceData[assetId].createdAt;
+      }
+
+      acc[symbol] = existingItem;
+      return acc;
+    },
+    {},
+  );
+
+  const formattedData: PortfolioItem[] = Object.values(list).sort(
+    (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
   );
 
   return (
