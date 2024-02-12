@@ -12,12 +12,12 @@ export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolio();
   const { dailyPriceData, portfolio, isPending, prevPriceData } =
     usePortfolioData();
-
+  const detailSymbol = getValue("data", "detailSymbol");
   if (isPending || !portfolio || !dailyPriceData) {
     return <div>network error...</div>;
   }
   const list = portfolio?.filter((item: any) => {
-    return item?.asset?.symbol === getValue("symbol");
+    return item?.asset?.symbol === getValue("data", "detailSymbol");
   });
 
   const detail = list?.reduce((acc: any, cur: any) => {
@@ -28,6 +28,7 @@ export default function ViewTransactionsPage() {
     const name = cur?.category?.name;
     const resultPrice =
       cur.transactionType === "BUY" ? price * quantity : price * quantity * -1;
+
     acc[cur?.asset?.symbol] = {
       price: Number(acc[symbol]?.price ?? 0) + resultPrice,
       quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
@@ -37,8 +38,8 @@ export default function ViewTransactionsPage() {
     return acc;
   }, {});
 
-  if (!detail[getValue("symbol")].symbol) {
-    setValue("symbol", undefined);
+  if (!detail[detailSymbol].symbol) {
+    setValue("data", "detailSymbol", null);
   }
 
   return (
@@ -46,10 +47,10 @@ export default function ViewTransactionsPage() {
       <Col className={"w-full items-start"}>
         <BackButton />
         <Header
-          symbol={detail[getValue("symbol")]?.symbol}
-          name={detail[getValue("symbol")]?.name}
-          totalPrice={detail[getValue("symbol")]?.price}
-          totalQuantity={detail[getValue("symbol")]?.quantity}
+          symbol={detail[detailSymbol]?.symbol}
+          name={detail[detailSymbol]?.name}
+          totalPrice={detail[detailSymbol]?.price}
+          totalQuantity={detail[detailSymbol]?.quantity}
         />
         <Body data={list} />
       </Col>

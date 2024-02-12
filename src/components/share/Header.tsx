@@ -27,9 +27,7 @@ export default function Header() {
             <Link href={"/add/forex"}>{t("asset_view")}</Link>
             <Link
               href={"/add/portfolio"}
-              onClick={() => {
-                setValue("symbol", undefined);
-              }}
+              onClick={() => setValue("data", "detailSymbol", null)}
             >
               {t("asset_add")}
             </Link>

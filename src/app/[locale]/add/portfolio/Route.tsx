@@ -9,7 +9,7 @@ export default function Route() {
 
   useEffect(() => {
     return () => {
-      setValue("symbol", undefined);
+      setValue("data", "detailSymbol", null);
     };
   }, [setValue]);
 

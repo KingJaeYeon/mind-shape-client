@@ -155,13 +155,13 @@ function Td({
   className?: string;
 }) {
   return (
-    <Text
+    <div
       className={cn(
         "flex justify-end px-[10px] text-[14px] font-medium",
         className,
       )}
     >
       {children}
-    </Text>
+    </div>
   );
 }

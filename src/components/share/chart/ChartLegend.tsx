@@ -16,7 +16,7 @@ export default function ChartLegend({
   totalPrice: number;
 }) {
   const { getValue, setValue } = usePortfolioStore();
-  const selected = getValue("portfolioSelected");
+  const selected = getValue("config", "portfolioSelected");
 
   const legendGlyphSize = 12;
 
@@ -43,6 +43,7 @@ export default function ChartLegend({
                 margin="1px 0px"
                 onClick={() => {
                   setValue(
+                    "config",
                     "portfolioSelected",
                     selected && selected === symbol ? null : symbol,
                   );

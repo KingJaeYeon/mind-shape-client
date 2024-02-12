@@ -5,7 +5,6 @@ interface State {
   config: {
     isShowChart: boolean;
     portfolioSelected: string | null;
-    totalPrice: number;
   };
   data: {
     list: any;
@@ -35,7 +34,6 @@ export const usePortfolioStore = create<State & Action>(
     config: {
       isShowChart: true,
       portfolioSelected: null,
-      totalPrice: 0,
     },
     data: {
       list: null,

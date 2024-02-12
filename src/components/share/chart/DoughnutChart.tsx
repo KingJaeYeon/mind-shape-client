@@ -12,17 +12,11 @@ import {
   PieProps,
 } from "@/components/share/chart/pieTypes";
 import { animated, to, useTransition } from "@react-spring/web";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import { useEffect } from "react";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
 import { useConvenienceStore } from "@/store/convenienceStore";
-
-const getTotalPrice = (data: any[]) =>
-  data?.reduce((acc: any, cur: any) => {
-    acc += cur?.dailyPrice * cur?.quantity;
-    return acc;
-  }, 0.0);
 
 const symbols = (data: PiePortfolioData[]) => data.map((item) => item?.symbol);
 const getSymbol = (symbol: PiePortfolioData) => symbol.symbol;
@@ -40,8 +34,8 @@ export default function DoughnutChart({
   legend,
   type,
 }: PieProps) {
-  const { getValue, setValue } = usePortfolioStore();
-  const selected = getValue("portfolioSelected");
+  const { getValue, setValue } = usePortfolio();
+  const selected = getValue("config", "portfolioSelected");
   const tempMargin = type === "mobile" ? 0 : -30;
   const innerWidth =
     type === "mobile" ? width - 120 - margin?.left - margin?.right : width - 80;
@@ -55,7 +49,7 @@ export default function DoughnutChart({
   const transformedData = getTransformedData(data);
 
   useEffect(() => {
-    setValue("totalPrice", totalPrice);
+    setValue("config", "totalPrice", totalPrice);
   }, [totalPrice]);
 
   const displayPrice = selected
@@ -92,6 +86,7 @@ export default function DoughnutChart({
                   if (event) {
                     animate &&
                       setValue(
+                        "config",
                         "portfolioSelected",
                         selected && selected === symbol ? null : symbol,
                       );

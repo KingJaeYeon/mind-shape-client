@@ -5,7 +5,7 @@ export default function BackButton() {
   const { setValue } = usePortfolioStore();
   return (
     <button
-      onClick={() => setValue("symbol", undefined)}
+      onClick={() => setValue("data", "detailSymbol", null)}
       className={
         "flex items-center gap-[4px] text-[15px] font-semibold text-primary"
       }
