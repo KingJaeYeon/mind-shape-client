@@ -78,7 +78,6 @@ export const usePortfolioStore = create<State & Action>(
 
           if (prevPriceData[assetId] && existingItem.prevPrice === -1) {
             existingItem.prevPrice = prevPriceData[assetId].closePrice;
-            existingItem.updatedAt = prevPriceData[assetId].createdAt;
           }
 
           acc[symbol] = existingItem;
