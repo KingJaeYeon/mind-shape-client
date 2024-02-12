@@ -43,7 +43,13 @@ export default function List() {
             const quantity = item?.quantity;
             const avg_buy_price = item?.price / quantity;
             const symbol = item?.symbol;
-            const price = (item?.dailyPrice * quantity).toFixed(2);
+            const price = (item?.dailyPrice * quantity).toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              },
+            );
             const profit_loss = (dailyPrice - avg_buy_price) * quantity;
             const profit_loss_percent =
               ((dailyPrice - avg_buy_price) / avg_buy_price) * 100;
@@ -73,19 +79,33 @@ export default function List() {
                   <ShowOrHideAmount
                     text={
                       isPlus === "black"
-                        ? profit_loss.toFixed(2)
-                        : "green"
-                          ? `+ ${profit_loss.toFixed(2)}`
-                          : `- ${profit_loss.toFixed(2)}`
+                        ? profit_loss.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                        : isPlus === "green"
+                          ? `+ ${Math.abs(profit_loss).toLocaleString(
+                              undefined,
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              },
+                            )}`
+                          : `- ${Math.abs(profit_loss).toLocaleString(
+                              undefined,
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              },
+                            )}`
                     }
                   />
                   <ShowOrHideAmount
-                    text={`${profit_loss_percent.toFixed(2)} %`}
+                    text={`${Math.abs(profit_loss_percent).toFixed(2)} %`}
                     length={4}
                   />
                 </Td>
                 <Td>
-                  {" "}
                   <ShowOrHideAmount text={quantity} length={4} />
                 </Td>
                 <Td>
