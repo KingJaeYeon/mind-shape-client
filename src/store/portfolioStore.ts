@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Asset, PortfolioItem } from "@/constant/portfolio";
 
 interface State {
   config: {
@@ -6,13 +7,28 @@ interface State {
     portfolioSelected: string | null;
     totalPrice: number;
   };
-  data: {};
+  data: {
+    list: any;
+    formattedData: any;
+    dailyTotalPrice: number;
+    prevTotalPrice: number;
+    detailSymbol: any;
+  };
 }
 
 interface Action {
-  getValue: (key: string) => any;
-  setValue: (key: string, value: any) => void;
+  init: (portfolio: any[], dailyPriceData: any[], prevPriceData: any[]) => any;
+  getValue: (key: string, ns: string) => any;
+  setValue: (key: string, ns: string, value: any) => void;
 }
+
+const initData = {
+  list: null,
+  formattedData: null,
+  dailyTotalPrice: -1,
+  prevTotalPrice: -1,
+  detailSymbol: null,
+};
 
 export const usePortfolioStore = create<State & Action>(
   (set: any, get: any) => ({
@@ -21,31 +37,100 @@ export const usePortfolioStore = create<State & Action>(
       portfolioSelected: null,
       totalPrice: 0,
     },
-    data: {},
-    getValue: (key: string) => {
+    data: {
+      list: null,
+      formattedData: null,
+      dailyTotalPrice: -1,
+      prevTotalPrice: -1,
+      detailSymbol: null,
+    },
+    init: (portfolio: any, dailyPriceData: any, prevPriceData: any) => {
+      set({ data: initData });
+      const list: Record<string, PortfolioItem> = portfolio.reduce(
+        (acc: any, cur: Asset) => {
+          const { assetId, transactionType, price, quantity, asset, category } =
+            cur;
+          const symbol = asset.symbol;
+          const name = category.name;
+          const adjustedPrice =
+            transactionType === "BUY"
+              ? price * quantity
+              : price * quantity * -1;
+
+          // 기존 항목 업데이트 또는 새 항목 생성
+          const existingItem = acc[symbol] || {
+            price: 0,
+            quantity: 0,
+            symbol,
+            name,
+            dailyPrice: -1,
+            prevPrice: -1,
+            updatedAt: null,
+          };
+
+          existingItem.price += adjustedPrice;
+          existingItem.quantity +=
+            transactionType === "BUY" ? quantity : -quantity;
+
+          // 일일 가격 데이터 업데이트
+          if (dailyPriceData[assetId] && existingItem.dailyPrice === -1) {
+            existingItem.dailyPrice = dailyPriceData[assetId].closePrice;
+            existingItem.updatedAt = dailyPriceData[assetId].createdAt;
+          }
+
+          if (prevPriceData[assetId] && existingItem.prevPrice === -1) {
+            existingItem.prevPrice = prevPriceData[assetId].closePrice;
+            existingItem.updatedAt = prevPriceData[assetId].createdAt;
+          }
+
+          acc[symbol] = existingItem;
+          return acc;
+        },
+        {},
+      );
+
+      const formattedData: PortfolioItem[] = Object.values(list).sort(
+        (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
+      );
+
+      const dailyTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
+        acc += cur?.dailyPrice * cur?.quantity;
+        return acc;
+      }, 0.0);
+      const prevTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
+        acc += cur?.prevPrice * cur?.quantity;
+        return acc;
+      }, 0.0);
+
+      set({
+        data: { list, formattedData, dailyTotalPrice, prevTotalPrice },
+      });
+    },
+    getValue: (key: string, ns: string) => {
       switch (key) {
-        case "symbol":
-          return get().data["symbol"];
-        case "list":
-          return get().data["list"];
-        default:
-          let config = get().config;
-          return config[key];
+        case "data":
+          const data = get().data;
+          return data[ns];
+        case "config":
+          const config = get().config;
+          return config[ns];
       }
     },
-    setValue: (key: string, value: any) => {
+    setValue: (key: string, ns: string, value: any) => {
       switch (key) {
-        case "symbol":
-          let dataList = get().data;
-          dataList["symbol"] = value;
-          set({ data: dataList });
+        case "data":
+          const data = get().data;
+          data[ns] = value;
+          set({ data });
           return;
-        default:
-          let config = get().config;
-          config[key] = value;
+        case "config":
+          const config = get().config;
+          config[ns] = value;
           set({ config });
           return;
       }
     },
   }),
 );
+
+export const usePortfolio = () => usePortfolioStore((state) => state);

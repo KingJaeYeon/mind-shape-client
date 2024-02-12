@@ -14,3 +14,25 @@ export type UpdatePortfolio = {
 };
 
 export const IS_SHOW_CHART = "portfolioIsShowChart";
+
+export type Asset = {
+  assetId: string;
+  price: number;
+  quantity: number;
+  transactionType: "BUY" | "SELL";
+  asset: {
+    symbol: string;
+  };
+  category: {
+    name: string;
+  };
+};
+
+export type PortfolioItem = {
+  price: number;
+  quantity: number;
+  symbol: string;
+  name: string;
+  dailyPrice: number;
+  updatedAt: Date | null;
+};

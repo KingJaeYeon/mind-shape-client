@@ -9,13 +9,14 @@ import Text from "@/components/layout/Text";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@/assets/IconFile";
 import ButtonBase from "@/components/layout/ButtonBase";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio, usePortfolioStore } from "@/store/portfolioStore";
 import { format } from "date-fns";
 import Col from "@/components/layout/Col";
 import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 
-export default function List({ data }: { data: any }) {
+export default function List() {
   const { t } = useTranslation("portfolio");
+  const { data, getValue } = usePortfolio();
   return (
     <Contents className={"isolate flex w-full flex-col"}>
       <Table columns="minmax(80px, auto) minmax(90px, auto) minmax(110px, auto) minmax(110px, auto) minmax(60px, auto) minmax(100px, auto) minmax(180px, 160px) minmax(60px, auto)">
@@ -36,7 +37,7 @@ export default function List({ data }: { data: any }) {
           <Th>{t("edit")}</Th>
         </Table.Header>
         <Table.Body
-          data={data}
+          data={data?.formattedData}
           render={(item: any) => {
             const dailyPrice = item?.dailyPrice;
             const quantity = item?.quantity;
@@ -115,7 +116,7 @@ function PopoverContent({ symbol }: { symbol: string }) {
   return (
     <ButtonBase
       onClick={() => {
-        setValue("symbol", symbol);
+        setValue("data", "detailSymbol", symbol);
       }}
       className={
         "w-[170px] cursor-pointer items-center rounded-[4px] px-[8px] py-[12px] text-[14px] hover:bg-weakGray"

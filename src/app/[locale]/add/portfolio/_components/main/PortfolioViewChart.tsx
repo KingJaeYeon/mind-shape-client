@@ -11,6 +11,7 @@ import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import TreeMapChart from "@/components/share/chart/TreeMapChart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
+import { usePortfolio } from "@/store/portfolioStore";
 
 type MyList = {
   quantity: number;
@@ -21,14 +22,9 @@ type MyList = {
   price: 100;
 }[];
 
-export default function PortfolioViewChart({
-  formattedData,
-  data,
-}: {
-  formattedData: any;
-  data: any;
-}) {
+export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
+  const { data } = usePortfolio();
   const { t } = useTranslation("portfolio");
   const ref = useRef();
 
@@ -63,7 +59,7 @@ export default function PortfolioViewChart({
     return null;
   }
 
-  const treeMapData = formattedData?.reduce(
+  const treeMapData = data?.formattedData?.reduce(
     (acc: any, cur: any) => {
       const isExistCategory = acc.find((item: any) => item.id === cur.name);
       if (!isExistCategory) {
@@ -81,10 +77,6 @@ export default function PortfolioViewChart({
       },
     ],
   );
-  const totalPrice = formattedData?.reduce((acc: any, cur: any) => {
-    acc += cur?.dailyPrice * cur?.quantity;
-    return acc;
-  }, 0.0);
 
   return (
     <Contents
@@ -104,13 +96,13 @@ export default function PortfolioViewChart({
           <DoughnutChart
             height={330}
             width={width / 2 - 210}
-            data={formattedData}
-            totalPrice={totalPrice}
+            data={data?.formattedData}
+            totalPrice={data?.dailyTotalPrice}
             legend={
               <ChartLabel
-                data={formattedData}
-                object={data}
-                totalPrice={Number(totalPrice)}
+                data={data?.formattedData}
+                object={data?.list}
+                totalPrice={Number(data?.dailyTotalPrice)}
               />
             }
           />
@@ -151,14 +143,14 @@ export default function PortfolioViewChart({
             <DoughnutChart
               height={300}
               width={width}
-              data={formattedData}
-              totalPrice={totalPrice}
+              data={data?.formattedData}
+              totalPrice={data?.dailyTotalPrice}
               type={"mobile"}
               legend={
                 <ChartLabel
-                  data={formattedData}
-                  object={data}
-                  totalPrice={Number(totalPrice)}
+                  data={data?.formattedData}
+                  object={data?.list}
+                  totalPrice={Number(data?.dailyTotalPrice)}
                 />
               }
             />

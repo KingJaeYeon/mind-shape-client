@@ -1,16 +1,17 @@
 "use client";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import Col from "@/components/layout/Col";
 import Contents from "@/components/layout/Contents";
 import BackButton from "@/app/[locale]/add/portfolio/_components/viewTransaction/BackButton";
 import Header from "@/app/[locale]/add/portfolio/_components/viewTransaction/Header";
 import Body from "@/app/[locale]/add/portfolio/_components/viewTransaction/Body";
-import { usePortfolio } from "@/hooks/react-query/portfolio.query";
+import { usePortfolioData } from "@/hooks/react-query/portfolio.query";
 import React from "react";
 
 export default function ViewTransactionsPage() {
-  const { getValue, setValue } = usePortfolioStore();
-  const { dailyPriceData, portfolio, isPending } = usePortfolio();
+  const { getValue, setValue } = usePortfolio();
+  const { dailyPriceData, portfolio, isPending, prevPriceData } =
+    usePortfolioData();
 
   if (isPending || !portfolio || !dailyPriceData) {
     return <div>network error...</div>;
@@ -36,7 +37,7 @@ export default function ViewTransactionsPage() {
     return acc;
   }, {});
 
-  if (!detail[getValue("symbol")]) {
+  if (!detail[getValue("symbol")].symbol) {
     setValue("symbol", undefined);
   }
 

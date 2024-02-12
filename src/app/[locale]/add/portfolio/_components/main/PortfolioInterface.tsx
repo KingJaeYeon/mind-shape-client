@@ -13,10 +13,6 @@ import { useState } from "react";
 import { useModalStore } from "@/store/modalStore";
 import { parseISO } from "date-fns";
 
-const data = {
-  totalPriceCurrent: 1000000,
-  totalPriceYesterday: 900000,
-};
 export default function PortfolioInterface() {
   const { t } = useTranslation("portfolio");
   const [isOpen, setIsOpen] = useState(false);

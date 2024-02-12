@@ -13,7 +13,7 @@ export default function Route() {
     };
   }, [setValue]);
 
-  if (!!getValue("symbol")) {
+  if (!!getValue("data", "detailSymbol")) {
     return <ViewTransactionsPage />;
   }
   return <MainPage />;
