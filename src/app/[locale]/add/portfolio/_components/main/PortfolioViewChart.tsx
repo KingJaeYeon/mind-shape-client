@@ -13,15 +13,6 @@ import TreeMapChart from "@/components/share/chart/TreeMapChart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import { usePortfolio } from "@/store/portfolioStore";
 
-type MyList = {
-  quantity: number;
-  asset: { symbol: string; exChange: string };
-  assetId: number;
-  category: { assetType: string; name: string };
-  index: 1;
-  price: 100;
-}[];
-
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
   const { data } = usePortfolio();
