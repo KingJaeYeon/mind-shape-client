@@ -62,6 +62,13 @@ export default function Header({ data }: { data: any }) {
           </h3>
         </CardBox>
       </Col>
+      <p
+        className={
+          "rounded-[10px] border border-red px-5 py-3 font-medium text-red"
+        }
+      >
+        {data.quantity === 0 && t("detail_warning")}
+      </p>
     </Col>
   );
 }

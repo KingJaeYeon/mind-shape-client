@@ -7,6 +7,7 @@ import Header from "@/app/[locale]/add/portfolio/_components/viewTransaction/Hea
 import Body from "@/app/[locale]/add/portfolio/_components/viewTransaction/Body";
 import { usePortfolioData } from "@/hooks/react-query/portfolio.query";
 import React from "react";
+import { Asset, PortfolioItem } from "@/constant/portfolio";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolio();
@@ -22,27 +23,48 @@ export default function ViewTransactionsPage() {
   const list = portfolio?.filter((item: any) => {
     return item?.asset?.symbol === getValue("data", "detailSymbol");
   });
-  const detail = getValue("data", "list")[getValue("data", "detailSymbol")];
-  // const detail = list?.reduce((acc: any, cur: any) => {
-  //   const price = cur?.transactionType === "BUY" ? cur?.price : cur?.price * -1;
-  //   const quantity =
-  //     cur?.transactionType === "BUY" ? cur?.quantity : cur?.quantity * -1;
-  //   const symbol = cur?.asset?.symbol;
-  //   const name = cur?.category?.name;
-  //   const resultPrice =
-  //     cur.transactionType === "BUY" ? price * quantity : price * quantity * -1;
-  //
-  //   acc[cur?.asset?.symbol] = {
-  //     price: Number(acc[symbol]?.price ?? 0) + resultPrice,
-  //     quantity: Number(acc[symbol]?.quantity ?? 0) + quantity,
-  //     symbol: symbol,
-  //     name: name,
-  //   };
-  //   return acc;
-  // }, {});
-  console.log("list::", list);
-  console.log("detail::", detail);
-  // console.log("getValue::", getValue("data", "list"));
+
+  const detail: Record<string, PortfolioItem> = list.reduce(
+    (acc: any, cur: Asset) => {
+      const { assetId, transactionType, price, quantity, asset, category } =
+        cur;
+      const symbol = asset.symbol;
+      const name = category.name;
+      const symbolName = asset.name;
+      const adjustedPrice =
+        transactionType === "BUY" ? price * quantity : price * quantity * -1;
+
+      // 기존 항목 업데이트 또는 새 항목 생성
+      const existingItem = acc[symbol] || {
+        price: 0,
+        quantity: 0,
+        symbol,
+        name,
+        symbolName,
+        dailyPrice: -1,
+        prevPrice: -1,
+        updatedAt: null,
+      };
+
+      existingItem.price += adjustedPrice;
+      existingItem.quantity += transactionType === "BUY" ? quantity : -quantity;
+
+      // 일일 가격 데이터 업데이트
+      if (dailyPriceData[assetId] && existingItem.dailyPrice === -1) {
+        existingItem.dailyPrice = dailyPriceData[assetId].closePrice;
+        existingItem.updatedAt = dailyPriceData[assetId].createdAt;
+      }
+
+      if (prevPriceData[assetId] && existingItem.prevPrice === -1) {
+        existingItem.prevPrice = prevPriceData[assetId].closePrice;
+      }
+
+      acc[symbol] = existingItem;
+      return acc;
+    },
+    {},
+  )[getValue("data", "detailSymbol")];
+
   if (!detailSymbol) {
     setValue("data", "detailSymbol", null);
   }
