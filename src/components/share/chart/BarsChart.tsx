@@ -5,6 +5,8 @@ import { Bar } from "@visx/shape";
 import { scaleLinear, scaleBand } from "@visx/scale";
 import { AxisLeft, AxisBottom } from "@visx/axis";
 import { GridRows, GridColumns } from "@visx/grid";
+import { defaultStyles, useTooltip, useTooltipInPortal } from "@visx/tooltip";
+import { localPoint } from "@visx/event";
 export const background = "#fff";
 
 // accessors
@@ -19,7 +21,17 @@ export type BarProps = {
   data: any;
   type?: string;
 };
-
+type TooltipData = {
+  bar: any;
+  xScaleKey: string;
+  yScaleValue: number;
+  index: number;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+};
+let tooltipTimeout: number;
 export default function BarsChart({
   width,
   height,
@@ -27,7 +39,29 @@ export default function BarsChart({
   data,
   type,
 }: BarProps) {
+  const {
+    tooltipOpen,
+    tooltipLeft,
+    tooltipTop,
+    tooltipData,
+    hideTooltip,
+    showTooltip,
+  } = useTooltip<TooltipData>();
+
+  const { containerRef, TooltipInPortal } = useTooltipInPortal({
+    // TooltipInPortal is rendered in a separate child of <body /> and positioned
+    // with page coordinates which should be updated on scroll. consider using
+    // Tooltip or TooltipWithBounds if you don't need to render inside a Portal
+    scroll: true,
+  });
   if (width < 10) return null;
+
+  const tooltipStyles = {
+    ...defaultStyles,
+    minWidth: 60,
+    backgroundColor: "rgba(0,0,0,0.9)",
+    color: "white",
+  };
 
   // bounds
   const xMax = type === "mobile" ? width : width - margin.left - margin.right;
@@ -47,9 +81,10 @@ export default function BarsChart({
   yScale.range([yMax, 0]);
 
   return (
-    <div>
+    <div className={"relative"}>
       <svg width={width} height={height}>
         <rect
+          ref={containerRef}
           x={0}
           y={0}
           width={width}
@@ -80,25 +115,62 @@ export default function BarsChart({
           <text x="-30" y="15" transform="rotate(-90)" fontSize={10}>
             Price ($)
           </text>
-          {data.map((d: any) => {
-            const letter = getXScaleKey(d);
+          {data?.map((d: any) => {
+            const xScaleKey = getXScaleKey(d);
             const barWidth = xScale.bandwidth();
             const barHeight = yMax - (yScale(getYScaleValue(d)) ?? 0);
-            const barX = xScale(letter);
+            const barX = xScale(xScaleKey) ?? 0;
             const barY = yMax - barHeight;
             return (
               <Bar
-                key={`bar-${letter}`}
+                key={`bar-${xScaleKey}`}
                 x={barX}
                 y={barY}
                 width={barWidth}
                 height={barHeight}
                 fill="rgba(23, 233, 217, .5)"
+                onMouseLeave={() => {
+                  tooltipTimeout = window.setTimeout(() => {
+                    hideTooltip();
+                  }, 300);
+                }}
+                onMouseMove={(event) => {
+                  if (tooltipTimeout) clearTimeout(tooltipTimeout);
+                  // TooltipInPortal expects coordinates to be relative to containerRef
+                  // localPoint returns coordinates relative to the nearest SVG, which
+                  // is what containerRef is set to in this example.
+                  const eventSvgCoords = localPoint(event);
+                  const left = barX + barWidth / 2;
+                  showTooltip({
+                    tooltipData: d,
+                    tooltipTop: eventSvgCoords?.y,
+                    tooltipLeft: left,
+                  });
+                }}
               />
             );
           })}
         </Group>
       </svg>
+      {tooltipOpen && tooltipData && (
+        <TooltipInPortal
+          top={tooltipTop}
+          left={tooltipLeft}
+          style={tooltipStyles}
+        >
+          <div className={"mb-[10px]"}>
+            <strong>{tooltipData.xScaleKey}</strong>
+          </div>
+          <div>
+            <p className={"font-medium"}>
+              {tooltipData.yScaleValue.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </p>
+          </div>
+        </TooltipInPortal>
+      )}
     </div>
   );
 }

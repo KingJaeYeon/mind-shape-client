@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from "react";
 import { DesktopTypeTM, TabletAndMobile } from "@/components/layout/responsive";
 import Row from "@/components/layout/Row";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
-import TreeMapChart from "@/components/share/chart/TreeMapChart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import { usePortfolio } from "@/store/portfolioStore";
 import BarsChart from "@/components/share/chart/BarsChart";
@@ -22,7 +21,10 @@ export default function PortfolioViewChart() {
 
   const toggleOptions = [
     { value: "allocation", label: t("allocation") },
-    { value: "industry", label: t("industry") },
+    {
+      value: "active_portfolio_overview",
+      label: t("active_portfolio_overview"),
+    },
   ];
   const [width, setWidth] = useState<number>(0);
   const [toggle, setToggle] = useState(toggleOptions[0].value);
