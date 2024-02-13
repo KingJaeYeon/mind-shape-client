@@ -8,28 +8,6 @@ import Text from "@/components/layout/Text";
 import React, { useEffect } from "react";
 import List from "@/app/[locale]/add/portfolio/_components/main/TableList";
 import { usePortfolio } from "@/store/portfolioStore";
-// 필요한 타입 정의
-type Asset = {
-  assetId: string;
-  price: number;
-  quantity: number;
-  transactionType: "BUY" | "SELL";
-  asset: {
-    symbol: string;
-  };
-  category: {
-    name: string;
-  };
-};
-
-type PortfolioItem = {
-  price: number;
-  quantity: number;
-  symbol: string;
-  name: string;
-  dailyPrice: number;
-  updatedAt: Date | null;
-};
 
 export default function PortfolioContents() {
   const { init } = usePortfolio();

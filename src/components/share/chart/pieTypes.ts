@@ -34,12 +34,11 @@ export type AnimatedStyles = {
 
 export interface PiePortfolioData {
   [key: string]: any;
-
+  dailyPrice: number;
+  quantity: number;
   symbol: string;
   price: number;
 }
-const getPortfolioSymbol = (symbol: PiePortfolioData) => symbol.symbol;
-const getPortfolioPrice = (price: PiePortfolioData) => price.price;
 
 export const getTransformedData = (data: any) =>
   data?.reduce((acc: any, item: any) => {

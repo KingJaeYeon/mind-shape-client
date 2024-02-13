@@ -18,9 +18,7 @@ import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
 import { useConvenienceStore } from "@/store/convenienceStore";
 
-const symbols = (data: PiePortfolioData[]) => data.map((item) => item?.symbol);
-const getSymbol = (symbol: PiePortfolioData) => symbol.symbol;
-const getPrice = (price: PiePortfolioData) => price.price;
+const getPrice = (price: PiePortfolioData) => price.dailyPrice * price.quantity;
 
 export default function DoughnutChart({
   width,
@@ -47,20 +45,21 @@ export default function DoughnutChart({
   const centerX = innerWidth / 2 - tempMargin;
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
-
+  console.log("transformedData::", transformedData);
+  console.log("data::", data);
   useEffect(() => {
     setValue("config", "totalPrice", totalPrice);
   }, [totalPrice]);
 
   const displayPrice = selected
     ? transformedData[selected]?.toLocaleString()
-    : totalPrice.toLocaleString();
+    : totalPrice?.toLocaleString();
 
   if (data?.length === 0 || !data) {
     return null;
   }
   const ordinalColorScale = scaleOrdinal({
-    domain: data.map((item) => item.symbol),
+    domain: data?.map((item) => item?.symbol),
     range: doughnutColor,
   });
   return (

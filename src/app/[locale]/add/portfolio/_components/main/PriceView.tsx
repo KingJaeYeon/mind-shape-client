@@ -31,10 +31,14 @@ export default function PriceView() {
           isPlus ? "text-green" : "text-red",
         )}
       >
-        <p> {isPlus ? "+" : "-"}</p>
         <ShowOrHideAmount
           length={4}
-          text={`$ ${priceDifference.toLocaleString()} (${t("24h")})`}
+          text={`$ ${isPlus ? "+" : "-"} ${Math.abs(
+            priceDifference,
+          ).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })} (${t("24h")})`}
           className={"text-[16px]"}
         />
       </Row>
