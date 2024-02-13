@@ -7,28 +7,21 @@ import {
 import React from "react";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
-export default function Header({
-  symbol,
-  name,
-  totalPrice,
-  totalQuantity,
-}: {
-  symbol: string;
-  name: string;
-  totalPrice: number;
-  totalQuantity: number;
-}) {
-  const avgPrice = totalPrice / totalQuantity;
+export default function Header({ data }: { data: any }) {
+  const symbol = data.symbol;
+  const symbolName = data.symbolName;
+  const quantity = data.quantity;
+  const holdingPrice = data.quantity * data.dailyPrice;
+  const avgPrice = data.price / quantity;
   const { t } = useTranslation("portfolio");
-  const { t: t2 } = useTranslation("category");
   return (
     <Col className={"w-full pb-[24px] pt-[28px]"}>
-      <h3 className={"text-text-secondary"}>{`${t2(name)} (${symbol})`}</h3>
+      <h3 className={"text-text-secondary"}>{`${symbolName} (${symbol})`}</h3>
       <Row
         className={"items-center justify-between gap-[8px] sm:justify-start"}
       >
         <ShowOrHideAmount
-          text={`$ ${totalPrice?.toLocaleString()}`}
+          text={`$${holdingPrice?.toLocaleString()}`}
           className={"text-[32px] font-semibold text-text"}
         />
         <ShowOrHideTrigger className={"h-[20px] w-[24px]"} />
@@ -39,7 +32,7 @@ export default function Header({
         <CardBox>
           <p className={"font-medium text-text-secondary"}>{t("quantity")}</p>
           <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
-            <ShowOrHideAmount text={`${totalQuantity} ${symbol}`} />
+            <ShowOrHideAmount text={`${quantity} ${symbol}`} />
           </h3>
         </CardBox>
         <CardBox>
@@ -48,7 +41,7 @@ export default function Header({
           </p>
           <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
             <ShowOrHideAmount
-              text={`₩ ${avgPrice?.toLocaleString(undefined, {
+              text={`$${avgPrice?.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}
@@ -61,7 +54,7 @@ export default function Header({
           </p>
           <h3 className={"mt-[4px] text-[25px] font-semibold text-black"}>
             <ShowOrHideAmount
-              text={`$ ${totalPrice?.toLocaleString(undefined, {
+              text={`$${holdingPrice?.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}

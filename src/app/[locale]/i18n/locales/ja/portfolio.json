@@ -32,5 +32,8 @@
   "transaction_remove": "取引を削除",
   "remove": "削除",
   "cancel": "キャンセルする",
-  "updated_at": "データ更新日"
+  "updated_at": "データ更新日",
+  "asking _price": "販売価",
+  "selling_price": "成約価格",
+  "asking_selling_price": "売値/買値"
 }

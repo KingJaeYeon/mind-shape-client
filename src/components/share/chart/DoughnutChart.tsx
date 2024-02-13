@@ -45,8 +45,7 @@ export default function DoughnutChart({
   const centerX = innerWidth / 2 - tempMargin;
   const centerY = innerHeight / 2;
   const transformedData = getTransformedData(data);
-  console.log("transformedData::", transformedData);
-  console.log("data::", data);
+
   useEffect(() => {
     setValue("config", "totalPrice", totalPrice);
   }, [totalPrice]);

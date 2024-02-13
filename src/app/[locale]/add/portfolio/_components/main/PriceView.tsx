@@ -20,7 +20,7 @@ export default function PriceView() {
     <Contents className={"flex flex-col"}>
       <Row className={"items-center gap-[8px]"}>
         <ShowOrHideAmount
-          text={`$ ${totalPriceCurrent?.toLocaleString()}`}
+          text={`$${totalPriceCurrent?.toLocaleString()}`}
           className={"text-[32px] font-bold text-text"}
         />
         <ShowOrHideTrigger className={"h-[20px] w-[24px]"} />
@@ -33,7 +33,7 @@ export default function PriceView() {
       >
         <ShowOrHideAmount
           length={4}
-          text={`$ ${isPlus ? "+" : "-"} ${Math.abs(
+          text={`${isPlus ? "+" : "-"} $${Math.abs(
             priceDifference,
           ).toLocaleString(undefined, {
             minimumFractionDigits: 2,

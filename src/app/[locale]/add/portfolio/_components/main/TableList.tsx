@@ -56,6 +56,7 @@ export default function List() {
             const updatedAt = format(item?.updatedAt, t("date_format"));
             const isPlus =
               profit_loss === 0 ? "black" : profit_loss > 0 ? "green" : "red";
+
             return (
               <TRow key={symbol} className={"cursor-pointer hover:bg-paleGray"}>
                 <Td

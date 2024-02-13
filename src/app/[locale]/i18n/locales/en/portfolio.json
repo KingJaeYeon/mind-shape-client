@@ -32,5 +32,8 @@
   "transaction_remove": "Remove Transaction",
   "remove": "Remove",
   "cancel": "Cancel",
-  "updated_at": "Data update date"
+  "updated_at": "Data update date",
+  "asking _price": "Asking Price",
+  "selling_price": "Selling Price",
+  "asking_selling_price": "Asking / Selling Price"
 }

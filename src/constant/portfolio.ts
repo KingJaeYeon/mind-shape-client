@@ -22,6 +22,7 @@ export type Asset = {
   transactionType: "BUY" | "SELL";
   asset: {
     symbol: string;
+    name: string;
   };
   category: {
     name: string;

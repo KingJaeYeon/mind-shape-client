@@ -50,6 +50,7 @@ export const usePortfolioStore = create<State & Action>(
             cur;
           const symbol = asset.symbol;
           const name = category.name;
+          const symbolName = asset.name;
           const adjustedPrice =
             transactionType === "BUY"
               ? price * quantity
@@ -61,6 +62,7 @@ export const usePortfolioStore = create<State & Action>(
             quantity: 0,
             symbol,
             name,
+            symbolName,
             dailyPrice: -1,
             prevPrice: -1,
             updatedAt: null,
@@ -86,9 +88,11 @@ export const usePortfolioStore = create<State & Action>(
         {},
       );
 
-      const formattedData: PortfolioItem[] = Object.values(list).sort(
-        (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
-      );
+      const formattedData: PortfolioItem[] = Object.values(list)
+        .filter((item) => item.quantity !== 0)
+        .sort(
+          (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
+        );
 
       const dailyTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
         acc += cur?.dailyPrice * cur?.quantity;

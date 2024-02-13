@@ -32,9 +32,11 @@ export default function Body({ data }: { data: any[] }) {
           <Th className={"left-0 h-full items-center justify-start font-bold"}>
             {t("type")}
           </Th>
-          <Th className={"hidden font-bold sm:flex"}>{t("current_price")}</Th>
-          <Th className={"hidden font-bold sm:flex"}>{t("quantity")}</Th>
           <Th className={"font-bold"}>{t("total_price")}</Th>
+          <Th className={"hidden font-bold sm:flex"}>{t("quantity")}</Th>
+          <Th className={"hidden font-bold sm:flex"}>
+            {t("asking_selling_price")}
+          </Th>
           <Th className={"hidden font-bold sm:flex"}>{t("edit")}</Th>
         </Table.Header>
         <Table.Body
@@ -103,7 +105,10 @@ function MobileRow({ item, t }: { item: any; t: any }) {
         </Td>
         <Td>
           <ShowOrHideAmount
-            text={item?.price && item?.price.toLocaleString()}
+            text={(item?.price * item?.quantity).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           />
         </Td>
       </TRow>
@@ -122,7 +127,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
           {format(item?.transactionDate, t("date_format"))}
         </div>
       </Td>
-      <Td className={"hidden sm:flex"}>
+      <Td>
         <ShowOrHideAmount
           text={(item?.price * item?.quantity).toLocaleString(undefined, {
             minimumFractionDigits: 2,
@@ -135,6 +140,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
       </Td>
       <Td>
         <ShowOrHideAmount
+          className={"hidden sm:flex"}
           text={
             item?.price &&
             (item?.price).toLocaleString(undefined, {

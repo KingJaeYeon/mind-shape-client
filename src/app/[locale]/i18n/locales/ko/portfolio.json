@@ -32,5 +32,8 @@
   "transaction_remove": "거래 삭제",
   "remove": "삭제",
   "cancel": "취소",
-  "updated_at": "데이터갱신날짜"
+  "updated_at": "데이터갱신날짜",
+  "asking _price": "매수가",
+  "selling_price": "매도가",
+  "asking_selling_price": "매수 / 매도가"
 }
