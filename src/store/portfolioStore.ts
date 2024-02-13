@@ -11,6 +11,7 @@ interface State {
     formattedData: any;
     dailyTotalPrice: number;
     prevTotalPrice: number;
+    originTotalPrice: number;
     detailSymbol: any;
   };
 }
@@ -40,6 +41,7 @@ export const usePortfolioStore = create<State & Action>(
       formattedData: null,
       dailyTotalPrice: -1,
       prevTotalPrice: -1,
+      originTotalPrice: -1,
       detailSymbol: null,
     },
     init: (portfolio: any, dailyPriceData: any, prevPriceData: any) => {
@@ -103,8 +105,20 @@ export const usePortfolioStore = create<State & Action>(
         return acc;
       }, 0.0);
 
+      console.log(formattedData);
+      const originTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
+        acc += cur?.price;
+        return acc;
+      }, 0.0);
+
       set({
-        data: { list, formattedData, dailyTotalPrice, prevTotalPrice },
+        data: {
+          list,
+          formattedData,
+          dailyTotalPrice,
+          prevTotalPrice,
+          originTotalPrice,
+        },
       });
     },
     getValue: (key: string, ns: string) => {

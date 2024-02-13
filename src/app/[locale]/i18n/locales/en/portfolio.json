@@ -36,5 +36,6 @@
   "asking _price": "Asking Price",
   "selling_price": "Selling Price",
   "asking_selling_price": "Asking / Selling Price",
-  "detail_warning": "The total quantity of this item has been changed to 0. If you leave this page, it will be removed from the portfolio list. If necessary, you can modify this item on the profit and loss realization page"
+  "detail_warning": "The Total quantity of this item has been changed to 0. If you leave this page, it will be removed from the portfolio list. If necessary, you can modify this item on the profit and loss realization page",
+  "active_portfolio_overview": "Active Portfolio Overview"
 }

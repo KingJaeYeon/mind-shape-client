@@ -12,6 +12,7 @@ import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import TreeMapChart from "@/components/share/chart/TreeMapChart";
 import { ToggleGroupBaseSingle } from "@/components/share/radix/ToggleGroupBase";
 import { usePortfolio } from "@/store/portfolioStore";
+import BarsChart from "@/components/share/chart/BarsChart";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
@@ -68,6 +69,13 @@ export default function PortfolioViewChart() {
       },
     ],
   );
+  const barData = [
+    {
+      xScaleKey: "Total Original Investment",
+      yScaleValue: data.originTotalPrice,
+    },
+    { xScaleKey: "Total Current Value", yScaleValue: data.dailyTotalPrice },
+  ];
 
   return (
     <Contents
@@ -105,13 +113,11 @@ export default function PortfolioViewChart() {
           style={{ maxWidth: `${width / 2 - 10}px` }}
         >
           <Row>
-            <h3 className={"text-[18px] font-bold"}>{t("industry")}</h3>
+            <h3 className={"text-[18px] font-bold"}>
+              {t("active_portfolio_overview")}
+            </h3>
           </Row>
-          <TreeMapChart
-            height={330}
-            width={width / 2 - 40}
-            formattedData={treeMapData}
-          />
+          <BarsChart height={330} width={width / 2 - 40} data={barData} />
         </Contents>
       </DesktopTypeTM>
       <TabletAndMobile>
@@ -121,7 +127,9 @@ export default function PortfolioViewChart() {
         >
           <Row className={"items-center justify-between"}>
             <h3 className={"text-[18px] font-bold"}>
-              {toggle === "allocation" ? t("allocation") : t("industry")}
+              {toggle === "allocation"
+                ? t("allocation")
+                : t("active_portfolio_overview")}
             </h3>
             <ToggleGroupBaseSingle
               value={toggle}
@@ -146,11 +154,11 @@ export default function PortfolioViewChart() {
               }
             />
           ) : (
-            <TreeMapChart
+            <BarsChart
               height={300}
               width={width}
+              data={barData}
               type={"mobile"}
-              formattedData={treeMapData}
             />
           )}
         </Contents>

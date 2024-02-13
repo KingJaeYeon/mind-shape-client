@@ -6,8 +6,6 @@ import { Shakespeare } from "@visx/mock-data/lib/mocks/shakespeare";
 import { scaleLinear } from "@visx/scale";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
-const color1 = "#338a3e";
-const color2 = "#fff";
 export const background = "#fff";
 
 const defaultMargin = { top: 10, left: 10, right: 10, bottom: 10 };
