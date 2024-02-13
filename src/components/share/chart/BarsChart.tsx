@@ -7,6 +7,8 @@ import { AxisLeft, AxisBottom } from "@visx/axis";
 import { GridRows, GridColumns } from "@visx/grid";
 import { defaultStyles, useTooltip, useTooltipInPortal } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
+import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import { cn } from "@/lib/utils";
 export const background = "#fff";
 
 // accessors
@@ -49,11 +51,9 @@ export default function BarsChart({
   } = useTooltip<TooltipData>();
 
   const { containerRef, TooltipInPortal } = useTooltipInPortal({
-    // TooltipInPortal is rendered in a separate child of <body /> and positioned
-    // with page coordinates which should be updated on scroll. consider using
-    // Tooltip or TooltipWithBounds if you don't need to render inside a Portal
     scroll: true,
   });
+  const { t } = useTranslation("portfolio");
   if (width < 10) return null;
 
   const tooltipStyles = {
@@ -62,7 +62,12 @@ export default function BarsChart({
     backgroundColor: "rgba(0,0,0,0.9)",
     color: "white",
   };
-
+  const isPlus =
+    data[1].yScaleValue - data[0].yScaleValue === 0
+      ? "black"
+      : data[1].yScaleValue - data[0].yScaleValue > 0
+        ? "green"
+        : "red";
   // bounds
   const xMax = type === "mobile" ? width : width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
@@ -136,9 +141,6 @@ export default function BarsChart({
                 }}
                 onMouseMove={(event) => {
                   if (tooltipTimeout) clearTimeout(tooltipTimeout);
-                  // TooltipInPortal expects coordinates to be relative to containerRef
-                  // localPoint returns coordinates relative to the nearest SVG, which
-                  // is what containerRef is set to in this example.
                   const eventSvgCoords = localPoint(event);
                   const left = barX + barWidth / 2;
                   showTooltip({
@@ -169,6 +171,20 @@ export default function BarsChart({
               })}
             </p>
           </div>
+          {tooltipData.xScaleKey === data[1].xScaleKey && (
+            <div
+              className={cn(
+                "mt-[10px] font-medium",
+                isPlus === "green" && "text-primary",
+                isPlus === "red" && "text-red",
+              )}
+            >{`${t("profit_loss")} : ${(
+              data[1].yScaleValue - data[0].yScaleValue
+            ).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}</div>
+          )}
         </TooltipInPortal>
       )}
     </div>
