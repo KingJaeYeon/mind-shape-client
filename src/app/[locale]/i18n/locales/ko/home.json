@@ -5,5 +5,9 @@
   "asset_view": "자산조회",
   "asset_add": "자산등록",
   "community": "커뮤니티",
-  "setting": "세팅"
+  "setting": "세팅",
+  "add_portfolio": "포트폴리오 추가",
+  "add_forex": "외화 추가",
+  "add_dividends": "배당금내역 추가",
+  "add_realized": "실현손익 추가"
 }

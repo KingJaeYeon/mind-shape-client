@@ -5,5 +5,9 @@
   "asset_view": "資産照会",
   "asset_add": "資産登録",
   "community": "コミュニティ",
-  "setting": "設定"
+  "setting": "設定",
+  "add_portfolio": "ポートフォリオ追加",
+  "add_forex": "外貨追加",
+  "add_dividends": "配当金履歴追加",
+  "add_realized": "実現損益追加"
 }

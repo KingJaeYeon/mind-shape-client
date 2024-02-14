@@ -5,5 +5,9 @@
   "asset_view": "Asset View",
   "asset_add": "Asset Registration",
   "community": "Community",
-  "setting": "Setting"
+  "setting": "Setting",
+  "add_portfolio": "Add Portfolio",
+  "add_forex": "Add Forex",
+  "add_dividends": "Add Dividends",
+  "add_realized": "Add Realized"
 }
