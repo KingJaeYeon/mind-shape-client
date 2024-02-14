@@ -114,10 +114,11 @@ export default function BarsChart({
           <AxisBottom
             top={yMax}
             scale={xScale}
+            axisClassName={"font-bold text-[14px]"}
             numTicks={width > 520 ? 10 : 5}
           />
           <AxisLeft scale={yScale} />
-          <text x="-30" y="15" transform="rotate(-90)" fontSize={10}>
+          <text x="-50" y="15" transform="rotate(-90)" fontSize={12}>
             Price ($)
           </text>
           {data?.map((d: any) => {
