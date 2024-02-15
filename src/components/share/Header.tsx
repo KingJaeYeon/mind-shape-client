@@ -10,16 +10,18 @@ import {
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
 import Link from "next/link";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio, usePortfolioStore } from "@/store/portfolioStore";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import IconMenu from "../../assets/IconMenu";
 import React from "react";
 import HoverCardBase from "@/components/share/radix/HoverCardBase";
 import Col from "@/components/layout/Col";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { t } = useTranslation("home");
-  const { setValue } = usePortfolioStore();
+  const { setValue } = usePortfolio();
+  const { push } = useRouter();
 
   const addMenu = [
     {
@@ -70,10 +72,16 @@ export default function Header() {
             <Link href={"/add/"}>{t("setting")}</Link>
           </Row>
           <Row className={"absolute right-[10px] gap-[10px]"}>
-            <Button secondary={true} size={"sm"}>
+            <Button
+              secondary={true}
+              size={"sm"}
+              onClick={() => push("/account/signin")}
+            >
               {t("sign_in")}
             </Button>
-            <Button size={"sm"}>{t("sign_up")}</Button>
+            <Button size={"sm"} onClick={() => push("/account/signup")}>
+              {t("sign_up")}
+            </Button>
           </Row>
         </Contents>
       </DesktopTypeTM>
