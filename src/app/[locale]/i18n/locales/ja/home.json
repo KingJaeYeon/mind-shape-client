@@ -9,5 +9,6 @@
   "add_portfolio": "ポートフォリオ追加",
   "add_forex": "外貨追加",
   "add_dividends": "配当金履歴追加",
-  "add_realized": "実現損益追加"
+  "add_realized": "実現損益追加",
+  "watchlist": "ウォッチリスト"
 }

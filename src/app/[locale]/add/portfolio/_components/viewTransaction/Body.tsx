@@ -29,15 +29,21 @@ export default function Body({ data }: { data: any[] }) {
       </h3>
       <Table columns="repeat(auto-fit, minmax(100px, 1fr))">
         <Table.Header>
-          <Th className={"left-0 h-full items-center justify-start font-bold"}>
+          <Table.Th
+            className={"left-0 h-full items-center justify-start font-bold"}
+          >
             {t("type")}
-          </Th>
-          <Th className={"font-bold"}>{t("total_price")}</Th>
-          <Th className={"hidden font-bold sm:flex"}>{t("quantity")}</Th>
-          <Th className={"hidden font-bold sm:flex"}>
+          </Table.Th>
+          <Table.Th className={"font-bold"}>{t("total_price")}</Table.Th>
+          <Table.Th className={"hidden font-bold sm:flex"}>
+            {t("quantity")}
+          </Table.Th>
+          <Table.Th className={"hidden font-bold sm:flex"}>
             {t("asking_selling_price")}
-          </Th>
-          <Th className={"hidden font-bold sm:flex"}>{t("edit")}</Th>
+          </Table.Th>
+          <Table.Th className={"hidden font-bold sm:flex"}>
+            {t("edit")}
+          </Table.Th>
         </Table.Header>
         <Table.Body
           data={data}
@@ -97,20 +103,20 @@ function MobileRow({ item, t }: { item: any; t: any }) {
           setContentsValue("date", formattedDate);
         }}
       >
-        <Td className={"left-0 h-full flex-col justify-center"}>
+        <Table.Td className={"left-0 h-full flex-col justify-center"}>
           <div>{item?.transactionType}</div>
           <div className={"text-[12px] text-text-secondary"}>
             {format(item?.transactionDate, t("date_format"))}
           </div>
-        </Td>
-        <Td>
+        </Table.Td>
+        <Table.Td>
           <ShowOrHideAmount
             text={(item?.price * item?.quantity).toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           />
-        </Td>
+        </Table.Td>
       </TRow>
     </DialogBase>
   );
@@ -121,24 +127,24 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
   const { setContentsValue } = useModalStore();
   return (
     <TRow className={"cursor-pointer hover:bg-paleGray"}>
-      <Td className={"left-0 h-full flex-col justify-center"}>
+      <Table.Td className={"left-0 h-full flex-col justify-center"}>
         <div>{item?.transactionType}</div>
         <div className={"text-[12px] text-text-secondary"}>
           {format(item?.transactionDate, t("date_format"))}
         </div>
-      </Td>
-      <Td>
+      </Table.Td>
+      <Table.Td>
         <ShowOrHideAmount
           text={(item?.price * item?.quantity).toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}
         />
-      </Td>
-      <Td className={"hidden sm:flex"}>
+      </Table.Td>
+      <Table.Td className={"hidden sm:flex"}>
         <ShowOrHideAmount text={item?.quantity} />
-      </Td>
-      <Td>
+      </Table.Td>
+      <Table.Td>
         <ShowOrHideAmount
           className={"hidden sm:flex"}
           text={
@@ -149,8 +155,8 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
             })
           }
         />
-      </Td>
-      <Td className={"hidden text-text-secondary sm:flex"}>
+      </Table.Td>
+      <Table.Td className={"hidden text-text-secondary sm:flex"}>
         <DialogBase
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -180,45 +186,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
             <IconTrash className={"h-[16px] w-[16px]"} />
           </ButtonBase>
         </DialogBase>
-      </Td>
+      </Table.Td>
     </TRow>
-  );
-}
-
-function Th({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <Text
-      className={cn(
-        "flex h-[48px] items-center justify-end border-y border-border px-[10px] py-[11px] text-[12px]",
-        className,
-      )}
-    >
-      {children}
-    </Text>
-  );
-}
-
-function Td({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "flex justify-end px-[10px] text-[14px] font-medium",
-        className,
-      )}
-    >
-      {children}
-    </div>
   );
 }

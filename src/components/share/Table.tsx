@@ -5,6 +5,7 @@ import React from "react";
 import Row from "@/components/layout/Row";
 import Contents from "@/components/layout/Contents";
 import { cn } from "@/lib/utils";
+import Text from "@/components/layout/Text";
 
 const TableContext = createContext<any>(undefined);
 
@@ -84,6 +85,45 @@ export function TRow({
     </Row>
   );
 }
+
+function Th({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Text
+      className={cn(
+        "flex h-[48px] items-center justify-end border-y border-border px-[10px] py-[11px] text-[12px]",
+        className,
+      )}
+    >
+      {children}
+    </Text>
+  );
+}
+
+function Td({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex justify-end px-[10px] text-[14px] font-medium",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function Footer({ children }: { children: React.ReactNode }) {
   return <footer className={"flex w-full"}>{children}</footer>;
 }
@@ -91,6 +131,8 @@ export function Footer({ children }: { children: React.ReactNode }) {
 TableContext.displayName = "TableContext";
 Table.Header = Header;
 Table.Body = Body;
+Table.Th = Th;
+Table.Td = Td;
 Table.TRow = TRow;
 Table.Footer = Footer;
 export default Table;

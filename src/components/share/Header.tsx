@@ -44,6 +44,11 @@ export default function Header() {
       onclick: () => setValue("data", "detailSymbol", null),
       text: t("add_realized"),
     },
+    {
+      href: "/add/watchlist",
+      onclick: () => setValue("data", "detailSymbol", null),
+      text: t("watchlist"),
+    },
   ];
 
   return (

@@ -6,6 +6,7 @@ import {
 } from "@/components/share/button/ShowOrHideAmount";
 import React from "react";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import CardBox from "@/components/share/CardBox";
 
 export default function Header({ data }: { data: any }) {
   const symbol = data.symbol;
@@ -72,17 +73,5 @@ export default function Header({ data }: { data: any }) {
         </p>
       )}
     </Col>
-  );
-}
-
-function CardBox({ children }: { children: React.ReactNode }) {
-  return (
-    <Row
-      className={
-        "mb-[12px] h-[108px] items-center justify-between rounded-[12px] px-[24px] py-[16px] shadow-chart sm:mr-[24px] sm:h-auto sm:flex-col sm:items-start"
-      }
-    >
-      {children}
-    </Row>
   );
 }
