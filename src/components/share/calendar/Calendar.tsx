@@ -381,19 +381,24 @@ function InputOption({
   }
 
   return (
-    <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
-      <p>Search:</p>
-      <input
-        size={12}
-        type="text"
-        className={"outline-none"}
-        placeholder={format(new Date(), "yyyy-MM-dd")}
-        value={inputValue}
-        onChange={(e) => {
-          e.preventDefault();
-          handleInputChange(e);
-        }}
-      />
+    <Row>
+      <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
+        <p>Search:</p>
+        <input
+          size={12}
+          type="text"
+          className={"outline-none"}
+          placeholder={format(new Date(), "yyyy-MM-dd")}
+          value={inputValue}
+          onChange={(e) => {
+            e.preventDefault();
+            handleInputChange(e);
+          }}
+        />
+      </Row>
+      <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
+        <input type={"time"} />
+      </Row>
     </Row>
   );
 }
