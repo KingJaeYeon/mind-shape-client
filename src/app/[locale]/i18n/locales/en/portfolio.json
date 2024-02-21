@@ -8,7 +8,7 @@
   "quantity": "Quantity",
   "price_per_assets": "Price Per Assets",
   "asset_type": "Asset Type",
-  "date_format": "MM.dd.yyyy",
+  "date_format": "MM.dd.yyyy HH:mm",
   "total_use_price": "Total Spent",
   "total_sell_price": "Total Income",
   "total_price": "Total Price",

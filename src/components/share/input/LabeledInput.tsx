@@ -2,7 +2,7 @@ import { Input, Label } from "@/components/layout/Input";
 
 type LabeledInputProps = {
   id: string;
-  label: string;
+  label?: string;
   value: any;
   valueHandler: any;
   placeholder: string;

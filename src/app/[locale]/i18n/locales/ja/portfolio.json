@@ -8,7 +8,7 @@
   "quantity": "数量",
   "price_per_assets": "資産価格",
   "asset_type": "分類",
-  "date_format": "yyyy年MM月dd日",
+  "date_format": "yyyy年MM月dd日 HH:mm",
   "total_use_price": "総支出",
   "total_sell_price": "総収入",
   "total_price": "合計価格",

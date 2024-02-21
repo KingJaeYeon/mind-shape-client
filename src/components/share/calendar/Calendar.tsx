@@ -10,6 +10,8 @@ import {
   endOfMonth,
   parse,
   isValid,
+  getHours,
+  getMinutes,
 } from "date-fns";
 import {
   CaptionProps,
@@ -26,6 +28,8 @@ import Row from "@/components/layout/Row";
 import { useModalStore } from "@/store/modalStore";
 import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import LabeledDisplay from "@/components/share/input/LabeledDisplay";
+import LabeledInput from "@/components/share/input/LabeledInput";
 
 /**
  *   기본 옵션
@@ -258,6 +262,8 @@ export function SingleDayPickerTypeModal({
   const year = getYear(date);
   const month = getMonth(date);
   const day = getDate(date);
+  const hour = getHours(date);
+  const minute = getMinutes(date);
   const endDay = format(endOfMonth(date), "dd");
   const disabledDays = [
     {
@@ -270,7 +276,9 @@ export function SingleDayPickerTypeModal({
   const [inputValue, setInputValue] = useState<string>("");
   const [display, setDisplay] = useState<Date | undefined>(selected);
   const { t } = useTranslation("portfolio");
-
+  const [time, setTime] = useState(() => {
+    return `${hour < 9 ? "0" + hour : hour}:${minute}`;
+  });
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
     const date = parse(e.currentTarget.value, "yyyy-MM-dd", new Date());
@@ -357,6 +365,8 @@ export function SingleDayPickerTypeModal({
             hasInputOption={hasInputOption}
             inputValue={inputValue}
             handleInputChange={handleInputChange}
+            time={time}
+            setTime={setTime}
           />
         }
       />
@@ -371,17 +381,21 @@ function InputOption({
   hasInputOption,
   inputValue,
   handleInputChange,
+  time,
+  setTime,
 }: {
   hasInputOption?: boolean;
   inputValue: string;
   handleInputChange: (e: any) => void;
+  time: any;
+  setTime: any;
 }) {
   if (!hasInputOption) {
     return null;
   }
 
   return (
-    <Row>
+    <Row className={"w-full items-center justify-between"}>
       <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
         <p>Search:</p>
         <input
@@ -396,9 +410,13 @@ function InputOption({
           }}
         />
       </Row>
-      <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
-        <input type={"time"} />
-      </Row>
+      <LabeledInput
+        id={"date"}
+        type={"text"}
+        value={time}
+        placeholder={"HH:mm"}
+        valueHandler={() => {}}
+      />
     </Row>
   );
 }
