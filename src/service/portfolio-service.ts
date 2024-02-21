@@ -1,6 +1,9 @@
 import { request } from "@/service/axios";
 import { AddPortfolio, UpdatePortfolio } from "@/constant/portfolio";
-
+enum transactionTypes {
+  BUY = "BUY",
+  SELL = "SELL",
+}
 export function addPortfolio({
   assetId,
   price,
@@ -9,6 +12,10 @@ export function addPortfolio({
   transactionDate,
   transactionType,
 }: AddPortfolio) {
+  const transactionEnum =
+    transactionType.toLowerCase() === "buy"
+      ? transactionTypes.BUY
+      : transactionTypes.SELL;
   return request({
     url: "/portfolio",
     method: "POST",
@@ -18,7 +25,7 @@ export function addPortfolio({
       quantity,
       categoryId,
       transactionDate,
-      transactionType,
+      transactionType: transactionEnum,
     },
   });
 }
