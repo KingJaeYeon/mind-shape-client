@@ -9,9 +9,11 @@ import {
 } from "@/service/portfolio-service";
 import toast from "react-hot-toast";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
+import { usePortfolio } from "@/store/portfolioStore";
 
 export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
   const queryClient = useQueryClient();
+  const { getValue } = usePortfolio();
   const { t } = useTranslation("toast");
   const {
     mutate: savePortfolio,
@@ -20,9 +22,14 @@ export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
   } = useMutation({
     mutationFn: addPortfolio,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["myPortfolio"],
-      });
+      const data = await getValue("data", "formattedData");
+      if (data?.length === 0) {
+        location.reload();
+      } else {
+        await queryClient.invalidateQueries({
+          queryKey: ["myPortfolio"],
+        });
+      }
       setIsOpen(false);
       toast.success(t("transaction_add"));
     },
@@ -35,7 +42,11 @@ export function useAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
 }
 
 export function usePortfolioData() {
-  const { data = {}, isPending } = useQuery({
+  const {
+    data = {},
+    isPending,
+    error,
+  } = useQuery({
     queryKey: ["myPortfolio"],
     queryFn: getPortfolio,
   });
@@ -46,6 +57,7 @@ export function usePortfolioData() {
     isPending,
     dailyPriceData: dailyPrice,
     prevPriceData: prevPrice,
+    error,
   };
 }
 

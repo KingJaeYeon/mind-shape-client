@@ -11,7 +11,7 @@ import { usePortfolio } from "@/store/portfolioStore";
 
 export default function PortfolioContents() {
   const { init } = usePortfolio();
-  const { dailyPriceData, portfolio, isPending, prevPriceData } =
+  const { dailyPriceData, portfolio, isPending, prevPriceData, error } =
     usePortfolioData();
 
   useEffect(() => {
@@ -21,8 +21,16 @@ export default function PortfolioContents() {
   }, [portfolio, init, dailyPriceData, prevPriceData]);
 
   const { t } = useTranslation("portfolio");
-  if (isPending || !portfolio || !dailyPriceData) {
+  if (error) {
     return <div>network error...</div>;
+  }
+
+  if (isPending) {
+    return <div>loading...</div>;
+  }
+
+  if (!portfolio || !dailyPriceData) {
+    return <div>no data...</div>;
   }
   return (
     <Contents className={"flex w-full flex-col"}>

@@ -11,11 +11,11 @@ import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import { useState } from "react";
 import { useModalStore } from "@/store/modalStore";
-import { parseISO } from "date-fns";
 
 export default function PortfolioInterface() {
   const { t } = useTranslation("portfolio");
   const [isOpen, setIsOpen] = useState(false);
+
   const { setContentsValue } = useModalStore();
   return (
     <Contents className={"flex flex-col justify-between gap-[5px] md:flex-row"}>

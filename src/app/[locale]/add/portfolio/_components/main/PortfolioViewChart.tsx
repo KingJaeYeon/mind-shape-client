@@ -15,7 +15,7 @@ import BarsChart from "@/components/share/chart/BarsChart";
 
 export default function PortfolioViewChart() {
   const { getValue } = useConvenienceStore();
-  const { data } = usePortfolio();
+  const { getValue: getPortfolio } = usePortfolio();
   const { t } = useTranslation("portfolio");
   const ref = useRef();
 
@@ -53,7 +53,7 @@ export default function PortfolioViewChart() {
     return null;
   }
 
-  const treeMapData = data?.formattedData?.reduce(
+  const treeMapData = getPortfolio("data", "formattedData")?.reduce(
     (acc: any, cur: any) => {
       const isExistCategory = acc.find((item: any) => item.id === cur.name);
       if (!isExistCategory) {
@@ -74,11 +74,16 @@ export default function PortfolioViewChart() {
   const barData = [
     {
       xScaleKey: "Total Original Investment",
-      yScaleValue: data.originTotalPrice,
+      yScaleValue: getPortfolio("data", "originTotalPrice"),
     },
-    { xScaleKey: "Total Current Value", yScaleValue: data.dailyTotalPrice },
+    {
+      xScaleKey: "Total Current Value",
+      yScaleValue: getPortfolio("data", "dailyTotalPrice"),
+    },
   ];
-
+  if (getPortfolio("data", "formattedData")?.length === 0) {
+    return null;
+  }
   return (
     <Contents
       className={"flex w-full max-w-full gap-[20px] font-Inter"}
@@ -97,13 +102,13 @@ export default function PortfolioViewChart() {
           <DoughnutChart
             height={330}
             width={width / 2 - 210}
-            data={data?.formattedData}
-            totalPrice={data?.dailyTotalPrice}
+            data={getPortfolio("data", "formattedData")}
+            totalPrice={getPortfolio("data", "dailyTotalPrice")}
             legend={
               <ChartLabel
-                data={data?.formattedData}
-                object={data?.list}
-                totalPrice={Number(data?.dailyTotalPrice)}
+                data={getPortfolio("data", "formattedData")}
+                object={getPortfolio("data", "list")}
+                totalPrice={Number(getPortfolio("data", "dailyTotalPrice"))}
               />
             }
           />
@@ -144,14 +149,14 @@ export default function PortfolioViewChart() {
             <DoughnutChart
               height={300}
               width={width}
-              data={data?.formattedData}
-              totalPrice={data?.dailyTotalPrice}
+              data={getPortfolio("data", "formattedData")}
+              totalPrice={getPortfolio("data", "dailyTotalPrice")}
               type={"mobile"}
               legend={
                 <ChartLabel
-                  data={data?.formattedData}
-                  object={data?.list}
-                  totalPrice={Number(data?.dailyTotalPrice)}
+                  data={getPortfolio("data", "formattedData")}
+                  object={getPortfolio("data", "list")}
+                  totalPrice={Number(getPortfolio("data", "dailyTotalPrice"))}
                 />
               }
             />
