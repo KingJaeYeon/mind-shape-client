@@ -106,7 +106,7 @@ function MobileRow({ item, t }: { item: any; t: any }) {
         <Table.Td className={"left-0 h-full flex-col justify-center"}>
           <div>{item?.transactionType}</div>
           <div className={"text-[12px] text-text-secondary"}>
-            {format(item?.transactionDate, t("date_format"))}
+            {format(item?.transactionDate, t("date_time_format"))}
           </div>
         </Table.Td>
         <Table.Td>
@@ -130,7 +130,7 @@ function DesktopRow({ item, t }: { item: any; t: any }) {
       <Table.Td className={"left-0 h-full flex-col justify-center"}>
         <div>{item?.transactionType}</div>
         <div className={"text-[12px] text-text-secondary"}>
-          {format(item?.transactionDate, t("date_format"))}
+          {format(item?.transactionDate, t("date_time_format"))}
         </div>
       </Table.Td>
       <Table.Td>
