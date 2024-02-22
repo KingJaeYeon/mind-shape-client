@@ -8,7 +8,7 @@
   "quantity": "Quantity",
   "price_per_assets": "Price Per Assets",
   "asset_type": "Asset Type",
-  "date_format": "MM.dd.yyyy HH:mm",
+  "date_time_format": "MM.dd.yyyy HH:mm",
   "total_use_price": "Total Spent",
   "total_sell_price": "Total Income",
   "total_price": "Total Price",
@@ -38,5 +38,6 @@
   "asking_selling_price": "Asking / Selling Price",
   "detail_warning": "The Total quantity of this item has been changed to 0. If you leave this page, it will be removed from the portfolio list. If necessary, you can modify this item on the profit and loss realization page",
   "active_portfolio_overview": "Active Portfolio Overview",
-  "watchlist": "Watchlist"
+  "watchlist": "Watchlist",
+  "date_format": "MM.dd.yyyy"
 }

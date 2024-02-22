@@ -150,7 +150,10 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
         <Row className={"mt-[16px] w-full gap-[10px]"}>
           <LabeledDisplay
             id={"transactionDate"}
-            displayText={format(getContentsValue("date"), t("date_format"))}
+            displayText={format(
+              getContentsValue("date"),
+              t("date_time_format"),
+            )}
             className={"px-[14px]"}
             onClickHandler={buyAtOpenHandler}
           />

@@ -1,0 +1,3 @@
+[data-radix-popper-content-wrapper] {
+    z-index: 9999 !important;/* 적절한 z-index 값으로 변경하세요. */
+}

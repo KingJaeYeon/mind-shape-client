@@ -12,6 +12,8 @@ import {
   isValid,
   getHours,
   getMinutes,
+  setHours,
+  setMinutes,
 } from "date-fns";
 import {
   CaptionProps,
@@ -277,7 +279,9 @@ export function SingleDayPickerTypeModal({
   const [display, setDisplay] = useState<Date | undefined>(selected);
   const { t } = useTranslation("portfolio");
   const [time, setTime] = useState(() => {
-    return `${hour < 9 ? "0" + hour : hour}:${minute}`;
+    return `${hour < 10 ? "0" + hour : hour}:${
+      minute < 10 ? "0" + minute : minute
+    }`;
   });
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
@@ -300,10 +304,25 @@ export function SingleDayPickerTypeModal({
   };
 
   const changeDateHandler = () => {
+    const currentDate = new Date();
     if (!display) {
-      selectedHandler(new Date());
+      selectedHandler(currentDate);
+      backHandler();
+      return;
     }
-    selectedHandler(display);
+    const regex = /^\d{2}:\d{2}$/;
+    let newDate;
+    if (regex.test(time)) {
+      const [hours, minutes] = time.split(":").map(Number);
+      newDate = setHours(display, hours); // 시간을 설정합니다.
+      newDate = setMinutes(newDate, minutes); // 분을 설정합니다.
+    } else {
+      const currentHours = getHours(currentDate);
+      const currentMinutes = getMinutes(currentDate);
+      newDate = setHours(display, currentHours); // 시간을 설정합니다.
+      newDate = setMinutes(newDate, currentMinutes); // 분을 설정합니다.
+    }
+    selectedHandler(newDate);
     backHandler();
   };
 
@@ -393,7 +412,32 @@ function InputOption({
   if (!hasInputOption) {
     return null;
   }
+  function timeHandler(value: string) {
+    if (value.length > 5) {
+      return;
+    }
+    if (
+      (Number(value.slice(0, 2)) >= 24 ||
+        Number(value.slice(0, 2)) < 0 ||
+        isNaN(Number(value.slice(0, 2)))) &&
+      value.length >= 2
+    ) {
+      value = value.replace(value.slice(0, 2), "00");
+    }
 
+    if (value.slice(2, 3) !== ":" && value.length >= 3) {
+      value = value.replace(value.slice(2, 3), ":");
+    }
+    if (
+      (Number(value.slice(3, 5)) >= 60 ||
+        Number(value.slice(3, 5)) < 0 ||
+        isNaN(Number(value.slice(3, 5)))) &&
+      value.length >= 5
+    ) {
+      value = value.replace(value.slice(3, 5), "59");
+    }
+    setTime(value);
+  }
   return (
     <Row className={"w-full items-center justify-between"}>
       <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
@@ -414,8 +458,10 @@ function InputOption({
         id={"date"}
         type={"text"}
         value={time}
-        placeholder={"HH:mm"}
-        valueHandler={() => {}}
+        placeholder={"23:59"}
+        valueHandler={timeHandler}
+        secondary={true}
+        className={time.length < 5 ? "text-red" : ""}
       />
     </Row>
   );

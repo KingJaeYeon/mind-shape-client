@@ -113,6 +113,8 @@ export default function List() {
                 <Table.Td>{updatedAt}</Table.Td>
                 <Table.Td>
                   <Popovers
+                    align={"end"}
+                    side={"bottom"}
                     trigger={
                       <button>
                         <IconMore />
