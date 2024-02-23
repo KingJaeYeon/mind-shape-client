@@ -17,7 +17,7 @@ interface State {
 }
 
 interface Action {
-  init: (portfolio: any[], dailyPriceData: any[], prevPriceData: any[]) => any;
+  init: (portfolio: any[], closePriceData: any[]) => any;
   getValue: (key: string, ns: string) => any;
   setValue: (key: string, ns: string, value: any) => void;
 }
@@ -44,7 +44,7 @@ export const usePortfolioStore = create<State & Action>(
       originTotalPrice: -1,
       detailSymbol: null,
     },
-    init: (portfolio: any, dailyPriceData: any, prevPriceData: any) => {
+    init: (portfolio: any, closePriceData: any) => {
       set({ data: initData });
       const list: Record<string, PortfolioItem> = portfolio.reduce(
         (acc: any, cur: Asset) => {
@@ -74,15 +74,9 @@ export const usePortfolioStore = create<State & Action>(
           existingItem.quantity +=
             transactionType === "BUY" ? quantity : -quantity;
 
-          // 일일 가격 데이터 업데이트
-          if (dailyPriceData[assetId] && existingItem.dailyPrice === -1) {
-            existingItem.dailyPrice = dailyPriceData[assetId].closePrice;
-            existingItem.updatedAt = dailyPriceData[assetId].createdAt;
-          }
-
-          if (prevPriceData[assetId] && existingItem.prevPrice === -1) {
-            existingItem.prevPrice = prevPriceData[assetId].closePrice;
-          }
+          existingItem.dailyPrice = closePriceData[assetId].dailyClosePrice;
+          existingItem.prevPrice = closePriceData[assetId].prevClosePrice;
+          existingItem.updatedAt = closePriceData[assetId].createdAtDaily;
 
           acc[symbol] = existingItem;
           return acc;

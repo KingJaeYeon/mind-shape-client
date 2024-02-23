@@ -50,13 +50,11 @@ export function usePortfolioData() {
     queryKey: ["myPortfolio"],
     queryFn: getPortfolio,
   });
-  const { portfolio, priceData } = data;
-  const { dailyPrice, prevPrice } = priceData ?? 0;
+  const { portfolio, closePriceData } = data;
   return {
     portfolio,
     isPending,
-    dailyPriceData: dailyPrice,
-    prevPriceData: prevPrice,
+    closePriceData,
     error,
   };
 }

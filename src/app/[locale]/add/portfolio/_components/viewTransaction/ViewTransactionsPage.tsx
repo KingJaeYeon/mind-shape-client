@@ -11,12 +11,11 @@ import { Asset, PortfolioItem } from "@/constant/portfolio";
 
 export default function ViewTransactionsPage() {
   const { getValue, setValue } = usePortfolio();
-  const { dailyPriceData, portfolio, isPending, prevPriceData } =
-    usePortfolioData();
+  const { portfolio, isPending, closePriceData } = usePortfolioData();
 
   const detailSymbol = getValue("data", "detailSymbol");
 
-  if (isPending || !portfolio || !dailyPriceData) {
+  if (isPending || !portfolio || !closePriceData) {
     return <div>network error...</div>;
   }
 
@@ -50,14 +49,9 @@ export default function ViewTransactionsPage() {
       existingItem.quantity += transactionType === "BUY" ? quantity : -quantity;
 
       // 일일 가격 데이터 업데이트
-      if (dailyPriceData[assetId] && existingItem.dailyPrice === -1) {
-        existingItem.dailyPrice = dailyPriceData[assetId].closePrice;
-        existingItem.updatedAt = dailyPriceData[assetId].createdAt;
-      }
-
-      if (prevPriceData[assetId] && existingItem.prevPrice === -1) {
-        existingItem.prevPrice = prevPriceData[assetId].closePrice;
-      }
+      existingItem.dailyPrice = closePriceData[assetId].dailyClosePrice;
+      existingItem.prevPrice = closePriceData[assetId].prevClosePrice;
+      existingItem.updatedAt = closePriceData[assetId].createdAtDaily;
 
       acc[symbol] = existingItem;
       return acc;

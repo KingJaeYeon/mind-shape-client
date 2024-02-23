@@ -34,42 +34,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant C as Client
-    participant S as Server
-    participant DB as Database
-    
-    autonumber
-    U ->> C: Fill username
-    U ->> C: Fill password
-    C ->> U: Enable "Login" button
-    U ->> C: Click "Login" button
-    
-    C ->>+ S: POST /login
-        S ->>+ DB: SELECT * FROM users
-            Note over S, DB : See login.py for impl. details
-        DB -->>- S: result
-    S -->>- C: {authenticated: true}
-    C -->> U: Redirect to /home
-```
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant C as Client
-    participant S as Server
-    participant DB as Database
-    
-    autonumber
-    U ->> C: type: "user" | "expert"
-    C ->>+ S: GET /scam-case/expert-comments <br/> GET /scam-case/user-comments
-        S ->>+ DB: SELECT
-        DB -->>- S: result
-    S -->>- C: result
-    C -->> U: view data
-```
 
 ```mermaid
 sequenceDiagram
@@ -106,4 +71,27 @@ sequenceDiagram
         DB -->>- S: result 
     S -->>- C: result
     C ->> U: update data
+```
+
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Client
+    participant S as Server
+    participant DB as Database
+    participant S3 as Object Storage
+    
+    autonumber
+    U ->> C: fill title
+    U ->> C: fill content
+    C ->> U: enable submit button
+    U ->> C: click submit
+    C ->>+ S: POST /board
+    S ->> S3: upload image
+    S3 -->> S: result
+    S ->>+ DB: Insert board
+    DB -->>- S: result
+    S -->>- C: result {id}
+    C ->> U: redirect to board/p/{id}
 ```

@@ -11,14 +11,13 @@ import { usePortfolio } from "@/store/portfolioStore";
 
 export default function PortfolioContents() {
   const { init } = usePortfolio();
-  const { dailyPriceData, portfolio, isPending, prevPriceData, error } =
-    usePortfolioData();
+  const { closePriceData, portfolio, isPending, error } = usePortfolioData();
 
   useEffect(() => {
     if (!!portfolio) {
-      init(portfolio, dailyPriceData, prevPriceData);
+      init(portfolio, closePriceData);
     }
-  }, [portfolio, init, dailyPriceData, prevPriceData]);
+  }, [portfolio, init, closePriceData]);
 
   const { t } = useTranslation("portfolio");
   if (error) {
@@ -29,7 +28,7 @@ export default function PortfolioContents() {
     return <div>loading...</div>;
   }
 
-  if (!portfolio || !dailyPriceData) {
+  if (!portfolio || !closePriceData) {
     return <div>no data...</div>;
   }
   return (
