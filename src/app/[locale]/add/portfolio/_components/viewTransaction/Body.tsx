@@ -4,8 +4,6 @@ import Col from "@/components/layout/Col";
 import Table, { TRow } from "@/components/share/Table";
 
 import React, { useState } from "react";
-import Text from "@/components/layout/Text";
-import { cn } from "@/lib/utils";
 import { format, parseISO } from "date-fns";
 import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 import { Desktop, Mobile } from "@/components/layout/responsive";
