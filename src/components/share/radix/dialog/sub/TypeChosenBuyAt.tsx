@@ -10,9 +10,11 @@ import { useModalStore } from "@/store/modalStore";
 export default function TypeChosenBuyAt() {
   const { t } = useTranslation("portfolio");
   const { getContentsValue, setContentsValue } = useModalStore();
+
   function selectHandler(value: string) {
     setContentsValue("date", value);
   }
+
   return (
     <form
       onSubmit={(event) => {

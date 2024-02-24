@@ -264,8 +264,10 @@ export function SingleDayPickerTypeModal({
   const year = getYear(date);
   const month = getMonth(date);
   const day = getDate(date);
-  const hour = getHours(date);
-  const minute = getMinutes(date);
+
+  const hour = getHours(!!selected ? selected : date);
+  const minute = getMinutes(!!selected ? selected : date);
+
   const endDay = format(endOfMonth(date), "dd");
   const disabledDays = [
     {
@@ -412,6 +414,7 @@ function InputOption({
   if (!hasInputOption) {
     return null;
   }
+
   function timeHandler(value: string) {
     if (value.length > 5) {
       return;
@@ -438,6 +441,7 @@ function InputOption({
     }
     setTime(value);
   }
+
   return (
     <Row className={"w-full items-center justify-between"}>
       <Row className={"mt-[5px] gap-[10px] rounded-[5px] p-[5px] font-Inter"}>
