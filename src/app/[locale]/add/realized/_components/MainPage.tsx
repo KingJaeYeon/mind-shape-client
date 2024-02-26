@@ -7,7 +7,7 @@ import Body from "@/app/[locale]/add/realized/_components/Body";
 
 export default function MainPage() {
   return (
-    <Contents className={"w-full flex-col items-start"}>
+    <Contents className={"w-full max-w-[1230px] flex-col items-start"}>
       <PageTitle title={"My Realized"} emoji={"🚀"} />
       <Header />
       <Body />

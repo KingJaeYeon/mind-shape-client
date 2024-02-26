@@ -18,7 +18,7 @@
   "country": "국가",
   "valuation_amount": "평가금액",
   "profit_loss": "이익/손실",
-  "avg_buy_price": "평균 매수가",
+  "avg_buy_price": "평단가",
   "edit": "수정",
   "allocation": "배분",
   "assets": "자산",
@@ -39,5 +39,7 @@
   "detail_warning": "해당 항목의 총 수량이 0으로 변경되어 페이지를 나가시면 포트폴리오 리스트에서 제외됩니다. 필요한 경우, 손익 실현 페이지에서 이 항목을 수정하실 수 있습니다.",
   "active_portfolio_overview": "활성 포트폴리오 개요",
   "watchlist": "즐겨찾기",
-  "date_format": "yyyy년 MM월 dd일"
+  "date_format": "yyyy년 MM월 dd일",
+  "selling_day": "매도일",
+  "profit_and_loss_amount": "손익금액"
 }

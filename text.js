@@ -1,13 +1,8 @@
-function main(A, B) {
-  A = A.sort((a, b) => a - b);
-  B = B.sort((a, b) => b - a);
-  return A.reduce((arr, cur, i) => {
-    arr += cur * B[i];
-    return arr;
-  }, 0);
+function main(A, B, answer = 0) {
+  return A.toString().split("");
 }
 
-const res = main([1, 4, 2], [5, 4, 4]);
+const res = main(123, "R");
 console.timeEnd();
 
 console.log(res);
