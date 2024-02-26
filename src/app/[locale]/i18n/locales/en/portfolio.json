@@ -41,5 +41,6 @@
   "watchlist": "Watchlist",
   "date_format": "MM.dd.yyyy",
   "selling_day": "Selling Day",
-  "profit_and_loss_amount": "P&L Amount"
+  "profit_and_loss_amount": "P&L Amount",
+  "sales_volume": "Sales Volume"
 }

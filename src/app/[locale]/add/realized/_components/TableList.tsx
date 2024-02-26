@@ -33,14 +33,32 @@ export default function List() {
   const formattedData = res.reduce(
     (acc, cur) => {
       if (cur.transactionType === "BUY") {
-        acc["total"][cur.assetId] = {
+        if (!acc["total"][cur.assetId]) {
+          acc["total"][cur.assetId] = {
+            assetId: cur.assetId,
+            symbol: cur.asset.symbol,
+            name: cur.asset.name,
+            totalPrice: 0,
+            totalQuantity: 0,
+          };
+        }
+        acc["total"][cur.assetId]["totalPrice"] += cur.price * cur.quantity;
+        acc["total"][cur.assetId]["totalQuantity"] += cur.quantity;
+      } else {
+        const object = {
           assetId: cur.assetId,
           symbol: cur.asset.symbol,
           name: cur.asset.name,
-          price: 0,
-          quantity: 0,
+          sellingDay: cur.transactionDate,
+          sellingQuantity: cur.quantity,
+          sellingTotalPrice: cur.price * cur.quantity,
+          sellingPrice: cur.price,
+          preSaleTotalPrice: acc["total"][cur.assetId]["totalPrice"],
+          preSaleTotalQuantity: acc["total"][cur.assetId]["totalQuantity"],
         };
-      } else {
+        acc["realized"].unshift(object);
+        acc["total"][cur.assetId]["totalPrice"] -= cur.price * cur.quantity;
+        acc["total"][cur.assetId]["totalQuantity"] -= cur.quantity;
       }
       return acc;
     },
@@ -62,39 +80,24 @@ export default function List() {
             {t("selling_day")}
           </Table.Th>
           <Table.Th>{t("ticker")}</Table.Th>
-          <Table.Th>{t("quantity")}</Table.Th>
+          <Table.Th>{t("sales_volume")}</Table.Th>
           <Table.Th>{t("asking _price")}</Table.Th>
           <Table.Th>{t("profit_and_loss_amount")}</Table.Th>
           <Table.Th>{t("selling_price")}</Table.Th>
           <Table.Th>{t("edit")}</Table.Th>
         </Table.Header>
         <Table.Body
-          data={data?.formattedData}
+          data={formattedData?.realized}
           render={(item: any, i: number) => {
-            const sellingDay = format(new Date(), t("date_time_format"));
-            const symbol = "TSLA";
-            const quantity = 20;
-            const askingPrice = (700).toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-              minimumFractionDigits: 2,
-            });
-            const profitLossAmount = Math.random();
-            const sellingPrice = 700;
-            // const dailyPrice = item?.dailyPrice;
-            // const quantity = item?.quantity;
-            // const avg_buy_price = item?.price / quantity;
-            // const symbol = item?.symbol;
-            // const price = (item?.dailyPrice * quantity).toLocaleString(
-            //   undefined,
-            //   {
-            //     minimumFractionDigits: 2,
-            //     maximumFractionDigits: 2,
-            //   },
-            // );
-            // const profit_loss = (dailyPrice - avg_buy_price) * quantity;
-            // const profit_loss_percent =
-            //   ((dailyPrice - avg_buy_price) / avg_buy_price) * 100;
-            // const updatedAt = format(item?.updatedAt, t("date_format"));
+            const sellingDay = format(item.sellingDay, t("date_time_format"));
+            const symbol = item.symbol;
+            const quantity = item.sellingQuantity;
+            const askingPrice =
+              item.preSaleTotalPrice / item.preSaleTotalQuantity;
+            const sellingPrice = item.sellingPrice;
+            const profitLossAmount =
+              (item.sellingPrice - askingPrice) * item.sellingQuantity;
+
             const isPlus =
               profitLossAmount === 0
                 ? "black"
@@ -113,7 +116,16 @@ export default function List() {
                 </Table.Td>
                 <Table.Td>{symbol}</Table.Td>
                 <Table.Td>
-                  <ShowOrHideAmount text={quantity.toString()} />
+                  <ShowOrHideAmount text={quantity} length={4} />
+                </Table.Td>
+                <Table.Td>
+                  <ShowOrHideAmount
+                    text={askingPrice.toLocaleString(undefined, {
+                      maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
+                    })}
+                    length={4}
+                  />
                 </Table.Td>
                 <Table.Td
                   className={cn(
@@ -125,19 +137,19 @@ export default function List() {
                   <ShowOrHideAmount
                     text={
                       isPlus === "black"
-                        ? sellingPrice.toLocaleString(undefined, {
+                        ? profitLossAmount.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })
                         : isPlus === "green"
-                          ? `+ ${Math.abs(sellingPrice).toLocaleString(
+                          ? `+ ${Math.abs(profitLossAmount).toLocaleString(
                               undefined,
                               {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               },
                             )}`
-                          : `- ${Math.abs(sellingPrice).toLocaleString(
+                          : `- ${Math.abs(profitLossAmount).toLocaleString(
                               undefined,
                               {
                                 minimumFractionDigits: 2,
@@ -146,16 +158,9 @@ export default function List() {
                             )}`
                     }
                   />
-                  <ShowOrHideAmount
-                    text={`${Math.abs(profitLossAmount).toFixed(2)} %`}
-                    length={4}
-                  />
                 </Table.Td>
                 <Table.Td>
-                  <ShowOrHideAmount text={askingPrice.toString()} length={4} />
-                </Table.Td>
-                <Table.Td>
-                  <ShowOrHideAmount text={askingPrice.toString()} />
+                  <ShowOrHideAmount text={sellingPrice} />
                 </Table.Td>
                 <Table.Td>
                   <Popovers
