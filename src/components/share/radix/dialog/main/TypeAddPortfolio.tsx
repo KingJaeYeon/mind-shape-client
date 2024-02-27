@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { CurrentDisplayPrice } from "@/components/share/input/SelectCurrent";
 import TypeChosenBuyAt from "@/components/share/radix/dialog/sub/TypeChosenBuyAt";
 import { wait } from "@/components/share/radix/DialogBase";
-import { useModalStore } from "@/store/modalStore";
+import { toggleOptions, useModal } from "@/store/modalStore";
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
@@ -30,18 +30,14 @@ type Chosen = {
   };
 };
 export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
-  const { setValue, getContentsValue, setContentsValue } = useModalStore();
+  const { setValue, getContentsValue, setContentsValue } = useModal();
   const { debouncedValue } = useDebounce(getContentsValue("search"));
   const { searchResult, isLoad, initList } = useSearchAsset(debouncedValue);
   const { savePortfolio, isPending } = useAddPortfolio({ setIsOpen });
   const { t } = useTranslation("portfolio");
   const { t: t2 } = useTranslation("category");
 
-  const toggleOptions = [
-    { value: "BUY", label: "BUY" },
-    { value: "SELL", label: "SELL" },
-  ];
-  const [toggle, setToggle] = useState(toggleOptions[0].value);
+  // const [toggle, setToggle] = useState(toggleOptions[0].value);
 
   function priceHandler(e: any) {
     if (e.target.value === "") {
@@ -82,7 +78,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
       categoryId: getContentsValue("chosen")?.category?.index,
       assetId: getContentsValue("chosen")?.index,
       transactionDate: getContentsValue("date"),
-      transactionType: toggle,
+      transactionType: getContentsValue("buyOrSell"),
     });
     e.preventDefault();
   }
@@ -95,6 +91,9 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
     setContentsValue("chosen", value);
   }
 
+  function setToggle(value: string) {
+    setContentsValue("buyOrSell", value);
+  }
   return (
     <form
       onSubmit={(event) => {
@@ -106,7 +105,7 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
 
       <ToggleGroupBaseSingle
         options={toggleOptions}
-        value={toggle}
+        value={getContentsValue("buyOrSell")}
         setValue={setToggle}
         className={
           "flex h-[34px] w-full items-center justify-center break-all bg-inputReadOnly text-[14px] text-inputLabelText first:rounded-bl-[5px] first:rounded-tl-[5px] last:rounded-br-[5px] last:rounded-tr-[5px] hover:bg-paleGray focus:outline-none data-[state=on]:bg-lightGray"
@@ -173,7 +172,9 @@ export default function TypeAddPortfolio({ setIsOpen }: { setIsOpen: any }) {
           }
         >
           <p className={"text-[14px] text-text-secondary"}>
-            {toggle === "BUY" ? t("total_use_price") : t("total_sell_price")}
+            {getContentsValue("buyOrSell") === "BUY"
+              ? t("total_use_price")
+              : t("total_sell_price")}
           </p>
           <CurrentDisplayPrice
             price={

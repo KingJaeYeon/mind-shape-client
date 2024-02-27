@@ -138,4 +138,4 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
   },
 }));
 
-export const usePortfolio = () => usePortfolioStore((state) => state);
+export const usePortfolio = () => usePortfolioStore();

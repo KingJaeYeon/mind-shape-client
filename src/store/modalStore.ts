@@ -18,6 +18,7 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
   subContents: undefined,
   mainContents: undefined,
   contentsValue: {
+    buyOrSell: "BUY",
     date: new Date(),
   },
   getContentsValue: (key: string) => {
@@ -58,3 +59,10 @@ export const useModalStore = create<Props>((set: any, get: any) => ({
     }
   },
 }));
+
+export const useModal = () => useModalStore();
+
+export const toggleOptions = [
+  { value: "BUY", label: "BUY" },
+  { value: "SELL", label: "SELL" },
+];
