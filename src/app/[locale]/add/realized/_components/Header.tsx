@@ -10,7 +10,6 @@ import { usePortfolio } from "@/store/portfolioStore";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 
 export default function Header() {
-  const amount = 2140;
   const {
     data: { realizedData },
   } = usePortfolio();
