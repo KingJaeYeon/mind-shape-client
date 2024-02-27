@@ -42,5 +42,6 @@
   "date_format": "yyyy年MM月dd日",
   "selling_day": "売却日 (ばいきゃくび)",
   "profit_and_loss_amount": "損益金額 (そんえききんがく)",
-  "sales_volume": "売却量 (ばいきゃくりょう) "
+  "sales_volume": "売却量 (ばいきゃくりょう) ",
+  "principal": "初期投資額(しょきとうしがく)"
 }

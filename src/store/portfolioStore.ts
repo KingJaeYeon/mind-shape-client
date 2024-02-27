@@ -8,6 +8,10 @@ interface Props {
   };
   data: {
     list: any;
+    realizedData: {
+      total: any;
+      realized: any[];
+    } | null;
     formattedData: any;
     dailyTotalPrice: number;
     prevTotalPrice: number;
@@ -18,6 +22,7 @@ interface Props {
   getValue: (key: string, ns: string) => any;
   setValue: (key: string, ns: string, value: any) => void;
   transformPortfolio: (portfolio: any, closePriceData: any) => any;
+  getRealizedData: (portfolio: any) => any;
 }
 
 const initData = {
@@ -35,11 +40,57 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
   },
   data: {
     list: null,
+    realizedData: null,
     formattedData: null,
     dailyTotalPrice: -1,
     prevTotalPrice: -1,
     originTotalPrice: -1,
     detailSymbol: null,
+  },
+  getRealizedData: (portfolio) => {
+    const reverse = [...portfolio].reverse();
+    return reverse.reduce<{ total: any; realized: any[] }>(
+      (acc, cur) => {
+        if (cur.transactionType === "BUY") {
+          if (!acc["total"][cur.assetId]) {
+            acc["total"][cur.assetId] = {
+              assetId: cur.assetId,
+              symbol: cur.asset.symbol,
+              name: cur.asset.name,
+              totalPrice: 0,
+              totalQuantity: 0,
+            };
+          }
+          acc["total"][cur.assetId]["totalPrice"] += cur.price * cur.quantity;
+          acc["total"][cur.assetId]["totalQuantity"] += cur.quantity;
+        } else {
+          const object = {
+            assetId: cur.assetId,
+            symbol: cur.asset.symbol,
+            name: cur.asset.name,
+            sellingDay: cur.transactionDate,
+            sellingQuantity: cur.quantity,
+            sellingTotalPrice: cur.price * cur.quantity,
+            sellingPrice: cur.price,
+            preSaleTotalPrice: acc["total"][cur.assetId]["totalPrice"],
+            preSaleTotalQuantity: acc["total"][cur.assetId]["totalQuantity"],
+            plPrice:
+              (cur.price -
+                acc["total"][cur.assetId]["totalPrice"] /
+                  acc["total"][cur.assetId]["totalQuantity"]) *
+              cur.quantity,
+          };
+          acc["realized"].unshift(object);
+          acc["total"][cur.assetId]["totalPrice"] -= cur.price * cur.quantity;
+          acc["total"][cur.assetId]["totalQuantity"] -= cur.quantity;
+        }
+        return acc;
+      },
+      {
+        total: {},
+        realized: [],
+      },
+    );
   },
   transformPortfolio: (portfolio, closePriceData) => {
     return portfolio.reduce((acc: any, cur: Asset) => {
@@ -81,6 +132,8 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
       closePriceData,
     );
 
+    const realizedData = get().getRealizedData(portfolio);
+    console.log("realizedData::", realizedData);
     const formattedData: PortfolioItem[] = Object.values(list)
       .filter((item) => item.quantity !== 0)
       .sort(
@@ -105,6 +158,7 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
     set({
       data: {
         list,
+        realizedData,
         formattedData,
         dailyTotalPrice,
         prevTotalPrice,

@@ -15,7 +15,9 @@ import { usePortfolioData } from "@/hooks/react-query/portfolio.query";
 
 export default function List() {
   const { t } = useTranslation("portfolio");
-  const { data, getValue } = usePortfolio();
+  const {
+    data: { realizedData },
+  } = usePortfolio();
   const { portfolio, error, closePriceData, isPending } = usePortfolioData();
 
   if (isPending) {
@@ -27,47 +29,7 @@ export default function List() {
   if (!portfolio || !closePriceData) {
     return <div>no data...</div>;
   }
-  const res = [...portfolio].reverse();
-  console.log(res);
 
-  const formattedData = res.reduce(
-    (acc, cur) => {
-      if (cur.transactionType === "BUY") {
-        if (!acc["total"][cur.assetId]) {
-          acc["total"][cur.assetId] = {
-            assetId: cur.assetId,
-            symbol: cur.asset.symbol,
-            name: cur.asset.name,
-            totalPrice: 0,
-            totalQuantity: 0,
-          };
-        }
-        acc["total"][cur.assetId]["totalPrice"] += cur.price * cur.quantity;
-        acc["total"][cur.assetId]["totalQuantity"] += cur.quantity;
-      } else {
-        const object = {
-          assetId: cur.assetId,
-          symbol: cur.asset.symbol,
-          name: cur.asset.name,
-          sellingDay: cur.transactionDate,
-          sellingQuantity: cur.quantity,
-          sellingTotalPrice: cur.price * cur.quantity,
-          sellingPrice: cur.price,
-          preSaleTotalPrice: acc["total"][cur.assetId]["totalPrice"],
-          preSaleTotalQuantity: acc["total"][cur.assetId]["totalQuantity"],
-        };
-        acc["realized"].unshift(object);
-        acc["total"][cur.assetId]["totalPrice"] -= cur.price * cur.quantity;
-        acc["total"][cur.assetId]["totalQuantity"] -= cur.quantity;
-      }
-      return acc;
-    },
-    {
-      total: {},
-      realized: [],
-    },
-  );
-  console.log("formattedData", formattedData);
   return (
     <Contents className={"isolate flex w-full flex-col"}>
       <Table columns="minmax(200px, auto) minmax(80px, auto) minmax(60px, auto) minmax(110px, auto) minmax(100px, auto) minmax(100px, auto) minmax(60px, auto)">
@@ -87,7 +49,7 @@ export default function List() {
           <Table.Th>{t("edit")}</Table.Th>
         </Table.Header>
         <Table.Body
-          data={formattedData?.realized}
+          data={realizedData?.realized}
           render={(item: any, i: number) => {
             const sellingDay = format(item.sellingDay, t("date_time_format"));
             const symbol = item.symbol;
@@ -95,8 +57,7 @@ export default function List() {
             const askingPrice =
               item.preSaleTotalPrice / item.preSaleTotalQuantity;
             const sellingPrice = item.sellingPrice;
-            const profitLossAmount =
-              (item.sellingPrice - askingPrice) * item.sellingQuantity;
+            const profitLossAmount = item.plPrice;
 
             const isPlus =
               profitLossAmount === 0

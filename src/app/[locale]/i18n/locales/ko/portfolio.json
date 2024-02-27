@@ -42,5 +42,6 @@
   "date_format": "yyyy년 MM월 dd일",
   "selling_day": "매도일",
   "profit_and_loss_amount": "손익금액",
-  "sales_volume": "매도량"
+  "sales_volume": "매도량",
+  "principal": "원금"
 }
