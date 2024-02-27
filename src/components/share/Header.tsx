@@ -10,7 +10,7 @@ import {
 import HomeButtonTypeLogo from "@/components/share/button/HomeButtonTypeLogo";
 import Button from "@/components/share/button/Button";
 import Link from "next/link";
-import { usePortfolio, usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import IconMenu from "../../assets/IconMenu";
 import React from "react";

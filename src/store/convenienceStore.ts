@@ -30,3 +30,5 @@ export const useConvenienceStore = create<ConvenienceStore>(
     },
   }),
 );
+
+export const useConvenience = () => useConvenienceStore();

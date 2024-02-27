@@ -1,8 +1,8 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { useEffect } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 
 type Props = {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ export default function DialogBase({
   setIsOpen: any;
   className?: string;
 }) {
-  const { setValue } = useModalStore();
+  const { setValue } = useModal();
 
   return (
     <Dialog.Root
@@ -70,7 +70,7 @@ export default function DialogBase({
 }
 
 function DisPlayContents() {
-  const { getValue } = useModalStore();
+  const { getValue } = useModal();
 
   if (!!getValue("subContents")) {
     return getValue("subContents");

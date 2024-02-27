@@ -27,10 +27,9 @@ import "react-day-picker/dist/style.css";
 import "./daypicker.css";
 import { cn } from "@/lib/utils";
 import Row from "@/components/layout/Row";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 import Button from "@/components/share/button/Button";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
-import LabeledDisplay from "@/components/share/input/LabeledDisplay";
 import LabeledInput from "@/components/share/input/LabeledInput";
 
 /**
@@ -276,7 +275,7 @@ export function SingleDayPickerTypeModal({
     },
   ];
 
-  const { backHandler } = useModalStore();
+  const { backHandler } = useModal();
   const [inputValue, setInputValue] = useState<string>("");
   const [display, setDisplay] = useState<Date | undefined>(selected);
   const { t } = useTranslation("portfolio");

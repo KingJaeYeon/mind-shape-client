@@ -1,6 +1,6 @@
 "use client";
 import * as Switch from "@radix-ui/react-switch";
-import { useConvenienceStore } from "@/store/convenienceStore";
+import { useConvenience } from "@/store/convenienceStore";
 export default function SwitchBase({
   id,
   switchKey,
@@ -8,7 +8,7 @@ export default function SwitchBase({
   id: string;
   switchKey: string;
 }) {
-  const { getValue, setValue } = useConvenienceStore();
+  const { getValue, setValue } = useConvenience();
 
   const rootStyle =
     "duration-400 bg-lightGray h-[25px] w-[42px] rounded-[999px] transition-all data-[state='checked']:bg-switchBg";

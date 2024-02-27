@@ -1,6 +1,6 @@
 "use client";
 import Contents from "@/components/layout/Contents";
-import { useConvenienceStore } from "@/store/convenienceStore";
+import { useConvenience } from "@/store/convenienceStore";
 import { IS_SHOW_CHART } from "@/constant/portfolio";
 
 import DoughnutChart from "@/components/share/chart/DoughnutChart";
@@ -14,7 +14,7 @@ import { usePortfolio } from "@/store/portfolioStore";
 import BarsChart from "@/components/share/chart/BarsChart";
 
 export default function PortfolioViewChart() {
-  const { getValue } = useConvenienceStore();
+  const { getValue } = useConvenience();
   const { getValue: getPortfolio } = usePortfolio();
   const { t } = useTranslation("portfolio");
   const ref = useRef();

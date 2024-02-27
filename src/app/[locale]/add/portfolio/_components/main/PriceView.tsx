@@ -1,5 +1,5 @@
 "use client";
-import { usePortfolio, usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import Contents from "@/components/layout/Contents";
 import Row from "@/components/layout/Row";
 import {

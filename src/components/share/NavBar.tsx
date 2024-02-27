@@ -1,5 +1,5 @@
 "use client";
-import { useConvenienceStore } from "@/store/convenienceStore";
+import { useConvenience } from "@/store/convenienceStore";
 import AnimatedDiv from "@/components/layout/AnimatedDiv";
 import Col from "@/components/layout/Col";
 import Row from "@/components/layout/Row";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export default function NavBar({}) {
-  const { getValue } = useConvenienceStore();
+  const { getValue } = useConvenience();
 
   const getNavBarStyle = () => {
     return getValue("hideNavBar")

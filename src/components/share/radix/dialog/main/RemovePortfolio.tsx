@@ -1,7 +1,6 @@
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
-import { useModalStore } from "@/store/modalStore";
 import { useDeleteTransaction } from "@/hooks/react-query/portfolio.query";
 import { wait } from "@/components/share/radix/DialogBase";
 

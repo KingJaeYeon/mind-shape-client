@@ -1,7 +1,6 @@
 "use client";
 import { LegendItem, LegendLabel, LegendOrdinal } from "@visx/legend";
-import { getTransformedData } from "@/components/share/chart/pieTypes";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
 import { cn } from "@/lib/utils";
@@ -15,7 +14,7 @@ export default function ChartLegend({
   object: any;
   totalPrice: number;
 }) {
-  const { getValue, setValue } = usePortfolioStore();
+  const { getValue, setValue } = usePortfolio();
   const selected = getValue("config", "portfolioSelected");
 
   const legendGlyphSize = 12;

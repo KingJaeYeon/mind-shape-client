@@ -1,8 +1,8 @@
 import { IconChevronLeft } from "@/assets";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 
 export default function BackButton() {
-  const { setValue } = usePortfolioStore();
+  const { setValue } = usePortfolio();
   return (
     <button
       onClick={() => setValue("data", "detailSymbol", null)}

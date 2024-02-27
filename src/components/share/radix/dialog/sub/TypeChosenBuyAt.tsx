@@ -4,12 +4,11 @@ import Row from "@/components/layout/Row";
 import { SingleDayPickerTypeModal } from "@/components/share/calendar/Calendar";
 import { SubModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
-import { wait } from "@/components/share/radix/DialogBase";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 
 export default function TypeChosenBuyAt() {
   const { t } = useTranslation("portfolio");
-  const { getContentsValue, setContentsValue } = useModalStore();
+  const { getContentsValue, setContentsValue } = useModal();
 
   function selectHandler(value: string) {
     setContentsValue("date", value);

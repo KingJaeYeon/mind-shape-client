@@ -1,11 +1,11 @@
 "use client";
-import { usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import MainPage from "@/app/[locale]/add/portfolio/_components/main/MainPage";
 import ViewTransactionsPage from "@/app/[locale]/add/portfolio/_components/viewTransaction/ViewTransactionsPage";
 import { useEffect } from "react";
 
 export default function Route() {
-  const { getValue, setValue } = usePortfolioStore();
+  const { getValue, setValue } = usePortfolio();
 
   useEffect(() => {
     return () => {

@@ -13,7 +13,7 @@ import DialogBase from "@/components/share/radix/DialogBase";
 import RemovePortfolio from "@/components/share/radix/dialog/main/RemovePortfolio";
 import ButtonBase from "@/components/layout/ButtonBase";
 import TypeEditPortfolio from "@/components/share/radix/dialog/main/TypeEditPortfolio";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 import Button from "@/components/share/button/Button";
 import { useDeleteTransaction } from "@/hooks/react-query/portfolio.query";
 
@@ -66,7 +66,7 @@ export default function Body({ data }: { data: any[] }) {
 function MobileRow({ item, t }: { item: any; t: any }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const { setContentsValue } = useModalStore();
+  const { setContentsValue } = useModal();
   const { mutate } = useDeleteTransaction({ setIsOpen });
   return (
     <DialogBase
@@ -122,7 +122,7 @@ function MobileRow({ item, t }: { item: any; t: any }) {
 
 function DesktopRow({ item, t }: { item: any; t: any }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { setContentsValue } = useModalStore();
+  const { setContentsValue } = useModal();
   return (
     <TRow className={"cursor-pointer hover:bg-paleGray"}>
       <Table.Td className={"left-0 h-full flex-col justify-center"}>

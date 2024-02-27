@@ -3,7 +3,7 @@ import Row from "@/components/layout/Row";
 import ButtonBase from "@/components/layout/ButtonBase";
 import { ModalCloseTriggerButton } from "@/components/share/button/ModalTriggerButton";
 import React from "react";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 import { IconChevronLeft } from "@/assets";
 
 export function MainModalHeader({
@@ -38,7 +38,7 @@ export function MainModalHeader({
 }
 
 export function SubModalHeader({ title }: { title?: string }) {
-  const { backHandler } = useModalStore();
+  const { backHandler } = useModal();
   return (
     <Row
       className={"ml-[-8px] items-center gap-[8px] py-[10px] text-modalTitle"}

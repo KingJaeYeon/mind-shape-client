@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { CurrentDisplayPrice } from "@/components/share/input/SelectCurrent";
 import TypeChosenBuyAt from "@/components/share/radix/dialog/sub/TypeChosenBuyAt";
 import { wait } from "@/components/share/radix/DialogBase";
-import { useModalStore } from "@/store/modalStore";
+import { useModal } from "@/store/modalStore";
 import { MainModalHeader } from "@/components/share/radix/dialog/DialogHeader";
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Button from "@/components/share/button/Button";
@@ -34,7 +34,7 @@ export default function TypeEditPortfolio({
   item: any;
   setIsOpen: any;
 }) {
-  const { setValue, getContentsValue, setContentsValue } = useModalStore();
+  const { setValue, getContentsValue, setContentsValue } = useModal();
   const { mutate, isPending } = useUpdateTransaction({ setIsOpen });
   const { t } = useTranslation("portfolio");
   const { t: t2 } = useTranslation("category");

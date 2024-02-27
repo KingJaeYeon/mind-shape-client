@@ -1,7 +1,4 @@
 import { PieArcDatum, ProvidedProps } from "@visx/shape/lib/shapes/Pie";
-import { scaleOrdinal } from "@visx/scale";
-import { usePortfolioStore } from "@/store/portfolioStore";
-import { doughnutColor } from "@/components/share/chart/colors";
 
 export const defaultMargin = { top: 20, right: 20, bottom: 20, left: 20 };
 

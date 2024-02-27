@@ -8,7 +8,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@/assets/IconFile";
 import ButtonBase from "@/components/layout/ButtonBase";
-import { usePortfolio, usePortfolioStore } from "@/store/portfolioStore";
+import { usePortfolio } from "@/store/portfolioStore";
 import { format } from "date-fns";
 import { ShowOrHideAmount } from "@/components/share/button/ShowOrHideAmount";
 import { usePortfolioData } from "@/hooks/react-query/portfolio.query";
@@ -184,7 +184,7 @@ export default function List() {
 }
 
 function PopoverContent({ symbol }: { symbol: string }) {
-  const { setValue } = usePortfolioStore();
+  const { setValue } = usePortfolio();
   return (
     <ButtonBase
       onClick={() => {

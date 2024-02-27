@@ -16,7 +16,7 @@ import { usePortfolio } from "@/store/portfolioStore";
 import { useEffect } from "react";
 import { scaleOrdinal } from "@visx/scale";
 import { doughnutColor } from "@/components/share/chart/colors";
-import { useConvenienceStore } from "@/store/convenienceStore";
+import { useConvenience } from "@/store/convenienceStore";
 
 const getPrice = (price: PiePortfolioData) => price.dailyPrice * price.quantity;
 
@@ -108,7 +108,7 @@ function DisplayPrice({
   showPrice: boolean;
   displayPrice?: string | undefined;
 }) {
-  const { getValue } = useConvenienceStore();
+  const { getValue } = useConvenience();
   if (!showPrice) {
     return null;
   }

@@ -1,5 +1,5 @@
 "use client";
-import { useConvenienceStore } from "@/store/convenienceStore";
+import { useConvenience } from "@/store/convenienceStore";
 import { useEffect } from "react";
 import Contents from "@/components/layout/Contents";
 import { IconEye, IconEyeOff } from "@/assets";
@@ -15,7 +15,7 @@ export function ShowOrHideAmount({
   length?: number;
   className?: string;
 }) {
-  const { getValue, setValue } = useConvenienceStore();
+  const { getValue, setValue } = useConvenience();
 
   useEffect(() => {
     const showQuantity = localStorage.getItem("showQuantity");
@@ -39,7 +39,7 @@ export function ShowOrHideAmount({
 }
 
 export function ShowOrHideTrigger({ className }: { className?: string }) {
-  const { getValue, setValue } = useConvenienceStore();
+  const { getValue, setValue } = useConvenience();
 
   return (
     <Contents
