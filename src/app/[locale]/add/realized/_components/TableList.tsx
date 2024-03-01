@@ -2,8 +2,6 @@
 import { useTranslation } from "@/app/[locale]/i18n/i18n-client";
 import Contents from "@/components/layout/Contents";
 import Table, { TRow } from "@/components/share/Table";
-import Popovers from "@/components/share/radix/Popovers";
-import { IconMore } from "@/assets";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@/assets/IconFile";
@@ -32,7 +30,7 @@ export default function List() {
 
   return (
     <Contents className={"isolate flex w-full flex-col"}>
-      <Table columns="minmax(200px, auto) minmax(80px, auto) minmax(60px, auto) minmax(110px, auto) minmax(100px, auto) minmax(100px, auto) minmax(60px, auto)">
+      <Table columns="minmax(200px, auto) minmax(80px, auto) minmax(60px, auto) minmax(110px, auto) minmax(100px, auto) minmax(100px, auto)">
         <Table.Header>
           <Table.Th
             className={
@@ -46,7 +44,6 @@ export default function List() {
           <Table.Th>{t("asking _price")}</Table.Th>
           <Table.Th>{t("profit_and_loss_amount")}</Table.Th>
           <Table.Th>{t("selling_price")}</Table.Th>
-          <Table.Th>{t("edit")}</Table.Th>
         </Table.Header>
         <Table.Body
           data={realizedData?.realized}
@@ -122,18 +119,6 @@ export default function List() {
                 </Table.Td>
                 <Table.Td>
                   <ShowOrHideAmount text={sellingPrice} />
-                </Table.Td>
-                <Table.Td>
-                  <Popovers
-                    align={"end"}
-                    side={"bottom"}
-                    trigger={
-                      <button>
-                        <IconMore />
-                      </button>
-                    }
-                    contents={<PopoverContent symbol={symbol} />}
-                  />
                 </Table.Td>
               </TRow>
             );
