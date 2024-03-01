@@ -42,6 +42,7 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
     list: null,
     realizedData: null,
     formattedData: null,
+    formattedDataFilter: null,
     dailyTotalPrice: -1,
     prevTotalPrice: -1,
     originTotalPrice: -1,
@@ -134,31 +135,41 @@ export const usePortfolioStore = create<Props>((set: any, get: any) => ({
 
     const realizedData = get().getRealizedData(portfolio);
     console.log("realizedData::", realizedData);
-    const formattedData: PortfolioItem[] = Object.values(list)
-      .filter((item) => item.quantity !== 0)
+    const formattedDataFilter: PortfolioItem[] = Object.values(list)
+      .filter((item) => item.quantity > 0)
       .sort(
         (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
       );
+    const formattedData: PortfolioItem[] = Object.values(list).sort(
+      (a, b) => b?.dailyPrice * b?.quantity - a?.dailyPrice * a?.quantity,
+    );
 
-    const dailyTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
-      acc += cur?.dailyPrice * cur?.quantity;
-      return acc;
-    }, 0.0);
+    const dailyTotalPrice = formattedDataFilter?.reduce(
+      (acc: any, cur: any) => {
+        acc += cur?.dailyPrice * cur?.quantity;
+        return acc;
+      },
+      0.0,
+    );
 
-    const prevTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
+    const prevTotalPrice = formattedDataFilter?.reduce((acc: any, cur: any) => {
       acc += cur?.prevPrice * cur?.quantity;
       return acc;
     }, 0.0);
 
-    const originTotalPrice = formattedData?.reduce((acc: any, cur: any) => {
-      acc += cur?.price;
-      return acc;
-    }, 0.0);
+    const originTotalPrice = formattedDataFilter?.reduce(
+      (acc: any, cur: any) => {
+        acc += cur?.price;
+        return acc;
+      },
+      0.0,
+    );
 
     set({
       data: {
         list,
         realizedData,
+        formattedDataFilter,
         formattedData,
         dailyTotalPrice,
         prevTotalPrice,

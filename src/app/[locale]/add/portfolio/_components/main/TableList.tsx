@@ -35,7 +35,7 @@ export default function List() {
           <Table.Th>{t("edit")}</Table.Th>
         </Table.Header>
         <Table.Body
-          data={data?.formattedData}
+          data={data.formattedData}
           render={(item: any) => {
             const dailyPrice = item?.dailyPrice;
             const quantity = item?.quantity;
@@ -56,7 +56,13 @@ export default function List() {
               profit_loss === 0 ? "black" : profit_loss > 0 ? "green" : "red";
 
             return (
-              <TRow key={symbol} className={"cursor-pointer hover:bg-paleGray"}>
+              <TRow
+                key={symbol}
+                className={cn(
+                  "cursor-pointer hover:bg-paleGray",
+                  quantity < 0 && "text-red",
+                )}
+              >
                 <Table.Td
                   className={
                     "z-4 sticky left-0 h-full items-center justify-start bg-bg font-semibold"
