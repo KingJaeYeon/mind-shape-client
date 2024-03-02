@@ -1,10 +1,10 @@
 import PageContainer from "@/components/layout/page/index/PageContainer";
-import PageTitle from "@/app/[locale]/add/portfolio/_components/main/PageTitle";
+import MainPage from "@/app/[locale]/add/forex/_components/MainPage";
 
 export default function page() {
   return (
     <PageContainer>
-      <PageTitle title={"My Forex"} emoji={"🚀"} />
+      <MainPage />
     </PageContainer>
   );
 }
