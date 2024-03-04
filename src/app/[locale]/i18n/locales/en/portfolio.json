@@ -43,5 +43,6 @@
   "selling_day": "Selling Day",
   "profit_and_loss_amount": "P&L Amount",
   "sales_volume": "Sales Volume",
-  "principal": "Principal"
+  "principal": "Principal",
+  "currency_add": "Add Currency"
 }
